@@ -6,7 +6,7 @@
         <div class="row gutters-10">
             <div class="col-lg-12">
                 <div class="row gutters-10">
-                    <div class="col-2">
+                    <div class="col-3">
                         <div class="bg-grad-6 text-white rounded-lg mb-4 overflow-hidden">
                             <div class="px-3 pt-3">
                                 <div class="fs-20">
@@ -22,7 +22,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <div class="bg-grad-3 text-white rounded-lg mb-4 overflow-hidden">
                             <div class="px-3 pt-3">
                                 <div class="fs-20">
@@ -38,7 +38,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <div class="bg-grad-1 text-white rounded-lg mb-4 overflow-hidden">
                             <div class="px-3 pt-3">
                                 <div class="fs-20">
@@ -54,7 +54,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <div class="bg-grad-4 text-white rounded-lg mb-4 overflow-hidden">
                             <div class="px-3 pt-3">
                                 <div class="fs-20">
@@ -70,7 +70,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <div class="bg-grad-5 text-white rounded-lg mb-4 overflow-hidden">
                             <div class="px-3 pt-3">
                                 <div class="fs-20">
@@ -86,7 +86,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <div class="bg-grad-2 text-white rounded-lg mb-4 overflow-hidden">
                             <div class="px-3 pt-3">
                                 <div class="fs-20">
@@ -102,12 +102,8 @@
                             </svg>
                         </div>
                     </div>
-
-
                 </div>
             </div>
-
-
         </div>
     @endif
 

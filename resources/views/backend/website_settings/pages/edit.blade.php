@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="card">
-        <ul class="nav nav-tabs nav-fill border-light">
+        {{-- <ul class="nav nav-tabs nav-fill border-light">
             @foreach (\App\Models\Language::all() as $key => $language)
                 <li class="nav-item">
                     <a class="nav-link text-reset @if ($language->code == $lang) active @else bg-soft-dark border-light border-left-0 @endif py-3" href="{{ route('custom-pages.edit', ['id'=>$page->type, 'lang'=> $language->code] ) }}">
@@ -18,7 +18,7 @@
                     </a>
                 </li>
             @endforeach
-        </ul>
+        </ul> --}}
 
         <form class="p-4" action="{{ route('custom-pages.update', $page->id) }}" method="POST"
             enctype="multipart/form-data">
@@ -26,7 +26,7 @@
             <input type="hidden" name="_method" value="PATCH">
             <input  type="hidden" name='lang' value="{{$lang}}">
             <div class="card-header px-0">
-                <h6 class="fw-600 mb-0">Page Content</h6>
+                <h6 class="fw-600 mb-0">{{ $page->slug }} Page Content</h6>
             </div>
             <div class="card-body px-0">
                 <div class="form-group row">
@@ -113,7 +113,8 @@
 
         
                 <div class="text-right">
-                    <button type="submit" class="btn btn-primary">Update Page</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <a href="{{ route('website.pages') }}" class="btn btn-cancel">Cancel</a>
                 </div>
             </div>
         </form>
