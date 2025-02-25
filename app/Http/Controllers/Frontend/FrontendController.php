@@ -11,7 +11,6 @@ use App\Models\PageSeos;
 use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\HomeSlider;
-use App\Models\Occasion;
 use App\Models\Partners;
 use App\Models\BusinessSetting;
 use App\Models\Subscriber;
@@ -121,45 +120,6 @@ class FrontendController extends Controller
             }
         });
 
-       
-
-        $home_banners = BusinessSetting::whereIn('type', array('home_mid_section_banner','home_center_banner', 'home_mid_banner'))->get()->keyBy('type');
-        
-        $banners = [];
-        $all_banners = Banner::where('status', 1);
-        if(!empty($home_banners)){
-            foreach($home_banners as $key => $hb){
-                $bannerid = json_decode($hb->value);
-                
-                $bannerData = [];
-                if(!empty($bannerid)){
-                    $bannerData = Banner::where('status', 1)->whereIn('id', $bannerid)->get();
-                }
-                
-                if(!empty($bannerData)){
-                    foreach($bannerData as $bData){
-                        
-                        $banners[$key][] = array(
-                            'type' => $bData->link_type ?? '',
-                            'link' => $bData->link_type == 'external' ? $bData->link : $bData->getBannerLink(),
-                            'type_id' => $bData->link_ref_id,
-                            'image' => ($bData->getTranslation('image', $lang)) ? uploaded_asset($bData->getTranslation('image', $lang)) : '',
-                            'mob_image' => ($bData->getTranslation('mobile_image', $lang)) ? uploaded_asset($bData->getTranslation('mobile_image', $lang)) : '',
-                            'title' => $bData->getTranslation('title', $lang),
-                            'sub_title' => $bData->getTranslation('sub_title', $lang),
-                            'btn_text' => $bData->getTranslation('btn_text', $lang) 
-                        );
-                        
-                    }
-                }else{
-                    $banners[$key] = array();
-                }
-            }
-        }
-       
-       
-        $data['banners'] = $banners;
-
         $data['new_arrival_products'] = Cache::remember('new_arrival_products', 3600, function () {
             $product_ids = get_setting('new_arrival_products');
             if ($product_ids) {
@@ -167,8 +127,6 @@ class FrontendController extends Controller
                 return $products;
             }
         });
-
-        $data['home_occasions'] = [];
 
         $data['special_products'] = Cache::remember('special_products', 3600, function () {
             $product_ids = get_setting('special_products');
@@ -178,15 +136,7 @@ class FrontendController extends Controller
             }
         });
 
-        $data['shop_by_brands'] = Cache::rememberForever('shop_by_brands', function () {
-            $details = Brand::where('is_active', 1)->get();
-            return $details;
-        });
-
-        $data['partners'] = Cache::rememberForever('partners', function () {
-            $details = Partners::where('status', 1)->get();
-            return $details;
-        });
+      
 
         // echo '<pre>';
         // print_r($data);

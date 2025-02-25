@@ -72,6 +72,76 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-from-label">Categories<br> </label> 
+                            {{-- (Max 8) --}}
+                            <div class="col-sm-10 new_collection-categories-target">
+                                <input type="hidden" name="types[]" value="home_categories">
+                               
+                                <input type="hidden" name="lang" value="{{ $lang }}">
+                                
+                                @if (get_setting('home_categories') != null && get_setting('home_categories') != 'null')
+                                    @foreach (json_decode(get_setting('home_categories'), true) as $key => $value)
+                                        <div class="row gutters-5">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <select class="form-control aiz-selectpicker" name="home_categories[]" data-live-search="true" data-selected={{ $value }}
+                                                        required>
+                                                        <option value="">Select Category</option>
+                                                        @foreach ($categories as $category)
+                                                            <option value="{{ $category->id }}">{{ $category->name }}
+                                                            </option>
+                                                            @foreach ($category->childrenCategories as $childCategory)
+                                                                @include('backend.categories.child_category', [
+                                                                    'child_category' => $childCategory,
+                                                                ])
+                                                            @endforeach
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <button type="button"
+                                                    class="mt-1 btn btn-icon btn-circle btn-soft-danger"
+                                                    data-toggle="remove-parent" data-parent=".row">
+                                                    <i class="las la-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                            
+                            <div class="col-sm-10">
+                                <button type="button" class="btn btn-soft-primary" data-toggle="add-more" id="addMoreBtn"
+                                data-content='<div class="row gutters-5">
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <select class="form-control aiz-selectpicker" name="home_categories[]" data-live-search="true" required>
+                                                            <option value="">Select Category</option>
+                                                            @foreach ($categories as $key => $category)
+                                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                            @foreach ($category->childrenCategories as $childCategory)
+                                                            @include('backend.categories.child_category', [
+                                                                'child_category' => $childCategory,
+                                                            ])
+                                                            @endforeach
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <button type="button" class="mt-1 btn btn-icon btn-circle btn-soft-danger" data-toggle="remove-parent" data-parent=".row">
+                                                        <i class="las la-times"></i>
+                                                    </button>
+                                                </div>
+                                            </div>'
+                                    data-target=".new_collection-categories-target">
+                                    Add New
+                                </button>
+                            </div>
+                        </div>
+
                         <div class="text-right">
                             <button type="submit" class="btn btn-info">Update</button>
                         </div>
@@ -269,6 +339,20 @@
                             <label class="col-sm-2 col-from-label" for="name">Content</label>
                             <div class="col-sm-10">
                                 <textarea class="resize-off form-control" placeholder="Enter..." name="content1" rows="5">{!! $page->getTranslation('content1',$lang) !!}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row @if($lang != 'en') d-none @endif">
+                            <label class="col-md-2 col-from-label">Services & Solutions</label>
+                            <div class="col-md-10">
+                                <input type="hidden" name="types[]" value="featured_services">
+                                <input type="hidden" name="page_type" value="featured_services">
+                                <select name="featured_services[]" class="form-control aiz-selectpicker" multiple data-actions-box="true" data-live-search="true" title="Select" data-selected="{{ get_setting('featured_services') }}">
+                                    {{-- <option disabled value=""></option> --}}
+                                    @foreach ($services as $key => $serv)
+                                        <option value="{{ $serv->id }}">{{ $serv->getTranslation('name', 'en') }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 

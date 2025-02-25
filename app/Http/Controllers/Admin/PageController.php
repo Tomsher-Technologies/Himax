@@ -15,6 +15,7 @@ use App\Models\Banner;
 use App\Models\Product;
 use App\Models\Contacts;
 use App\Models\HomePoints;
+use App\Models\Service;
 use Storage;
 use File;
 
@@ -104,10 +105,12 @@ class PageController extends Controller
             
             $products = Product::select('id', 'name')->where('published',1)->get();
             $home_points = HomePoints::all();
+            $categories = Category::where('parent_id',0)->where('is_active',1)->get();
+            $services = Service::where('status',1)->get();
             // echo '<pre>';
             // print_r($points);
             // die;
-            return view('backend.website_settings.pages.home_page_edit', compact('page', 'products','lang','page_id','home_points'));
+            return view('backend.website_settings.pages.home_page_edit', compact('page', 'products','lang','page_id','home_points','categories','services'));
             
           }else if ($id == 'find_us' || $id == 'news' || $id == 'faq') {
             return view('backend.website_settings.pages.find_us', compact('page','lang','page_id'));
