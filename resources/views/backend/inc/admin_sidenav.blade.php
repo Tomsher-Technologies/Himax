@@ -2,7 +2,7 @@
     <div class="aiz-sidebar left c-scrollbar">
         <div class="aiz-side-nav-logo-wrap">
             <a href="{{ route('admin.dashboard') }}" class="d-block text-left">
-                <img class="mw-100" height="100" src="{{ asset('assets/img/logo.avif') }}" 
+                <img class="mw-100" height="100" src="{{ asset('assets/img/logo.svg') }}" 
                         alt="{{ get_setting('site_name') }}">
             </a>
         </div>

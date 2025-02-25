@@ -15,6 +15,10 @@ use App\Models\Partners;
 use App\Models\BusinessSetting;
 use App\Models\Subscriber;
 use App\Models\Contacts;
+use App\Models\Service;
+use App\Models\HomePoints;
+use App\Models\Industries;
+use App\Models\Blog;
 use App\Mail\ContactEnquiry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -91,7 +95,7 @@ class FrontendController extends Controller
     }
     public function home()
     {
-        $page = Page::where('type','home')->first();
+        $page = Page::with('page_translations')->where('type','home')->first();
         $lang = getActiveLanguage();
         $seo = [
             'title'                 => $page->getTranslation('title', $lang),
@@ -106,13 +110,9 @@ class FrontendController extends Controller
         
         $this->loadSEO($seo);
 
-        $data['slider'] = Cache::rememberForever('homeSlider', function () {
-            $sliders = HomeSlider::where('status',1)->orderBy('sort_order')->get();
-            return $sliders;
-        });
-
-        $data['discover_categories'] = Cache::rememberForever('discover_categories', function () {
-            $categories = get_setting('discover_categories');
+     
+        $data['home_categories'] = Cache::rememberForever('home_categories', function () {
+            $categories = get_setting('home_categories');
             if ($categories) {
                 $details = Category::whereIn('id', json_decode($categories))->where('is_active', 1)
                     ->get();
@@ -120,26 +120,28 @@ class FrontendController extends Controller
             }
         });
 
-        $data['new_arrival_products'] = Cache::remember('new_arrival_products', 3600, function () {
-            $product_ids = get_setting('new_arrival_products');
+        $data['featured_services'] = Cache::remember('featured_services', 3600, function () {
+            $service_ids = get_setting('featured_services');
+            if ($service_ids) {
+                $services =  Service::where('status', 1)->whereIn('id', json_decode($service_ids))->with('points')->get();
+                return $services;
+            }
+        });
+
+        $data['featured_products'] = Cache::remember('featured_products', 3600, function () {
+            $product_ids = get_setting('featured_products');
             if ($product_ids) {
                 $products =  Product::where('published', 1)->whereIn('id', json_decode($product_ids))->with('brand')->get();
                 return $products;
             }
         });
 
-        $data['special_products'] = Cache::remember('special_products', 3600, function () {
-            $product_ids = get_setting('special_products');
-            if ($product_ids) {
-                $products =  Product::where('published', 1)->whereIn('id', json_decode($product_ids))->with('brand')->get();
-                return $products;
-            }
-        });
-
-      
-
+        $data['points'] = HomePoints::all();
+        $data['industries'] = Industries::where('status',1)->orderBy('sort_order','ASC')->get();
+        $data['brands'] = Brand::where('is_active',1)->orderBy('name','ASC')->get();
+        $data['blogs'] = Blog::where('status',1)->orderBy('blog_date','desc')->limit(4)->get();
         // echo '<pre>';
-        // print_r($data);
+        // print_r($page);
         // die;
 
 

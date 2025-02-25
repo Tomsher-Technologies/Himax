@@ -1,258 +1,275 @@
-<header class="header header--type-6">
-    <!-- Promo bar -->
-    @php
-        $lang = getActiveLanguage();
-    @endphp
-    <div class="header__promo-bar">
-        <div class="container container--type-2">
-            <div class="d-flex justify-content-between">
-                <div class="d-none 	d-md-none d-lg-block d-xl-block">
-                    <a href="#"><i class="lnr lnr-tag"></i> {{ get_setting('helpline_title') }}</a>
-                </div>
-                <div class="header__contact d-flex align-items-center">
-                    <div class="header-contact__icon">
-                        <svg viewBox="0 0 60 60">
-                            <g id="Layer_1"></g>
-                            <g id="Layer_2">
-                                <path
-                                    d="M62.1,45.5l-9.6-6.1c-1.8-1.2-4.2-0.7-5.5,1l-2.7,3.7c-0.3,0.4-1,0.5-1.5,0.2c-12.9-7.7-21-18.5-23.9-22.8
-                                c-0.2-0.2-0.2-0.5-0.1-0.6c0-0.2,0.2-0.4,0.4-0.5l3.9-2.6c0.9-0.6,1.5-1.5,1.7-2.5c0.2-1,0-2.1-0.6-2.9l-6.4-9.2
-                                C16.5,1.5,14.1,1,12.3,2L3.4,7C3,7.2,2.7,7.5,2.5,7.7C-4,14.6,2.7,31.2,17.8,45.6C29,56.2,41.5,62.5,50.1,62.5c3,0,5.4-0.7,7.3-2.3
-                                c0.3-0.2,0.6-0.6,0.8-0.9c0,0,0,0,0,0l5.2-8.4C64.5,49,64,46.7,62.1,45.5z M60.9,49.2l-5.2,8.4c-0.1,0.1-0.1,0.2-0.2,0.2
-                                c-5.8,4.9-22.1-1.7-35.5-14.5C6.5,30.6-0.5,15.3,4.6,9.8c0,0,0.1-0.1,0.2-0.2l8.9-5c0.2-0.1,0.4-0.1,0.5-0.1c0.4,0,0.7,0.2,0.9,0.5
-                                l6.4,9.2c0.2,0.2,0.2,0.5,0.1,0.6c0,0.2-0.2,0.4-0.4,0.5l-3.9,2.6c-0.9,0.6-1.5,1.5-1.7,2.5c-0.2,1,0,2,0.6,2.9
-                                c3,4.4,11.4,15.6,24.9,23.7c1.8,1.1,4.2,0.6,5.4-1l2.7-3.7c0.3-0.4,1-0.5,1.5-0.2l9.6,6.1C61,48.3,61.1,48.8,60.9,49.2z">
-                                </path>
-                            </g>
-                        </svg>
+@php
+    $lang = getActiveLanguage();
+@endphp
+
+
+<!-- Mouse Cursor Start -->
+<div class="mouse-cursor cursor-outer"></div>
+<div class="mouse-cursor cursor-inner"></div>
+
+<!-- Back To Top Start -->
+<button id="back-top" class="back-to-top">
+    <i class="fa-solid fa-chevron-up"></i>
+</button>
+
+<!-- Offcanvas Area Start -->
+<div class="fix-area">
+    <div class="offcanvas__info">
+        <div class="offcanvas__wrapper">
+            <div class="offcanvas__content">
+                <div class="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
+                    <div class="offcanvas__logo">
+                        <a href="index.html">
+                            <img src="assets/img/logo/black-logo.svg" alt="logo-img">
+                        </a>
                     </div>
-                    <div class="header-contact__content">
-                        <p>{{ get_setting('helpline_number') }}</p>
+                    <div class="offcanvas__close">
+                        <button>
+                            <i class="fas fa-times"></i>
+                        </button>
                     </div>
                 </div>
-                <div class="">
-                    <div class="header__switcher">
-                        <p>@if (getActiveLanguage() == 'en') English @else Arabic @endif <span></span></p>
-                        <select id="lang-change">
-                            <option value="en" @if (getActiveLanguage() == 'en') selected @endif>English</option>
-                            <option value="ae" @if (getActiveLanguage() == 'ae') selected @endif>Arabic</option>
-                        </select>
+                <p class="text d-none d-xl-block">
+                    Nullam dignissim, ante scelerisque the is euismod fermentum odio sem semper the is erat, a
+                    feugiat leo urna eget eros. Duis Aenean a imperdiet risus.
+                </p>
+                <div class="mobile-menu fix mb-3"></div>
+                <div class="offcanvas__contact">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li class="d-flex align-items-center">
+                            <div class="offcanvas__contact-icon">
+                                <i class="fal fa-map-marker-alt"></i>
+                            </div>
+                            <div class="offcanvas__contact-text">
+                                <a target="_blank" href="#">Main Street, Melbourne, Australia</a>
+                            </div>
+                        </li>
+                        <li class="d-flex align-items-center">
+                            <div class="offcanvas__contact-icon mr-15">
+                                <i class="fal fa-envelope"></i>
+                            </div>
+                            <div class="offcanvas__contact-text">
+                                <a href="/cdn-cgi/l/email-protection#d9b0b7bfb699bca1b8b4a9b5bcf7bab6b4"><span
+                                        class="mailto:info@example.com"><span class="__cf_email__"
+                                            data-cfemail="b1d8dfd7def1d4c9d0dcc1ddd49fd2dedc">[email&#160;protected]</span></span></a>
+                            </div>
+                        </li>
+                        <li class="d-flex align-items-center">
+                            <div class="offcanvas__contact-icon mr-15">
+                                <i class="fal fa-clock"></i>
+                            </div>
+                            <div class="offcanvas__contact-text">
+                                <a target="_blank" href="#">Mod-friday, 09am -05pm</a>
+                            </div>
+                        </li>
+                        <li class="d-flex align-items-center">
+                            <div class="offcanvas__contact-icon mr-15">
+                                <i class="far fa-phone"></i>
+                            </div>
+                            <div class="offcanvas__contact-text">
+                                <a href="tel:+11002345909">+11002345909</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="header-button mt-4">
+
+                    </div>
+                    <div class="main-button">
+                        <a href="contact.html" class="theme-btn w-100 text-center">
+                            Get Started <i class="fa-sharp fa-regular fa-arrow-up-right"></i>
+                        </a>
+                    </div>
+                    <div class="social-icon d-flex align-items-center">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    @php
-        $details = getCategoryHeader();
-    @endphp
-    <!-- End promo bar -->
-    <!-- Container -->
-    <div class="container container--type-2">
-        <!-- Header container -->
-        <div class="header__container d-flex align-items-center">
-            <!-- Mobile menu -->
-            <div class="header__mobile-menu">
-                <!-- Open mobile menu -->
-                <div class="mobile-menu__open">
-                    <a href="#" class="js-open-mobile-menu"><i class="lnr lnr-menu"></i></a>
-                </div>
-                <!-- End open mobile menu -->
-                <!-- Mobile menu -->
-                <div class="mobile-menu js-mobile-menu">
-                    <!-- Overlay -->
-                    <div class="mobile-menu__overlay js-close-mobile-menu"></div>
-                    <!-- End overlay -->
-                    <!-- Content -->
-                    <div class="mobile-menu__content">
-                        <!-- Close mobile menu -->
-                        <div class="mobile-menu__close">
-                            <a href="#" class="js-close-mobile-menu"><i class="lnil lnil-close"></i></a>
+</div>
+
+
+<div class="offcanvas__overlay"></div>
+
+
+
+
+
+<!-- Header Section Start -->
+<header class="header-section-3">
+ 
+    <div id="header-sticky" class="header-3 mb-5">
+        <div class="container-fluid">
+            <div class="mega-menu-wrapper">
+                <div class="header-main">
+                    <div class="logo">
+                        <a href="index.html" class="header-logo">
+                            <img src="{{ asset('assets/images/logo.svg') }}" alt="logo-img">
+                        </a>
+                        <a href="index.html" class="header-logo-2">
+                            <img src="{{ asset('assets/images/logo.svg') }}" alt="logo-img">
+                        </a>
+                    </div>
+
+                    <div class="header-center d-flex justify-content-end align-items-center">
+                        <div class="mean__menu-wrapper">
+                            <div class="main-menu">
+                                <nav id="mobile-menu">
+                                    <ul>
+
+                                        <li class="has-dropdown active menu-thumb">
+                                            <a href="#">
+                                                SERVICES & SOLUTIONS
+
+                                                <i class="fa-regular fa-plus"></i>
+                                            </a>
+                                            <ul class="submenu has-homemenu">
+                                                <li>
+                                                    <div class="homemenu-items">
+                                                        <div class="solutions-grid">
+
+                                                            <div class="solutions-wrapper">
+                                                                <div class="solution-item"
+                                                                    style="background-image: url({{asset('assets/images/solutions/backup.webp')}});">
+                                                                    <a href="#">IP Telephony & PABX System</a>
+                                                                </div>
+                                                                <div class="solution-item"
+                                                                    style="background-image: url({{asset('assets/images/solutions/backup.webp')}});">
+                                                                    <a href="#">IT Outsourcing</a>
+                                                                </div>
+                                                                <div class="solution-item"
+                                                                    style="background-image: url({{asset('assets/images/solutions/backup.webp')}});">
+                                                                    <a href="#">Backup & Data Protection</a>
+                                                                </div>
+                                                                <div class="solution-item"
+                                                                    style="background-image: url({{asset('assets/images/solutions/backup.webp')}});">
+                                                                    <a href="#">IT Maintenance & Integration</a>
+                                                                </div>
+                                                                <div class="solution-item"
+                                                                    style="background-image: url({{asset('assets/images/solutions/backup.webp')}});">
+                                                                    <a href="#">Software Licensing</a>
+                                                                </div>
+                                                                <div class="solution-item"
+                                                                    style="background-image: url({{asset('assets/images/solutions/backup.webp')}});">
+                                                                    <a href="#">Anti-Virus & Anti-SPAM
+                                                                        Solutions</a>
+                                                                </div>
+                                                                <div class="solution-item"
+                                                                    style="background-image: url({{asset('assets/images/solutions/backup.webp')}});">
+                                                                    <a href="#">Network Solutions</a>
+                                                                </div>
+                                                                <div class="solution-item"
+                                                                    style="background-image: url({{asset('assets/images/solutions/backup.webp')}});">
+                                                                    <a href="#">Data Center</a>
+                                                                </div>
+                                                                <div class="solution-item"
+                                                                    style="background-image: url({{asset('assets/images/solutions/backup.webp')}});">
+                                                                    <a href="#">On-Site Support</a>
+                                                                </div>
+                                                                <div class="solution-item"
+                                                                    style="background-image: url({{asset('assets/images/solutions/backup.webp')}});">
+                                                                    <a href="#">Network Installation &
+                                                                        Troubleshooting</a>
+                                                                </div>
+                                                                <div class="solution-item"
+                                                                    style="background-image: url({{asset('assets/images/solutions/backup.webp')}});">
+                                                                    <a href="#">Managed IT Services</a>
+                                                                </div>
+                                                                <div class="solution-item"
+                                                                    style="background-image: url({{asset('assets/images/solutions/backup.webp')}});">
+                                                                    <a href="#">Reliable IT Annual Maintenance
+                                                                        Service</a>
+                                                                </div>
+                                                                <div class="solution-item"
+                                                                    style="background-image: url({{asset('assets/images/solutions/backup.webp')}});">
+                                                                    <a href="#">CCTV Surveillance</a>
+                                                                </div>
+                                                                <div class="solution-item"
+                                                                    style="background-image: url({{asset('assets/images/solutions/backup.webp')}});">
+                                                                    <a href="#">Fire Fighting Equipment</a>
+                                                                </div>
+                                                                <div class="solution-item"
+                                                                    style="background-image: url({{asset('assets/images/solutions/backup.webp')}});">
+                                                                    <a href="#">Fire Fighting Maintenance</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="has-dropdown active d-xl-none">
+                                            <a href="index.html" class="border-none">
+                                                Home
+                                            </a>
+                                            <ul class="submenu">
+                                                <li><a href="index.html">Home 01</a></li>
+                                                <li><a href="index2.html">Home 02</a></li>
+                                                <li><a href="index3.html">Home 03</a></li>
+                                                <li><a href="index4.html">Home 04</a></li>
+                                            </ul>
+                                        </li>
+
+                                        <li>
+                                            <a href="products.html">Products</a>
+                                        </li>
+
+
+
+                                        <li>
+                                            <a href="about.html">About Us</a>
+                                        </li>
+
+
+
+                                        <li>
+                                            <a href="contact.html">Contact Us</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
-                        <!-- End close mobile menu -->
-                        <!-- Mobile logo -->
-                        <h3 class="mobile-menu__logo"><img width="200" src="assets/images/logo.avif" alt="">
-                        </h3>
-                        <!-- End mobile logo -->
-                        <!-- Mobile Nav -->
-                        <ul class="mobile-menu__nav">
-                            <li class="mobile-menu__dropdown">
-                                <a href="{{ route('home') }}">Shop</a>
-                                <ul class="mobile-menu__dropdown-menu js-mobile-menu-dropdown-menu">
-                                    <li><a href=""> Shop </a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                </ul>
-                                <div class="mobile-menu__dropdown-btn js-mobile-menu-dropdown-btn"><span
-                                        class="lnil lnil-chevron-down"></span></div>
-                            </li>
-                            <li class="mobile-menu__dropdown">
-                                <a href="{{ route('home') }}">Shop</a>
-                                <ul class="mobile-menu__dropdown-menu js-mobile-menu-dropdown-menu">
-                                    <li><a href=""> Shop </a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                </ul>
-                                <div class="mobile-menu__dropdown-btn js-mobile-menu-dropdown-btn"><span
-                                        class="lnil lnil-chevron-down"></span></div>
-                            </li>
-                            <li class="mobile-menu__dropdown">
-                                <a href="{{ route('home') }}">Shop</a>
-                                <ul class="mobile-menu__dropdown-menu js-mobile-menu-dropdown-menu">
-                                    <li><a href=""> Shop </a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                </ul>
-                                <div class="mobile-menu__dropdown-btn js-mobile-menu-dropdown-btn"><span
-                                        class="lnil lnil-chevron-down"></span></div>
-                            </li>
-                            <li class="mobile-menu__dropdown">
-                                <a href="{{ route('home') }}">Shop</a>
-                                <ul class="mobile-menu__dropdown-menu js-mobile-menu-dropdown-menu">
-                                    <li><a href=""> Shop </a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                </ul>
-                                <div class="mobile-menu__dropdown-btn js-mobile-menu-dropdown-btn"><span
-                                        class="lnil lnil-chevron-down"></span></div>
-                            </li>
-                            <li class="mobile-menu__dropdown">
-                                <a href="{{ route('home') }}">Shop</a>
-                                <ul class="mobile-menu__dropdown-menu js-mobile-menu-dropdown-menu">
-                                    <li><a href=""> Shop </a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                </ul>
-                                <div class="mobile-menu__dropdown-btn js-mobile-menu-dropdown-btn"><span
-                                        class="lnil lnil-chevron-down"></span></div>
-                            </li>
-                        </ul>
-                        <!-- End Mobile nav -->
+
                     </div>
-                    <!-- End content -->
+
+                    <div class="header-right d-flex justify-content-end align-items-center">
+
+                        <div class="header-button">
+                            <a href="contact.html" class="theme-btn"><i
+                                    class="fa-sharp fa-regular fa-arrow-up-right"></i> +250-788-315-949 </a>
+                        </div>
+
+                        <div class="header__hamburger d-xl-block my-auto">
+                            <div class="sidebar__toggle">
+                                <div class="header-bar">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- End mobile menu -->
             </div>
-            <!-- End mobile menu -->
-            <ul class="header_page_nav">
-                <li><a href="{{ route('home') }}" class="nav__item active">Sale</a></li>
-                {{-- <li><a href="rent.html" class="nav__item">Rent</a></li>
-                <li><a href="auction.html" class="nav__item">Auction</a></li>
-                <li><a href="mortgage.html" class="nav__item">mortgage</a></li> --}}
-            </ul>
-            <!-- Logo -->
-            <h1 class="header__logo">
-                <a href="{{ route('home') }}">
-                    <img src="{{ asset('assets/images/logo-1.png') }}" alt="">
-                </a>
-            </h1>
-            <!-- End logo -->
-            <!-- Header right -->
-            <ul class="header__right">
-                <li><a href="#" class="js-open-popup-search"><i class="lnr lnr-magnifier"></i></a></li>
-                <li class="header__cart d-none d-lg-block"><a href="#"><i
-                            class="lnr lnr-heart"></i><span class="wishlist_count">{{ wishlistCount() }}</span></a></li>
-                <li class="header__cart"><a href="#" class="js-open-canvas-cart"><i
-                            class="lnr lnr-cart"></i><span class="cart_count">{{ cartCount() }}</span></a></li>
-                <li class="header__canvas-menu"><a href="#" class="js-open-canvas-menu"><i
-                            class="lnr lnr-user"></i></a></li>
-            </ul>
-            <!-- End header right -->
         </div>
-        <!-- End header container -->
-        <!-- Navigation -->
-        <ul class="header__nav">
-            <li>
-                <a href="#" class="nav__item">{{ trans('messages.categories') }}</a>
-                <!-- MegaMenu -->
-                <div class="nav__mega-menu">
-                    <!-- Column -->
-                    <div class="mega-menu__standard-column">
-                        <!-- Column title -->
-                        <div class="standard-column__title">{{ get_setting('header_category_title_1') }}</div>
-                        <!-- End column title -->
-                        <!-- Column nav -->
-                        <ul class="standard-column__nav">
-                            @if(!empty($details['header_categories']))
-                                @foreach($details['header_categories'] as $header_categories)
-                                    <li><a href="{{ route('products.index',['category' => $header_categories->getTranslation('slug', $lang)]) }}">{{ $header_categories->getTranslation('name', $lang) }}</a></li>
-                                @endforeach
-                            @endif  
-                        </ul>
-                        <!-- End column nav -->
-                    </div>
-                    <!-- End column -->
-                    <!-- Column -->
-                    <div class="mega-menu__standard-column">
-                        <!-- Column title -->
-                        <div class="standard-column__title">{{ get_setting('header_category_title_2') }} </div>
-                        <!-- End column title -->
-                        <!-- Column nav -->
-                        <ul class="standard-column__nav">
-                            @if (!empty($details['header_brands']))
-                                @foreach ($details['header_brands'] as $header_brands)
-                                    <li><a href="{{ route('products.index',['brand' => [$header_brands->getTranslation('slug', $lang)]]) }}"> {{$header_brands->getTranslation('name', $lang)}}</a></li>
-                                @endforeach
-                            @endif 
-                            
-                        </ul>
-                        <!-- End column nav -->
-                    </div>
-                 
-                    <div class="mega-menu__banner">
-                        <img alt="Image" data-sizes="auto"
-                            data-srcset="{{ uploaded_asset(get_setting('header_category_logo')) }}"
-                            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                            class="lazyload" />
-                    </div>
-                    <!-- End banner -->
-                </div>
-                <!-- End MegaMenu -->
-            </li>
-            <li><a href="{{ route('products.index') }}" class="nav__item">{{ trans('messages.collections') }}</a></li>
-            <li><a href="{{ route('products.index',['offers']) }}" class="nav__item">{{ trans('messages.offers') }}</a></li>
-        </ul>
-        <!-- End navigation -->
     </div>
-    <!-- End container -->
-    <ul class="header_page_nav page-im-mobile">
-        <li><a href="{{ route('home') }}" class="nav__item active">Shop</a></li>
-        {{-- <li><a href="#" class="nav__item">Rent</a></li>
-        <li><a href="#" class="nav__item">Auction</a></li>
-        <li><a href="#" class="nav__item">mortgage</a></li> --}}
-    </ul>
 </header>
+
+<!-- Search Area Start -->
+<div class="search-wrap">
+    <div class="search-inner">
+        <i class="fas fa-times search-close" id="search-close"></i>
+        <div class="search-cell">
+            <form method="get">
+                <div class="search-field-holder">
+                    <input type="search" class="main-search-input" placeholder="Search...">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
