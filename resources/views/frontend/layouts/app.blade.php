@@ -41,7 +41,14 @@
 </head>
 
 <body>
+    <!-- Mouse Cursor Start -->
+    <div class="mouse-cursor cursor-outer"></div>
+    <div class="mouse-cursor cursor-inner"></div>
 
+    <!-- Back To Top Start -->
+    <button id="back-top" class="back-to-top">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
 
     @include('frontend.parts.header')
     

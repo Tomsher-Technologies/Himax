@@ -201,25 +201,34 @@ class BusinessSettingsController extends Controller
                 if($request->has('image1')){
                     $page_translation->image1               = $request->image1;
                 }
-               
+
+                $data = $request->input('points');
+            
+                if($data){
+                    $page_translation->content5             = json_encode($data);
+                }
+
                 $page_translation->save();
     
-            }
-
-            $data = $request->input('points');
-            
-            if($data){
-                HomePoints::truncate();
-                foreach ($data as $point) {
-                    if($point['title'] != NULL){
-                        HomePoints::create([
-                            'title' => $point['title'],
-                            'image' => $point['icon']
-                        ]);
-                    }
+                if($request->has('image11')){
+                    $page->image1               = $request->image11;
                 }
+                if($request->has('image22')){
+                    $page->image2               = $request->image22;
+                }
+                if($request->has('image33')){
+                    $page->image3               = $request->image33;
+                }
+                if($request->has('image44')){
+                    $page->image4               = $request->image44;
+                }
+                if($request->has('image55')){
+                    $page->image               = $request->image55;
+                }
+                $page->save();
             }
 
+            
             $photos = [];
             if ($request->hasfile('images')) {
                 if ($page->image == null) {

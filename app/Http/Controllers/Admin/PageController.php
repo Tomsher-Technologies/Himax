@@ -94,8 +94,8 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-   public function edit(Request $request, $id)
-   {
+    public function edit(Request $request, $id)
+    {
         $lang = $request->lang;
         $page_name = $request->page;
         $page = Page::where('type', $id)->first();
@@ -134,7 +134,9 @@ class PageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        // echo '<pre>';
+        // print_r($request->all());
+        // die;
         $page = Page::findOrFail($id);
         if ($page) {
             if ($request->hasfile('image')) {

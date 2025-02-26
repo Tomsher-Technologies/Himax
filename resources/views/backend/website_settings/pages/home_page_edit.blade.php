@@ -157,6 +157,7 @@
                     <form action="{{ route('business_settings.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="page_id" value="{{ $page_id }}">
+
                         <div class="form-group row">
                             <label class="col-sm-2 col-from-label" for="name">Title <span class="text-danger">*</span></label>
                             <div class="col-sm-10">
@@ -472,6 +473,7 @@
                         @csrf
                         <input type="hidden" name="page_id" value="{{ $page_id }}">
                         <input type="hidden" name="lang" value="{{ $lang }}">
+                        
                         <div class="form-group row">
                             <label class="col-sm-2 col-from-label" for="name">Title <span
                                     class="text-danger">*</span></label>
@@ -574,6 +576,7 @@
                         @csrf
                         <input type="hidden" name="page_id" value="{{ $page_id }}">
                         <input type="hidden" name="lang" value="{{ $lang }}">
+                        
                         <div class="form-group row">
                             <label class="col-sm-2 col-from-label" for="name">Title <span
                                     class="text-danger">*</span></label>

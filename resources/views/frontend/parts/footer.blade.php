@@ -1,5 +1,4 @@
 @php
-    $pageData = getPageData('home');
     $lang = getActiveLanguage();
 @endphp
 <footer class="footer-section">
@@ -10,20 +9,18 @@
                     <div class="single-footer-widget">
                         <div class="widget-head">
                             <a href="index.html">
-                                <img src="assets/images/logo.svg" alt="logo-img">
+                                <img src="{{ uploaded_asset(get_setting('footer_logo')) }}" alt="logo-img">
                             </a>
                         </div>
                         <div class="footer-content">
                             <p>
-                                Phasellus ultricies aliquam volutpat
-                                ullamcorper laoreet neque, a lacinia
-                                curabitur lacinia mollis
+                                {!! get_setting('about_us_description', null, $lang) !!}
                             </p>
                             <div class="social-icon d-flex align-items-center">
-                                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                                <a href="{{ get_setting('facebook_link') }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                <a href="{{ get_setting('twitter_link') }}" target="_blank"><i class="fab fa-twitter"></i></a>
+                                <a href="{{ get_setting('linkedin_link') }}" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                                <a href="{{ get_setting('youtube_link') }}" target="_blank"><i class="fa-brands fa-youtube"></i></a>
                             </div>
                         </div>
                     </div>
@@ -55,7 +52,7 @@
                             <li>
                                 <a href="faq.html">
                                     <i class="fa-solid fa-chevron-right"></i>
-                                    FAQ’S
+                                    FAQ's
                                 </a>
                             </li>
                             <li>
@@ -67,7 +64,6 @@
                         </ul>
                     </div>
                 </div>
-
 
                 <div class="col-xl-3 col-lg-4 col-md-6 ps-lg-5 wow fadeInUp" data-wow-delay=".5s">
                     <div class="single-footer-widget">
@@ -103,8 +99,6 @@
                         </ul>
                     </div>
                 </div>
-
-
 
                 <div class="col-xl-3 col-lg-4 col-md-6 ps-lg-5 wow fadeInUp" data-wow-delay=".5s">
                     <div class="single-footer-widget">
@@ -148,7 +142,7 @@
         <div class="container">
             <div class="footer-wrapper d-flex align-items-center justify-content-between">
                 <p class="wow fadeInLeft color-2" data-wow-delay=".3s">
-                    © All Copyright 2025 by Himax Services
+                    © {{date('Y')}} {!! get_setting('frontend_copyright_text', null, $lang) !!}
                 </p>
 
                 <p class="wow fadeInLeft color-2 fadeInRight" data-wow-delay=".3s">
