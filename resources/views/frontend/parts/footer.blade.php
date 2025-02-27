@@ -8,7 +8,7 @@
                 <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".3s">
                     <div class="single-footer-widget">
                         <div class="widget-head">
-                            <a href="index.html">
+                            <a href="{{ route('home') }}">
                                 <img src="{{ uploaded_asset(get_setting('footer_logo')) }}" alt="logo-img">
                             </a>
                         </div>

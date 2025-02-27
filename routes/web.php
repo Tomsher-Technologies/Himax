@@ -36,7 +36,6 @@ Route::post('/recently-viewed', [CommonController::class, 'addRecentlyViewed']);
 Route::get('/recently-viewed', [CommonController::class, 'getRecentlyViewed']);
 Route::get('related-products', [ProductController::class, 'relatedProducts'])->name('related.products');
 
-Route::post('/language_change', [FrontendController::class, 'changeLanguage'])->name('language.change');
 
 Route::get('/category/{category_slug}', [SearchController::class, 'listingByCategory'])->name('products.category');
 

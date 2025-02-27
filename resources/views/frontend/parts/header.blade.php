@@ -10,7 +10,7 @@
             <div class="offcanvas__content">
                 <div class="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
                     <div class="offcanvas__logo">
-                        <a href="index.html">
+                        <a href="{{ route('home') }}">
                             <img src="assets/img/logo/black-logo.svg" alt="logo-img">
                         </a>
                     </div>
@@ -98,10 +98,10 @@
             <div class="mega-menu-wrapper">
                 <div class="header-main">
                     <div class="logo">
-                        <a href="index.html" class="header-logo">
+                        <a href="{{ route('home') }}" class="header-logo">
                             <img src="{{ asset('assets/images/logo.svg') }}" alt="logo-img">
                         </a>
-                        <a href="index.html" class="header-logo-2">
+                        <a href="{{ route('home') }}" class="header-logo-2">
                             <img src="{{ asset('assets/images/logo.svg') }}" alt="logo-img">
                         </a>
                     </div>
@@ -195,11 +195,11 @@
                                         </li>
 
                                         <li class="has-dropdown active d-xl-none">
-                                            <a href="index.html" class="border-none">
+                                            <a href="{{ route('home') }}" class="border-none">
                                                 Home
                                             </a>
                                             <ul class="submenu">
-                                                <li><a href="index.html">Home 01</a></li>
+                                                <li><a href="{{ route('home') }}">Home 01</a></li>
                                                 <li><a href="index2.html">Home 02</a></li>
                                                 <li><a href="index3.html">Home 03</a></li>
                                                 <li><a href="index4.html">Home 04</a></li>
@@ -213,7 +213,7 @@
 
 
                                         <li>
-                                            <a href="about.html">About Us</a>
+                                            <a href="{{ route('about_us') }}">About Us</a>
                                         </li>
 
 

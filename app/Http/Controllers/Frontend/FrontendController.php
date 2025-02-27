@@ -138,7 +138,7 @@ class FrontendController extends Controller
 
         $data['points'] = HomePoints::all();
         $data['industries'] = Industries::where('status',1)->orderBy('sort_order','ASC')->get();
-        $data['brands'] = Brand::where('is_active',1)->orderBy('name','ASC')->get();
+        $data['brands'] = Brand::where('is_active',1)->whereIn('id', json_decode(get_setting('home_brands')))->orderBy('name','ASC')->get();
         $data['blogs'] = Blog::where('status',1)->orderBy('blog_date','desc')->limit(4)->get();
         // echo '<pre>';
         // print_r($page);
@@ -162,9 +162,11 @@ class FrontendController extends Controller
             'twitter_title'         => $page->getTranslation('twitter_title', $lang),
             'twitter_description'   => $page->getTranslation('twitter_description', $lang),
         ];
-        
+        // DB::enableQueryLog();
+        $brands = Brand::where('is_active',1)->whereIn('id', json_decode(get_setting('about_brands')))->orderBy('name','ASC')->get();
+        // dd(DB::getQueryLog());
         $this->loadSEO($seo);
-        return view('frontend.about',compact('page','lang'));
+        return view('frontend.about',compact('page','lang','brands'));
     }
 
     public function terms()

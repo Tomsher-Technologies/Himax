@@ -254,7 +254,7 @@
                         <input type="hidden" name="types[]" value="about_brands">
                         <select name="about_brands[]" id="about_brands" class="form-control aiz-selectpicker" multiple  data-live-search="true" data-actions-box="true" data-selected="{{ get_setting('about_brands') }}">
                             
-                            @foreach (\App\Models\Brand::all() as $key => $brand)
+                            @foreach (\App\Models\Brand::where('is_active',1)->get() as $key => $brand)
                                 <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                             @endforeach
                         </select>

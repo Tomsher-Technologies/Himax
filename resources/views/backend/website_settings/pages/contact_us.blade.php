@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="card">
-        <ul class="nav nav-tabs nav-fill border-light">
+        {{-- <ul class="nav nav-tabs nav-fill border-light">
             @foreach (\App\Models\Language::all() as $key => $language)
                 <li class="nav-item">
                     <a class="nav-link text-reset @if ($language->code == $lang) active @else bg-soft-dark border-light border-left-0 @endif py-3" href="{{ route('custom-pages.edit', ['id'=>$page->type, 'lang'=> $language->code] ) }}">
@@ -18,13 +18,12 @@
                     </a>
                 </li>
             @endforeach
-        </ul>
+        </ul> --}}
 
-        <form class="p-4" action="{{ route('custom-pages.update', $page->id) }}" method="POST"
-            enctype="multipart/form-data">
+        <form class="p-4" action="{{ route('business_settings.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" name="_method" value="PATCH">
             <input  type="hidden" name='lang' value="{{$lang}}">
+            <input type="hidden" name="page_id" value="{{ $page_id }}">
 
             <div class="card-header px-0">
                 <h6 class="fw-600 mb-0">Page Content</h6>
@@ -32,79 +31,154 @@
             <div class="card-body px-0">
                 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-from-label" for="name">Title <span
-                            class="text-danger">*</span> </label>
+                    <h6 class="mb-1 ml-3"><u>Banner Section</u></h6>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-from-label" for="name">Title<span class="text-danger">*</span> </label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control"  @if($lang == 'ae') dir="rtl" @endif  placeholder="Title" name="title"
-                            value="{{ $page->getTranslation('title', $lang) }}">
+                        <input type="text" class="form-control" placeholder="Enter..." name="title" value="{{ $page->getTranslation('title', $lang) }}" required>
                     </div>
                 </div>
 
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label" for="signinSrEmail">Image</label>
+                    <div class="col-md-10">
+                        <div class="input-group" data-toggle="aizuploader" data-type="image">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-soft-secondary font-weight-medium">
+                                    {{ trans('messages.browse') }}</div>
+                            </div>
+                            <div class="form-control file-amount">{{ trans('messages.choose_file') }}</div>
+                            <input type="hidden" name="image11" class="selected-files"
+                                value="{{$page->image1}}">
+                        </div>
+                        <div class="file-preview box sm">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <h6 class="mb-1 ml-3"><u>Connect Section</u></h6>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-from-label" for="name">Title <span class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="Enter..." name="title1" value="{{ old('title1', $page->getTranslation('title1', $lang)) }}" required>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-from-label" for="name">Subtitle <span class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="Enter..." name="sub_title" value="{{ old('sub_title', $page->getTranslation('sub_title', $lang)) }}" required>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-from-label" for="name">Address Title <span class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="Enter..." name="title2" value="{{ old('title2', $page->getTranslation('title2', $lang)) }}" required>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-from-label" for="content">Address Content<span
+                            class="text-danger">*</span> </label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" name="content">{!! $page->getTranslation('content', $lang) !!}</textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-from-label" for="name">Email Title <span class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="Enter..." name="heading3" value="{{ old('heading3', $page->getTranslation('heading3', $lang)) }}" required>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-from-label" for="sub_heading2">Email Content<span
+                            class="text-danger">*</span> </label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" placeholder="Email" name="heading1" value="{{ $page->getTranslation('heading1', $lang) }}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-from-label" for="name">Phone Title <span class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="Enter..." name="title3" value="{{ old('title3', $page->getTranslation('title3', $lang)) }}" required>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-from-label" for="heading2">Phone Content<span
+                            class="text-danger">*</span> </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="Phone" name="content1" value="{{ $page->getTranslation('content1', $lang) }}">
+                        <span class="text-muted">((If you want to add multiple phone numbers, please separate each value with a /.))</span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-from-label" for="name">Working Hours Title <span class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="Enter..." name="heading2" value="{{ old('heading2', $page->getTranslation('heading2', $lang)) }}" required>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-from-label" for="content2">Working Hours Content<span
+                            class="text-danger">*</span> </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="Phone" name="content2" value="{{ $page->getTranslation('content2', $lang) }}">
+                        <span class="text-muted">((If you want to add multiple Working Hours, please separate each value with a /.))</span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <h6 class="mb-1 ml-3"><u>Social Media Section</u></h6>
+                </div>
                 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-from-label" for="sub_heading1">Detials Heading <span
-                            class="text-danger">*</span> </label>
+                    <label class="col-sm-2 col-from-label" for="name">Title <span class="text-danger">*</span></label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="Detials Heading"  @if($lang == 'ae') dir="rtl" @endif name="heading2" value="{{ $page->getTranslation('heading2', $lang) }}">
+                        <input type="text" class="form-control" placeholder="Enter..." name="heading4" value="{{ old('heading4', $page->getTranslation('heading4', $lang)) }}" required>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-from-label" for="content">Address <span
-                            class="text-danger">*</span> </label>
+                    <label class="col-sm-2 col-from-label" for="name">Subtitle <span class="text-danger">*</span></label>
                     <div class="col-sm-10">
-                        <textarea class="form-control"  @if($lang == 'ae') dir="rtl" @endif name="content">{!! $page->getTranslation('content', $lang) !!}</textarea>
+                        <input type="text" class="form-control" placeholder="Enter..." name="heading5" value="{{ old('heading5', $page->getTranslation('heading5', $lang)) }}" required>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-from-label" for="heading2">Phone <span
-                            class="text-danger">*</span> </label>
+                    <h6 class="mb-1 ml-3"><u>Facebook</u></h6>
+                </div>
+
+                @php
+                    $facebook = 
+                @endphp
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-from-label" for="name">Title <span class="text-danger">*</span></label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="Phone"  @if($lang == 'ae') dir="rtl" @endif name="heading3"
-                            value="{{ $page->getTranslation('heading3', $lang) }}">
+                        <input type="text" class="form-control" placeholder="Enter..." name="facebook[title]" value="{{ old('heading4', $page->getTranslation('heading4', $lang)) }}" required>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-from-label" for="sub_heading2">Email <span
-                            class="text-danger">*</span> </label>
+                    <label class="col-sm-2 col-from-label" for="name">Subtitle <span class="text-danger">*</span></label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" placeholder="Email"  @if($lang == 'ae') dir="rtl" @endif name="heading4"
-                            value="{{ $page->getTranslation('heading4', $lang) }}">
+                        <input type="text" class="form-control" placeholder="Enter..." name="heading5" value="{{ old('heading5', $page->getTranslation('heading5', $lang)) }}" required>
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label class="col-sm-2 col-from-label" for="heading1">Contact Form Heading <span
-                            class="text-danger">*</span> </label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="Contact Form Heading"  @if($lang == 'ae') dir="rtl" @endif name="heading1" value="{{ $page->getTranslation('heading1', $lang) }}" required>
-                    </div>
-                </div>
-
-                <div class="form-group row @if ($lang != 'en') d-none @endif">
-                    <label class="col-md-2 col-form-label" for="signinSrEmail">{{ trans('messages.images') }}</label>
-                    <div class="col-md-10">
-                        <input type="file" name="image" class="form-control" accept="image/*">
-
-                        @if ($page->image)
-                            <div class="file-preview box sm">
-                                <div  class="d-flex justify-content-between align-items-center mt-2 file-preview-item">
-                                    <div
-                                        class="align-items-center align-self-stretch d-flex justify-content-center thumb">
-                                        <img src="{{ asset($page->image) }}" class="img-fit">
-                                    </div>
-                                    <div class="remove">
-                                        <button class="btn btn-link"
-                                            data-url="{{ $page->image }}" type="button">
-                                            </button>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-                </div>
+               
                 
             </div>
 
