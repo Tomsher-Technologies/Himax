@@ -106,7 +106,7 @@ class PageController extends Controller
             
           }else if ($id == 'product_listing' || $id == 'product_details') {
             return view('backend.website_settings.pages.find_us', compact('page','lang','page_id'));
-          }else if ($id == 'news') {
+          }else if ($id == 'news' || $id == 'news_details') {
             return view('backend.website_settings.pages.blog', compact('page','lang','page_id'));
           }else if ( $id == 'service_details' || $id == 'service_listing') {
             return view('backend.website_settings.pages.service', compact('page','lang','page_id'));

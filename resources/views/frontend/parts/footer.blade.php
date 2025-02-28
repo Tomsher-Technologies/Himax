@@ -18,6 +18,7 @@
                             </p>
                             <div class="social-icon d-flex align-items-center">
                                 <a href="{{ get_setting('facebook_link') }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                <a href="{{ get_setting('instagram_link') }}" target="_blank"><i class="fab fa-instagram"></i></a>
                                 <a href="{{ get_setting('twitter_link') }}" target="_blank"><i class="fab fa-twitter"></i></a>
                                 <a href="{{ get_setting('linkedin_link') }}" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
                                 <a href="{{ get_setting('youtube_link') }}" target="_blank"><i class="fa-brands fa-youtube"></i></a>
@@ -32,31 +33,31 @@
                         </div>
                         <ul class="list-area">
                             <li>
-                                <a href="about.html">
+                                <a href="{{ route('about_us') }}">
                                     <i class="fa-solid fa-chevron-right"></i>
                                     About
                                 </a>
                             </li>
                             <li>
-                                <a href="service.html">
+                                <a href="{{ route('services.index') }}">
                                     <i class="fa-solid fa-chevron-right"></i>
                                     Our Services
                                 </a>
                             </li>
                             <li>
-                                <a href="blog.html">
+                                <a href="{{ route('blogs.index') }}">
                                     <i class="fa-solid fa-chevron-right"></i>
                                     Our Blogs
                                 </a>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="faq.html">
                                     <i class="fa-solid fa-chevron-right"></i>
                                     FAQ's
                                 </a>
-                            </li>
+                            </li> --}}
                             <li>
-                                <a href="contact.html">
+                                <a href="{{ route('contact') }}">
                                     <i class="fa-solid fa-chevron-right"></i>
                                     Contact Us
                                 </a>

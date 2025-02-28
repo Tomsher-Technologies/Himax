@@ -320,4 +320,53 @@ class FrontendController extends Controller
         return view('frontend.service_details', compact('lang','service','page'));
     }
 
+    public function blogsList(){
+        $lang = getActiveLanguage();
+        $page = Page::where('type','news')->first();
+
+        $seo = [
+            'title'                 => $page->getTranslation('title', $lang),
+            'meta_title'            => $page->getTranslation('meta_title', $lang),
+            'meta_description'      => $page->getTranslation('meta_description', $lang),
+            'keywords'              => $page->getTranslation('keywords', $lang),
+            'og_title'              => $page->getTranslation('og_title', $lang),
+            'og_description'        => $page->getTranslation('og_description', $lang),
+            'twitter_title'         => $page->getTranslation('twitter_title', $lang),
+            'twitter_description'   => $page->getTranslation('twitter_description', $lang),
+        ];
+        
+        $this->loadSEO($seo);
+        $blogs = Blog::where('status', 1)->orderBy('blog_date', 'desc')->paginate(12);
+
+        return view('frontend.blogs',compact('page','lang','blogs'));
+    }
+
+    public function blogDetails($slug){
+        $lang = getActiveLanguage();
+        $page = Page::where('type','news_details')->first();
+        $blog = $recentBlogs = '' ;
+        if($slug !=  ''){
+            $blog = Blog::where('status',1)->where('slug', $slug)->first();
+            if($blog){
+                $seo = [
+                    'title'                 => $blog->name,
+                    'meta_title'            => $blog->meta_title,
+                    'meta_description'      => $blog->meta_description,
+                    'keywords'              => $blog->keywords,
+                    'og_title'              => $blog->og_title,
+                    'og_description'        => $blog->og_description,
+                    'twitter_title'         => $blog->twitter_title,
+                    'twitter_description'   => $blog->twitter_description,
+                ];
+                $this->loadSEO($seo);
+
+                $recentBlogs = Blog::where('id', '!=', $blog->id)
+                                    ->orderBy('blog_date', 'desc')
+                                    ->take(10)
+                                    ->get();
+            }
+        }
+
+        return view('frontend.blog_details', compact('lang','blog','page','recentBlogs'));
+    }
 }

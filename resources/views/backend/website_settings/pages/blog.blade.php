@@ -34,10 +34,10 @@
 				<h6 class="mb-1 ml-3"><u>Banner Section</u></h6>
 			</div>
 
-			<div class="form-group row">
-				<label class="col-sm-2 col-from-label" for="name">Title<span class="text-danger">*</span> </label>
+			<div class="form-group row @if ($page->type == 'news_details') d-none @endif">
+				<label class="col-sm-2 col-from-label" for="name">Title </label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" placeholder="Enter..." name="title" value="{{ $page->getTranslation('title', $lang) }}" required>
+					<input type="text" class="form-control" placeholder="Enter..." name="title" value="{{ $page->getTranslation('title', $lang) }}" >
 				</div>
 			</div>
 
@@ -58,21 +58,29 @@
 				</div>
 			</div>
 
-			<div class="form-group row @if ($page->type == 'product_details' || $page->type == 'news') d-none @endif">
-				<h6 class="mb-1 ml-3"><u>Listing Section</u></h6>
-			</div>
 
-			<div class="form-group row @if ($page->type == 'product_details' || $page->type == 'news') d-none @endif">
-				<label class="col-sm-2 col-from-label" for="name">Title</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" placeholder="Title" name="title1" value="{{ $page->getTranslation('title1',$lang) }}" >
-				</div>
-			</div>
-
-			<div class="form-group row @if ($page->type == 'product_details') d-none @endif">
+			<div class="form-group row @if ($page->type == 'news_details') d-none @endif">
 				<label class="col-sm-2 col-from-label" for="name">Subtitle</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" placeholder="Subtitle" name="sub_title" value="{{ $page->getTranslation('sub_title',$lang) }}" >
+				</div>
+			</div>
+
+			<div class="form-group row  @if ($page->type == 'news') d-none @endif">
+				<h6 class="mb-1 ml-3"><u>Recent Blogs Section</u></h6>
+			</div>
+
+			<div class="form-group row @if ($page->type == 'news') d-none @endif">
+				<label class="col-sm-2 col-from-label" for="name">Title </label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" placeholder="Title" name="heading2" value="{{ $page->getTranslation('heading2',$lang) }}"  >
+				</div>
+			</div>
+
+			<div class="form-group row @if ($page->type == 'news') d-none @endif">
+				<label class="col-sm-2 col-from-label" for="name">Social Media Title </label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" placeholder="Title" name="heading3" value="{{ $page->getTranslation('heading3',$lang) }}"  >
 				</div>
 			</div>
 
@@ -95,7 +103,7 @@
 			</div>
 
 			<div class="form-group row">
-				<label class="col-sm-2 col-from-label" for="name">Button Text <span class="text-danger">*</span></label>
+				<label class="col-sm-2 col-from-label" for="name">Button Text </label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" placeholder="Title" name="heading1" value="{{ $page->getTranslation('heading1',$lang) }}"  >
 				</div>
@@ -126,33 +134,33 @@
 			</div> --}}
 		</div>
 
-		<div class="card-header px-0 @if ($page->type == 'product_details') d-none @endif">
+		<div class="card-header px-0 @if ($page->type == 'news_details') d-none @endif">
 			<h6 class="fw-600 mb-0">Seo Fields</h6>
 		</div>
 		<div class="card-body px-0">
 
-			<div class="form-group row @if ($page->type == 'product_details') d-none @endif">
+			<div class="form-group row @if ($page->type == 'news_details') d-none @endif">
 				<label class="col-sm-2 col-from-label" for="name">Meta Title</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" placeholder="Meta Title" name="meta_title" value="{{ $page->getTranslation('meta_title',$lang) }}" @if($lang == 'ae') dir="rtl" @endif>
 				</div>
 			</div>
 
-			<div class="form-group row @if ($page->type == 'product_details') d-none @endif">
+			<div class="form-group row @if ($page->type == 'news_details') d-none @endif">
 				<label class="col-sm-2 col-from-label" for="name">Meta Description</label>
 				<div class="col-sm-10">
 					<textarea class="resize-off form-control" placeholder="Description" name="meta_description"  @if($lang == 'ae') dir="rtl" @endif>{!! $page->getTranslation('meta_description',$lang) !!}</textarea>
 				</div>
 			</div>
 
-			<div class="form-group row @if ($page->type == 'product_details') d-none @endif">
+			<div class="form-group row @if ($page->type == 'news_details') d-none @endif">
 				<label class="col-sm-2 col-from-label" for="name">Keywords</label>
 				<div class="col-sm-10">
 					<textarea class="resize-off form-control" placeholder="Keywords" name="keywords" @if($lang == 'ae') dir="rtl" @endif>{!! $page->getTranslation('keywords',$lang) !!}</textarea>
 				</div>
 			</div>
 
-			<div class="form-group row @if ($page->type == 'product_details') d-none @endif">
+			<div class="form-group row @if ($page->type == 'news_details') d-none @endif">
 				<label class="col-sm-2 col-from-label" for="name">OG Title</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" placeholder="OG Title"
@@ -160,7 +168,7 @@
 				</div>
 			</div>
 
-			<div class="form-group row @if ($page->type == 'product_details') d-none @endif">
+			<div class="form-group row @if ($page->type == 'news_details') d-none @endif">
 				<label class="col-sm-2 col-from-label" for="name">OG Description</label>
 				<div class="col-sm-10">
 					<textarea class="resize-off form-control" placeholder="OG Description" name="og_description" @if($lang == 'ae') dir="rtl" @endif>{!! $page->getTranslation('og_description',$lang) !!}</textarea>
@@ -168,7 +176,7 @@
 			</div>
 
 
-			<div class="form-group row @if ($page->type == 'product_details') d-none @endif">
+			<div class="form-group row @if ($page->type == 'news_details') d-none @endif">
 				<label class="col-sm-2 col-from-label" for="name">Twitter Title</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" placeholder="Twitter Title"
@@ -176,7 +184,7 @@
 				</div>
 			</div>
 
-			<div class="form-group row @if ($page->type == 'product_details') d-none @endif">
+			<div class="form-group row @if ($page->type == 'news_details') d-none @endif">
 				<label class="col-sm-2 col-from-label" for="name">Twitter Description</label>
 				<div class="col-sm-10">
 					<textarea class="resize-off form-control" placeholder="Twitter Description"

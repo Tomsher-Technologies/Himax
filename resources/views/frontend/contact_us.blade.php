@@ -82,7 +82,7 @@
             <p>{{ $page->getTranslation('heading5', $lang) }}</p>
 
             <div id="social-icons-grid">
-                <a href="{{ $page->getTranslation('heading7', $lang) }}" class="social-icon-card" id="facebook-card">
+                <a href="{{ $page->getTranslation('heading7', $lang) }}"  target="_blank" class="social-icon-card" id="facebook-card">
                     <div class="icon-wrapper">
                         <i class="fab fa-facebook-f"></i>
                     </div>
@@ -90,7 +90,7 @@
                     <p>{{ $page->getTranslation('heading6', $lang) }}</p>
                     <span class="follow-text">Follow Us</span>
                 </a>
-                <a href="{{ $page->getTranslation('heading9', $lang) }}" class="social-icon-card" id="twitter-x-card">
+                <a href="{{ $page->getTranslation('heading9', $lang) }}" target="_blank" class="social-icon-card" id="twitter-x-card">
                     <div class="icon-wrapper">
                         <i class="bi bi-twitter-x"></i>
                     </div>
@@ -98,7 +98,7 @@
                     <p>{{ $page->getTranslation('heading8', $lang) }}</p>
                     <span class="follow-text">Follow Us</span>
                 </a>
-                <a href="{{ $page->getTranslation('heading11', $lang) }}" class="social-icon-card" id="linkedin-card">
+                <a href="{{ $page->getTranslation('heading11', $lang) }}" target="_blank" class="social-icon-card" id="linkedin-card">
                     <div class="icon-wrapper">
                         <i class="fab fa-linkedin-in"></i>
                     </div>
@@ -106,7 +106,7 @@
                     <p>{{ $page->getTranslation('heading10', $lang) }}</p>
                     <span class="follow-text">Connect</span>
                 </a>
-                <a href="{{ $page->getTranslation('heading13', $lang) }}" class="social-icon-card" id="instagram-card">
+                <a href="{{ $page->getTranslation('heading13', $lang) }}" target="_blank" class="social-icon-card" id="instagram-card">
                     <div class="icon-wrapper">
                         <i class="fab fa-instagram"></i>
                     </div>
@@ -114,7 +114,7 @@
                     <p>{{ $page->getTranslation('heading12', $lang) }}</p>
                     <span class="follow-text">Follow Us</span>
                 </a>
-                <a href="{{ $page->getTranslation('heading15', $lang) }}" class="social-icon-card" id="youtube-card">
+                <a href="{{ $page->getTranslation('heading15', $lang) }}" target="_blank" class="social-icon-card" id="youtube-card">
                     <div class="icon-wrapper">
                         <i class="fab fa-youtube"></i>
                     </div>

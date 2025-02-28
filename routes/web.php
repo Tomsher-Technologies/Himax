@@ -36,22 +36,10 @@ Route::post('/product-enquiry', [ProductController::class, 'storeProductEnquiry'
 Route::get('/services', [FrontendController::class, 'servicesList'])->name('services.index');
 Route::get('/service/{slug}', [FrontendController::class, 'serviceDetails'])->name('service-detail');
 
-Route::get('/category/{category_slug}', [SearchController::class, 'listingByCategory'])->name('products.category');
-
 Route::post('/subscribe', [FrontendController::class, 'subscribe'])->name('newsletter.subscribe');
 
-Route::get('register', [AuthController::class, 'showRegistrationForm'])->name('register');
-Route::post('register', [AuthController::class, 'register']);
-
-Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('login', [AuthController::class, 'login']);
-
-Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.sendResetLink');
-Route::get('/password/reset/{email}/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('password.reset.form');
-Route::post('/password/reset', [ForgotPasswordController::class, 'resetPassword'])->name('password.reset');
-
-
-
+Route::get('/blogs', [FrontendController::class, 'blogsList'])->name('blogs.index');
+Route::get('/blog-detail/{slug}', [FrontendController::class, 'blogDetails'])->name('blog-detail');
 
 
 
