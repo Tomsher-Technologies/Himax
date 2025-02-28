@@ -198,13 +198,36 @@
                     </li>
                 @endcanany
 
-                <li class="aiz-side-nav-item">
-                    <a href="{{ route('enquiries.contact') }}"
-                        class="aiz-side-nav-link {{ areActiveRoutes(['enquiries.contact']) }}">
-                        <i class="las la-mail-bulk aiz-side-nav-icon"></i>
-                        <span class="aiz-side-nav-text">Contact Enquiries</span>
-                    </a>
-                </li>
+                @canany(['product_enquiries'])
+                    <li class="aiz-side-nav-item">
+                        <a href="{{ route('enquiries.products') }}"
+                            class="aiz-side-nav-link {{ areActiveRoutes(['enquiries.products']) }}">
+                            <i class="las la-cart-plus aiz-side-nav-icon"></i>
+                            <span class="aiz-side-nav-text">Product Enquiries</span>
+                        </a>
+                    </li>
+                @endcanany
+
+                @canany(['contact_enquiries'])
+                    <li class="aiz-side-nav-item">
+                        <a href="{{ route('enquiries.contact') }}"
+                            class="aiz-side-nav-link {{ areActiveRoutes(['enquiries.contact']) }}">
+                            <i class="las la-mail-bulk aiz-side-nav-icon"></i>
+                            <span class="aiz-side-nav-text">Contact Enquiries</span>
+                        </a>
+                    </li>
+                @endcanany
+
+                @canany(['newsletter_subscribers'])
+                    <li class="aiz-side-nav-item">
+                        <a href="{{ route('subscribers.index') }}"
+                            class="aiz-side-nav-link {{ areActiveRoutes(['subscribers.index']) }}">
+                            <i class=" las la-newspaper aiz-side-nav-icon"></i>
+                            <span class="aiz-side-nav-text">Newsletter Subscribers</span>
+                        </a>
+                    </li>
+                @endcanany
+
 
                 @canany(['website_setup'])
                     <li class="aiz-side-nav-item">
@@ -238,7 +261,7 @@
                                 </a>
                             </li>
                           
-                            <li class="aiz-side-nav-item">
+                            {{-- <li class="aiz-side-nav-item">
                                 <a href="{{ route('home-slider.index') }}"
                                     class="aiz-side-nav-link {{ areActiveRoutes(['home-slider.index', 'home-slider.create', 'home-slider.edit']) }}">
                                     <span class="aiz-side-nav-text">Home Page Sliders</span>
@@ -249,7 +272,7 @@
                                     class="aiz-side-nav-link {{ areActiveRoutes(['banners.index', 'banners.create', 'banners.edit']) }}">
                                     <span class="aiz-side-nav-text">Banners</span>
                                 </a>
-                            </li>
+                            </li> --}}
 
                             {{-- <li class="aiz-side-nav-item">
                                 <a href="{{ route('partners.index') }}"

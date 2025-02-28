@@ -266,8 +266,8 @@
                         </div>
                         
                         <div class="repeater">
-                            <div data-repeater-list="points">
-                               
+                            <div data-repeater-list="home_points">
+                                @if (!empty($home_points[0]))
                                     @foreach ($home_points as $key => $point)
                                         <div data-repeater-item >
                                             <hr>
@@ -277,7 +277,7 @@
                                                     <input type="text" name="title" class="form-control" value="{{$point->title}}">
                                                 </div>
                                             </div>
-        
+
                                             <div class="form-group row">
                                                 <label class="col-md-2 col-form-label" for="signinSrEmail">Image</label>
                                                 <div class="col-md-10">
@@ -294,12 +294,45 @@
                                                     </div>
                                                 </div>
                                             </div>
-        
+
                                             <div class="form-group text-right">
                                                 <button type="button" class="btn btn-soft-danger" data-repeater-delete>Delete</button>
                                             </div>
                                         </div>                                     
                                     @endforeach
+                                @else
+                                    <div data-repeater-item >
+                                        <hr>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-from-label">Point</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" name="title" class="form-control" value="">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-form-label" for="signinSrEmail">Image</label>
+                                            <div class="col-md-10">
+                                                <div class="input-group" data-toggle="aizuploader" data-type="image">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text bg-soft-secondary font-weight-medium">
+                                                            {{ trans('messages.browse') }}</div>
+                                                    </div>
+                                                    <div class="form-control file-amount">{{ trans('messages.choose_file') }}</div>
+                                                    <input type="hidden" name="icon" class="selected-files"
+                                                        value="">
+                                                </div>
+                                                <div class="file-preview box sm">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group text-right">
+                                            <button type="button" class="btn btn-soft-danger" data-repeater-delete>Delete</button>
+                                        </div>
+                                    </div> 
+                                @endif
+                                    
 
 
                                 

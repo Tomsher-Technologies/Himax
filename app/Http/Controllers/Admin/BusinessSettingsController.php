@@ -123,6 +123,7 @@ class BusinessSettingsController extends Controller
                 if($request->has('content5')){
                     $page_translation->content5             = $request->content5;
                 }
+                
                 if($request->has('content6')){
                     $page_translation->content6             = $request->content6;
                 }
@@ -202,11 +203,14 @@ class BusinessSettingsController extends Controller
                     $page_translation->image1               = $request->image1;
                 }
 
-                $data = $request->input('points');
+                if($request->has('points')){
+                    $datass = $request->input('points');
             
-                if($data){
-                    $page_translation->content5             = json_encode($data);
+                    if($datass){
+                        $page_translation->content5             = json_encode($datass);
+                    }
                 }
+                
 
                 $page_translation->save();
     
@@ -226,6 +230,20 @@ class BusinessSettingsController extends Controller
                     $page->image               = $request->image55;
                 }
                 $page->save();
+            }
+
+            $data = $request->input('home_points');
+            
+            if($data){
+                HomePoints::truncate();
+                foreach ($data as $point) {
+                    if($point['title'] != NULL){
+                        HomePoints::create([
+                            'title' => $point['title'],
+                            'image' => $point['icon']
+                        ]);
+                    }
+                }
             }
 
             

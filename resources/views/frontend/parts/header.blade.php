@@ -207,7 +207,7 @@
                                         </li>
 
                                         <li>
-                                            <a href="products.html">Products</a>
+                                            <a href="{{ route('products.index') }}">Products</a>
                                         </li>
 
 
@@ -219,7 +219,7 @@
 
 
                                         <li>
-                                            <a href="contact.html">Contact Us</a>
+                                            <a href="{{ route('contact') }}">Contact Us</a>
                                         </li>
                                     </ul>
                                 </nav>

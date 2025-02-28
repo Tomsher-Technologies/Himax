@@ -58,11 +58,11 @@
 				</div>
 			</div>
 
-			<div class="form-group row @if ($page->type == 'product_details') d-none @endif">
+			<div class="form-group row @if ($page->type == 'product_details' || $page->type == 'news') d-none @endif">
 				<h6 class="mb-1 ml-3"><u>Listing Section</u></h6>
 			</div>
 
-			<div class="form-group row @if ($page->type == 'product_details') d-none @endif">
+			<div class="form-group row @if ($page->type == 'product_details' || $page->type == 'news') d-none @endif">
 				<label class="col-sm-2 col-from-label" for="name">Title</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" placeholder="Title" name="title1" value="{{ $page->getTranslation('title1',$lang) }}" >
@@ -73,6 +73,48 @@
 				<label class="col-sm-2 col-from-label" for="name">Subtitle</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" placeholder="Subtitle" name="sub_title" value="{{ $page->getTranslation('sub_title',$lang) }}" >
+				</div>
+			</div>
+
+			<div class="form-group row ">
+				<h6 class="mb-1 ml-3"><u>Footer Section</u></h6>
+			</div>
+
+			<div class="form-group row ">
+				<label class="col-sm-2 col-from-label" for="name">Title</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" placeholder="Title" name="title2" value="{{ $page->getTranslation('title2',$lang) }}" >
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label class="col-sm-2 col-from-label" for="name">Subtitle</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" placeholder="Subtitle" name="title3" value="{{ $page->getTranslation('title3',$lang) }}" >
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label class="col-sm-2 col-from-label" for="name">Button Text <span class="text-danger">*</span></label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" placeholder="Title" name="heading1" value="{{ $page->getTranslation('heading1',$lang) }}"  >
+				</div>
+			</div>
+
+            <div class="form-group row">
+				<label class="col-md-2 col-form-label" for="signinSrEmail">Background Image</label>
+				<div class="col-md-10">
+					<div class="input-group" data-toggle="aizuploader" data-type="image">
+						<div class="input-group-prepend">
+							<div class="input-group-text bg-soft-secondary font-weight-medium">
+								{{ trans('messages.browse') }}</div>
+						</div>
+						<div class="form-control file-amount">{{ trans('messages.choose_file') }}</div>
+						<input type="hidden" name="image22" class="selected-files"
+							value="{{$page->image2}}">
+					</div>
+					<div class="file-preview box sm">
+					</div>
 				</div>
 			</div>
 

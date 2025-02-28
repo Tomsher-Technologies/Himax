@@ -231,16 +231,15 @@ class FrontendController extends Controller
     {
         // Validate input
         $validated = $request->validate([
-            'firstName' => 'required|string|max:255',
-            'lastName' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'nullable|string|max:20',
             'subject' => 'required|string',
-            'message' => 'required|string|max:5000',
+            'message' => 'required|string|max:1000',
         ]);
 
         $con                = new Contacts;
-        $con->name          = $request->firstName.' '.$request->lastName;
+        $con->name          = $request->name;
         $con->email         = $request->email;
         $con->phone         = $request->phone;
         $con->subject       = $request->subject;
@@ -250,10 +249,7 @@ class FrontendController extends Controller
         // Send an email (optional)
         Mail::to(env('MAIL_ADMIN'))->queue(new ContactEnquiry($con));
 
-        session()->flash('message', trans('messages.contact_success_msg'));
-        session()->flash('alert-type', 'success');
-
-        return redirect()->back();
+        return response()->json(['success' => true, 'message' => '<div class="alert alert-success w-50">Thank you for getting in touch. Our team will contact you shortly.</div>']);
     }
 
     public function changeLanguage(Request $request)
@@ -275,7 +271,53 @@ class FrontendController extends Controller
 
         Subscriber::create(['email' => $request->email]);
 
-        return response()->json(['success' => trans('messages.newsletter_success')]);
+        return response()->json(['success' => true ,'message' => trans('messages.newsletter_success')]);
+    }
+
+    public function servicesList(){
+
+        $page = Page::where('type','service_listing')->first();
+        $lang = getActiveLanguage();
+
+        $services = Service::where('status',1)->orderBy('name','asc')->get();
+
+        $seo = [
+            'title'                 => $page->getTranslation('title', $lang),
+            'meta_title'            => $page->getTranslation('meta_title', $lang),
+            'meta_description'      => $page->getTranslation('meta_description', $lang),
+            'keywords'              => $page->getTranslation('keywords', $lang),
+            'og_title'              => $page->getTranslation('og_title', $lang),
+            'og_description'        => $page->getTranslation('og_description', $lang),
+            'twitter_title'         => $page->getTranslation('twitter_title', $lang),
+            'twitter_description'   => $page->getTranslation('twitter_description', $lang),
+        ];
+        
+        $this->loadSEO($seo);
+
+        return view('frontend.services',compact('page','services', 'lang'));
+    }
+
+    public function serviceDetails($slug){
+        $lang = getActiveLanguage();
+        $page = Page::where('type','service_details')->first();
+        $service = '';
+        if($slug !=  ''){
+            $service = Service::where('status',1)->where('slug', $slug)->first();
+            if($service){
+                $seo = [
+                    'title'                 => $service->getTranslation('name', $lang),
+                    'meta_title'            => $service->getTranslation('meta_title', $lang),
+                    'meta_description'      => $service->getTranslation('meta_description', $lang),
+                    'keywords'              => $service->getTranslation('meta_keywords', $lang),
+                    'og_title'              => $service->getTranslation('og_title', $lang),
+                    'og_description'        => $service->getTranslation('og_description', $lang),
+                    'twitter_title'         => $service->getTranslation('twitter_title', $lang),
+                    'twitter_description'   => $service->getTranslation('twitter_description', $lang),
+                ];
+                $this->loadSEO($seo);
+            }
+        }
+        return view('frontend.service_details', compact('lang','service','page'));
     }
 
 }
