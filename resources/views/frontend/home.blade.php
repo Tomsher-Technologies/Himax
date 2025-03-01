@@ -19,7 +19,10 @@
             <p class="hero-description wow fadeInUp" data-wow-delay=".3s">
                 {!! $page->getTranslation('content6') !!}
             </p>
-            <a href="{{ route('contact') }}" class="btn">{{ $page->getTranslation('heading17') }}</a>
+            {{-- {{ route('contact') }} --}}
+            <a href="#" class="btn">
+                {{ $page->getTranslation('heading17') }}
+            </a>
         </div>
 
         <div id="hero-service-slider-sec" class="slider-area">
@@ -29,9 +32,9 @@
                     @if (!empty($data['home_categories']))
                         @foreach ($data['home_categories'] as $home_categories)
                             <div class="swiper-slide">
-                                <a href="{{ route('products.index',['category' =>$home_categories->getTranslation('slug', $lang)]) }}">
+                                {{-- <a href="{{ route('products.index',['category' =>$home_categories->getTranslation('slug', $lang)]) }}"> --}}
                                     <img src="{{ uploaded_asset($home_categories->getTranslation('icon', $lang)) }}" alt="{{ $home_categories->getTranslation('name', $lang) }}">
-                                </a>
+                                {{-- </a> --}}
                             </div>
                         @endforeach
                     @endif
@@ -163,7 +166,7 @@
                                         @foreach ($data['featured_services'] as $fea_service)
                                             <div class="swiper-slide">
                                                 <div id="services-card">
-                                                    <a href="{{ route('service-detail',['slug' => $fea_service->slug]) }}" >
+                                                    {{-- <a href="{{ route('service-detail',['slug' => $fea_service->slug]) }}" > --}}
                                                         <img src="{{ uploaded_asset($fea_service->image) }}" alt="Managed IT Services" id="services-card-image">
                                                         <div id="services-card-content">
                                                             <div class="services-card-content-top">
@@ -208,7 +211,7 @@
                                                                 </a>
                                                             </div>
                                                         </div>
-                                                    </a>
+                                                    {{-- </a> --}}
                                                 </div>
                                             </div>
                                         @endforeach
@@ -273,15 +276,15 @@
                                         <span class="new-badge">NEW</span>
                                     </div>
                                     <div class="image-wrapper">
-                                        <a href="{{ route('product-detail',['slug' => $fea_products->slug, 'sku' => $fea_products->sku]) }}">
+                                        {{-- <a href="{{ route('product-detail',['slug' => $fea_products->slug, 'sku' => $fea_products->sku]) }}"> --}}
                                             <img src="{{ asset($fea_products->thumbnail_img) }}" alt="2M Explosion-proof IR Camera">
-                                        </a>
+                                        {{-- </a> --}}
                                     </div>
                                     <div class="product-info">
                                         <span class="model">{{ $fea_products->brand->name }}</span>
-                                        <a href="{{ route('product-detail',['slug' => $fea_products->slug, 'sku' => $fea_products->sku]) }}">
+                                        {{-- <a href="{{ route('product-detail',['slug' => $fea_products->slug, 'sku' => $fea_products->sku]) }}"> --}}
                                             <h3 class="product-title">{{ $fea_products->getTranslation('name', $lang) }}</h3>
-                                        </a>
+                                        {{-- </a> --}}
                                     </div>
                                 </div>
                            
@@ -395,14 +398,16 @@
         <div class="container">
             <div class="blog-header">
                 <h2 class="blog--sec-title">{{ $page->getTranslation('heading11', $lang) }}</h2>
-                <a href="#" class="blog-link">{{ $page->getTranslation('heading12', $lang) }} ↗</a>
+                {{-- <a href="{{ route('blogs.index') }}" class="blog-link"> --}}
+                    {{ $page->getTranslation('heading12', $lang) }} ↗
+                {{-- </a> --}}
             </div>
 
             <div class="blog-grid">
                 @if (!empty($data['blogs']))
                     @foreach ($data['blogs'] as $blog)
                         <div class="blog-card">
-                            <a href="{{ route('blog-detail',['slug' => $blog->slug]) }}">
+                            {{-- <a href="{{ route('blog-detail',['slug' => $blog->slug]) }}"> --}}
                                 <div class="blog-image">
                                     <img src="{{ uploaded_asset($blog->image) }}" alt="AI Prosthetics">
                                     <div class="blog-tags">
@@ -419,7 +424,7 @@
                                 </div>
                                 <span class="blog-date">| {{ date('M d, Y', strtotime($blog->blog_date)) }}</span>
                                 <h3 class="blog-title">{{ $blog->name }}</h3>
-                            </a>
+                            {{-- </a> --}}
                         </div>
                     @endforeach
                 @endif
@@ -442,7 +447,8 @@
                 <h2 class="animate__animated animate__fadeInDown">
                     {{ $page->getTranslation('heading13', $lang) }}
                 </h2>
-                <a href="{{ route('services.index') }}" class="cta-button animate__animated animate__fadeInUp animate__delay-1s">
+                {{-- {{ route('services.index') }} --}}
+                <a href="#" class="cta-button animate__animated animate__fadeInUp animate__delay-1s">
                     {{ $page->getTranslation('heading14', $lang) }}
                 </a>
             </div>
