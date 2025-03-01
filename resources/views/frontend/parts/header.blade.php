@@ -89,14 +89,20 @@
                         </a>
                     </div> --}}
                     <div class="social-icon d-flex align-items-center">
-                        <a href="{{ get_setting('facebook_link') }}" target="_blank"><i
+                        {{-- <a href="{{ get_setting('facebook_link') }}" target="_blank"><i
                                 class="fab fa-facebook-f"></i></a>
                         <a href="{{ get_setting('instagram_link') }}" target="_blank"><i
                                 class="fab fa-instagram"></i></a>
                         <a href="{{ get_setting('twitter_link') }}" target="_blank"><i class="fab fa-twitter"></i></a>
                         <a href="{{ get_setting('youtube_link') }}" target="_blank"><i class="fab fa-youtube"></i></a>
                         <a href="{{ get_setting('linkedin_link') }}" target="_blank"><i
-                                class="fab fa-linkedin-in"></i></a>
+                                class="fab fa-linkedin-in"></i></a> --}}
+
+                        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>
@@ -129,7 +135,8 @@
                                     <ul>
 
                                         <li class="has-dropdown active menu-thumb">
-                                            <a href="{{ route('services.index') }}">
+                                            {{-- {{ route('services.index') }} --}}
+                                            <a href="#">
                                                 SERVICES & SOLUTIONS
 
                                                 <i class="fa-regular fa-plus"></i>
@@ -148,7 +155,10 @@
                                                                     @foreach ($header_services as $hserv)
                                                     
                                                                         <div class="solution-item" style="background-image: url({{ uploaded_asset($hserv->image) }});">
-                                                                            <a href="{{ route('service-detail',['slug' => $hserv->slug]) }}">{{ $hserv->getTranslation('name', env('DEFAULT_LANGUAGE')) }}</a>
+                                                                            {{-- {{ route('service-detail',['slug' => $hserv->slug]) }} --}}
+                                                                            <a href="#">
+                                                                                {{ $hserv->getTranslation('name', env('DEFAULT_LANGUAGE')) }}
+                                                                            </a>
                                                                         </div>
 
                                                                     @endforeach
@@ -162,7 +172,8 @@
 
                                         <!-- Mega Menu -->
                                         <li id="product-menu" class="has-dropdown active menu-thumb">
-                                            <a href="{{ route('products.index') }}">PRODUCT CATEGORIES</a>
+                                            <a href="#">PRODUCT CATEGORIES</a>
+                                            {{-- {{ route('products.index') }} --}}
                                             <ul class="submenu has-homemenu">
                                                 <li class="menu-container">
 
@@ -184,55 +195,79 @@
 
                                                         <!-- ICT Section (Grid Layout) -->
                                                         <div id="ict" class="menu-category-content active">
-                                                            <a href="{{ route('products.index',['category' =>'ict']) }}">
+                                                            {{-- <a href="{{ route('products.index',['category' =>'ict']) }}"> --}}
                                                                 <h4 class="menu-title"> ICT </h4>
-                                                            </a>
+                                                            {{-- </a> --}}
 
                                                             <div class="ict-grid">
                                                                 <div class="menu-category">
-                                                                    <a href="{{ route('products.index',['category' =>'telecommunication']) }}">
+                                                                    {{-- <a href="{{ route('products.index',['category' =>'telecommunication']) }}"> --}}
                                                                         <h5>Telecommunication</h5>
-                                                                    </a>
+                                                                    {{-- </a> --}}
                                                                     <ul>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'grandstream']) }}">Grandstream</a></li>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'avaya']) }}">Avaya</a></li>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'logitech']) }}">Logitech</a></li>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'yealink']) }}">Yealink</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'grandstream']) }} --}}
+                                                                        <li><a href="#">Grandstream</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'avaya']) }} --}}
+                                                                        <li><a href="#">Avaya</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'logitech']) }} --}}
+                                                                        <li><a href="#">Logitech</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'yealink']) }} --}}
+                                                                        <li><a href="#">Yealink</a></li>
                                                                     </ul>
                                                                 </div>
 
                                                                 <div class="menu-category">
-                                                                    <a href="{{ route('products.index',['category' =>'computer-hardware']) }}">
+                                                                    {{-- {{ route('products.index',['category' =>'computer-hardware']) }} --}}
+                                                                    <a href="#">
                                                                         <h5>Computer & Hardware</h5>
                                                                     </a>
                                                                     <ul>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'dell']) }}">Dell</a></li>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'hp']) }}">HP</a></li>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'lenovo']) }}">Lenovo</a></li>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'epson']) }}">Epson</a></li>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'canon']) }}">Canon</a></li>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'toshiba']) }}">Toshiba</a></li>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'logitech']) }}">Logitech</a></li>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'hpe']) }}">HPE</a></li>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'dell-emc']) }}">Dell EMC</a></li>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'wd']) }}">WD</a></li>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'dseagate']) }}">Dseagate</a></li>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'qnap']) }}">Qnap</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'dell']) }} --}}
+                                                                        <li><a href="#">Dell</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'hp']) }} --}}
+                                                                        <li><a href="#">HP</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'lenovo']) }} --}}
+                                                                        <li><a href="#">Lenovo</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'epson']) }} --}}
+                                                                        <li><a href="#">Epson</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'canon']) }} --}}
+                                                                        <li><a href="#">Canon</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'toshiba']) }} --}}
+                                                                        <li><a href="#">Toshiba</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'logitech']) }} --}}
+                                                                        <li><a href="#">Logitech</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'hpe']) }} --}}
+                                                                        <li><a href="#">HPE</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'dell-emc']) }} --}}
+                                                                        <li><a href="#">Dell EMC</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'wd']) }} --}}
+                                                                        <li><a href="#">WD</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'dseagate']) }} --}}
+                                                                        <li><a href="#">Dseagate</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'qnap']) }} --}}
+                                                                        <li><a href="#">Qnap</a></li>
                                                                     </ul>
                                                                 </div>
 
                                                                 <div class="menu-category">
-                                                                    <a href="{{ route('products.index',['category' =>'software']) }}">
+                                                                    {{-- {{ route('products.index',['category' =>'software']) }} --}}
+                                                                    <a href="#">
                                                                         <h5>Software</h5>
                                                                     </a>
                                                                    
                                                                     <ul>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'microsoft']) }}">Microsoft</a></li>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'kaspersky']) }}">Kaspersky</a></li>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'sophos']) }}">Sophos</a></li>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'adobe']) }}">Adobe</a></li>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'vmware']) }}">VMware</a></li>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'esset']) }}">Esset</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'microsoft']) }} --}}
+                                                                        <li><a href="#">Microsoft</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'kaspersky']) }} --}}
+                                                                        <li><a href="#">Kaspersky</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'sophos']) }} --}}
+                                                                        <li><a href="#">Sophos</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'adobe']) }} --}}
+                                                                        <li><a href="#">Adobe</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'vmware']) }} --}}
+                                                                        <li><a href="#">VMware</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'esset']) }} --}}
+                                                                        <li><a href="#">Esset</a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -240,65 +275,97 @@
 
                                                         <!-- NETWORKING Section -->
                                                         <div id="networking" class="menu-category-content">
-                                                            <a href="{{ route('products.index',['category' =>'networking']) }}">
+                                                            {{-- {{ route('products.index',['category' =>'networking']) }} --}}
+                                                            <a href="#">
                                                                 <h4 class="menu-title">NETWORKING</h4>
                                                             </a>
                                                             <ul class="brand-list">
-                                                                <li><a href="{{ route('products.index',['brand' =>'cisco']) }}">Cisco</a></li>
-                                                                <li><a href="{{ route('products.index',['brand' =>'sophos']) }}">Sophos</a></li>
-                                                                <li><a href="{{ route('products.index',['brand' =>'fortigate']) }}">Fortigate</a></li>
-                                                                <li><a href="{{ route('products.index',['brand' =>'tp-link']) }}">TP-Link</a></li>
-                                                                <li><a href="{{ route('products.index',['brand' =>'juniper']) }}">Juniper</a></li>
-                                                                <li><a href="{{ route('products.index',['brand' =>'aruba']) }}">Aruba</a></li>
-                                                                <li><a href="{{ route('products.index',['brand' =>'huawei']) }}">Huawei</a></li>
-                                                                <li><a href="{{ route('products.index',['brand' =>'ubiquiti']) }}">Ubiquiti</a></li>
-                                                                <li><a href="{{ route('products.index',['brand' =>'mikrotik']) }}">Mikrotik</a></li>
-                                                                <li><a href="{{ route('products.index',['brand' =>'ruckus']) }}">Ruckus</a></li>
-                                                                <li><a href="{{ route('products.index',['brand' =>'sonicwall']) }}">Sonicwall</a></li>
-                                                                <li><a href="{{ route('products.index',['brand' =>'Watchguard']) }}">watchguard</a></li>
-                                                                <li><a href="{{ route('products.index',['brand' =>'Grandstream']) }}">grandstream</a></li>
-                                                                <li><a href="{{ route('products.index',['brand' =>'hikvision']) }}">Hikvision</a></li>
-                                                                <li><a href="{{ route('products.index',['brand' =>'d-link']) }}">D Link</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'cisco']) }} --}}
+                                                                <li><a href="#">Cisco</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'sophos']) }} --}}
+                                                                <li><a href="#">Sophos</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'fortigate']) }} --}}
+                                                                <li><a href="#">Fortigate</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'tp-link']) }} --}}
+                                                                <li><a href="#">TP-Link</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'juniper']) }} --}}
+                                                                <li><a href="#">Juniper</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'aruba']) }} --}}
+                                                                <li><a href="#">Aruba</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'huawei']) }} --}}
+                                                                <li><a href="#">Huawei</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'ubiquiti']) }} --}}
+                                                                <li><a href="#">Ubiquiti</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'mikrotik']) }} --}}
+                                                                <li><a href="#">Mikrotik</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'ruckus']) }} --}}
+                                                                <li><a href="#">Ruckus</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'sonicwall']) }} --}}
+                                                                <li><a href="#">Sonicwall</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'Watchguard']) }} --}}
+                                                                <li><a href="#">watchguard</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'Grandstream']) }} --}}
+                                                                <li><a href="#">grandstream</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'hikvision']) }} --}}
+                                                                <li><a href="#">Hikvision</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'d-link']) }} --}}
+                                                                <li><a href="#">D Link</a></li>
                                                             </ul>
                                                         </div>
 
                                                         <!-- SECURITY & SURVEILLANCE -->
                                                         <div id="security" class="menu-category-content">
-                                                            <a href="{{ route('products.index',['category' =>'security-surveillance']) }}">
+                                                            {{-- {{ route('products.index',['category' =>'security-surveillance']) }} --}}
+                                                            <a href="#">
                                                                 <h4 class="menu-title">SECURITY & SURVEILLANCE</h4>
                                                             </a>
                                                             <ul class="brand-list">
-                                                                <li><a href="{{ route('products.index',['brand' =>'hikvision']) }}">Hikvision</a></li>
-                                                                <li><a href="{{ route('products.index',['brand' =>'ajax']) }}">Ajax</a></li>
-                                                                <li><a href="{{ route('products.index',['brand' =>'ezviz']) }}">EZVIZ</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'hikvision']) }} --}}
+                                                                <li><a href="#">Hikvision</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'ajax']) }} --}}
+                                                                <li><a href="#">Ajax</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'ezviz']) }} --}}
+                                                                <li><a href="#">EZVIZ</a></li>
                                                             </ul>
                                                         </div>
 
                                                         <!-- FIRE SAFETY -->
                                                         <div id="fire" class="menu-category-content">
-                                                            <a href="{{ route('products.index',['category' =>'fire-safety']) }}">
+                                                            {{-- {{ route('products.index',['category' =>'fire-safety']) }} --}}
+                                                            <a href="#">
                                                                 <h4 class="menu-title">FIRE SAFETY</h4>
                                                             </a>
                                                             <ul class="brand-list">
-                                                                <li><a href="{{ route('products.index',['brand' =>'asenware']) }}">Asenware</a></li>
-                                                                <li><a href="{{ route('products.index',['brand' =>'fireX']) }}">FireX</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'asenware']) }} --}}
+                                                                <li><a href="#">Asenware</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'fireX']) }} --}}
+                                                                <li><a href="#">FireX</a></li>
                                                             </ul>
                                                         </div>
 
                                                         <!-- ELECTRONICS -->
                                                         <div id="electronics" class="menu-category-content">
-                                                            <a href="{{ route('products.index',['category' =>'electronics']) }}">
+                                                            {{-- {{ route('products.index',['category' =>'electronics']) }} --}}
+                                                            <a href="#">
                                                                 <h4 class="menu-title">ELECTRONICS</h4>
                                                             </a>
                                                             <ul class="brand-list">
-                                                                <li><a href="{{ route('products.index',['category' =>'mobile-phones']) }}">Mobile Phones</a></li>
-                                                                <li><a href="{{ route('products.index',['category' =>'tablets']) }}">Tablets</a></li>
-                                                                <li><a href="{{ route('products.index',['category' =>'tv']) }}">TV</a></li>
-                                                                <li><a href="{{ route('products.index',['category' =>'projectors']) }}">Projectors</a></li>
-                                                                <li><a href="{{ route('products.index',['category' =>'headsets-speakers']) }}">Headsets & Speakers</a></li>
-                                                                <li><a href="{{ route('products.index',['category' =>'soundbars']) }}">Soundbars</a></li>
-                                                                <li><a href="{{ route('products.index',['category' =>'streaming-devices']) }}">Streaming Devices</a></li>
-                                                                <li><a href="{{ route('products.index',['category' =>'gaming-consoles']) }}">Gaming Consoles</a></li>
+                                                                {{-- {{ route('products.index',['category' =>'mobile-phones']) }} --}}
+                                                                <li><a href="#">Mobile Phones</a></li>
+                                                                {{-- {{ route('products.index',['category' =>'tablets']) }} --}}
+                                                                <li><a href="#">Tablets</a></li>
+                                                                {{-- {{ route('products.index',['category' =>'tv']) }} --}}
+                                                                <li><a href="#">TV</a></li>
+                                                                {{-- {{ route('products.index',['category' =>'projectors']) }} --}}
+                                                                <li><a href="#">Projectors</a></li>
+                                                                {{-- {{ route('products.index',['category' =>'headsets-speakers']) }} --}}
+                                                                <li><a href="#">Headsets & Speakers</a></li>
+                                                                {{-- {{ route('products.index',['category' =>'soundbars']) }} --}}
+                                                                <li><a href="#">Soundbars</a></li>
+                                                                {{-- {{ route('products.index',['category' =>'streaming-devices']) }} --}}
+                                                                <li><a href="#">Streaming Devices</a></li>
+                                                                {{-- {{ route('products.index',['category' =>'gaming-consoles']) }} --}}
+                                                                <li><a href="#">Gaming Consoles</a></li>
                                                             </ul>
                                                         </div>
 
@@ -313,10 +380,12 @@
                                         </li> --}}
 
                                         <li>
-                                            <a href="{{ route('about_us') }}">About Us</a>
+                                            {{-- {{ route('about_us') }} --}}
+                                            <a href="#">About Us</a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('contact') }}">Contact Us</a>
+                                            {{-- {{ route('contact') }} --}}
+                                            <a href="#">Contact Us</a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -328,7 +397,8 @@
                     <div class="header-right d-flex justify-content-end align-items-center">
 
                         <div class="header-button">
-                            <a href="{{ route('contact') }}" class="theme-btn"><i
+                            {{-- {{ route('contact') }} --}}
+                            <a href="#" class="theme-btn"><i
                                     class="fa-sharp fa-regular fa-arrow-up-right"></i> {{ get_setting('main_contact_number') }}</a>
                         </div>
 

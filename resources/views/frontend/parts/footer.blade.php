@@ -17,11 +17,16 @@
                                 {!! get_setting('about_us_description', null, $lang) !!}
                             </p>
                             <div class="social-icon d-flex align-items-center">
-                                <a href="{{ get_setting('facebook_link') }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                                <a href="{{ get_setting('instagram_link') }}" target="_blank"><i class="fab fa-instagram"></i></a>
-                                <a href="{{ get_setting('twitter_link') }}" target="_blank"><i class="fab fa-twitter"></i></a>
-                                <a href="{{ get_setting('linkedin_link') }}" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
-                                <a href="{{ get_setting('youtube_link') }}" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                                {{-- {{ get_setting('facebook_link') }}
+                                {{ get_setting('instagram_link') }}
+                                {{ get_setting('twitter_link') }}
+                                {{ get_setting('linkedin_link') }}
+                                {{ get_setting('youtube_link') }} --}}
+                                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                                <a href="#" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                                <a href="#" target="_blank"><i class="fa-brands fa-youtube"></i></a>
                             </div>
                         </div>
                     </div>
@@ -33,25 +38,29 @@
                         </div>
                         <ul class="list-area">
                             <li>
-                                <a href="{{ route('about_us') }}">
+                                {{-- {{ route('about_us') }} --}}
+                                <a href="#">
                                     <i class="fa-solid fa-chevron-right"></i>
                                     About Us
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('services.index') }}">
+                                {{-- {{ route('services.index') }} --}}
+                                <a href="#">
                                     <i class="fa-solid fa-chevron-right"></i>
                                     Our Services
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('products.index') }}">
+                                {{-- {{ route('products.index') }} --}}
+                                <a href="#">
                                     <i class="fa-solid fa-chevron-right"></i>
                                     Our Products
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('blogs.index') }}">
+                                {{-- {{ route('blogs.index') }} --}}
+                                <a href="#">
                                     <i class="fa-solid fa-chevron-right"></i>
                                      Blogs
                                 </a>
@@ -63,7 +72,8 @@
                                 </a>
                             </li> --}}
                             <li>
-                                <a href="{{ route('contact') }}">
+                                {{-- {{ route('contact') }} --}}
+                                <a href="#">
                                     <i class="fa-solid fa-chevron-right"></i>
                                     Contact Us
                                 </a>
@@ -84,7 +94,8 @@
                             @if (!empty($footer_services))
                                 @foreach ($footer_services as $fserv)
                                     <li>
-                                        <a href="{{ route('service-detail',['slug' => $fserv->slug]) }}">
+                                        {{-- {{ route('service-detail',['slug' => $fserv->slug]) }} --}}
+                                        <a href="#">
                                             <i class="fa-solid fa-chevron-right"></i>
                                             {{ $fserv->getTranslation('name', $lang) }}
                                         </a>
@@ -108,7 +119,8 @@
                             @if (!empty($footer_categories))
                                 @foreach ($footer_categories as $fcat)
                                     <li>
-                                        <a href="{{ route('products.index',['category' => $fcat->getTranslation('slug', $lang)]) }}">
+                                        {{-- {{ route('products.index',['category' => $fcat->getTranslation('slug', $lang)]) }} --}}
+                                        <a href="#">
                                             <i class="fa-solid fa-chevron-right"></i>
                                             {{ $fcat->getTranslation('name', $lang) }}
                                         </a>
