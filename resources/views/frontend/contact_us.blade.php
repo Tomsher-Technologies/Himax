@@ -92,7 +92,7 @@
                 </a>
                 <a href="{{ $page->getTranslation('heading9', $lang) }}" target="_blank" class="social-icon-card" id="twitter-x-card">
                     <div class="icon-wrapper">
-                        <i class="bi bi-twitter-x"></i>
+                        <i class="fab fa-twitter"></i>
                     </div>
                     <h3>Twitter</h3>
                     <p>{{ $page->getTranslation('heading8', $lang) }}</p>

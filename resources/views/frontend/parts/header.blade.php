@@ -11,7 +11,7 @@
                 <div class="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
                     <div class="offcanvas__logo">
                         <a href="{{ route('home') }}">
-                            <img src="assets/img/logo/black-logo.svg" alt="logo-img">
+                            <img src="{{ asset('assets/images/logo.svg') }}" alt="logo-img">
                         </a>
                     </div>
                     <div class="offcanvas__close">
@@ -20,10 +20,7 @@
                         </button>
                     </div>
                 </div>
-                <p class="text d-none d-xl-block">
-                    Nullam dignissim, ante scelerisque the is euismod fermentum odio sem semper the is erat, a
-                    feugiat leo urna eget eros. Duis Aenean a imperdiet risus.
-                </p>
+               
                 <div class="mobile-menu fix mb-3"></div>
                 <div class="offcanvas__contact">
                     <h4>Contact Info</h4>
@@ -66,16 +63,17 @@
                     <div class="header-button mt-4">
 
                     </div>
-                    <div class="main-button">
+                    {{-- <div class="main-button">
                         <a href="contact.html" class="theme-btn w-100 text-center">
                             Get Started <i class="fa-sharp fa-regular fa-arrow-up-right"></i>
                         </a>
-                    </div>
+                    </div> --}}
                     <div class="social-icon d-flex align-items-center">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="{{ get_setting('facebook_link') }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="{{ get_setting('instagram_link') }}" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="{{ get_setting('twitter_link') }}" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="{{ get_setting('youtube_link') }}" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="{{ get_setting('linkedin_link') }}" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>
@@ -191,18 +189,6 @@
                                                         </div>
                                                     </div>
                                                 </li>
-                                            </ul>
-                                        </li>
-
-                                        <li class="has-dropdown active d-xl-none">
-                                            <a href="{{ route('home') }}" class="border-none">
-                                                Home
-                                            </a>
-                                            <ul class="submenu">
-                                                <li><a href="{{ route('home') }}">Home 01</a></li>
-                                                <li><a href="index2.html">Home 02</a></li>
-                                                <li><a href="index3.html">Home 03</a></li>
-                                                <li><a href="index4.html">Home 04</a></li>
                                             </ul>
                                         </li>
 

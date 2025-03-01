@@ -35,7 +35,7 @@
                             <li>
                                 <a href="{{ route('about_us') }}">
                                     <i class="fa-solid fa-chevron-right"></i>
-                                    About
+                                    About Us
                                 </a>
                             </li>
                             <li>
@@ -45,9 +45,15 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ route('products.index') }}">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                    Our Products
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('blogs.index') }}">
                                     <i class="fa-solid fa-chevron-right"></i>
-                                    Our Blogs
+                                     Blogs
                                 </a>
                             </li>
                             {{-- <li>
@@ -69,34 +75,22 @@
                 <div class="col-xl-3 col-lg-4 col-md-6 ps-lg-5 wow fadeInUp" data-wow-delay=".5s">
                     <div class="single-footer-widget">
                         <div class="widget-head">
-                            <h3>Services</h3>
+                            <h3>{{ get_setting('footer_services_title') }}</h3>
                         </div>
+                        @php
+                            $footer_services = footerServices();
+                        @endphp
                         <ul class="list-area">
-                            <li>
-                                <a href="about.html">
-                                    <i class="fa-solid fa-chevron-right"></i>
-                                    Cloud Solutions
-                                </a>
-                            </li>
-                            <li>
-                                <a href="service.html">
-                                    <i class="fa-solid fa-chevron-right"></i>
-                                    Managed IT Services
-                                </a>
-                            </li>
-                            <li>
-                                <a href="blog.html">
-                                    <i class="fa-solid fa-chevron-right"></i>
-                                    Cybersecurity
-                                </a>
-                            </li>
-                            <li>
-                                <a href="faq.html">
-                                    <i class="fa-solid fa-chevron-right"></i>
-                                    IT Consulting
-                                </a>
-                            </li>
-
+                            @if (!empty($footer_services))
+                                @foreach ($footer_services as $fserv)
+                                    <li>
+                                        <a href="{{ route('service-detail',['slug' => $fserv->slug]) }}">
+                                            <i class="fa-solid fa-chevron-right"></i>
+                                            {{ $fserv->getTranslation('name', $lang) }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -104,34 +98,23 @@
                 <div class="col-xl-3 col-lg-4 col-md-6 ps-lg-5 wow fadeInUp" data-wow-delay=".5s">
                     <div class="single-footer-widget">
                         <div class="widget-head">
-                            <h3>Industries We Serve</h3>
+                            <h3>{{ get_setting('footer_products_title') }}</h3>
                         </div>
                         <ul class="list-area">
-                            <li>
-                                <a href="about.html">
-                                    <i class="fa-solid fa-chevron-right"></i>
-                                    Banking & Finance
-                                </a>
-                            </li>
-                            <li>
-                                <a href="service.html">
-                                    <i class="fa-solid fa-chevron-right"></i>
-                                    Healthcare
-                                </a>
-                            </li>
-                            <li>
-                                <a href="blog.html">
-                                    <i class="fa-solid fa-chevron-right"></i>
-                                    Education
-                                </a>
-                            </li>
-                            <li>
-                                <a href="faq.html">
-                                    <i class="fa-solid fa-chevron-right"></i>
-                                    Government
-                                </a>
-                            </li>
+                            @php
+                                $footer_categories = footerCategories();
+                            @endphp
 
+                            @if (!empty($footer_categories))
+                                @foreach ($footer_categories as $fcat)
+                                    <li>
+                                        <a href="{{ route('products.index',['category' => $fcat->getTranslation('slug', $lang)]) }}">
+                                            <i class="fa-solid fa-chevron-right"></i>
+                                            {{ $fcat->getTranslation('name', $lang) }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -147,7 +130,7 @@
                 </p>
 
                 <p class="wow fadeInLeft color-2 fadeInRight" data-wow-delay=".3s">
-                    Designed by <a href="tomsher.com">tomsher</a>
+                    Designed by <a href="tomsher.com">Tomsher</a>
                 </p>
 
             </div>

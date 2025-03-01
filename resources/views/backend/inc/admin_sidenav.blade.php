@@ -243,11 +243,11 @@
                                     <span class="aiz-side-nav-text">Header</span>
                                 </a>
                             </li>
-                            {{-- <li class="aiz-side-nav-item">
+                            <li class="aiz-side-nav-item">
                                 <a href="{{ route('website.menu') }}" class="aiz-side-nav-link">
                                     <span class="aiz-side-nav-text">Menus</span>
                                 </a>
-                            </li> --}}
+                            </li>
                             <li class="aiz-side-nav-item">
                                 <a href="{{ route('website.footer', ['lang' => App::getLocale()]) }}"
                                     class="aiz-side-nav-link {{ areActiveRoutes(['website.footer']) }}">

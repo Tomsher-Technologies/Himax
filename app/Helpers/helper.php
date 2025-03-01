@@ -2,110 +2,48 @@
 
 use App\Models\BusinessSetting;
 use App\Utility\CategoryUtility;
-use App\Models\ProductAttributes;
 use App\Models\Product;
-use App\Models\AttributeValue;
-use App\Models\ProductStock;
 use App\Models\Category;
 use App\Models\Brand;
-use App\Models\Occasion;
 use App\Models\Page;
-use App\Models\Wishlist;
-use App\Models\Cart;
-use App\Models\RecentlyViewedProduct;
+use App\Models\Service;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Request;
+
 // use DB;
 
-function trackRecentlyViewed($productId)
+function getMenu($id)
 {
-    // Check if the user is authenticated
-    if (auth()->check()) {
-        $userId = auth()->id();
+    // Cache::forget('menu_6');
+    return Cache::rememberForever('menu_' . $id,  function () use ($id) {
+        $menu = Menu::get($id);
+        $menu_real = array();
+        foreach ($menu as $key => $m) {
+            $menu_real[$key] = $m;
+            if ($m['img_1']) {
+                $menu_real[$key]['img_1_src'] = uploaded_asset($m['img_1']);
+            }
+            if ($m['img_2']) {
+                $menu_real[$key]['img_2_src'] = uploaded_asset($m['img_2']);
+            }
+            if ($m['img_3']) {
+                $menu_real[$key]['img_3_src'] = uploaded_asset($m['img_3']);
+            }
 
-        // Save for authenticated user
-        RecentlyViewedProduct::updateOrCreate(
-            ['user_id' => $userId, 'product_id' => $productId],
-            ['updated_at' => now()]
-        );
+            if ($m['brands'] !== null) {
+                $brand_ids = explode(',', $m['brands']);
+                $brands = Brand::whereIn('id', $brand_ids)->select(['id', 'name', 'logo', 'slug'])->with('logoImage', function ($query) {
+                    return $query->select(['id', 'file_name']);
+                })->get();
 
-        // Limit to last 10 products
-        // RecentlyViewedProduct::where('user_id', $userId)
-        //         ->orderBy('updated_at', 'desc')
-        //         ->skip(10)
-        //         ->get()
-        //         ->each(function ($row) {
-        //             $row->delete();
-        //         });
-    } else {
-        // Get or create a guest token
-        $guestToken = Cookie::get('guest_token', Str::uuid());
-        Cookie::queue('guest_token', $guestToken, 60 * 24 * 7); // 7 days
-        
-        // Save for guest user
-        RecentlyViewedProduct::updateOrCreate(
-            ['guest_token' => $guestToken, 'product_id' => $productId],
-            ['updated_at' => now()]
-        );
-    
-        // Limit to last 10 products
-        // RecentlyViewedProduct::where('guest_token', $guestToken)
-        //         ->orderBy('updated_at', 'desc')
-        //         ->skip(10)
-        //         ->take(PHP_INT_MAX)
-        //         ->get()
-        //         ->each(function ($row) {
-        //             $row->delete();
-        //         });
-    }
-}
-
-function getRecentlyViewedProducts()
-{
-    if (auth()->check()) {
-        $recentlyViewedIds = RecentlyViewedProduct::where('user_id', auth()->id())
-            ->orderBy('updated_at', 'desc')
-            ->pluck('product_id')
-            ->toArray();
-    } else {
-        $guestToken = Cookie::get('guest_token', null);
-        if ($guestToken) {
-            $recentlyViewedIds = RecentlyViewedProduct::where('guest_token', $guestToken)
-                ->orderBy('updated_at', 'desc')
-                ->pluck('product_id')
-                ->toArray();
-        } else {
-            $recentlyViewedIds = [];
+                $menu_real[$key]['brands'] = $brands;
+            }
         }
-    }
-
-    return Product::whereIn('id', $recentlyViewedIds)->get();
+        return $menu_real;
+    });
 }
 
-//$this->mergeGuestToUser(auth()->id(), Cookie::get('guest_token')); 
-
-function mergeGuestToUser($userId, $guestToken)
-{
-    if (!$guestToken) {
-        return;
-    }
-
-    $guestProducts = RecentlyViewedProduct::where('guest_token', $guestToken)->get();
-
-    foreach ($guestProducts as $guestProduct) {
-        RecentlyViewedProduct::updateOrCreate(
-            ['user_id' => $userId, 'product_id' => $guestProduct->product_id],
-            ['updated_at' => $guestProduct->updated_at]
-        );
-    }
-
-    // Delete guest data
-    RecentlyViewedProduct::where('guest_token', $guestToken)->delete();
-
-    // Remove guest token cookie
-    Cookie::queue(Cookie::forget('guest_token'));
-}
 
 if (!function_exists('getBaseURL')) {
     function getBaseURL()
@@ -147,28 +85,6 @@ if (!function_exists('filter_products')) {
     }
 }
 
-function getProductAttributes($attributes){
-    $attributeArr = [];
-    $lang = getActiveLanguage();
-    if($attributes){
-        foreach($attributes as $attr){
-            $attributeArr[] = [
-                                "name" => $attr->attributes?->getTranslation('name', $lang),
-                                "value" => $attr->attribute_value?->getTranslatedName('value'),
-                            ];
-        }
-    }
-    return  $attributeArr;
-}
-
-if (!function_exists('verified_sellers_id')) {
-    function verified_sellers_id()
-    {
-        return Cache::rememberForever('verified_sellers_id', function () {
-            // return App\Models\Seller::where('verification_status', 1)->pluck('user_id')->toArray();
-        });
-    }
-}
 
 if (!function_exists('get_setting')) {
     function get_setting($key, $default = null, $lang = false)
@@ -213,70 +129,7 @@ if (!function_exists('uploaded_asset')) {
     }
 }
 
-if (!function_exists('home_base_price')) {
-    function home_base_price($product, $formatted = true)
-    {
-        $price = $product->unit_price;
-        $tax = 0;
 
-        if($product->taxes){
-            foreach ($product->taxes as $product_tax) {
-                if ($product_tax->tax_type == 'percent') {
-                    $tax += ($price * $product_tax->tax) / 100;
-                } elseif ($product_tax->tax_type == 'amount') {
-                    $tax += $product_tax->tax;
-                }
-            }
-        }
-        
-        $price += $tax;
-        return $formatted ? format_price(convert_price($price)) : $price;
-    }
-}
-
-//formats currency
-if (!function_exists('format_price')) {
-    function format_price($price)
-    {
-        if (get_setting('decimal_separator') == 1) {
-            $fomated_price = number_format($price, get_setting('no_of_decimals'));
-        } else {
-            $fomated_price = number_format($price, get_setting('no_of_decimals'), ',', ' ');
-        }
-
-        if (get_setting('symbol_format') == 1) {
-            return currency_symbol() . $fomated_price;
-        } else if (get_setting('symbol_format') == 3) {
-            return currency_symbol() . ' ' . $fomated_price;
-        } else if (get_setting('symbol_format') == 4) {
-            return $fomated_price . ' ' . currency_symbol();
-        }
-        return $fomated_price . currency_symbol();
-    }
-}
-
-//converts currency to home default currency
-if (!function_exists('convert_price')) {
-    function convert_price($price)
-    {
-        if (Session::has('currency_code') && (Session::get('currency_code') != get_system_default_currency()->code)) {
-            $price = floatval($price) / floatval(get_system_default_currency()->exchange_rate);
-            $price = floatval($price) * floatval(Session::get('currency_exchange_rate'));
-        }
-        return $price;
-    }
-}
-
-//gets currency symbol
-if (!function_exists('currency_symbol')) {
-    function currency_symbol()
-    {
-        // if (Session::has('currency_symbol')) {
-        //     return Session::get('currency_symbol');
-        // }
-        // return get_system_default_currency()->symbol;
-    }
-}
 
 //highlights the selected navigation on admin panel
 if (!function_exists('areActiveRoutes')) {
@@ -352,31 +205,6 @@ if (!function_exists('get_product_image')) {
     }
 }
 
-function get_product_attrValue($attrValue, $productStockId){
-    $query = ProductAttributes::where('product_varient_id', $productStockId)
-                                ->where('attribute_id', $attrValue)
-                                ->first();
-    $value = '';
-    if($query){
-        $value = $query->attribute_value_id;
-    }
-    return $value;
-}
-
-
-function get_attribute_values($attribute_id, $proAttr){
-    $all_attribute_values = AttributeValue::with('attribute')->where('is_active',1)->where('attribute_id', $attribute_id)->get();
-
-    $html = '';
-
-    foreach ($all_attribute_values as $row) {
-        $selected = ($proAttr == $row->id) ? 'selected' : '';
-        $html .= '<option value="' . $row->id . '" '.$selected.'>' . $row->getTranslatedName('value') . '</option>';
-    }
-
-    return $html;
-}
-
 function getSidebarCategoryTree()
 {
     $all_cats = Category::select([
@@ -428,13 +256,6 @@ function getChildCategoryIds($parentId)
         return $childIds;
     }
 
-    //formats price to home default price with convertion
-if (!function_exists('single_price')) {
-    function single_price($price)
-    {
-        return format_price(convert_price($price));
-    }
-}
 
 
 function uploadImage($type, $imageUrl, $filename = null){
@@ -476,151 +297,13 @@ function getActiveLanguage()
     return 'en';
 }
 
-function getProductOfferPrice($product){
-
-    $data["original_price"] = $product->min_price ;
-    $discountPrice = $product->min_price ;
-    
-    $offertag =  '';
-    $tax = 0;
-    
-    $discount_applicable = false;
-    if($product->discount_start_date != NULL && $product->discount_end_date != NULL){
-        if(strtotime(date('d-m-Y H:i:s')) >= $product->discount_start_date && strtotime(date('d-m-Y H:i:s')) <= $product->discount_end_date) {
-            $discount_applicable = true;
-        }
-    }
-   
-    if ($discount_applicable) {
-        if ($product->discount_type == 'percent') {
-            $discountPrice -= ($discountPrice * $product->discount) / 100;
-            $offertag = $product->discount.'% OFF';
-        } elseif ($product->discount_type == 'amount') {
-            $discountPrice -= $product->discount;
-            $offertag = 'AED '.$product->discount.' OFF';
-        }
-    }
-   
-    $data["discounted_price"] = $discountPrice;
-    $data["offer_tag"]  = $offertag;
-
-    return $data;
-}
-
-function getProductPrice($productStock){
-
-    $data["original_price"] = $productStock->price ;
-    $discountPrice = $productStock->price ;
-    
-    $offertag =  '';
-    $tax = 0;
-    
-    $discount_applicable = false;
-    if($productStock->product->discount_start_date != NULL && $productStock->product->discount_end_date != NULL){
-        if(strtotime(date('d-m-Y H:i:s')) >= $productStock->product->discount_start_date && strtotime(date('d-m-Y H:i:s')) <= $productStock->product->discount_end_date) {
-            $discount_applicable = true;
-        }
-    }
-   
-    if ($discount_applicable) {
-        if ($productStock->product->discount_type == 'percent') {
-            $discountPrice -= ($discountPrice * $productStock->product->discount) / 100;
-            $offertag = $productStock->product->discount.'% OFF';
-        } elseif ($productStock->product->discount_type == 'amount') {
-            $discountPrice -= $productStock->product->discount;
-            $offertag = 'AED '.$productStock->product->discount.' OFF';
-        }
-    }
-   
-    $data["discounted_price"] = $discountPrice;
-    $data["offer_tag"]  = $offertag;
-
-    return $data;
-}
-
-function reduceProductQuantity($productQuantities){
-    if(!empty($productQuantities)){
-        foreach($productQuantities as $key => $value){
-            $product_stock = ProductStock::where('product_id', $key)->first();
-            $product_stock->qty -= $value;
-            $product_stock->save();
-        }
-    }
-}
 
 function getPageData($type){
     $page = Page::where('type',$type)->first();
     return $page;
 }
 
-function getUser()
-{
-    $user = array(
-        'users_id_type' => 'temp_user_id',
-        'users_id' => null
-    );
 
-    if (auth()->user()) {
-        $user = array(
-            'users_id_type' => 'user_id',
-            'users_id' => auth()->user()->id
-        );
-    } else {
-        $user = array(
-            'users_id_type' => 'temp_user_id',
-            'users_id' => Request::cookie('guest_token')
-        );
-    }
-
-    return $user;
-}
-
-function cartCount()
-{
-    $user = getUser();
-
-    return Cart::where([
-        $user['users_id_type'] => $user['users_id']
-    ])->count();
-}
-
-function wishlistCount()
-{
-    if (auth()->user()) {
-        return Wishlist::where('user_id', auth()->user()->id)->count();
-    }else{
-        // return Wishlist::where('temp_user_id', Request::cookie('guest_token'))->count();
-        return 0;
-    }
-}
-
-function isWishlisted($productId, $productStockId)
-{
-    return Wishlist::where('user_id', Auth::id())
-                   ->where('product_id', $productId)
-                   ->exists();
-}
-
-function productWishlisted($sku, $product_slug){
-    $variantProduct = ProductStock::leftJoin('products as p','p.id','=','product_stocks.product_id')
-                                    ->where('product_stocks.sku', $sku)
-                                    ->where('p.slug', $product_slug)
-                                    ->select('product_stocks.*')->first()?->toArray();
-    if(!empty($variantProduct)){
-        $product_id         = $variantProduct['product_id'] ?? null;
-        $product_stock_id   = $variantProduct['id'] ?? null;
-        if($product_id != null &&  $product_stock_id != null){
-            // Check if product already exist in wishlist
-            $checkWhishlist =   Wishlist::where('user_id', Auth::id())
-                                            ->where('product_id',$product_id)
-                                            ->where('product_stock_id',$product_stock_id)->count();  
-            return $checkWhishlist; 
-        }
-        return 0;
-    } else{
-        return 0;
-    }                            
-}
 
 function getProductSkuFromSlug($slug){
     $product = Product::where('slug', $slug)->first();
@@ -658,4 +341,22 @@ function generateUniqueSKU()
     } while (Product::where('sku', $sku)->exists());
 
     return $sku;
+}
+
+function footerServices(){
+    $service_ids = get_setting('footer_services');
+    $services = [];
+    if ($service_ids) {
+        $services =  Service::where('status', 1)->whereIn('id', json_decode($service_ids))->orderBy('name','asc')->get();
+    }
+    return $services;
+}
+
+function footerCategories(){
+    $category_ids = get_setting('footer_categories');
+    $categories = [];
+    if ($category_ids) {
+        $categories =  Category::where('is_active', 1)->where('parent_id',0)->whereIn('id', json_decode($category_ids))->orderBy('name','asc')->get();
+    }
+    return $categories;
 }
