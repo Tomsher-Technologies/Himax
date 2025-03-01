@@ -391,17 +391,14 @@
                                 </nav>
                             </div>
                         </div>
-
                     </div>
 
                     <div class="header-right d-flex justify-content-end align-items-center">
-
                         <div class="header-button">
                             {{-- {{ route('contact') }} --}}
                             <a href="#" class="theme-btn"><i
                                     class="fa-sharp fa-regular fa-arrow-up-right"></i> {{ get_setting('main_contact_number') }}</a>
                         </div>
-
                         <div class="header__hamburger d-xl-block my-auto">
                             <div class="sidebar__toggle">
                                 <div class="header-bar">
