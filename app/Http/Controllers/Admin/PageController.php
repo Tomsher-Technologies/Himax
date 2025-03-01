@@ -14,6 +14,11 @@ use App\Models\BusinessSetting;
 use App\Models\Banner;
 use App\Models\Product;
 use App\Models\Contacts;
+use App\Models\HomePoints;
+use App\Models\Service;
+use App\Models\Subscriber;
+use App\Models\ProductEnquiry;
+use Carbon\Carbon;
 use Storage;
 use File;
 
@@ -76,45 +81,35 @@ class PageController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-   public function edit(Request $request, $id)
-   {
+    public function edit(Request $request, $id)
+    {
         $lang = $request->lang;
         $page_name = $request->page;
         $page = Page::where('type', $id)->first();
         if($page != null){
             $page_id = $page->id;
           if ($id == 'home') {
-            $banners = Banner::where('status', 1)->get();
-            $current_banners = BusinessSetting::whereIn('type', array('home_banner','home_mid_section_banner','home_center_banner', 'home_mid_banner', 'home_large_banner'))->get()->keyBy('type');
-            // echo '<pre>';
-            // print_r($current_banners);
-            // die;
-            $categories = Category::where('parent_id', 0)->where('is_active',1)->with('childrenCategories')->get();
-
-            $products = Product::select('id', 'name')->where('published',1)->get();
-            $brands = Brand::where('is_active',1)->orderBy('name', 'asc')->get();
-            $occasions = [];
-
-            return view('backend.website_settings.pages.home_page_edit', compact('page', 'banners', 'current_banners', 'categories', 'brands', 'products','occasions','lang','page_id'));
             
-          }else if ($id == 'find_us' || $id == 'news' || $id == 'faq') {
+            $products = Product::select('id', 'name')->where('published',1)->get();
+            $home_points = HomePoints::all();
+            $categories = Category::where('parent_id',0)->where('is_active',1)->get();
+            $services = Service::where('status',1)->get();
+            // echo '<pre>';
+            // print_r($points);
+            // die;
+            return view('backend.website_settings.pages.home_page_edit', compact('page', 'products','lang','page_id','home_points','categories','services'));
+            
+          }else if ($id == 'product_listing' || $id == 'product_details') {
             return view('backend.website_settings.pages.find_us', compact('page','lang','page_id'));
+          }else if ($id == 'news' || $id == 'news_details') {
+            return view('backend.website_settings.pages.blog', compact('page','lang','page_id'));
+          }else if ( $id == 'service_details' || $id == 'service_listing') {
+            return view('backend.website_settings.pages.service', compact('page','lang','page_id'));
           }else if ($id == 'contact_us') {
             return view('backend.website_settings.pages.contact_us', compact('page','lang','page_id'));
           }else if ($id == 'about_us') {
@@ -126,16 +121,11 @@ class PageController extends Controller
         abort(404);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        
+        // echo '<pre>';
+        // print_r($request->all());
+        // die;
         $page = Page::findOrFail($id);
         if ($page) {
             if ($request->hasfile('image')) {
@@ -179,6 +169,42 @@ class PageController extends Controller
         $query = Contacts::latest();
         $contact = $query->paginate(20);
         return view('backend.contact', compact('contact'));
+    }
+
+    public function enquiriesProducts(Request $request){
+        $keyword_search = $request->has('search') ? $request->search : '';
+        $filterProduct = $request->has('product') ? $request->product : '';
+        $end_date = '';
+        $start_date = '';
+
+        if ($request->has('date_range') && $request->date_range != null) {
+            $date_var   = explode(" to ", $request->date_range);
+            $start_date = $date_var[0];
+            $end_date   = $date_var[1];
+        }
+
+        $query = ProductEnquiry::orderBy('id', 'desc');
+
+        if ($filterProduct) {
+            $query->where('product_id', $filterProduct);
+        }
+        if ($keyword_search) {
+            $query->where(function ($query) use($keyword_search) {
+                $query->where('name', 'like', '%' . $keyword_search . '%')
+                ->orWhere('email', 'like', '%' . $keyword_search . '%')
+                ->orWhere('phone', 'like', '%' . $keyword_search . '%');
+            });
+        }
+
+        if($start_date != '' && $end_date != ''){
+            $start_dateF = Carbon::parse($start_date)->startOfDay(); 
+            $end_dateF = Carbon::parse($end_date)->endOfDay();
+            $query->whereBetween('created_at', [$start_dateF, $end_dateF]);
+        }
+
+        $enquiries = $query->paginate(20);
+        $products = Product::orderBy('name','asc')->get();
+        return view('backend.product_enquiries', compact('enquiries','products','keyword_search','filterProduct','end_date','start_date'));
     }
 
     /**
@@ -241,4 +267,19 @@ class PageController extends Controller
             return 0;
         }
     }
+
+    public function subscribers()
+    {
+        $subscribers = Subscriber::orderBy('created_at', 'desc')->paginate(15);
+        return view('backend.subscribers', compact('subscribers'));
+    }
+
+    
+    public function subscribersDestroy($id)
+    {
+        Subscriber::destroy($id);
+        flash(trans('messages.subscriber').' '.trans('messages.deleted_msg'))->success();
+        return redirect()->route('subscribers.index');
+    }
+
 }

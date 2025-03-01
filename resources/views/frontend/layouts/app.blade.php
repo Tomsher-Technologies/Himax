@@ -1,463 +1,265 @@
 <!DOCTYPE html>
-<html dir="{{ getDirection() }}" lang="{{ getActiveLanguage() }}">
+<html lang="{{ getActiveLanguage() }}">
+<!--<< Header Area >>-->
 
 <head>
-    <meta charset="utf-8">
+    <!-- ========== Meta Tags ========== -->
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Gramentheme">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title></title>
     {!! SEO::generate() !!}
-    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/css/theme.css?v=4') }}" rel="stylesheet" type="text/css" />
-    <!-- For Js Library -->
-    <script src="{{ asset('assets/js/vendor.js') }}"></script>
-    <script src="{{ asset('assets/js/theme.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('assets/css/lineicons-regular.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/icon-font.min.css') }}">
-    <link href="{{ asset('assets/css/custom-style.css') }}" rel="stylesheet" type="text/css" />
+    <!-- ======== Page title ============ -->
+    <title></title>
+    <!--<< Favcion >>-->
+    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.ico') }}">
+    <!--<< Bootstrap min.css >>-->
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <!--<< All Min Css >>-->
+    <link rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}">
+    <!--<< Animate.css >>-->
+    <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
+    <!--<< Splitting.css >>-->
+    <link rel="stylesheet" href="{{ asset('assets/css/splitting.css') }}">
+    <!--<< Magnific popup.css >>-->
+    <link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.css') }}">
+    <!--<< Icomoon.css >>-->
+    <link rel="stylesheet" href="{{ asset('assets/css/icomoon.css') }}">
+    <!--<< MeanMenu.css >>-->
+    <link rel="stylesheet" href="{{ asset('assets/css/meanmenu.css') }}">
+    <!--<< Swiper Bundle.css >>-->
+    <link rel="stylesheet" href="{{ asset('assets/css/swiper-bundle.min.css') }}">
+    <!--<< NiceSelect.css >>-->
+    <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}">
+    <!--<< Main.css >>-->
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+
     @yield('header')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <style>
+
+        .brand-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Two columns */
+            gap: 10px; /* Optional gap between items */
+        }
+
+        .brand-list li {
+            list-style: none; /* Remove default list styles */
+            padding: 5px 0;
+        }
+
+        @media (max-width: 768px) {
+            .brand-list {
+                grid-template-columns: 1fr; /* Single column on smaller screens */
+            }
+        }
+
+        /* ===== MENU LAYOUT ===== */
+        #product-menu .menu-container {
+            display: flex;
+            /* width: 800px; */
+            /* background: white; */
+            /* border-radius: 8px; */
+            overflow: hidden;
+            /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
+        }
+
+        /* ===== LEFT TAB MENU ===== */
+        #product-menu .menu-tabs {
+            width: 200px;
+            background: #ffe6e6;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        #product-menu .menu-tab {
+            background: transparent;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            color: #000;
+            padding: 15px;
+            cursor: pointer;
+            text-align: left;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        #product-menu .menu-tab.active {
+            background: #931c1e;
+            color: white;
+        }
+
+        /* ===== RIGHT CONTENT AREA ===== */
+        #product-menu .menu-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        #product-menu .menu-category-content {
+            display: none;
+        }
+
+        #product-menu .menu-category-content.active {
+            display: block;
+        }
+
+
+
+        /* ===== ICT SECTION GRID ===== */
+        #product-menu .ict-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        /* ===== MENU TITLES ===== */
+        #product-menu .menu-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #931c1e;
+            padding-bottom: 5px;
+        }
+
+        /* ===== CATEGORY STYLES ===== */
+        #product-menu .menu-category {
+            margin-bottom: 15px;
+        }
+
+        #product-menu .menu-category h5 {
+            font-size: 14px;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 6px;
+        }
+
+        #product-menu .menu-category ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #product-menu .menu-category ul li {
+            padding: 4px 0;
+        }
+
+        #product-menu .menu-category ul li a {
+            font-size: 14px;
+            color: #000;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        #product-menu .menu-category ul li a:hover {
+            color: #931c1e;
+        }
+
+
+
+        #product-menu .submenu li a {
+            color: #000;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 992px) {
+            #product-menu .menu-container {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            #product-menu .menu-tabs {
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-around;
+            }
+
+            #product-menu .menu-tab {
+                flex-grow: 1;
+                text-align: center;
+            }
+
+            #product-menu .ict-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
 </head>
 
 <body>
-    <div id="main">
-        <!-- Header -->
-        @include('frontend.parts.header')
-        <!-- End header -->
+    <!-- Mouse Cursor Start -->
+    <div class="mouse-cursor cursor-outer"></div>
+    <div class="mouse-cursor cursor-inner"></div>
 
-        <!-- Canvas menu -->
-        @include('frontend.parts.canvas')
-        <!-- End canvas menu -->
+    <!-- Back To Top Start -->
+    <button id="back-top" class="back-to-top">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
 
-        <!-- Canvas cart -->
-        @include('frontend.parts.canvas_cart')
-        <!-- End canvas cart -->
+    @include('frontend.parts.header')
+    
 
-        @yield('content')
+    @yield('content')
+    <!-- Footer Section    S T A R T -->
+   
+    @include('frontend.parts.footer')
+    <!--<< All JS Plugins >>-->
+    <script src="{{ asset('assets/js/jquery-3.7.1.min.js') }}"></script>
+    <!--<< Bootstrap Js >>-->
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <!--<< Waypoints Js >>-->
+    <script src="{{ asset('assets/js/jquery.waypoints.js') }}"></script>
+    <!--<< Counterup Js >>-->
+    <script src="{{ asset('assets/js/jquery.counterup.min.js') }}"></script>
+    <!--<< Viewport Js >>-->
+    <script src="{{ asset('assets/js/viewport.jquery.js') }}"></script>
+    <!--<< Tilt Js >>-->
+    <script src="{{ asset('assets/js/tilt.min.js') }}"></script>
+    <!--<< Swiper Slider Js >>-->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <!--<< MeanMenu Js >>-->
+    <script src="{{ asset('assets/js/jquery.meanmenu.min.js') }}"></script>
+    <!--<< Magnific popup Js >>-->
+    <script src="{{ asset('assets/js/magnific-popup.min.js') }}"></script>
+    <!--<< Wow Animation Js >>-->
+    <script src="{{ asset('assets/js/wow.min.js') }}"></script>
+    <!--<< Splitting Animation Js >>-->
+    <script src="{{ asset('assets/js/splitting.js') }}"></script>
+    <!--<< NIce Select Js >>-->
+    <script src="{{ asset('assets/js/nice-select.min.js') }}"></script>
+    <!--<< Circle Progress Js >>-->
+    <script src="{{ asset('assets/js/circle-progress.js') }}"></script>
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
 
-        <!-- Footer collection -->
-        @include('frontend.parts.footer')
-        <!-- End footer collection -->
 
-        <div class="search-popup js-search-popup">
-            <!-- Search close -->
-            <div class="search-popup__close">
-                <a href="#" class="js-close-search-popup"><i class="lnr lnr-cross"></i></a>
-            </div>
-            <!-- End search close -->
-            <!-- Container -->
-            <div class="container container--type-2">
-                <!-- Search title -->
-                {{-- <h5 class="search-popup__title">Search</h5>
-                <!-- End search title -->
-                <!-- Search categories -->
-                <ul class="search-popup__categories">
-                    <li><a href="#" class="active">All</a></li>
-                    <li><a href="#">Rings</a></li>
-                    <li><a href="#">Bracelets</a></li>
-                    <li><a href="#">Bangles</a></li>
-                    <li><a href="#">Necklaces</a></li>
-                </ul> --}}
-                <!-- End search categories -->
-                <!-- Search form -->
-                <form class="search-popup__form" action="{{ route('products.index') }}" method="get">
-                    <!-- Search input -->
-                    <input type="text" class="search-popup__input" name="search" placeholder="Search here..." />
-                    <!-- End search input -->
-                </form>
-                <!-- End search form -->
-                <!-- Search results -->
-                {{-- <div class="search-popups__results">
-                    <!-- Results heading -->
-                    <h6 class="search-popup__results-heading">Search results</h6>
-                    <!-- End results heading -->
-                    <!-- Results -->
-                    <div class="search-popups__results-products d-flex">
-                        <!-- Product -->
-                        <div class="result-product">
-                            <!-- Image -->
-                            <div class="result-product__image">
-                                <a href="product.html">
-                                    <img src="assets/images/products/image2.jpg" alt="Product image" />
-                                </a>
-                            </div>
-                            <!-- End image -->
-                            <!-- Product name -->
-                            <div class="result-product__name"><a href="product.html">18K Red & Black Gold Diamond
-                                    Mismatched Earrings</a></div>
-                            <!-- End product name -->
-                            <!-- Product price -->
-                            <div class="result-product__price">AED 2500.00</div>
-                            <!-- End product price -->
-                        </div>
-                        <!-- End product -->
-                        <!-- Product -->
-                        <div class="result-product">
-                            <!-- Image -->
-                            <div class="result-product__image">
-                                <a href="product.html">
-                                    <img src="assets/images/products/image1.jpg" alt="Product image" />
-                                </a>
-                            </div>
-                            <!-- End image -->
-                            <!-- Product name -->
-                            <div class="result-product__name"><a href="product.html">18K Yellow & White Gold Diamond
-                                    Ring</a></div>
-                            <!-- End product name -->
-                            <!-- Product price -->
-                            <div class="result-product__price">AED 6500.00</div>
-                            <!-- End product price -->
-                        </div>
-                        <!-- End product -->
-                        <!-- Product -->
-                        <div class="result-product">
-                            <!-- Image -->
-                            <div class="result-product__image">
-                                <a href="product.html">
-                                    <img src="assets/images/products/image3.jpg" alt="Product image" />
-                                </a>
-                            </div>
-                            <!-- End image -->
-                            <!-- Product name -->
-                            <div class="result-product__name"><a href="product.html">Black Diamond Necklace</a></div>
-                            <!-- End product name -->
-                            <!-- Product price -->
-                            <div class="result-product__price">AED 3500.00</div>
-                            <!-- End product price -->
-                        </div>
-                        <!-- End product -->
-                        <!-- Product -->
-                        <div class="result-product">
-                            <!-- Image -->
-                            <div class="result-product__image">
-                                <a href="product.html">
-                                    <img src="assets/images/products/image1.jpg" alt="Product image" />
-                                </a>
-                            </div>
-                            <!-- End image -->
-                            <!-- Product name -->
-                            <div class="result-product__name"><a href="product.html">18K Yellow & White Gold Diamond
-                                    Ring</a></div>
-                            <!-- End product name -->
-                            <!-- Product price -->
-                            <div class="result-product__price">AED 1999.00</div>
-                            <!-- End product price -->
-                        </div>
-                        <!-- End product -->
-                        <!-- Product -->
-                        <div class="result-product">
-                            <!-- Image -->
-                            <div class="result-product__image">
-                                <a href="product.html">
-                                    <img src="assets/images/products/image4.jpg" alt="Product image" />
-                                </a>
-                            </div>
-                            <!-- End image -->
-                            <!-- Product name -->
-                            <div class="result-product__name"><a href="product.html">18K Red & Black Gold Diamond
-                                    Mismatched Earrings</a></div>
-                            <!-- End product name -->
-                            <!-- Product price -->
-                            <div class="result-product__price">
-                                <!-- Price new -->
-                                <span class="result-product__price-new">AED 2500.00</span>
-                                <!-- End price new -->
-                                <!-- Price old -->
-                                <span class="result-product__price-old">AED 5000.00</span>
-                                <!-- End price old -->
-                            </div>
-                            <!-- End product price -->
-                        </div>
-                        <!-- End product -->
-                    </div>
-                    <!-- End results -->
-                    <!-- Results action -->
-                    <div class="search-popup__results-action">
-                        <a href="#" class="fifth-button">All results (12)</a>
-                    </div>
-                    <!-- End results actions -->
-                </div> --}}
-                <!-- End search results -->
-            </div>
-            <!-- End container -->
-        </div>
-    </div>
+    <!--<< Main.js >>-->
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'9156b62abc2b792a',t:'MTc0MDE0MDY0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
 
     <script>
-         @if (session('message'))
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true,
-                "positionClass": "toast-top-right", // Change the position if needed
-            };
-            toastr["{{ session('alert-type', 'info') }}"]("{{ session('message') }}");
-        @endif
-
-        if ($('#lang-change').length > 0) {
-            $('#lang-change').on('change', function(e) {
-                e.preventDefault();
-                var $this = $(this);
-                var locale = $this.val();
-                $.post('{{ route('language.change') }}', {
-                    _token: '{{ csrf_token() }}',
-                    locale: locale
-                }, function(data) {
-                    location.reload();
+        document.addEventListener("DOMContentLoaded", function() {
+            const tabs = document.querySelectorAll(".menu-tab");
+            const contents = document.querySelectorAll(".menu-category-content");
+    
+            tabs.forEach(tab => {
+                tab.addEventListener("click", function() {
+                    // Remove active class from all tabs and content
+                    tabs.forEach(t => t.classList.remove("active"));
+                    contents.forEach(c => c.classList.remove("active"));
+    
+                    // Add active class to clicked tab and corresponding content
+                    this.classList.add("active");
+                    document.getElementById(this.getAttribute("data-target")).classList.add(
+                        "active");
                 });
-            });
-        }
-
-        var productDetailRoute = "{{ route('product-detail', ['slug' => '__slug__', 'sku' => '__sku__']) }}"; // this will be a placeholder
-        $(".js-open-canvas-cart").on("click", function() {
-
-            $.get('{{ route('cart.index') }}', {
-                _token: '{{ csrf_token() }}'
-            }, function(data) {
-                console.log();
-                // location.reload();
-                var productRow = '';
-                $.each(data.products, function(index, product) {
-                    
-                    var productLink = productDetailRoute.replace('__slug__', product.product.slug).replace('__sku__', product.product.sku);
-        
-                    var attributeHTML = '';
-
-                    $.each(product.product.attributes, function(attrIndex, attribute) {
-                        attributeHTML += `<span class="cart-item__variant">${attribute.name}, ${attribute.value || "Not specified"}</span>`;
-                    });
-
-                    productRow += `
-                            <li class="cart-item d-flex">
-                                    
-                                    <p class="cart-item__image">
-                                        <a href="${productLink}">
-                                            <img alt="Image" data-sizes="auto"
-                                                data-srcset="${product.product.image}"
-                                                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                                class="lazyload" />
-                                        </a>
-                                    </p>
-                                
-                                    <p class="cart-item__details">
-                                        <a href="" class="cart-item__title">${product.product.name}</a>
-                                        ${attributeHTML}
-                                        <span class="cart-ietm__price">${product.quantity} <i>x</i> AED ${product.main_price}</span>
-                                    </p>
-                                    <div class="cart-item__quantity">
-                                       
-                                    </div>
-                                   
-                                
-                                    <p class="cart-item__delete">
-                                        <a href="#" class="remove-cart-item" data-id="${product.id}" ><i class="lnr lnr-cross"></i></a>
-                                    </p>
-                                
-                                </li>`;
-                    
-                });
-
-                $('.header-cart__items').html(productRow);
-                               
-                $('.cart_sub_total').html(data.summary.after_discount);
-            });
-
-
-
-            $(".js-canvas-cart").addClass("active");
-            $("body").css("overflow", "hidden");
-            return false;
-        });
-
-
-        $(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            
-            $(document).on('click', '.add-to-cart-btn', function () {
-                const productSlug = $(this).data('product-slug');
-                const productSku = $(this).data('product-sku');
-                var quantity = $('#product_quantity').val() ?? 1;
-            
-                $.ajax({
-                    url: '/cart/add', // Laravel route
-                    type: 'POST',
-                    data: {
-                        product_slug: productSlug,
-                        sku : productSku,
-                        quantity: quantity, // Default quantity
-                    },
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    },
-                    success: function (response) {
-                        $('.cart_count').text(response.cart_count);
-                        if (response.status == true) {
-                            toastr.success(response.message, "{{trans('messages.success')}}");
-                        } else {
-                            toastr.error(response.message, "{{trans('messages.error')}}");
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        toastr.error("{{trans('messages.product_add_cart_failed')}}", 'Error');
-                    },
-                });
-            });
-
-            // Event listener for the "Remove" button
-            $(document).on('click', '.remove-cart-item', function() {
-                var cartItemId = $(this).data('id'); // Get the cart item ID
-                var row = $(this).closest('li'); // Get the closest row to remove
-
-                // Send an Ajax request to remove the item from the cart
-                $.ajax({
-                    url: '/cart/' + cartItemId,
-                    type: 'DELETE',
-                    success: function(response) {
-                        if (response.status === true) {
-                            // Remove the row from the table
-                            row.remove();
-                            $('.row_'+cartItemId).remove();
-                            $('.cart_sub_total').html(response.updatedCartSummary.sub_total)
-                            // Optionally, you can update the cart summary here
-                            toastr.success(response.message, "{{trans('messages.success')}}");
-                        } else {
-                            toastr.error(response.message, "{{trans('messages.error')}}");
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        toastr.error("{{trans('messages.cart_remove_error')}}", "{{trans('messages.error')}}");
-                    }
-                });
-            });
-
-            $(document).on('click', '.change_quantity', function() {
-                var cartItemId = $(this).data('id'); // Get the cart item ID
-                var action = $(this).data('action'); // Get the cart item ID
-                var quantity = $('#quantity-field_'+cartItemId).val();
-                // Send an Ajax request to remove the item from the cart
-                if(action == 'plus'){
-                    quantity = parseInt(quantity, 10) + 1;
-                    $('#quantity-field_'+cartItemId).val(quantity);
-                    
-                }else{
-                    quantity =  parseInt(quantity, 10) - 1;;
-                    $('#quantity-field_'+cartItemId).val(quantity);
-                }
-                
-                $.ajax({
-                    url: '/cart/change_quantity',
-                    type: 'POST',
-                    data: {
-                        cart_id: cartItemId,
-                        action : action,
-                        quantity : quantity
-                    },
-                    success: function(response) {
-                        if (response.status === true) {
-                            // Optionally, you can update the cart summary here
-                            toastr.success(response.message, "{{trans('messages.success')}}");
-                            window.location.reload();
-                        } else {
-                            toastr.error(response.message, "{{trans('messages.error')}}");
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        toastr.error("{{trans('messages.cart_remove_error')}}", "{{trans('messages.error')}}");
-                    }
-                });
-            });
-
-            $(document).on('click', '.wishlist-btn', function () {
-                const heartIcon = $(this).find('.lnr-heart');
-                const productSlug = $(this).data('product-slug');
-                const productSku = $(this).data('product-sku');
-                const url = '/wishlist/store';
-
-                $.ajax({
-                    url: url,
-                    type: 'POST',
-                    data: {
-                        productSlug: productSlug, 
-                        productSku: productSku, 
-                        _token: $('meta[name="csrf-token"]').attr('content') 
-                    },
-                    success: function(response) {
-                        if(response.status == true){
-                            $('.wishlist_count').text(response.wishlist_count);
-                            toastr.success(response.message, "{{trans('messages.success')}}");
-                            heartIcon.toggleClass('active');
-
-                            if(response.wishlist_status == 1){
-                                $('.wishlist_msg').html("{{trans('messages.remove_wishlist')}}");
-                            }else{
-                                $('.wishlist_msg').html("{{trans('messages.add_wishlist')}}");
-                            }
-                        }else{
-                            toastr.error(response.message, "{{trans('messages.error')}}");
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        toastr.error("{{trans('messages.wishlist_remove_error')}}", "{{trans('messages.error')}}");
-                    }
-                });
-            });
-
-            $('#newsletterForm').on('submit', function(e) {
-                e.preventDefault();
-
-                $.ajax({
-                    url: "{{ route('newsletter.subscribe') }}",
-                    method: "POST",
-                    data: $(this).serialize(),
-                    success: function(response) {
-                        $('#newsletterMessage').html('<p style="color: green;">' + response.success + '</p>');
-                        $('#newsletterForm')[0].reset();
-                    },
-                    error: function(xhr) {
-                        let errors = xhr.responseJSON.errors;
-                        if (errors && errors.email) {
-                            $('#newsletterMessage').html('<p style="color: red;">' + errors.email[0] + '</p>');
-                        }
-                    }
-                });
-            });
-
-        });
-
-        $('.proceedToCheckout').on('click', function () {
-            $.ajax({
-                url: '/check-login-status',  // Endpoint to check login status
-                type: 'GET',
-                success: function (response) {
-                    if (response.is_logged_in) {
-                        // Redirect to checkout page
-                        window.location.href = '/checkout';
-                    } else {
-                        // Show alert if not logged in
-                        toastr.error("{{trans('messages.login_msg')}}", "{{trans('messages.error')}}");
-                    }
-                },
-                error: function () {
-                    toastr.error("{{trans('messages.error_try_again')}}", "{{trans('messages.error')}}");
-                }
-            });
-        });
-
-        $(document).ajaxComplete(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
             });
         });
     </script>
-    
+
     @yield('script')
 </body>
 

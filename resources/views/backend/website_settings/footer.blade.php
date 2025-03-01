@@ -20,13 +20,13 @@
             </li>
         @endforeach --}}
     </ul>
-    {{-- <div class="card">
+    <div class="card">
         <div class="card-header">
             <h6 class="fw-600 mb-0">Footer Widget</h6>
         </div>
         <div class="card-body">
             <div class="row gutters-10">
-                <div class="col-lg-6 d-none">
+                <div class="col-lg-6">
                     <div class="card shadow-none bg-light">
                         <div class="card-header">
                             <h6 class="mb-0">About Widget</h6>
@@ -49,7 +49,7 @@
                                     <div class="file-preview"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label>About description (Translatable)</label>
+                                    <label>About description</label>
                                     <input type="hidden" name="types[][{{ $lang }}]" value="about_us_description">
                                     <textarea class="aiz-text-editor form-control" name="about_us_description"
                                         data-buttons='[["font", ["bold", "underline", "italic"]],["para", ["ul", "ol"]],["view", ["undo","redo"]]]'
@@ -57,18 +57,7 @@
                                         {!! get_setting('about_us_description', null, $lang) !!}
                                     </textarea>
                                 </div>
-                                <div class="form-group">
-                                    <label>Play Store Link</label>
-                                    <input type="hidden" name="types[]" value="play_store_link">
-                                    <input type="text" class="form-control" placeholder="http://" name="play_store_link"
-                                        value="{{ get_setting('play_store_link') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label>App Store Link</label>
-                                    <input type="hidden" name="types[]" value="app_store_link">
-                                    <input type="text" class="form-control" placeholder="http://" name="app_store_link"
-                                        value="{{ get_setting('app_store_link') }}">
-                                </div>
+                                
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
@@ -76,7 +65,106 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-6 mx-auto">
+                    <div class="card shadow-none bg-light">
+                        <div class="card-header">
+                            <h6 class="mb-0">Links Section</h6>
+                        </div>
+                        <div class="card-body">
+                            <form action="{{ route('business_settings.update') }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <label>Services Title</label>
+                                    <input type="hidden" name="types[][{{ $lang }}]" value="footer_services_title">
+                                    <input type="text" class="form-control" placeholder="Enter..." name="footer_services_title"
+                                        value="{{ get_setting('footer_services_title') }}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Services</label>
+                                    <input type="hidden" name="types[][{{ $lang }}]" value="footer_services">
+                                    <select name="footer_services[]" class="form-control aiz-selectpicker" multiple data-actions-box="true" data-live-search="true" title="Select" data-selected="{{ get_setting('footer_services') }}">
+                                        {{-- <option disabled value=""></option> --}}
+                                        @foreach (App\Models\Service::where('status',1)->get() as $key => $serv)
+                                            <option value="{{ $serv->id }}">{{ $serv->getTranslation('name', 'en') }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Products Title</label>
+                                    <input type="hidden" name="types[][{{ $lang }}]" value="footer_products_title">
+                                    <input type="text" class="form-control" placeholder="Enter..." name="footer_products_title"
+                                        value="{{ get_setting('footer_products_title') }}">
+                                </div>
+                               
+                                <div class="form-group">
+                                    <label>Product Categories</label>
+                                    <input type="hidden" name="types[][{{ $lang }}]" value="footer_categories">
+                                    <select name="footer_categories[]" class="form-control aiz-selectpicker" multiple data-actions-box="true" data-live-search="true" title="Select" data-selected="{{ get_setting('footer_categories') }}">
+                                        {{-- <option disabled value=""></option> --}}
+                                        @foreach (App\Models\Category::where('parent_id',0)->where('is_active',1)->get() as $categ)
+                                            <option value="{{ $categ->id }}">{{ $categ->getTranslation('name', 'en') }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="text-right">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-6 mx-auto d-none">
+                    <div class="card shadow-none bg-light">
+                        <div class="card-header">
+                            <h6 class="mb-0">Newsletter & Contact Section</h6>
+                        </div>
+                        <div class="card-body">
+                            <form action="{{ route('business_settings.update') }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <label>Newsletter Title</label>
+                                    <input type="hidden" name="types[][{{ $lang }}]" value="newsletter_title">
+                                    <textarea class="form-control" placeholder="Enter..." rows="3" name="newsletter_title">{{ get_setting('newsletter_title') }}</textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Newsletter Button Text</label>
+                                    <input type="hidden" name="types[]" value="newsletter_btn_text">
+                                    <input type="text" class="form-control" placeholder="Enter..." name="newsletter_btn_text"
+                                        value="{{ get_setting('newsletter_btn_text') }}">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Contact Title</label>
+                                    <input type="hidden" name="types[][{{ $lang }}]" value="contact_title">
+                                    <textarea class="form-control" placeholder="Enter..." rows="3" name="contact_title">{{ get_setting('contact_title') }}</textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Contact Button Text</label>
+                                    <input type="hidden" name="types[]" value="contact_btn_text">
+                                    <input type="text" class="form-control" placeholder="Enter..." name="contact_btn_text"
+                                        value="{{ get_setting('contact_btn_text') }}">
+                                </div>
+
+                                <div class="text-right">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- <div class="col-lg-6 mx-auto">
                     <div class="card shadow-none bg-light">
                         <div class="card-header">
                             <h6 class="mb-0">Contact Info Widget</h6>
@@ -113,7 +201,7 @@
                             </form>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="col-lg-12 d-none">
                     <div class="card shadow-none bg-light">
                         <div class="card-header">
@@ -194,7 +282,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 
     <div class="card">
         <div class="card-header">
@@ -224,27 +312,6 @@
                         <h6 class="mb-0">Social Link Widget </h6>
                     </div>
                     <div class="card-body">
-                        
-
-                        <div class="form-group">
-                            <label>Social Links Title</label>
-                            <div class="input-group form-group">
-                                <input type="hidden" name="types[]" value="social_title">
-                                <input type="text" class="form-control" placeholder="" name="social_title"
-                                    value="{{ get_setting('social_title') }}">
-                                
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Social Links Sub Title</label>
-                            <div class="input-group form-group">
-                                <input type="hidden" name="types[]" value="social_sub_title">
-                                <input type="text" class="form-control" placeholder="" name="social_sub_title"
-                                    value="{{ get_setting('social_sub_title') }}">
-                                
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             <label>Social Links</label>
@@ -288,7 +355,7 @@
                                 <input type="text" class="form-control" placeholder="http://" name="linkedin_link"
                                     value="{{ get_setting('linkedin_link') }}">
                             </div>
-                            <div class="input-group form-group">
+                            <div class="input-group form-group d-none">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="lab la-whatsapp"></i></span>
                                 </div>
@@ -299,28 +366,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card shadow-none bg-light">
-                    <div class="card-header">
-                        <h6 class="mb-0">Payment Methods Widget </h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label>Payment Methods</label>
-                            <div class="input-group" data-toggle="aizuploader" data-type="image" data-multiple="true">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text bg-soft-secondary font-weight-medium">
-                                        Browse</div>
-                                </div>
-                                <div class="form-control file-amount">Choose File</div>
-                                <input type="hidden" name="types[]" value="payment_method_images">
-                                <input type="hidden" name="payment_method_images" class="selected-files"
-                                    value="{{ get_setting('payment_method_images') }}">
-                            </div>
-                            <div class="file-preview box sm">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
 
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary">Update</button>
@@ -329,3 +375,20 @@
         </form>
     </div>
 @endsection
+
+@section('script')
+    <script type="text/javascript">
+        
+        $(document).ready(function () {
+           
+            $('.aiz-selectpicker').on('shown.bs.select', function () {
+                var select = $(this);
+                var selectedOptions = select.find('option:selected').detach();
+                select.prepend(selectedOptions);
+                select.selectpicker('refresh');
+            });
+        });
+
+    </script>
+@endsection
+

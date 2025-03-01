@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\BusinessSetting;
 use App\Models\Page;
 use App\Models\PageTranslation;
+use App\Models\HomePoints;
+use Illuminate\Support\Facades\Storage;
 use Artisan;
 // use CoreComponentRepository;
 
@@ -71,9 +73,14 @@ class BusinessSettingsController extends Controller
         $id = $request->has('page_id') ? $request->page_id : null;
          
         if($id != null){
+
+            // echo '<pre>';
+            // print_r($request->all());
+            // die;
+
             $page = Page::findOrFail($id);
             if ($page) {
-                $page_translation                           = PageTranslation::firstOrNew(['lang' => $request->lang, 'page_id' => $page->id]);
+                $page_translation                           = PageTranslation::firstOrNew(['lang' => env('DEFAULT_LANGUAGE'), 'page_id' => $page->id]);
                 if($request->has('title')){
                     $page_translation->title                = $request->title;
                 }
@@ -82,6 +89,15 @@ class BusinessSettingsController extends Controller
                 }
                 if($request->has('sub_title')){
                     $page_translation->sub_title            = $request->sub_title;
+                }
+                if($request->has('title1')){
+                    $page_translation->title1                = $request->title1;
+                }
+                if($request->has('title2')){
+                    $page_translation->title2                = $request->title2;
+                }
+                if($request->has('title3')){
+                    $page_translation->title3                = $request->title3;
                 }
                 if($request->has('heading1')){
                     $page_translation->heading1             = $request->heading1;
@@ -107,6 +123,10 @@ class BusinessSettingsController extends Controller
                 if($request->has('content5')){
                     $page_translation->content5             = $request->content5;
                 }
+                
+                if($request->has('content6')){
+                    $page_translation->content6             = $request->content6;
+                }
                 if($request->has('heading4')){
                 $page_translation->heading4                 = $request->heading4;
                 }
@@ -125,7 +145,38 @@ class BusinessSettingsController extends Controller
                 if($request->has('heading9')){
                     $page_translation->heading9             = $request->heading9;
                 }
-                    
+
+                if($request->has('heading10')){
+                    $page_translation->heading10             = $request->heading10;
+                }
+                if($request->has('heading11')){
+                    $page_translation->heading11             = $request->heading11;
+                }
+                if($request->has('heading12')){
+                    $page_translation->heading12             = $request->heading12;
+                }
+                if($request->has('heading13')){
+                    $page_translation->heading13             = $request->heading13;
+                }
+                if($request->has('heading14')){
+                    $page_translation->heading14             = $request->heading14;
+                }
+                if($request->has('heading15')){
+                    $page_translation->heading15             = $request->heading15;
+                }
+                if($request->has('heading16')){
+                    $page_translation->heading16             = $request->heading16;
+                }
+                if($request->has('heading17')){
+                    $page_translation->heading17             = $request->heading17;
+                }
+                if($request->has('heading18')){
+                    $page_translation->heading18             = $request->heading18;
+                }
+                if($request->has('heading19')){
+                    $page_translation->heading19             = $request->heading19;
+                }
+                
                 if($request->has('meta_title')){
                     $page_translation->meta_title           = $request->meta_title;
                 }
@@ -151,11 +202,51 @@ class BusinessSettingsController extends Controller
                 if($request->has('image1')){
                     $page_translation->image1               = $request->image1;
                 }
-               
+
+                if($request->has('points')){
+                    $datass = $request->input('points');
+            
+                    if($datass){
+                        $page_translation->content5             = json_encode($datass);
+                    }
+                }
+                
+
                 $page_translation->save();
     
+                if($request->has('image11')){
+                    $page->image1               = $request->image11;
+                }
+                if($request->has('image22')){
+                    $page->image2               = $request->image22;
+                }
+                if($request->has('image33')){
+                    $page->image3               = $request->image33;
+                }
+                if($request->has('image44')){
+                    $page->image4               = $request->image44;
+                }
+                if($request->has('image55')){
+                    $page->image               = $request->image55;
+                }
+                $page->save();
             }
 
+            $data = $request->input('home_points');
+            
+            if($data){
+                HomePoints::truncate();
+                foreach ($data as $point) {
+                    if($point['title'] != NULL){
+                        HomePoints::create([
+                            'title' => $point['title'],
+                            'image' => $point['icon']
+                        ]);
+                    }
+                }
+            }
+
+            
             $photos = [];
             if ($request->hasfile('images')) {
                 if ($page->image == null) {
@@ -173,9 +264,42 @@ class BusinessSettingsController extends Controller
                 $page->save();
             }
 
+            if ($request->hasfile('video')) {
+                if($page->video != NULL){
+                    $filePath = str_replace('storage/', '', $page->video);
+                    if (Storage::disk('public')->exists($filePath)) {
+                        Storage::disk('public')->delete($filePath);
+                    }
+                }
+                $fileName = time() . '_Video';
+                $video = uploadImage('page', $request->video, $fileName);
+                $page->video = $video;
+                $page->save();
+            }
+
             if ($request->hasfile('image')) {
-                $photo = uploadImage('page', $request->image, 'image_1');
+                if($page->image != NULL){
+                    $filePath = str_replace('storage/', '', $page->image);
+                    if (Storage::disk('public')->exists($filePath)) {
+                        Storage::disk('public')->delete($filePath);
+                    }
+                }
+                $fileName = time() . '_Image';
+                $photo = uploadImage('page', $request->image, $fileName);
                 $page->image = $photo;
+                $page->save();
+            }
+
+            if ($request->hasfile('image1')) {
+                if($page->image1 != NULL){
+                    $filePath = str_replace('storage/', '', $page->image1);
+                    if (Storage::disk('public')->exists($filePath)) {
+                        Storage::disk('public')->delete($filePath);
+                    }
+                }
+                $fileName = time() . '_Image';
+                $photo = uploadImage('page', $request->image1, $fileName);
+                $page->image1 = $photo;
                 $page->save();
             }
         }

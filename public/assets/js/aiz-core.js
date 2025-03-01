@@ -860,9 +860,9 @@ togglePassword.on('click', function (e) {
                         $this.val(selected);
                     }
                     $this.selectpicker({
-                        size: 5,
+                        size: 6,
                         noneSelectedText: AIZ.local.nothing_selected,
-                        virtualScroll: false
+                        virtualScroll: true
                     });
                 }
                 if (refresh === "refresh") {

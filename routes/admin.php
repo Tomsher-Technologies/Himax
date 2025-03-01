@@ -55,6 +55,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/banners/edit/{id}', [Bannercontroller::class, 'edit'])->name('banners.edit');
 
     Route::get('/enquiries-contact', [PageController::class, 'enquiries'])->name('enquiries.contact');
+    Route::get('/enquiries-products', [PageController::class, 'enquiriesProducts'])->name('enquiries.products');
     // website setting
     Route::group(['prefix' => 'website'], function () {
         Route::get('/footer', [WebsiteController::class, 'footer'])->name('website.footer');
@@ -73,6 +74,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/custom-pages/edit/{id}', [PageController::class, 'edit'])->name('custom-pages.edit');
         Route::get('/custom-pages/destroy/{id}', [PageController::class, 'destroy'])->name('custom-pages.destroy');
         Route::post('/page/delete_image', [PageController::class, 'delete_image'])->name('page.delete_image');
+        Route::get('/subscribers', [PageController::class, 'subscribers'])->name('subscribers.index');
+        Route::get('/subscribers/destroy/{id}', [PageController::class, 'subscribersDestroy'])->name('subscriber.destroy');
 
         // Partners
         Route::resource('partners', PartnersController::class)->except('show');

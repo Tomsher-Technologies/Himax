@@ -161,6 +161,7 @@ class ServiceController extends Controller
         $service_translation                       = ServiceTranslation::firstOrNew(['lang' => $request->lang, 'service_id' => $service->id]);
         $service_translation->name                 = $request->name;
         $service_translation->description          = $request->description;
+        $service_translation->short_description    = $request->short_description;
         $service_translation->meta_title           = $request->meta_title;
         $service_translation->meta_description     = $request->meta_description;
         $service_translation->meta_keywords        = $request->meta_keywords;

@@ -1,122 +1,139 @@
-<footer class="modern-footer collection-footer">
-    @php
-        $pageData = getPageData('home');
-        $lang = getActiveLanguage();
-    @endphp
-    
-    <!-- Newsletter -->
-    <div class="blog-with-sidebar__newsletter">
-        <!-- Container -->
+@php
+    $lang = getActiveLanguage();
+@endphp
+<footer class="footer-section">
+    <div class="footer-widgets-wrapper footer-bg">
         <div class="container">
-            <!-- Row -->
-            <div class="row blog-newsletter">
-                <div class="col-lg-12">
-                    <!-- Newsletter Title -->
-                    <h3 class="blog-newsletter__title font-family-jost text-center">{{ $pageData->getTranslation('heading8', $lang) }}</h3>
-                    <!-- End newsletter title -->
+            <div class="row">
+                <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".3s">
+                    <div class="single-footer-widget">
+                        <div class="widget-head">
+                            <a href="{{ route('home') }}">
+                                <img src="{{ uploaded_asset(get_setting('footer_logo')) }}" alt="logo-img">
+                            </a>
+                        </div>
+                        <div class="footer-content">
+                            <p>
+                                {!! get_setting('about_us_description', null, $lang) !!}
+                            </p>
+                            <div class="social-icon d-flex align-items-center">
+                                <a href="{{ get_setting('facebook_link') }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                <a href="{{ get_setting('instagram_link') }}" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a href="{{ get_setting('twitter_link') }}" target="_blank"><i class="fab fa-twitter"></i></a>
+                                <a href="{{ get_setting('linkedin_link') }}" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                                <a href="{{ get_setting('youtube_link') }}" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 ps-lg-5 wow fadeInUp" data-wow-delay=".5s">
+                    <div class="single-footer-widget">
+                        <div class="widget-head">
+                            <h3>Quick Links</h3>
+                        </div>
+                        <ul class="list-area">
+                            <li>
+                                <a href="{{ route('about_us') }}">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                    About Us
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('services.index') }}">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                    Our Services
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('products.index') }}">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                    Our Products
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('blogs.index') }}">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                     Blogs
+                                </a>
+                            </li>
+                            {{-- <li>
+                                <a href="faq.html">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                    FAQ's
+                                </a>
+                            </li> --}}
+                            <li>
+                                <a href="{{ route('contact') }}">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                    Contact Us
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="col-lg-6">
-                    <p class="newsletter-text-area">{{ $pageData->getTranslation('heading9', $lang) }}</p>
+                <div class="col-xl-3 col-lg-4 col-md-6 ps-lg-5 wow fadeInUp" data-wow-delay=".5s">
+                    <div class="single-footer-widget">
+                        <div class="widget-head">
+                            <h3>{{ get_setting('footer_services_title') }}</h3>
+                        </div>
+                        @php
+                            $footer_services = footerServices();
+                        @endphp
+                        <ul class="list-area">
+                            @if (!empty($footer_services))
+                                @foreach ($footer_services as $fserv)
+                                    <li>
+                                        <a href="{{ route('service-detail',['slug' => $fserv->slug]) }}">
+                                            <i class="fa-solid fa-chevron-right"></i>
+                                            {{ $fserv->getTranslation('name', $lang) }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </div>
                 </div>
-                <div class="col-lg-6">
-                    <!-- Newsletter form -->
-                    <form class="blog-newsletter__form"  id="newsletterForm">
-                        <input type="email" placeholder="{{trans('email')}}"  name="email" class="blog-newsletter__input" />
-                        <button type="submit" class="blog-newsletter__submit">{{ trans('messages.subscribe') }}</button>
-                    </form>
-                    <div id="newsletterMessage"></div>
-                    <!-- End newsletter form -->
+
+                <div class="col-xl-3 col-lg-4 col-md-6 ps-lg-5 wow fadeInUp" data-wow-delay=".5s">
+                    <div class="single-footer-widget">
+                        <div class="widget-head">
+                            <h3>{{ get_setting('footer_products_title') }}</h3>
+                        </div>
+                        <ul class="list-area">
+                            @php
+                                $footer_categories = footerCategories();
+                            @endphp
+
+                            @if (!empty($footer_categories))
+                                @foreach ($footer_categories as $fcat)
+                                    <li>
+                                        <a href="{{ route('products.index',['category' => $fcat->getTranslation('slug', $lang)]) }}">
+                                            <i class="fa-solid fa-chevron-right"></i>
+                                            {{ $fcat->getTranslation('name', $lang) }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </div>
                 </div>
+
             </div>
-            <!-- End row -->
         </div>
-        <!-- End container -->
     </div>
-    <!-- End newsletter -->
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="footer-wrapper d-flex align-items-center justify-content-between">
+                <p class="wow fadeInLeft color-2" data-wow-delay=".3s">
+                    © {{date('Y')}} {!! get_setting('frontend_copyright_text', null, $lang) !!}
+                </p>
 
-    <!-- Container -->
-    <div class="container">
+                <p class="wow fadeInLeft color-2 fadeInRight" data-wow-delay=".3s">
+                    Designed by <a href="tomsher.com">Tomsher</a>
+                </p>
 
-        <!-- Menu -->
-        <ul class="modern-footer__menu">
-            <li><a href="{{route('home')}}">{{ trans('messages.home') }} </a></li>
-            <li><a href="{{route('about_us')}}">{{ trans('messages.about_us') }} </a></li>
-            <li><a href="{{route('products.index')}}">{{ trans('messages.shop') }} </a></li>
-            <li><a href="{{route('terms')}}">{{ trans('messages.terms_conditions') }} </a></li>
-            <li><a href="{{route('privacy')}}">{{ trans('messages.privacy_policy') }}</a></li>
-            <li><a href="{{route('contact')}}">{{ trans('messages.contact') }}</a></li>
-        </ul>
-        <!-- End menu -->
-        <!-- Row -->
-        <div class="row">
-            <div class="col-lg-4 mobile-order-2">
-                <!-- Social -->
-                <div class="modern-footer__social">
-                    <p>{{ get_setting('social_title') }}</p>
-                    <ul>
-                        <li><a href="{{ get_setting('instagram_link') }}"><img src="{{ asset('assets/images/instagram.svg') }}" alt=""></a></li>
-                        <li><a href="{{ get_setting('facebook_link') }}"><img src="{{ asset('assets/images/facebook.svg') }}"></a></li>
-                        <li><a href="{{ get_setting('youtube_link') }}"><img src="{{ asset('assets/images/youtube.svg') }}"></a></li>
-                        <li><a href="{{ get_setting('linkedin_link') }}"><img src="{{ asset('assets/images/LinkedIn.svg') }}"></a></li>
-                    </ul>
-                </div>
-                <!-- End social -->
-            </div>
-            <div class="col-lg-4">
-                <!-- Logo -->
-                <div class="modern-footer__logo">
-                    <img width="250" src="{{ asset('assets/img/logo.avif') }}" alt="">
-                </div>
-                <!-- End logo -->
-                <!-- Address -->
-                <div class="modern-footer__address">
-
-                    <ul>
-                        <li><a href="#"><img width="40" src="{{ asset('assets/images/email.svg') }}" alt=""></a></li>
-                        <li><a href="#"><img width="40" src="{{ asset('assets/images/chat.svg') }}"></a></li>
-                        <li><a href="#"><img width="40" src="{{ asset('assets/images/phone.svg') }}"></a></li>
-                        <li><a href="#"><img width="40" src="{{ asset('assets/images/visit.svg') }}"></a></li>
-                    </ul>
-                </div>
-                <!-- End address -->
-                <!-- Payment -->
-                <div class="modern-footer__payment d-none d-lg-block">
-                    <img src="{{ uploaded_asset(get_setting('payment_method_images')) }}" alt="Payment" />
-                </div>
-                <!-- End payment -->
-            </div>
-            <div class="col-lg-4 mobile-order-3">
-                <!-- Currency -->
-                <div class="modern-footer__currency">
-                    <p>{{ trans('messages.join_with_us') }}</p>
-
-                    <div class="become_promotor" bis_skin_checked="1"><a href="#"><i
-                                class="lnr lnr-bullhorn"></i>{{ trans('messages.become_promotor') }}
-                        </a></div>
-                    <div class="become_partner" bis_skin_checked="1"><a href="#"><i
-                                class="lnr lnr-thumbs-up"></i>{{ trans('messages.become_partner') }}
-                        </a></div>
-
-
-
-                </div>
-                <!-- End currency -->
             </div>
         </div>
-        <!-- End row -->
-        <!-- Payment -->
-        <div class="modern-footer__payment d-block d-lg-none">
-            <img src="{{ asset('assets/images/payment.svg') }}" alt="Payment" />
-        </div>
-        <!-- End payment -->
-
-
-        <!-- Copyright -->
-        <div class="modern-footer__copyright"> {!! get_setting('frontend_copyright_text', null, $lang) !!} {{ trans('messages.design_by') }}  {{ trans('messages.tomsher') }}</div>
-        <!-- End copyright -->
-
     </div>
-
-    <!-- End container -->
 </footer>
