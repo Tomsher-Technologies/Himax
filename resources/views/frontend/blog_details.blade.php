@@ -40,8 +40,10 @@
                     </div>
 
                     <article id="blog-details-article">
-                       {!! $blog->description !!}
-                       
+                        <span class="mb-2" style="color: #202857">| {{ date('M d, Y', strtotime($blog->blog_date)) }}</span><br>
+                        <div class="mt-3">
+                            {!! $blog->description !!}
+                        </div>
                     </article>
                 </div>
 

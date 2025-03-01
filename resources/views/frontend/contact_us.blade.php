@@ -45,14 +45,14 @@
                     $phones = explode('/', $page->getTranslation('content1', $lang));
                     $phone = '';
                     foreach($phones as $ph){
-                        $phone .= $ph .'<br>';
+                        $phone .= '<a href="tel:'.$ph.'">'.$ph .'</a><br>';
                     }
                 @endphp
 
                 <div id="contact-card">
                     <i class="fas fa-phone-alt"></i>
                     <h3 class="text-white">{{ $page->getTranslation('title3', $lang) }}</h3>
-                    <p>
+                    <p style="color: white">
                         {!! $phone !!}
                     </p>
                 </div>
@@ -182,7 +182,7 @@
                     <h3>{{ $page->getTranslation('content6', $lang) }}</h3>
                     <p><i class="fas fa-map-marker-alt"></i> {!! $page->getTranslation('content', $lang) !!}</p>
                     <p><i class="fas fa-phone"></i>  {!! $phone !!}</p>
-                    <p><i class="fas fa-envelope"></i> {{ $page->getTranslation('heading1', $lang) }}</p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:{{ $page->getTranslation('heading1', $lang) }}">{{ $page->getTranslation('heading1', $lang) }}</a></p>
                     
                 </div>
             </div>

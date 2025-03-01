@@ -266,7 +266,7 @@
                 <h2 class="animate__animated animate__fadeInDown">
                     {!! $page->getTranslation('heading16', $lang) !!}
                 </h2>
-                <a href="#" class="cta-button animate__animated animate__fadeInUp animate__delay-1s">
+                <a href="{{ route('services.index') }}" class="cta-button animate__animated animate__fadeInUp animate__delay-1s">
                    {{ $page->getTranslation('heading17', $lang) }}
                 </a>
             </div>

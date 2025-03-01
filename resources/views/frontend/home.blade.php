@@ -19,7 +19,7 @@
             <p class="hero-description wow fadeInUp" data-wow-delay=".3s">
                 {!! $page->getTranslation('content6') !!}
             </p>
-            <a href="#about" class="btn">{{ $page->getTranslation('heading17') }}</a>
+            <a href="{{ route('contact') }}" class="btn">{{ $page->getTranslation('heading17') }}</a>
         </div>
 
         <div id="hero-service-slider-sec" class="slider-area">
@@ -29,7 +29,9 @@
                     @if (!empty($data['home_categories']))
                         @foreach ($data['home_categories'] as $home_categories)
                             <div class="swiper-slide">
-                                <img src="{{ uploaded_asset($home_categories->getTranslation('icon', $lang)) }}" alt="{{ $home_categories->getTranslation('name', $lang) }}">
+                                <a href="{{ route('products.index',['category' =>$home_categories->getTranslation('slug', $lang)]) }}">
+                                    <img src="{{ uploaded_asset($home_categories->getTranslation('icon', $lang)) }}" alt="{{ $home_categories->getTranslation('name', $lang) }}">
+                                </a>
                             </div>
                         @endforeach
                     @endif
@@ -161,50 +163,52 @@
                                         @foreach ($data['featured_services'] as $fea_service)
                                             <div class="swiper-slide">
                                                 <div id="services-card">
-                                                    <img src="{{ uploaded_asset($fea_service->image) }}" alt="Managed IT Services" id="services-card-image">
-                                                    <div id="services-card-content">
-                                                        <div class="services-card-content-top">
-                                                            <!-- Title -->
-                                                            <h2 id="services-card-title">
-                                                                {{ $fea_service->getTranslation('name', $lang) }}
-                                                            </h2>
-                                                            <!-- Service List (Now below title and always visible) -->
-                                                            <ul id="services-card-list">
-                                                                @foreach ($fea_service->points as $service_points)
-                                                                    <li class="services-card-item">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                            height="16" viewBox="0 0 16 16" fill="none">
-                                                                            <g clip-path="url(#clip0_97_177)">
-                                                                                <path d="M2.5 9L6 12.5L14 4.5" stroke="white"
-                                                                                    stroke-width="2" stroke-linecap="round"
-                                                                                    stroke-linejoin="round" />
-                                                                            </g>
-                                                                            <defs>
-                                                                                <clipPath id="clip0_97_177">
-                                                                                    <rect width="16" height="16"
-                                                                                        fill="white" />
-                                                                                </clipPath>
-                                                                            </defs>
-                                                                        </svg>
-                                                                        {{ $service_points->title }}
-                                                                    </li>
-                                                                @endforeach
-                                                            </ul>
+                                                    <a href="{{ route('service-detail',['slug' => $fea_service->slug]) }}" >
+                                                        <img src="{{ uploaded_asset($fea_service->image) }}" alt="Managed IT Services" id="services-card-image">
+                                                        <div id="services-card-content">
+                                                            <div class="services-card-content-top">
+                                                                <!-- Title -->
+                                                                <h2 id="services-card-title">
+                                                                    {{ $fea_service->getTranslation('name', $lang) }}
+                                                                </h2>
+                                                                <!-- Service List (Now below title and always visible) -->
+                                                                <ul id="services-card-list">
+                                                                    @foreach ($fea_service->points as $service_points)
+                                                                        <li class="services-card-item">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                                height="16" viewBox="0 0 16 16" fill="none">
+                                                                                <g clip-path="url(#clip0_97_177)">
+                                                                                    <path d="M2.5 9L6 12.5L14 4.5" stroke="white"
+                                                                                        stroke-width="2" stroke-linecap="round"
+                                                                                        stroke-linejoin="round" />
+                                                                                </g>
+                                                                                <defs>
+                                                                                    <clipPath id="clip0_97_177">
+                                                                                        <rect width="16" height="16"
+                                                                                            fill="white" />
+                                                                                    </clipPath>
+                                                                                </defs>
+                                                                            </svg>
+                                                                            {{ $service_points->title }}
+                                                                        </li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            </div>
+            
+                                                            <!-- Footer (Always Visible) -->
+                                                            <div id="services-card-footer">
+                                                                <span id="services-card-footer-text">{{ ucfirst($fea_service->type) }}</span>
+                                                                <a href="#" id="services-card-arrow">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="48"
+                                                                        height="48" viewBox="0 0 48 48" fill="none">
+                                                                        <path
+                                                                            d="M37.0008 11.5V31C37.0008 31.3978 36.8428 31.7794 36.5615 32.0607C36.2802 32.342 35.8987 32.5 35.5008 32.5C35.103 32.5 34.7215 32.342 34.4402 32.0607C34.1589 31.7794 34.0008 31.3978 34.0008 31V15.1206L12.5621 36.5613C12.2806 36.8427 11.8989 37.0008 11.5008 37.0008C11.1028 37.0008 10.721 36.8427 10.4396 36.5613C10.1581 36.2798 10 35.898 10 35.5C10 35.102 10.1581 34.7202 10.4396 34.4387L31.8802 13H16.0008C15.603 13 15.2215 12.842 14.9402 12.5607C14.6589 12.2794 14.5008 11.8978 14.5008 11.5C14.5008 11.1022 14.6589 10.7206 14.9402 10.4393C15.2215 10.158 15.603 10 16.0008 10H35.5008C35.8987 10 36.2802 10.158 36.5615 10.4393C36.8428 10.7206 37.0008 11.1022 37.0008 11.5Z"
+                                                                            fill="white" />
+                                                                    </svg>
+                                                                </a>
+                                                            </div>
                                                         </div>
-        
-                                                        <!-- Footer (Always Visible) -->
-                                                        <div id="services-card-footer">
-                                                            <span id="services-card-footer-text">{{ ucfirst($fea_service->type) }}</span>
-                                                            <a href="#" id="services-card-arrow">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="48"
-                                                                    height="48" viewBox="0 0 48 48" fill="none">
-                                                                    <path
-                                                                        d="M37.0008 11.5V31C37.0008 31.3978 36.8428 31.7794 36.5615 32.0607C36.2802 32.342 35.8987 32.5 35.5008 32.5C35.103 32.5 34.7215 32.342 34.4402 32.0607C34.1589 31.7794 34.0008 31.3978 34.0008 31V15.1206L12.5621 36.5613C12.2806 36.8427 11.8989 37.0008 11.5008 37.0008C11.1028 37.0008 10.721 36.8427 10.4396 36.5613C10.1581 36.2798 10 35.898 10 35.5C10 35.102 10.1581 34.7202 10.4396 34.4387L31.8802 13H16.0008C15.603 13 15.2215 12.842 14.9402 12.5607C14.6589 12.2794 14.5008 11.8978 14.5008 11.5C14.5008 11.1022 14.6589 10.7206 14.9402 10.4393C15.2215 10.158 15.603 10 16.0008 10H35.5008C35.8987 10 36.2802 10.158 36.5615 10.4393C36.8428 10.7206 37.0008 11.1022 37.0008 11.5Z"
-                                                                        fill="white" />
-                                                                </svg>
-                                                            </a>
-                                                        </div>
-                                                    </div>
+                                                    </a>
                                                 </div>
                                             </div>
                                         @endforeach
@@ -262,19 +266,25 @@
                 <div class="swiper-wrapper">
                     @if (!empty($data['featured_products']))
                         @foreach ($data['featured_products'] as $fea_products)
-                            <div class="swiper-slide product-card">
-                                <div class="product-header">
-                                    <span class="category">{{ $fea_products->category->name }}</span>
-                                    <span class="new-badge">NEW</span>
+                            
+                                <div class="swiper-slide product-card">
+                                    <div class="product-header">
+                                        <span class="category">{{ $fea_products->category->name }}</span>
+                                        <span class="new-badge">NEW</span>
+                                    </div>
+                                    <div class="image-wrapper">
+                                        <a href="{{ route('product-detail',['slug' => $fea_products->slug, 'sku' => $fea_products->sku]) }}">
+                                            <img src="{{ asset($fea_products->thumbnail_img) }}" alt="2M Explosion-proof IR Camera">
+                                        </a>
+                                    </div>
+                                    <div class="product-info">
+                                        <span class="model">{{ $fea_products->brand->name }}</span>
+                                        <a href="{{ route('product-detail',['slug' => $fea_products->slug, 'sku' => $fea_products->sku]) }}">
+                                            <h3 class="product-title">{{ $fea_products->getTranslation('name', $lang) }}</h3>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="image-wrapper">
-                                    <img src="{{ asset($fea_products->thumbnail_img) }}" alt="2M Explosion-proof IR Camera">
-                                </div>
-                                <div class="product-info">
-                                    <span class="model">{{ $fea_products->brand->name }}</span>
-                                    <h3 class="product-title">{{ $fea_products->getTranslation('name', $lang) }}</h3>
-                                </div>
-                            </div>
+                           
                         @endforeach
                     @endif
                     <!-- Product Card 1 -->
@@ -392,22 +402,24 @@
                 @if (!empty($data['blogs']))
                     @foreach ($data['blogs'] as $blog)
                         <div class="blog-card">
-                            <div class="blog-image">
-                                <img src="{{ uploaded_asset($blog->image) }}" alt="AI Prosthetics">
-                                <div class="blog-tags">
-                                    @php
-                                        $tags = explode(',', $blog->tags);
-                                    @endphp
-                                    @if (!empty($tags))
-                                        @foreach ( $tags as $tag)
-                                            <span class="tag">{{$tag}}</span>
-                                        @endforeach
-                                    @endif
-                                    
+                            <a href="{{ route('blog-detail',['slug' => $blog->slug]) }}">
+                                <div class="blog-image">
+                                    <img src="{{ uploaded_asset($blog->image) }}" alt="AI Prosthetics">
+                                    <div class="blog-tags">
+                                        @php
+                                            $tags = explode(',', $blog->tags);
+                                        @endphp
+                                        @if (!empty($tags))
+                                            @foreach ( $tags as $tag)
+                                                <span class="tag">{{$tag}}</span>
+                                            @endforeach
+                                        @endif
+                                        
+                                    </div>
                                 </div>
-                            </div>
-                            <span class="blog-date">| {{ date('M d, Y', strtotime($blog->blog_date)) }}</span>
-                            <h3 class="blog-title">{{ $blog->name }}</h3>
+                                <span class="blog-date">| {{ date('M d, Y', strtotime($blog->blog_date)) }}</span>
+                                <h3 class="blog-title">{{ $blog->name }}</h3>
+                            </a>
                         </div>
                     @endforeach
                 @endif
@@ -430,7 +442,7 @@
                 <h2 class="animate__animated animate__fadeInDown">
                     {{ $page->getTranslation('heading13', $lang) }}
                 </h2>
-                <a href="#" class="cta-button animate__animated animate__fadeInUp animate__delay-1s">
+                <a href="{{ route('services.index') }}" class="cta-button animate__animated animate__fadeInUp animate__delay-1s">
                     {{ $page->getTranslation('heading14', $lang) }}
                 </a>
             </div>

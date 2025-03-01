@@ -352,6 +352,15 @@ function footerServices(){
     return $services;
 }
 
+function headerServices(){
+    $service_ids = get_setting('header_services');
+    $services = [];
+    if ($service_ids) {
+        $services =  Service::where('status', 1)->whereIn('id', json_decode($service_ids))->orderBy('name','asc')->get();
+    }
+    return $services;
+}
+
 function footerCategories(){
     $category_ids = get_setting('footer_categories');
     $categories = [];

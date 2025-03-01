@@ -292,6 +292,8 @@
 }
 
 
+
+
 /* Ensure text readability on mobile devices */
 @media (max-width: 768px) {
     .hero-title {
@@ -306,6 +308,9 @@
         font-size: 1rem;
     }
 }
+
+
+
 
 
 /* Button */
@@ -408,6 +413,14 @@
         right: 5% !important;
     }
 }
+
+
+
+
+
+
+
+
 
 #services-card {
     position: relative;
@@ -516,6 +529,17 @@
     font-weight: 600;
     color: #FAFBFC;
 }
+
+
+
+
+
+
+
+
+
+
+
 
 /* ===== PRODUCT SECTION ===== */
 #product-section {
@@ -668,6 +692,16 @@
     margin-top: 4px;
 }
 
+
+
+
+
+
+
+
+
+
+
 /* ===== FEATURES SECTION ===== */
 #features {
     padding: 60px 0;
@@ -777,6 +811,18 @@
     background: white;
     color: black;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ===== INDUSTRIES SECTION ===== */
 #industries {
@@ -891,6 +937,10 @@
 .industries-info p {
     font-size: 14px;
 }
+
+
+
+
 /* RESPONSIVE DESIGN */
 @media (max-width: 1024px) {
     .industries-content {
@@ -924,6 +974,12 @@
         text-align: center;
     }
 }
+
+
+
+
+
+
 
 /* ===== Partners Section ===== */
 #partners {
@@ -1108,6 +1164,12 @@
     }
 }
 
+
+
+
+
+
+
 /* ===== Blog Section ===== */
 #blog {
     background: #FCE5E2;
@@ -1242,6 +1304,13 @@
     }
 }
 
+
+
+
+
+
+
+
 /* ===== CTA Section ===== */
 #cta-section {
     position: relative;
@@ -1329,6 +1398,14 @@
     }
 }
 
+
+
+
+
+
+
+
+
 /* Solutions Grid Under Megamenu */
 .solutions-grid {
     padding: 20px;
@@ -1413,6 +1490,114 @@
         grid-template-columns: repeat(1, 1fr);
     }
 }
+
+
+
+
+
+
+
+/* ===== MENU GRID ===== */
+/* #product-menu .menu-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+#product-menu .menu-column {
+    flex: 1;
+    min-width: 220px;
+}
+
+#product-menu .menu-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #931c1e;
+    margin-bottom: 10px;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 5px;
+}
+
+#product-menu .menu-category {
+    margin-bottom: 15px;
+}
+
+#product-menu .menu-category h5 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 6px;
+}
+
+#product-menu .menu-category ul {
+    list-style: none;
+    padding: 0;
+}
+
+#product-menu .menu-category ul li {
+    padding: 4px 0;
+}
+
+#product-menu .menu-category ul li a {
+    font-size: 14px;
+    color: #000;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+#product-menu .menu-category ul li a:hover {
+    color: var(--primary-color);
+}
+
+#product-menu .menu-title:hover {
+    color: var(--primary-color);
+}
+
+#product-menu .submenu {
+    display: none;
+    background: white ;
+    padding: 20px;
+
+    left: -550px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    top: 100%;
+}
+
+
+#product-menu .submenu li a{
+    color: #000 !important;
+}
+
+#product-menu:hover .submenu {
+    display: block;
+}
+
+@media (max-width: 992px) {
+    #product-menu .menu-grid {
+        flex-direction: column;
+    }
+
+    #product-menu .submenu {
+        position: static;
+        box-shadow: none;
+    }
+}
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ===== Mission & Vision Section ===== */
 #mission-vision {
@@ -1592,6 +1777,23 @@
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #contact-info {
     background-color: var(--primary-color);
     color: white;
@@ -1632,6 +1834,14 @@
     font-size: 1.2em;
     margin-bottom: 10px;
 }
+
+
+
+
+
+
+
+
 
 #connect-with-us {
     background-color: #f8f9fa;
@@ -1806,6 +2016,17 @@
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
 #contact-form-section {
     background-image: url('../images/bg-3.png');
     background-size: cover;
@@ -1825,6 +2046,8 @@
     background: rgba(0, 0, 0, 0.5);
     z-index: 1;
 } */
+
+
 
 #contact-form-section .contact-form-wrapper {
     background: rgba(255, 255, 255, 0.1);
@@ -1908,6 +2131,22 @@
         flex-direction: column;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #map-section {
     background-color: #f8f9fa;
@@ -2000,6 +2239,23 @@
         width: 100%;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ===== PRODUCTS PAGE ===== */
 
 
@@ -2197,6 +2453,22 @@
         transform: translateY(0);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ===== SERVICE OVERVIEW SECTION ===== */
 
@@ -2509,6 +2781,17 @@
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
 #service-dt-services {
     padding: 5rem 0;
     background: linear-gradient(to bottom right, #f8f9fa, #ffffff);
@@ -2549,6 +2832,17 @@
 .text-primary {
     color: var(--primary-color) !important;
 }
+
+
+
+
+
+
+
+
+
+
+
 
 #service-dt-cta {
     background: linear-gradient(rgba(34, 41, 87, 0.8), rgba(147, 28, 30, 0.8)), url('../images/bg-3.png') no-repeat center center;
