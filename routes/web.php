@@ -41,6 +41,8 @@ Route::post('/subscribe', [FrontendController::class, 'subscribe'])->name('newsl
 Route::get('/blogs', [FrontendController::class, 'blogsList'])->name('blogs.index');
 Route::get('/blog-detail/{slug}', [FrontendController::class, 'blogDetails'])->name('blog-detail');
 
+Route::get('/category/{category_slug}', [SearchController::class, 'listingByCategory'])->name('products.category');
+
 
 
 
