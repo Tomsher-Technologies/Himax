@@ -82,9 +82,9 @@
                                             <i class="las la-edit"></i>
                                         </a>
 
-                                        <a href="#" class="btn btn-soft-danger btn-icon btn-circle confirm-delete" data-href="{{ route('service.delete', $service->id) }}" title="Delete">
+                                        {{-- <a href="#" class="btn btn-soft-danger btn-icon btn-circle confirm-delete" data-href="{{ route('service.delete', $service->id) }}" title="Delete">
                                             <i class="las la-trash"></i>
-                                        </a>
+                                        </a> --}}
                                     </td>
                                 </tr>
                             @endforeach
