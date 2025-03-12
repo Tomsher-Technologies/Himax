@@ -397,7 +397,7 @@
                         <div class="header-button">
                             {{-- {{ route('contact') }} --}}
                             <a href="#" class="theme-btn"><i
-                                    class="fa-sharp fa-regular fa-arrow-up-right"></i> {{ get_setting('main_contact_number') }}</a>
+                                    class="fa-light fa-phone me-2"></i> {{ get_setting('main_contact_number') }}</a>
                         </div>
                         <div class="header__hamburger d-xl-block my-auto">
                             <div class="sidebar__toggle">

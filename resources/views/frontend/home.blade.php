@@ -47,7 +47,7 @@
     </section>
 
     <!-- Why Choose Us Section S T A R T -->
-    <div class="wcu-section section-padding fix">
+    <div class="wcu-section section-padding fix pb-0">
         <div class="container">
             <div class="wcu-wrapper style3">
                 <div class="row gy-5 gy-64 d-flex align-items-center">
@@ -78,6 +78,8 @@
                             </div>
 
                         </div>
+                        
+                        <a href="#" class="btn">Schedule Free Consultation </a>
                     </div>
 
 
@@ -148,7 +150,9 @@
             <div class="testimonial-wrapper style1 margin-minus-bottom">
                 <div class="">
                     <div class="">
-                        <div class="section-header row">
+                        
+                        <div class="container">
+                        <div class="section-header text-start row">
                             <div class="col-sm-6">
                                 <span class="section-subtitle">{{ $page->getTranslation('heading3', $lang) }}</span>
                                 <h2 class="section-title">{{ $page->getTranslation('heading4', $lang) }}</h2>
@@ -157,6 +161,8 @@
                                 <p>{{ $page->getTranslation('content1', $lang) }}</p>
                             </div>
                         </div>
+                        </div>
+                        
                         <div class="slider-area testimonialSliderOne">
 
                             <div class="swiper gt-slider" id="testimonialSliderOne" data-slider-options='{"loop": true,"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":2}, "768":{"slidesPerView":2}, "992":{"slidesPerView":2}, "1200":{"slidesPerView":4}}}'>
@@ -238,7 +244,7 @@
 
     <section id="product-section">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header text-start">
                 <div class="">
                     <span class="section-subtitle">{{ $page->getTranslation('heading5', $lang) }}</span>
                     <h2 class="section-title">{{ $page->getTranslation('heading6', $lang) }}</h2>
@@ -262,6 +268,8 @@
 
                 </div>
             </div>
+             
+            
         </div>
 
         <div class="container-fluid">
@@ -297,13 +305,27 @@
                 </div>
             </div>
         </div>
+          <div class="container">
+              
+                       <div class="row product_link pt-5 align-items-center ">
+                  <div class="col-md-2"><h3>{{ $page->getTranslation('heading7', $lang) }}</h3> </div>
+                  <div class="col-md-8"> <hr> </div>
+                  <div class="col-md-2"><a href="#" class="btn">{{ $page->getTranslation('heading8', $lang) }}</a></div>
+              </div>
+          </div>
+
     </section>
 
     <section id="industries">
         <div class="container">
             <div class="industries-header">
-                <h5>{{ $page->getTranslation('content2', $lang) }}</h5>
+                
+                      <div class="">
+                                         <h5>{{ $page->getTranslation('content2', $lang) }}</h5>
                 <h2>{{ $page->getTranslation('content3', $lang) }}</h2>
+                      </div>
+                
+ 
                 <p>{{ $page->getTranslation('content4', $lang) }}</p>
             </div>
 
