@@ -421,7 +421,7 @@ input[type=radio]:checked~label::before {
     content: "";
     top: 162%;
     left: 50%;
-    background: #ffb000;
+    background: #222957;
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%) rotate(-8deg);
     border-radius: 80%;
@@ -429,7 +429,7 @@ input[type=radio]:checked~label::before {
 }
 
 .theme-btn:hover {
-    color: var(--title) !important
+    color: #fff !important
 }
 
 .theme-btn:hover:before {
@@ -2875,9 +2875,9 @@ input[type=radio]:checked~label::before {
 .section-title .subtitle {
     color: var(--title);
     font-family: 'Urbanist', sans-serif !important;
-    font-size: 16px;
+    font-size: 20px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 28px;
     margin-bottom: 10px
 }
@@ -2887,7 +2887,7 @@ input[type=radio]:checked~label::before {
 }
 
 .section-title h2 {
-    color: var(--theme);
+    color:#000;
     font-size: 42px;
     font-style: normal;
     font-weight: 600;
@@ -3504,7 +3504,7 @@ input.main-search-input::placeholder {
 }
 
 .header-main .logo .header-logo img {
-    width: 250px
+    width: 200px
 }
 
 @media (max-width:1199px) {
@@ -3541,14 +3541,16 @@ input.main-search-input::placeholder {
 .header-main .main-menu ul li a {
     
     display: inline-block;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
     color: var(--white);
     padding: 20px 0;
     text-align: left;
     position: relative;
     text-transform: uppercase ;
-    transition: all 0.4s ease-in-out
+    transition: all 0.4s ease-in-out;
+    font-family: 'Kabyta', sans-serif !important;
+    font-weight: 600;
 }
 
 .header-main .main-menu ul li a i {
@@ -3588,7 +3590,7 @@ input.main-search-input::placeholder {
     position: relative;
     z-index: 11;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 800;
     color: white;
     line-height: 38px;
     padding: 0 0 0 32px;
@@ -13055,6 +13057,7 @@ textarea.is-invalid {
 
 .wcu-wrapper.style3 .wcu-content .text {
     margin-bottom: 30px
+       color:#000;
 }
 
 .wcu-wrapper.style3 .wcu-content .check-list-items {
@@ -13687,3 +13690,224 @@ textarea.is-invalid {
     width: 100%;
     height: 100%
 }
+
+/*SH-08-03-25*/
+
+.header-section-3 .container-fluid {
+    padding: 0 50px;
+}
+
+    .header-section-3 {
+        height: 98px!important;
+        border: 1px solid #fff!important;
+        background: rgba(255, 255, 255, 0.30);
+    }
+    
+    a.theme-btn {
+    border-radius: 500px!important;
+    border: 2px solid #7184EF!important;
+    background: linear-gradient(90deg, rgba(19, 20, 34, 0.20) 0%, rgba(7, 3, 34, 0.20) 100%)!important;
+    backdrop-filter: blur(12.149999618530273px)!important;
+    font-family: 'Kabyta', sans-serif !important;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+}
+
+    a.theme-btn:hover {
+
+    background:transparant;
+
+}
+
+.hero-content .btn{
+    border-radius: 500px;
+border: 2px solid #7184EF;
+background: conic-gradient(from 90deg at 50% 50%, rgba(11, 41, 74, 0.50) 0deg, rgba(21, 83, 153, 0.50) 41.40000343322754deg);
+backdrop-filter: blur(12.149999618530273px);
+ padding:20px 30px;
+
+}
+
+.hero-content .btn:hover{
+color: #fff;
+
+}
+
+.wcu-section.section-padding.fix {
+    background: #FEE1E1;
+}
+
+.counter-box h2{
+    font-size: 100px;
+    line-height: 100px;
+    color: #155399;
+}
+
+.counter-box p{
+    color: #155399;
+}
+
+.counter-box {
+    margin-top: 30px;
+}
+
+section.testimonial-section-1.fix {
+    background-color: #fee1e1;
+}
+
+section.testimonial-section-1 .section-header p {
+    color: #000;
+    font-size: 18px;
+}
+
+.wcu-section .wcu-wrapper.style3 .btn{
+        border-radius: 500px;
+border: 2px solid #7184EF;
+background: conic-gradient(from 90deg at 50% 50%, rgba(11, 41, 74, 0.50) 0deg, rgba(21, 83, 153, 0.50) 41.40000343322754deg);
+backdrop-filter: blur(12.149999618530273px);
+ padding:20px 30px;
+}
+
+.wcu-section .wcu-wrapper.style3{
+margin-top: 30px;
+}
+
+.slider-area.testimonialSliderOne {
+    position: relative;
+    left: 165px;
+}
+
+
+.arrow-btn.text-end.wow.fadeInUp {
+    justify-content: space-between;
+    width: 80%;
+    bottom: 313px;
+    position: relative;
+    z-index: 99;
+}
+
+#industries .industries-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.blog-header {
+    color: #000;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+div#swiper-wrapper-6109ad5ea45ba5ad7 {
+    padding-left: 166px;
+}
+
+.product_link .btn{
+border-radius: 500px;
+border: 2px solid #7184EF;
+background: #fff;
+color: #155399;
+ padding:20px 30px;
+}
+
+.product_link .btn:hover{
+color: #fff;
+
+}
+
+#product-section svg{
+    display: none!important;
+}
+
+#product-section .product-slider {
+    padding-left: 160px;
+}
+
+.product_link h3{
+    color: #155399;
+    font-size: 22px;
+}
+
+.product_link hr {
+    margin: 0;
+    color: inherit;
+    background-color: #155399;
+    border: 0;
+    opacity: 1;
+}
+
+#industries .industries-header p {
+     color: #000;
+    font-size: 20px;
+}
+
+.wcu-section .wcu-wrapper.style3 .btn {
+    border-radius: 500px;
+    border: 2px solid #7184EF;
+    background: conic-gradient(from 90deg at 50% 50%, rgba(11, 41, 74, 0.50) 0deg, rgba(21, 83, 153, 0.50) 41.40000343322754deg), linear-gradient(90deg, #131422 0%, #070322 100%);
+    backdrop-filter: blur(12.149999618530273px);
+}
+
+.wcu-section .wcu-wrapper.style3 .btn:hover{
+color: #fff;
+
+}
+
+
+
+@media (max-width:768px) {
+    #hero-service-slider-sec .swiper-button-prev{
+        top:93%!important;
+        
+    }
+    
+    .counter-box h2 {
+    font-size: 65px;
+    line-height: 65px;
+}
+.counter-box h2 {
+    font-size: 65px;
+    line-height: 100px;
+    color: #155399;
+}
+
+#product-section .product-slider {
+    padding-left: 0;
+}
+
+.cta-content {
+    padding: 40px!important;
+}
+
+#product-section .image-wrapper {
+    height: 120px!important;
+
+}
+
+#product-section .swiper-navigation {
+    width: 46%!important;
+}
+
+#hero-service-slider-sec .swiper-button-prev, #hero-service-slider-sec .swiper-button-next {
+
+    top: 93% !important;
+
+}
+
+.slider-area.testimonialSliderOne {
+    left: 0 !important;
+}
+
+.features-text {
+    max-width: 100%!important;
+
+}
+
+#product-section .product-custom-prev, #product-section .product-custom-next {
+    width: 36px!important;
+    height: 36px!important;
+}
+    
+    
+}
+
