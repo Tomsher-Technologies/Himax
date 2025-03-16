@@ -46,7 +46,7 @@
 /* Large Screens (1440px+) */
 @media (min-width: 1440px) {
     .container {
-        max-width: 1600px !important;
+        max-width: 1400px !important;
         /* Expand width for larger screens */
     }
 }
@@ -82,7 +82,8 @@
 /* General Button Styling */
 .btn {
     font-family: 'Kabyta', sans-serif !important;
-    font-size: 16px;
+    font-size: 15px;
+    letter-spacing: 0.2px;
     font-weight: 600;
     line-height: normal;
 }
@@ -167,14 +168,15 @@
     .header-section-3 {
         position: absolute;
         top: 20px;
-        width: 98%;
+        width: 100%;
         left: 20px;
         right: 20px;
         z-index: 999;
         /* overflow: hidden; */
-        border-radius: 15px !important;
-        height: 115px;
-        border: 1px solid;
+       
+        height: 80px;
+
+  
     }
 
 }
@@ -234,8 +236,8 @@
     position: relative;
     height: 100%;
     z-index: 9;
-    padding-top: 180px;
-    padding-bottom: 180px;
+    padding-top: 200px;
+    padding-bottom: 70px;
     text-align: center;
     color: white;
     width: 100%;
@@ -258,15 +260,15 @@
 /* Hero Title (main part) */
 .hero-title-main {
     text-align: center;
-    font-size: 48px;
-    font-weight: 800;
+    font-size: 30px;
+    font-weight: 600;
     color: #FFF;
     font-family: 'Kabyta', sans-serif;
 }
 
 /* Hero Title (smaller part inside span) */
 .hero-title-span {
-    font-size: 28px;
+    font-size: 25px;
     font-weight: 500;
     font-family: 'Kabyta', sans-serif !important;
     /*background: linear-gradient(90deg, #FAD201 0%, #00A1DE 100%);*/
@@ -277,7 +279,14 @@
 }
 
 .hero-title {
-    line-height: 50px !important;
+    font-size: 40px;
+
+    line-height: 40px !important;
+    /* max-width: 650px !important; */
+    margin: auto;
+    text-align: center;
+    padding-top: 0px;
+    padding-bottom: 10px;
 }
 
 .hero-title-main {
@@ -286,8 +295,12 @@
 
 /* Hero Description */
 .hero-description {
+    max-width: 400px;
+    text-align: center;
+    margin: auto;
     font-size: 1.2rem;
-    margin-top: 15px;
+    margin-top: 10px;
+    margin-bottom: 20px;
     color: rgba(255, 255, 255, 0.7);
     font-family: 'Urbanist', sans-serif !important;
 }
@@ -324,7 +337,7 @@
     color: white;
     text-decoration: none;
     border-radius: 5px;
-    font-size: 1.2rem;
+    /* font-size: 1.2rem; */
 }
 
 .btn:hover {
@@ -355,6 +368,10 @@
     text-align: center;
 } */
 
+#hero-service-slider-sec{
+    padding-bottom: 50px;
+}
+
 #hero-service-slider-sec .swiper-slide img {
     width: 100%;
     height: auto;
@@ -372,8 +389,8 @@
 #hero-service-slider-sec .swiper-button-prev,
 #hero-service-slider-sec .swiper-button-next {
     color: white !important;
-    width: 56px !important;
-    height: 56px !important;
+    width: 40px !important;
+    height: 40px !important;
     border-radius: 50%;
     position: absolute !important;
     bottom: 50% !important;
@@ -383,7 +400,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    top: 84%;
+    top: 83% !important;
     border-radius: 500px;
 border: 2px solid #7184EF;
 background: conic-gradient(from 90deg at 50% 50%, rgba(11, 41, 74, 0.50) 0deg, rgba(21, 83, 153, 0.50) 41.40000343322754deg), linear-gradient(90deg, rgba(119, 127, 239, 0.40) 0%, rgba(46, 31, 148, 0.40) 100%);
@@ -412,10 +429,12 @@ backdrop-filter: blur(12.149999618530273px);
 
     #hero-service-slider-sec .swiper-button-prev {
         left: 5% !important;
+        top: 87% !important;
     }
 
     #hero-service-slider-sec .swiper-button-next {
         right: 5% !important;
+        top: 87% !important;
     }
 }
 
@@ -430,6 +449,7 @@ backdrop-filter: blur(12.149999618530273px);
 #services-card {
     position: relative;
     /* width: 350px; */
+    height: 400px;
     border-radius: 15px;
     overflow: hidden;
     background: #001f3f;
@@ -482,10 +502,10 @@ backdrop-filter: blur(12.149999618530273px);
 /* Title */
 #services-card-title {
     font-family: "Kabyta", sans-serif;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 500;
     line-height: 99%;
-    letter-spacing: -1.6px;
+    /* letter-spacing: -1.6px; */
     color: #FAFBFC;
     margin-bottom: 15px;
 }
@@ -547,6 +567,42 @@ backdrop-filter: blur(12.149999618530273px);
 
 
 /* ===== PRODUCT SECTION ===== */
+
+/* ✅ Default - Large Screens */
+#product-section .product-slider {
+    padding-left: 159px; /* Standard left padding */
+}
+
+/* ✅ Extra Large Screens (Above 1600px) */
+@media (min-width: 1600px) {
+    #product-section .product-slider {
+        padding-left: 180px; /* Increase padding for ultra-wide screens */
+    }
+}
+
+/* ✅ Medium Screens (Tablets: 992px - 1199px) */
+@media (max-width: 1199px) {
+    #product-section .product-slider {
+        padding-left: 100px; /* Reduce padding for tablets */
+    }
+}
+
+/* ✅ Small Screens (Mobile: 576px - 991px) */
+@media (max-width: 991px) {
+    #product-section .product-slider {
+        padding-left: 50px; /* Reduce padding for small screens */
+    }
+}
+
+/* ✅ Extra Small Screens (Mobile Below 576px) */
+@media (max-width: 576px) {
+    #product-section .product-slider {
+        padding-left: 20px; /* Minimal padding for mobile */
+    }
+}
+
+
+
 #product-section {
     padding: 50px 0;
     background: #ffffff;
@@ -583,16 +639,20 @@ backdrop-filter: blur(12.149999618530273px);
 /* Swiper Navigation (Custom Arrows) */
 #product-section .swiper-navigation {
     position: relative;
-    display: flex;
+    display: flex
+;
     align-items: center;
-    gap: 10px;
-    width:10%;
+    gap: 10px !important;
+    width: 10%;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
 }
 
 #product-section .product-custom-prev,
 #product-section .product-custom-next {
-    width: 56px;
-    height: 56px;
+    width: 46px;
+    height: 46px;
+    color: #fff;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -669,13 +729,13 @@ backdrop-filter: blur(12.149999618530273px);
 /* Image Wrapper */
 #product-section .image-wrapper {
     width: 100%;
-    height: 360px;
+    height: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     border-radius: 8px;
-    padding: 80px;
+    padding: 50px;
 }
 
 #product-section .image-wrapper img {
@@ -783,13 +843,13 @@ backdrop-filter: blur(12.149999618530273px);
 }
 
 .features-text h3 {
-    font-size: 22px;
+    font-size: 15px;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.8);
 }
 
 .features-text h2 {
-    font-size: 38px;
+    font-size: 30px;
     font-weight: bold;
     color: white;
 }
@@ -856,8 +916,8 @@ backdrop-filter: blur(12.149999618530273px);
 }
 
 #industries h2 {
-    font-size: 40px;
-    font-weight: 700;
+    font-size: 30px;
+    font-weight: 600;
     color: #000;
 }
 
@@ -883,6 +943,7 @@ backdrop-filter: blur(12.149999618530273px);
 
 .industry-tab {
     background:transparent;
+    font-family: 'Kabyta', sans-serif !important;
     border: 1px solid #c8b9b9;
     padding: 12px 20px;
     font-size: 16px;
@@ -1021,7 +1082,7 @@ backdrop-filter: blur(12.149999618530273px);
 
 .partners-subtitle {
     font-family: 'Kabyta', sans-serif !important;
-    font-size: 20px;
+    font-size: 16px;
     color: #000;
     font-weight:600;
     text-transform: uppercase;
@@ -1030,10 +1091,10 @@ backdrop-filter: blur(12.149999618530273px);
 }
 
 .partners-title {
-    font-size: 48px;
+    font-size: 30px;
     font-weight: 600;
     color: #000;
-    margin: 10px 0;
+    margin: 20px 0;
     line-height:115%;
     opacity: 0;
     animation: fadeInUp 1.2s ease-in-out forwards;
@@ -1201,8 +1262,8 @@ backdrop-filter: blur(12.149999618530273px);
 }
 
 .blog--sec-title {
-    font-size: 40px;
-    font-weight: bold;
+    font-size: 30px;
+    font-weight: 600;
     color: #000;
 }
 
@@ -1371,7 +1432,7 @@ backdrop-filter: blur(12.149999618530273px);
 
 .cta-content h2 {
     color: #fff;
-    font-size: 36px;
+    font-size: 30px;
     font-weight: 600;
     line-height: 1.4;
 }
@@ -1636,12 +1697,6 @@ backdrop-filter: blur(12.149999618530273px);
     text-transform: uppercase;
 }
 
-.section-title {
-    font-size: 36px;
-    font-weight: bold;
-    color: #fff;
-    letter-spacing: -1px;
-}
 
 /* Info Cards */
 .info-card {
@@ -1698,7 +1753,7 @@ backdrop-filter: blur(12.149999618530273px);
 }
 
 .section-title {
-    font-size: 36px;
+    font-size: 30px;
     font-weight: bold;
     color: #222;
 }
@@ -3135,3 +3190,6 @@ backdrop-filter: blur(12.149999618530273px);
 
 
 
+#about-as p{
+    font-size: 20px;
+}

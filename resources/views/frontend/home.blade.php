@@ -8,7 +8,7 @@
                 Your browser does not support the video tag.
             </video>
         </div>
-        <div class="video-overlay"></div>
+        <!-- <div class="video-overlay"></div> -->
 
         <div class="hero-content m-auto">
 
@@ -46,8 +46,12 @@
         </div>
     </section>
 
+
+
+
+
     <!-- Why Choose Us Section S T A R T -->
-    <div class="wcu-section section-padding fix pb-0">
+    <div id="about-as" class="wcu-section section-padding fix pb-0">
         <div class="container">
             <div class="wcu-wrapper style3">
                 <div class="row gy-5 gy-64 d-flex align-items-center">
@@ -60,7 +64,7 @@
                                 </h2>
                             </div>
 
-                            <p class="text fs-4 wow fadeInUp" data-wow-delay=".5s">
+                            <p class="text  wow fadeInUp" data-wow-delay=".5s">
                                 {!! $page->getTranslation('content', $lang) !!}
                             </p>
 
@@ -86,7 +90,7 @@
                     <div class="col-xl-6 col-lg-6">
                         <div class="wcu-thumb">
                             <div class="thumb1 bg-cover"><img src="{{ asset($page->image) }}" alt="thumb"
-                                    class="wow img-custom-anim-left"></div>
+                                    class="wow img-custom-anim-left w-100"></div>
 
 
                         </div>
@@ -151,17 +155,19 @@
                 <div class="">
                     <div class="">
                         
-                        <div class="container">
-                        <div class="section-header text-start row">
-                            <div class="col-sm-6">
-                                <span class="section-subtitle">{{ $page->getTranslation('heading3', $lang) }}</span>
-                                <h2 class="section-title">{{ $page->getTranslation('heading4', $lang) }}</h2>
-                            </div>
-                            <div class="col-sm-6">
-                                <p>{{ $page->getTranslation('content1', $lang) }}</p>
-                            </div>
-                        </div>
-                        </div>
+                    <div class="container">
+    <div class="section-header text-start row">
+        <div class="col-lg-5 col-md-6 col-sm-12">
+            <span class="section-subtitle">{{ $page->getTranslation('heading3', $lang) }}</span>
+            <h2 class="section-title">{{ $page->getTranslation('heading4', $lang) }}</h2>
+        </div>
+        <div class="col-lg-2 d-none d-lg-block"></div> <!-- Empty column only on large screens -->
+        <div class="col-lg-5 col-md-6 col-sm-12">
+            <p>{{ $page->getTranslation('content1', $lang) }}</p>
+        </div>
+    </div>
+</div>
+
                         
                         <div class="slider-area testimonialSliderOne">
 
@@ -184,7 +190,7 @@
                                                                 <ul id="services-card-list">
                                                                     @foreach ($fea_service->points as $service_points)
                                                                         <li class="services-card-item">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                                                 height="16" viewBox="0 0 16 16" fill="none">
                                                                                 <g clip-path="url(#clip0_97_177)">
                                                                                     <path d="M2.5 9L6 12.5L14 4.5" stroke="white"
@@ -197,7 +203,54 @@
                                                                                             fill="white" />
                                                                                     </clipPath>
                                                                                 </defs>
-                                                                            </svg>
+                                                                            </svg> -->
+
+
+
+
+
+                                                                            <svg width="16"
+                                                                            height="16" fill="white" version="1.1" id="fi_447147" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<g>
+	<g>
+		<path d="M504.502,75.496c-9.997-9.998-26.205-9.998-36.204,0L161.594,382.203L43.702,264.311c-9.997-9.998-26.205-9.997-36.204,0
+			c-9.998,9.997-9.998,26.205,0,36.203l135.994,135.992c9.994,9.997,26.214,9.99,36.204,0L504.502,111.7
+			C514.5,101.703,514.499,85.494,504.502,75.496z"></path>
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+
                                                                             {{ $service_points->title }}
                                                                         </li>
                                                                     @endforeach
@@ -251,19 +304,21 @@
                 </div>
                 <div class="swiper-navigation">
 
-                    <div class="swiper-button-next product-custom-next">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 5L16 12L9 19" stroke="white" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </div>
+                    
                     <div class="swiper-button-prev product-custom-prev">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 19L8 12L15 5" stroke="white" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" />
-                        </svg>
+                        </svg> -->
+                    </div>
+
+                    <div class="swiper-button-next product-custom-next">
+                        <!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 5L16 12L9 19" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg> -->
                     </div>
 
                 </div>
@@ -308,8 +363,8 @@
           <div class="container">
               
                        <div class="row product_link pt-5 align-items-center ">
-                  <div class="col-md-2"><h3>{{ $page->getTranslation('heading7', $lang) }}</h3> </div>
-                  <div class="col-md-8"> <hr> </div>
+                  <div class="col-md-3"><h3>{{ $page->getTranslation('heading7', $lang) }}</h3> </div>
+                  <div class="col-md-7"> <hr> </div>
                   <div class="col-md-2"><a href="#" class="btn">{{ $page->getTranslation('heading8', $lang) }}</a></div>
               </div>
           </div>
