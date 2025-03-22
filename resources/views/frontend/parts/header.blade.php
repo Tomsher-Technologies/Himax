@@ -1,258 +1,431 @@
-<header class="header header--type-6">
-    <!-- Promo bar -->
-    @php
-        $lang = getActiveLanguage();
-    @endphp
-    <div class="header__promo-bar">
-        <div class="container container--type-2">
-            <div class="d-flex justify-content-between">
-                <div class="d-none 	d-md-none d-lg-block d-xl-block">
-                    <a href="#"><i class="lnr lnr-tag"></i> {{ get_setting('helpline_title') }}</a>
-                </div>
-                <div class="header__contact d-flex align-items-center">
-                    <div class="header-contact__icon">
-                        <svg viewBox="0 0 60 60">
-                            <g id="Layer_1"></g>
-                            <g id="Layer_2">
-                                <path
-                                    d="M62.1,45.5l-9.6-6.1c-1.8-1.2-4.2-0.7-5.5,1l-2.7,3.7c-0.3,0.4-1,0.5-1.5,0.2c-12.9-7.7-21-18.5-23.9-22.8
-                                c-0.2-0.2-0.2-0.5-0.1-0.6c0-0.2,0.2-0.4,0.4-0.5l3.9-2.6c0.9-0.6,1.5-1.5,1.7-2.5c0.2-1,0-2.1-0.6-2.9l-6.4-9.2
-                                C16.5,1.5,14.1,1,12.3,2L3.4,7C3,7.2,2.7,7.5,2.5,7.7C-4,14.6,2.7,31.2,17.8,45.6C29,56.2,41.5,62.5,50.1,62.5c3,0,5.4-0.7,7.3-2.3
-                                c0.3-0.2,0.6-0.6,0.8-0.9c0,0,0,0,0,0l5.2-8.4C64.5,49,64,46.7,62.1,45.5z M60.9,49.2l-5.2,8.4c-0.1,0.1-0.1,0.2-0.2,0.2
-                                c-5.8,4.9-22.1-1.7-35.5-14.5C6.5,30.6-0.5,15.3,4.6,9.8c0,0,0.1-0.1,0.2-0.2l8.9-5c0.2-0.1,0.4-0.1,0.5-0.1c0.4,0,0.7,0.2,0.9,0.5
-                                l6.4,9.2c0.2,0.2,0.2,0.5,0.1,0.6c0,0.2-0.2,0.4-0.4,0.5l-3.9,2.6c-0.9,0.6-1.5,1.5-1.7,2.5c-0.2,1,0,2,0.6,2.9
-                                c3,4.4,11.4,15.6,24.9,23.7c1.8,1.1,4.2,0.6,5.4-1l2.7-3.7c0.3-0.4,1-0.5,1.5-0.2l9.6,6.1C61,48.3,61.1,48.8,60.9,49.2z">
-                                </path>
-                            </g>
-                        </svg>
+@php
+    $lang = getActiveLanguage();
+@endphp
+
+
+<!-- Offcanvas Area Start -->
+<div class="fix-area">
+    <div class="offcanvas__info">
+        <div class="offcanvas__wrapper">
+            <div class="offcanvas__content">
+                <div class="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
+                    <div class="offcanvas__logo">
+                        <a href="{{ route('home') }}">
+                            <img src="{{ uploaded_asset(get_setting('header_logo')) ?? asset('assets/images/logo.svg') }}" alt="logo-img">
+                        </a>
                     </div>
-                    <div class="header-contact__content">
-                        <p>{{ get_setting('helpline_number') }}</p>
+                    <div class="offcanvas__close">
+                        <button>
+                            <i class="fas fa-times"></i>
+                        </button>
                     </div>
                 </div>
-                <div class="">
-                    <div class="header__switcher">
-                        <p>@if (getActiveLanguage() == 'en') English @else Arabic @endif <span></span></p>
-                        <select id="lang-change">
-                            <option value="en" @if (getActiveLanguage() == 'en') selected @endif>English</option>
-                            <option value="ae" @if (getActiveLanguage() == 'ae') selected @endif>Arabic</option>
-                        </select>
+
+                @php
+                    $pagedata = getPageData('contact_us');
+
+                    $phones = explode('/', $pagedata->getTranslation('content1', env('DEFAULT_LANGUAGE')));
+                    $phone = '';
+                    foreach($phones as $ph){
+                        $phone .= '<a href="tel:'.$ph.'">'.$ph .'</a><br>';
+                    }
+
+                    $working_hours = explode('/', $pagedata->getTranslation('content2', env('DEFAULT_LANGUAGE')));
+                    $hours = '';
+                    foreach($working_hours as $wh){
+                        $hours .= $wh .'<br>';
+                    }
+                @endphp
+
+                <div class="mobile-menu fix mb-3"></div>
+                <div class="offcanvas__contact">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li class="d-flex align-items-center">
+                            <div class="offcanvas__contact-icon">
+                                <i class="fal fa-map-marker-alt"></i>
+                            </div>
+                            <div class="offcanvas__contact-text">
+                                <a target="_blank" href="#">{!! $pagedata->getTranslation('content', env('DEFAULT_LANGUAGE')) !!}</a>
+                            </div>
+                        </li>
+                        <li class="d-flex align-items-center">
+                            <div class="offcanvas__contact-icon mr-15">
+                                <i class="fal fa-envelope"></i>
+                            </div>
+                            <div class="offcanvas__contact-text">
+                                <a href="mailto:{{ $pagedata->getTranslation('heading1', env('DEFAULT_LANGUAGE')) }}">
+                                    <span class="">
+                                        <span class="__cf_email__" data-cfemail="b1d8dfd7def1d4c9d0dcc1ddd49fd2dedc">
+                                            {{ $pagedata->getTranslation('heading1', env('DEFAULT_LANGUAGE')) }}
+                                        </span>
+                                    </span>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="d-flex align-items-center">
+                            <div class="offcanvas__contact-icon mr-15">
+                                <i class="fal fa-clock"></i>
+                            </div>
+                            <div class="offcanvas__contact-text">
+                                <a target="_blank" href="#">{!! $hours !!}</a>
+                            </div>
+                        </li>
+                        <li class="d-flex align-items-center">
+                            <div class="offcanvas__contact-icon mr-15">
+                                <i class="far fa-phone"></i>
+                            </div>
+                            <div class="offcanvas__contact-text">
+                                {!! $phone !!}
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="header-button mt-4">
+
+                    </div>
+                    {{-- <div class="main-button">
+                        <a href="contact.html" class="theme-btn w-100 text-center">
+                            Get Started <i class="fa-sharp fa-regular fa-arrow-up-right"></i>
+                        </a>
+                    </div> --}}
+                    <div class="social-icon d-flex align-items-center">
+                        {{-- <a href="{{ get_setting('facebook_link') }}" target="_blank"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="{{ get_setting('instagram_link') }}" target="_blank"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="{{ get_setting('twitter_link') }}" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="{{ get_setting('youtube_link') }}" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="{{ get_setting('linkedin_link') }}" target="_blank"><i
+                                class="fab fa-linkedin-in"></i></a> --}}
+
+                        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    @php
-        $details = getCategoryHeader();
-    @endphp
-    <!-- End promo bar -->
-    <!-- Container -->
-    <div class="container container--type-2">
-        <!-- Header container -->
-        <div class="header__container d-flex align-items-center">
-            <!-- Mobile menu -->
-            <div class="header__mobile-menu">
-                <!-- Open mobile menu -->
-                <div class="mobile-menu__open">
-                    <a href="#" class="js-open-mobile-menu"><i class="lnr lnr-menu"></i></a>
-                </div>
-                <!-- End open mobile menu -->
-                <!-- Mobile menu -->
-                <div class="mobile-menu js-mobile-menu">
-                    <!-- Overlay -->
-                    <div class="mobile-menu__overlay js-close-mobile-menu"></div>
-                    <!-- End overlay -->
-                    <!-- Content -->
-                    <div class="mobile-menu__content">
-                        <!-- Close mobile menu -->
-                        <div class="mobile-menu__close">
-                            <a href="#" class="js-close-mobile-menu"><i class="lnil lnil-close"></i></a>
+</div>
+
+
+<div class="offcanvas__overlay"></div>
+
+
+<header class="header-section-3">
+<div class="container">
+    <div id="header-sticky" class="header-3 mb-5">
+     
+            <div class="mega-menu-wrapper">
+                <div class="header-main">
+                    <div class="logo">
+                        <a href="{{ route('home') }}" class="header-logo">
+                            <img src="{{ uploaded_asset(get_setting('header_logo')) ?? asset('assets/images/logo.svg') }}" alt="logo-img">
+                        </a>
+                        <a href="{{ route('home') }}" class="header-logo-2">
+                            <img src="{{ uploaded_asset(get_setting('header_logo')) ?? asset('assets/images/logo.svg') }}" alt="logo-img">
+                        </a>
+                    </div>
+
+                    <div class="header-center d-flex justify-content-end align-items-center">
+                        <div class="mean__menu-wrapper">
+                            <div class="main-menu">
+                                <nav id="mobile-menu">
+                                    <ul>
+
+                                        <li class="has-dropdown active menu-thumb">
+                                            {{-- {{ route('services.index') }} --}}
+                                            <a href="#">
+                                                SERVICES & SOLUTIONS
+
+                                                <i class="fa-regular fa-plus"></i>
+                                            </a>
+                                            <ul class="submenu has-homemenu">
+                                                <li>
+                                                    <div class="homemenu-items">
+                                                        <div class="solutions-grid">
+
+                                                            <div class="solutions-wrapper">
+                                                                @php
+                                                                    $header_services = headerServices();
+                                                                @endphp
+
+                                                                @if (!empty($header_services))
+                                                                    @foreach ($header_services as $hserv)
+                                                    
+                                                                        <div class="solution-item" style="background-image: url({{ uploaded_asset($hserv->image) }});">
+                                                                            {{-- {{ route('service-detail',['slug' => $hserv->slug]) }} --}}
+                                                                            <a href="#">
+                                                                                {{ $hserv->getTranslation('name', env('DEFAULT_LANGUAGE')) }}
+                                                                            </a>
+                                                                        </div>
+
+                                                                    @endforeach
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <!-- Mega Menu -->
+                                        <li id="product-menu" class="has-dropdown active menu-thumb">
+                                            <a href="#">PRODUCT CATEGORIES</a>
+                                            {{-- {{ route('products.index') }} --}}
+                                            <ul class="submenu has-homemenu">
+                                                <li class="menu-container">
+
+                                                    <!-- Left Tabs -->
+                                                    <div class="menu-tabs">
+                                                        <button class="menu-tab active" data-target="ict">ICT</button>
+                                                        <button class="menu-tab"
+                                                            data-target="networking">NETWORKING</button>
+                                                        <button class="menu-tab" data-target="security">SECURITY &
+                                                            SURVEILLANCE</button>
+                                                        <button class="menu-tab" data-target="fire">FIRE
+                                                            SAFETY</button>
+                                                        <button class="menu-tab"
+                                                            data-target="electronics">ELECTRONICS</button>
+                                                    </div>
+
+                                                    <!-- Right Content -->
+                                                    <div class="menu-content">
+
+                                                        <!-- ICT Section (Grid Layout) -->
+                                                        <div id="ict" class="menu-category-content active">
+                                                            {{-- <a href="{{ route('products.index',['category' =>'ict']) }}"> --}}
+                                                                <h4 class="menu-title"> ICT </h4>
+                                                            {{-- </a> --}}
+
+                                                            <div class="ict-grid">
+                                                                <div class="menu-category">
+                                                                    {{-- <a href="{{ route('products.index',['category' =>'telecommunication']) }}"> --}}
+                                                                        <h5>Telecommunication</h5>
+                                                                    {{-- </a> --}}
+                                                                    <ul>
+                                                                        {{-- {{ route('products.index',['brand' =>'grandstream']) }} --}}
+                                                                        <li><a href="#">Grandstream</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'avaya']) }} --}}
+                                                                        <li><a href="#">Avaya</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'logitech']) }} --}}
+                                                                        <li><a href="#">Logitech</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'yealink']) }} --}}
+                                                                        <li><a href="#">Yealink</a></li>
+                                                                    </ul>
+                                                                </div>
+
+                                                                <div class="menu-category">
+                                                                    {{-- {{ route('products.index',['category' =>'computer-hardware']) }} --}}
+                                                                    <a href="#">
+                                                                        <h5>Computer & Hardware</h5>
+                                                                    </a>
+                                                                    <ul>
+                                                                        {{-- {{ route('products.index',['brand' =>'dell']) }} --}}
+                                                                        <li><a href="#">Dell</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'hp']) }} --}}
+                                                                        <li><a href="#">HP</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'lenovo']) }} --}}
+                                                                        <li><a href="#">Lenovo</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'epson']) }} --}}
+                                                                        <li><a href="#">Epson</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'canon']) }} --}}
+                                                                        <li><a href="#">Canon</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'toshiba']) }} --}}
+                                                                        <li><a href="#">Toshiba</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'logitech']) }} --}}
+                                                                        <li><a href="#">Logitech</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'hpe']) }} --}}
+                                                                        <li><a href="#">HPE</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'dell-emc']) }} --}}
+                                                                        <li><a href="#">Dell EMC</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'wd']) }} --}}
+                                                                        <li><a href="#">WD</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'dseagate']) }} --}}
+                                                                        <li><a href="#">Dseagate</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'qnap']) }} --}}
+                                                                        <li><a href="#">Qnap</a></li>
+                                                                    </ul>
+                                                                </div>
+
+                                                                <div class="menu-category">
+                                                                    {{-- {{ route('products.index',['category' =>'software']) }} --}}
+                                                                    <a href="#">
+                                                                        <h5>Software</h5>
+                                                                    </a>
+                                                                   
+                                                                    <ul>
+                                                                        {{-- {{ route('products.index',['brand' =>'microsoft']) }} --}}
+                                                                        <li><a href="#">Microsoft</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'kaspersky']) }} --}}
+                                                                        <li><a href="#">Kaspersky</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'sophos']) }} --}}
+                                                                        <li><a href="#">Sophos</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'adobe']) }} --}}
+                                                                        <li><a href="#">Adobe</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'vmware']) }} --}}
+                                                                        <li><a href="#">VMware</a></li>
+                                                                        {{-- {{ route('products.index',['brand' =>'esset']) }} --}}
+                                                                        <li><a href="#">Esset</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- NETWORKING Section -->
+                                                        <div id="networking" class="menu-category-content">
+                                                            {{-- {{ route('products.index',['category' =>'networking']) }} --}}
+                                                            <a href="#">
+                                                                <h4 class="menu-title">NETWORKING</h4>
+                                                            </a>
+                                                            <ul class="brand-list">
+                                                                {{-- {{ route('products.index',['brand' =>'cisco']) }} --}}
+                                                                <li><a href="#">Cisco</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'sophos']) }} --}}
+                                                                <li><a href="#">Sophos</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'fortigate']) }} --}}
+                                                                <li><a href="#">Fortigate</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'tp-link']) }} --}}
+                                                                <li><a href="#">TP-Link</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'juniper']) }} --}}
+                                                                <li><a href="#">Juniper</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'aruba']) }} --}}
+                                                                <li><a href="#">Aruba</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'huawei']) }} --}}
+                                                                <li><a href="#">Huawei</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'ubiquiti']) }} --}}
+                                                                <li><a href="#">Ubiquiti</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'mikrotik']) }} --}}
+                                                                <li><a href="#">Mikrotik</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'ruckus']) }} --}}
+                                                                <li><a href="#">Ruckus</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'sonicwall']) }} --}}
+                                                                <li><a href="#">Sonicwall</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'Watchguard']) }} --}}
+                                                                <li><a href="#">watchguard</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'Grandstream']) }} --}}
+                                                                <li><a href="#">grandstream</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'hikvision']) }} --}}
+                                                                <li><a href="#">Hikvision</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'d-link']) }} --}}
+                                                                <li><a href="#">D Link</a></li>
+                                                            </ul>
+                                                        </div>
+
+                                                        <!-- SECURITY & SURVEILLANCE -->
+                                                        <div id="security" class="menu-category-content">
+                                                            {{-- {{ route('products.index',['category' =>'security-surveillance']) }} --}}
+                                                            <a href="#">
+                                                                <h4 class="menu-title">SECURITY & SURVEILLANCE</h4>
+                                                            </a>
+                                                            <ul class="brand-list">
+                                                                {{-- {{ route('products.index',['brand' =>'hikvision']) }} --}}
+                                                                <li><a href="#">Hikvision</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'ajax']) }} --}}
+                                                                <li><a href="#">Ajax</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'ezviz']) }} --}}
+                                                                <li><a href="#">EZVIZ</a></li>
+                                                            </ul>
+                                                        </div>
+
+                                                        <!-- FIRE SAFETY -->
+                                                        <div id="fire" class="menu-category-content">
+                                                            {{-- {{ route('products.index',['category' =>'fire-safety']) }} --}}
+                                                            <a href="#">
+                                                                <h4 class="menu-title">FIRE SAFETY</h4>
+                                                            </a>
+                                                            <ul class="brand-list">
+                                                                {{-- {{ route('products.index',['brand' =>'asenware']) }} --}}
+                                                                <li><a href="#">Asenware</a></li>
+                                                                {{-- {{ route('products.index',['brand' =>'fireX']) }} --}}
+                                                                <li><a href="#">FireX</a></li>
+                                                            </ul>
+                                                        </div>
+
+                                                        <!-- ELECTRONICS -->
+                                                        <div id="electronics" class="menu-category-content">
+                                                            {{-- {{ route('products.index',['category' =>'electronics']) }} --}}
+                                                            <a href="#">
+                                                                <h4 class="menu-title">ELECTRONICS</h4>
+                                                            </a>
+                                                            <ul class="brand-list">
+                                                                {{-- {{ route('products.index',['category' =>'mobile-phones']) }} --}}
+                                                                <li><a href="#">Mobile Phones</a></li>
+                                                                {{-- {{ route('products.index',['category' =>'tablets']) }} --}}
+                                                                <li><a href="#">Tablets</a></li>
+                                                                {{-- {{ route('products.index',['category' =>'tv']) }} --}}
+                                                                <li><a href="#">TV</a></li>
+                                                                {{-- {{ route('products.index',['category' =>'projectors']) }} --}}
+                                                                <li><a href="#">Projectors</a></li>
+                                                                {{-- {{ route('products.index',['category' =>'headsets-speakers']) }} --}}
+                                                                <li><a href="#">Headsets & Speakers</a></li>
+                                                                {{-- {{ route('products.index',['category' =>'soundbars']) }} --}}
+                                                                <li><a href="#">Soundbars</a></li>
+                                                                {{-- {{ route('products.index',['category' =>'streaming-devices']) }} --}}
+                                                                <li><a href="#">Streaming Devices</a></li>
+                                                                {{-- {{ route('products.index',['category' =>'gaming-consoles']) }} --}}
+                                                                <li><a href="#">Gaming Consoles</a></li>
+                                                            </ul>
+                                                        </div>
+
+                                                    </div>
+
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        {{-- <li>
+                                            <a href="{{ route('products.index') }}">Products</a>
+                                        </li> --}}
+
+                                        <li>
+                                            {{-- {{ route('about_us') }} --}}
+                                            <a href="#">About Us</a>
+                                        </li>
+                                        <li>
+                                            {{-- {{ route('contact') }} --}}
+                                            <a href="#">Contact Us</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
-                        <!-- End close mobile menu -->
-                        <!-- Mobile logo -->
-                        <h3 class="mobile-menu__logo"><img width="200" src="assets/images/logo.avif" alt="">
-                        </h3>
-                        <!-- End mobile logo -->
-                        <!-- Mobile Nav -->
-                        <ul class="mobile-menu__nav">
-                            <li class="mobile-menu__dropdown">
-                                <a href="{{ route('home') }}">Shop</a>
-                                <ul class="mobile-menu__dropdown-menu js-mobile-menu-dropdown-menu">
-                                    <li><a href=""> Shop </a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                </ul>
-                                <div class="mobile-menu__dropdown-btn js-mobile-menu-dropdown-btn"><span
-                                        class="lnil lnil-chevron-down"></span></div>
-                            </li>
-                            <li class="mobile-menu__dropdown">
-                                <a href="{{ route('home') }}">Shop</a>
-                                <ul class="mobile-menu__dropdown-menu js-mobile-menu-dropdown-menu">
-                                    <li><a href=""> Shop </a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                </ul>
-                                <div class="mobile-menu__dropdown-btn js-mobile-menu-dropdown-btn"><span
-                                        class="lnil lnil-chevron-down"></span></div>
-                            </li>
-                            <li class="mobile-menu__dropdown">
-                                <a href="{{ route('home') }}">Shop</a>
-                                <ul class="mobile-menu__dropdown-menu js-mobile-menu-dropdown-menu">
-                                    <li><a href=""> Shop </a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                </ul>
-                                <div class="mobile-menu__dropdown-btn js-mobile-menu-dropdown-btn"><span
-                                        class="lnil lnil-chevron-down"></span></div>
-                            </li>
-                            <li class="mobile-menu__dropdown">
-                                <a href="{{ route('home') }}">Shop</a>
-                                <ul class="mobile-menu__dropdown-menu js-mobile-menu-dropdown-menu">
-                                    <li><a href=""> Shop </a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                </ul>
-                                <div class="mobile-menu__dropdown-btn js-mobile-menu-dropdown-btn"><span
-                                        class="lnil lnil-chevron-down"></span></div>
-                            </li>
-                            <li class="mobile-menu__dropdown">
-                                <a href="{{ route('home') }}">Shop</a>
-                                <ul class="mobile-menu__dropdown-menu js-mobile-menu-dropdown-menu">
-                                    <li><a href=""> Shop </a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                    <li><a href=""> Shop</a></li>
-                                </ul>
-                                <div class="mobile-menu__dropdown-btn js-mobile-menu-dropdown-btn"><span
-                                        class="lnil lnil-chevron-down"></span></div>
-                            </li>
-                        </ul>
-                        <!-- End Mobile nav -->
                     </div>
-                    <!-- End content -->
+
+                    <div class="header-right d-flex justify-content-end align-items-center">
+                        <div class="header-button">
+                            {{-- {{ route('contact') }} --}}
+                            <a href="#" class="theme-btn"><i
+                                    class="fa-light fa-phone me-2"></i> {{ get_setting('main_contact_number') }}</a>
+                        </div>
+                        <!-- <div class="header__hamburger d-xl-block my-auto">
+                            <div class="sidebar__toggle">
+                                <div class="header-bar">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
                 </div>
-                <!-- End mobile menu -->
             </div>
-            <!-- End mobile menu -->
-            <ul class="header_page_nav">
-                <li><a href="{{ route('home') }}" class="nav__item active">Sale</a></li>
-                {{-- <li><a href="rent.html" class="nav__item">Rent</a></li>
-                <li><a href="auction.html" class="nav__item">Auction</a></li>
-                <li><a href="mortgage.html" class="nav__item">mortgage</a></li> --}}
-            </ul>
-            <!-- Logo -->
-            <h1 class="header__logo">
-                <a href="{{ route('home') }}">
-                    <img src="{{ asset('assets/images/logo-1.png') }}" alt="">
-                </a>
-            </h1>
-            <!-- End logo -->
-            <!-- Header right -->
-            <ul class="header__right">
-                <li><a href="#" class="js-open-popup-search"><i class="lnr lnr-magnifier"></i></a></li>
-                <li class="header__cart d-none d-lg-block"><a href="#"><i
-                            class="lnr lnr-heart"></i><span class="wishlist_count">{{ wishlistCount() }}</span></a></li>
-                <li class="header__cart"><a href="#" class="js-open-canvas-cart"><i
-                            class="lnr lnr-cart"></i><span class="cart_count">{{ cartCount() }}</span></a></li>
-                <li class="header__canvas-menu"><a href="#" class="js-open-canvas-menu"><i
-                            class="lnr lnr-user"></i></a></li>
-            </ul>
-            <!-- End header right -->
         </div>
-        <!-- End header container -->
-        <!-- Navigation -->
-        <ul class="header__nav">
-            <li>
-                <a href="#" class="nav__item">{{ trans('messages.categories') }}</a>
-                <!-- MegaMenu -->
-                <div class="nav__mega-menu">
-                    <!-- Column -->
-                    <div class="mega-menu__standard-column">
-                        <!-- Column title -->
-                        <div class="standard-column__title">{{ get_setting('header_category_title_1') }}</div>
-                        <!-- End column title -->
-                        <!-- Column nav -->
-                        <ul class="standard-column__nav">
-                            @if(!empty($details['header_categories']))
-                                @foreach($details['header_categories'] as $header_categories)
-                                    <li><a href="{{ route('products.index',['category' => $header_categories->getTranslation('slug', $lang)]) }}">{{ $header_categories->getTranslation('name', $lang) }}</a></li>
-                                @endforeach
-                            @endif  
-                        </ul>
-                        <!-- End column nav -->
-                    </div>
-                    <!-- End column -->
-                    <!-- Column -->
-                    <div class="mega-menu__standard-column">
-                        <!-- Column title -->
-                        <div class="standard-column__title">{{ get_setting('header_category_title_2') }} </div>
-                        <!-- End column title -->
-                        <!-- Column nav -->
-                        <ul class="standard-column__nav">
-                            @if (!empty($details['header_brands']))
-                                @foreach ($details['header_brands'] as $header_brands)
-                                    <li><a href="{{ route('products.index',['brand' => [$header_brands->getTranslation('slug', $lang)]]) }}"> {{$header_brands->getTranslation('name', $lang)}}</a></li>
-                                @endforeach
-                            @endif 
-                            
-                        </ul>
-                        <!-- End column nav -->
-                    </div>
-                 
-                    <div class="mega-menu__banner">
-                        <img alt="Image" data-sizes="auto"
-                            data-srcset="{{ uploaded_asset(get_setting('header_category_logo')) }}"
-                            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                            class="lazyload" />
-                    </div>
-                    <!-- End banner -->
-                </div>
-                <!-- End MegaMenu -->
-            </li>
-            <li><a href="{{ route('products.index') }}" class="nav__item">{{ trans('messages.collections') }}</a></li>
-            <li><a href="{{ route('products.index',['offers']) }}" class="nav__item">{{ trans('messages.offers') }}</a></li>
-        </ul>
-        <!-- End navigation -->
     </div>
-    <!-- End container -->
-    <ul class="header_page_nav page-im-mobile">
-        <li><a href="{{ route('home') }}" class="nav__item active">Shop</a></li>
-        {{-- <li><a href="#" class="nav__item">Rent</a></li>
-        <li><a href="#" class="nav__item">Auction</a></li>
-        <li><a href="#" class="nav__item">mortgage</a></li> --}}
-    </ul>
 </header>
+
+<!-- Search Area Start -->
+<div class="search-wrap">
+    <div class="search-inner">
+        <i class="fas fa-times search-close" id="search-close"></i>
+        <div class="search-cell">
+            <form method="get">
+                <div class="search-field-holder">
+                    <input type="search" class="main-search-input" placeholder="Search...">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

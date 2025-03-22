@@ -282,8 +282,7 @@ class ProductController extends Controller
         $product->brand_id          = $request->brand_id;
         $product->user_id           = Auth::user()->id;
         $product->sku               = cleanSKU($skuMain);
-        $product->published         = ($request->has('published')) ? 1 : 0;
-
+        
         $slug               = $request->slug ? Str::slug($request->slug, '-') : Str::slug($request->name, '-');
         $same_slug_count    = Product::where('slug', 'LIKE', $slug . '%')->where('id','!=',$id)->count();
         $slug_suffix        = $same_slug_count ? '-' . $same_slug_count + 1 : '';

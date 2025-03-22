@@ -6,10 +6,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-xl-4 mx-auto">
-                    <div class="card text-left">
-                        <div class="card-body">
+                    <div class="card text-left"  style="border-color:#5da8c4 !important;">
+                        <div class="card-body" style="background-color:#5da8c4 !important;">
                             <div class="mb-5 text-center">
-                                <img src="{{ asset('assets/img/logo.avif') }}" class="mw-100 mb-4" >
+                                <img src="{{ asset('assets/img/logo.svg') }}" class="mw-100 mb-4" >
                                 <h1 class="h3 text-primary mb-0">{{  trans('messages.login') }} </h1>
                                 {{-- <p>{{  trans('messages.Login to your account.') }}</p> --}}
                               

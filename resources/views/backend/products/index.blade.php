@@ -165,10 +165,10 @@
                                         <i class="las la-edit"></i>
                                     </a>
                                    
-                                    <a href="#" class="btn btn-soft-danger btn-icon btn-circle confirm-delete"
+                                    {{-- <a href="#" class="btn btn-soft-danger btn-icon btn-circle confirm-delete"
                                         data-href="{{ route('products.destroy', $product->id) }}" title="Delete">
                                         <i class="las la-trash"></i>
-                                    </a>
+                                    </a> --}}
                                 </td>
                             </tr>
                         @endforeach

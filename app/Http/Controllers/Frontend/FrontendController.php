@@ -11,11 +11,14 @@ use App\Models\PageSeos;
 use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\HomeSlider;
-use App\Models\Occasion;
 use App\Models\Partners;
 use App\Models\BusinessSetting;
 use App\Models\Subscriber;
 use App\Models\Contacts;
+use App\Models\Service;
+use App\Models\HomePoints;
+use App\Models\Industries;
+use App\Models\Blog;
 use App\Mail\ContactEnquiry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -92,7 +95,7 @@ class FrontendController extends Controller
     }
     public function home()
     {
-        $page = Page::where('type','home')->first();
+        $page = Page::with('page_translations')->where('type','home')->first();
         $lang = getActiveLanguage();
         $seo = [
             'title'                 => $page->getTranslation('title', $lang),
@@ -107,13 +110,9 @@ class FrontendController extends Controller
         
         $this->loadSEO($seo);
 
-        $data['slider'] = Cache::rememberForever('homeSlider', function () {
-            $sliders = HomeSlider::where('status',1)->orderBy('sort_order')->get();
-            return $sliders;
-        });
-
-        $data['discover_categories'] = Cache::rememberForever('discover_categories', function () {
-            $categories = get_setting('discover_categories');
+     
+        $data['home_categories'] = Cache::rememberForever('home_categories', function () {
+            $categories = get_setting('home_categories');
             if ($categories) {
                 $details = Category::whereIn('id', json_decode($categories))->where('is_active', 1)
                     ->get();
@@ -121,75 +120,28 @@ class FrontendController extends Controller
             }
         });
 
-       
-
-        $home_banners = BusinessSetting::whereIn('type', array('home_mid_section_banner','home_center_banner', 'home_mid_banner'))->get()->keyBy('type');
-        
-        $banners = [];
-        $all_banners = Banner::where('status', 1);
-        if(!empty($home_banners)){
-            foreach($home_banners as $key => $hb){
-                $bannerid = json_decode($hb->value);
-                
-                $bannerData = [];
-                if(!empty($bannerid)){
-                    $bannerData = Banner::where('status', 1)->whereIn('id', $bannerid)->get();
-                }
-                
-                if(!empty($bannerData)){
-                    foreach($bannerData as $bData){
-                        
-                        $banners[$key][] = array(
-                            'type' => $bData->link_type ?? '',
-                            'link' => $bData->link_type == 'external' ? $bData->link : $bData->getBannerLink(),
-                            'type_id' => $bData->link_ref_id,
-                            'image' => ($bData->getTranslation('image', $lang)) ? uploaded_asset($bData->getTranslation('image', $lang)) : '',
-                            'mob_image' => ($bData->getTranslation('mobile_image', $lang)) ? uploaded_asset($bData->getTranslation('mobile_image', $lang)) : '',
-                            'title' => $bData->getTranslation('title', $lang),
-                            'sub_title' => $bData->getTranslation('sub_title', $lang),
-                            'btn_text' => $bData->getTranslation('btn_text', $lang) 
-                        );
-                        
-                    }
-                }else{
-                    $banners[$key] = array();
-                }
+        $data['featured_services'] = Cache::remember('featured_services', 3600, function () {
+            $service_ids = get_setting('featured_services');
+            if ($service_ids) {
+                $services =  Service::where('status', 1)->whereIn('id', json_decode($service_ids))->with('points')->get();
+                return $services;
             }
-        }
-       
-       
-        $data['banners'] = $banners;
+        });
 
-        $data['new_arrival_products'] = Cache::remember('new_arrival_products', 3600, function () {
-            $product_ids = get_setting('new_arrival_products');
+        $data['featured_products'] = Cache::remember('featured_products', 3600, function () {
+            $product_ids = get_setting('featured_products');
             if ($product_ids) {
                 $products =  Product::where('published', 1)->whereIn('id', json_decode($product_ids))->with('brand')->get();
                 return $products;
             }
         });
 
-        $data['home_occasions'] = [];
-
-        $data['special_products'] = Cache::remember('special_products', 3600, function () {
-            $product_ids = get_setting('special_products');
-            if ($product_ids) {
-                $products =  Product::where('published', 1)->whereIn('id', json_decode($product_ids))->with('brand')->get();
-                return $products;
-            }
-        });
-
-        $data['shop_by_brands'] = Cache::rememberForever('shop_by_brands', function () {
-            $details = Brand::where('is_active', 1)->get();
-            return $details;
-        });
-
-        $data['partners'] = Cache::rememberForever('partners', function () {
-            $details = Partners::where('status', 1)->get();
-            return $details;
-        });
-
+        $data['points'] = HomePoints::all();
+        $data['industries'] = Industries::where('status',1)->orderBy('sort_order','ASC')->get();
+        $data['brands'] = Brand::where('is_active',1)->whereIn('id', json_decode(get_setting('home_brands')))->orderBy('name','ASC')->get();
+        $data['blogs'] = Blog::where('status',1)->orderBy('blog_date','desc')->limit(4)->get();
         // echo '<pre>';
-        // print_r($data);
+        // print_r($page);
         // die;
 
 
@@ -210,9 +162,11 @@ class FrontendController extends Controller
             'twitter_title'         => $page->getTranslation('twitter_title', $lang),
             'twitter_description'   => $page->getTranslation('twitter_description', $lang),
         ];
-        
+        // DB::enableQueryLog();
+        $brands = Brand::where('is_active',1)->whereIn('id', json_decode(get_setting('about_brands')))->orderBy('name','ASC')->get();
+        // dd(DB::getQueryLog());
         $this->loadSEO($seo);
-        return view('frontend.about',compact('page','lang'));
+        return view('frontend.about',compact('page','lang','brands'));
     }
 
     public function terms()
@@ -277,16 +231,15 @@ class FrontendController extends Controller
     {
         // Validate input
         $validated = $request->validate([
-            'firstName' => 'required|string|max:255',
-            'lastName' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'nullable|string|max:20',
             'subject' => 'required|string',
-            'message' => 'required|string|max:5000',
+            'message' => 'required|string|max:1000',
         ]);
 
         $con                = new Contacts;
-        $con->name          = $request->firstName.' '.$request->lastName;
+        $con->name          = $request->name;
         $con->email         = $request->email;
         $con->phone         = $request->phone;
         $con->subject       = $request->subject;
@@ -296,10 +249,7 @@ class FrontendController extends Controller
         // Send an email (optional)
         Mail::to(env('MAIL_ADMIN'))->queue(new ContactEnquiry($con));
 
-        session()->flash('message', trans('messages.contact_success_msg'));
-        session()->flash('alert-type', 'success');
-
-        return redirect()->back();
+        return response()->json(['success' => true, 'message' => '<div class="alert alert-success w-50">Thank you for getting in touch. Our team will contact you shortly.</div>']);
     }
 
     public function changeLanguage(Request $request)
@@ -321,7 +271,102 @@ class FrontendController extends Controller
 
         Subscriber::create(['email' => $request->email]);
 
-        return response()->json(['success' => trans('messages.newsletter_success')]);
+        return response()->json(['success' => true ,'message' => trans('messages.newsletter_success')]);
     }
 
+    public function servicesList(){
+
+        $page = Page::where('type','service_listing')->first();
+        $lang = getActiveLanguage();
+
+        $services = Service::where('status',1)->orderBy('name','asc')->get();
+
+        $seo = [
+            'title'                 => $page->getTranslation('title', $lang),
+            'meta_title'            => $page->getTranslation('meta_title', $lang),
+            'meta_description'      => $page->getTranslation('meta_description', $lang),
+            'keywords'              => $page->getTranslation('keywords', $lang),
+            'og_title'              => $page->getTranslation('og_title', $lang),
+            'og_description'        => $page->getTranslation('og_description', $lang),
+            'twitter_title'         => $page->getTranslation('twitter_title', $lang),
+            'twitter_description'   => $page->getTranslation('twitter_description', $lang),
+        ];
+        
+        $this->loadSEO($seo);
+
+        return view('frontend.services',compact('page','services', 'lang'));
+    }
+
+    public function serviceDetails($slug){
+        $lang = getActiveLanguage();
+        $page = Page::where('type','service_details')->first();
+        $service = '';
+        if($slug !=  ''){
+            $service = Service::where('status',1)->where('slug', $slug)->first();
+            if($service){
+                $seo = [
+                    'title'                 => $service->getTranslation('name', $lang),
+                    'meta_title'            => $service->getTranslation('meta_title', $lang),
+                    'meta_description'      => $service->getTranslation('meta_description', $lang),
+                    'keywords'              => $service->getTranslation('meta_keywords', $lang),
+                    'og_title'              => $service->getTranslation('og_title', $lang),
+                    'og_description'        => $service->getTranslation('og_description', $lang),
+                    'twitter_title'         => $service->getTranslation('twitter_title', $lang),
+                    'twitter_description'   => $service->getTranslation('twitter_description', $lang),
+                ];
+                $this->loadSEO($seo);
+            }
+        }
+        return view('frontend.service_details', compact('lang','service','page'));
+    }
+
+    public function blogsList(){
+        $lang = getActiveLanguage();
+        $page = Page::where('type','news')->first();
+
+        $seo = [
+            'title'                 => $page->getTranslation('title', $lang),
+            'meta_title'            => $page->getTranslation('meta_title', $lang),
+            'meta_description'      => $page->getTranslation('meta_description', $lang),
+            'keywords'              => $page->getTranslation('keywords', $lang),
+            'og_title'              => $page->getTranslation('og_title', $lang),
+            'og_description'        => $page->getTranslation('og_description', $lang),
+            'twitter_title'         => $page->getTranslation('twitter_title', $lang),
+            'twitter_description'   => $page->getTranslation('twitter_description', $lang),
+        ];
+        
+        $this->loadSEO($seo);
+        $blogs = Blog::where('status', 1)->orderBy('blog_date', 'desc')->paginate(12);
+
+        return view('frontend.blogs',compact('page','lang','blogs'));
+    }
+
+    public function blogDetails($slug){
+        $lang = getActiveLanguage();
+        $page = Page::where('type','news_details')->first();
+        $blog = $recentBlogs = '' ;
+        if($slug !=  ''){
+            $blog = Blog::where('status',1)->where('slug', $slug)->first();
+            if($blog){
+                $seo = [
+                    'title'                 => $blog->name,
+                    'meta_title'            => $blog->meta_title,
+                    'meta_description'      => $blog->meta_description,
+                    'keywords'              => $blog->keywords,
+                    'og_title'              => $blog->og_title,
+                    'og_description'        => $blog->og_description,
+                    'twitter_title'         => $blog->twitter_title,
+                    'twitter_description'   => $blog->twitter_description,
+                ];
+                $this->loadSEO($seo);
+
+                $recentBlogs = Blog::where('id', '!=', $blog->id)
+                                    ->orderBy('blog_date', 'desc')
+                                    ->take(10)
+                                    ->get();
+            }
+        }
+
+        return view('frontend.blog_details', compact('lang','blog','page','recentBlogs'));
+    }
 }

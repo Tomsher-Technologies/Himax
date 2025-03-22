@@ -1,121 +1,244 @@
 @extends('frontend.layouts.app')
-
 @section('content')
-    <div class="shop-breadcrumb">
-        <!-- Container -->
-        <div class="container container--type-2">
-            <!-- Breadcrumb -->
-            <ol class="breadcrumb text-uppercase">
-                <li class="breadcrumb__item"><a href="{{ route('home') }}">{{ trans('messages.home') }} </a></li>
-
-                <li class="breadcrumb__item active" aria-current="page">
-                    {{ trans('messages.contact') }}</li>
-            </ol>
-            <!-- End breadcrumb -->
-            <!-- Title -->
-            <!-- End Title -->
+    <div class="breadcrumb-wrapper bg-cover" style="background-image: url('{{ uploaded_asset($page->image1) }}');">
+        <div class="container">
+            <div class="page-heading">
+                <div class="breadcrumb-sub-title">
+                    <h1 class="wow fadeInUp" data-wow-delay=".3s">{{ $page->getTranslation('title', $lang) }}</h1>
+                </div>
+                <ul class="breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
+                    <li>
+                        <a href="{{ route('home') }}">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <i class="fa-regular fa-slash-forward"></i>
+                    </li>
+                    <li>
+                        Contact Us
+                    </li>
+                </ul>
+            </div>
         </div>
-        <!-- End container -->
     </div>
-    <!-- End shop breadcrumb -->
 
-    <!-- start :: about us -->
-    <!-- Main About Section -->
-    <section class="zk-contactus-section">
-        <div class="container container--type-2">
-            <div class="zk-header">
-                <h1 class="zk-header__title">{{ $page->getTranslation('title', $lang) }}</h1>
-            </div>
+    <section id="contact-info">
+        <div class="container">
+            <h2 class="text-white"> {{ $page->getTranslation('title1', $lang) }}</h2>
+            <p>{{$page->getTranslation('sub_title', $lang)}}</p>
 
-            <div class="zk-store-location">
-                <div class="zk-location-wrapper">
-                    <div class="zk-map-container">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13249.679258660537!2d55.2721875!3d25.2769875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f4348dddbdb6f%3A0x4745b5b1df3e5c13!2sDubai%20Mall!5e0!3m2!1sen!2sae!4v1631792012925!5m2!1sen!2sae"
-                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                    </div>
-                    <div class="zk-contact-info">
-                        <h3 class="zk-contact-heading">{{ $page->getTranslation('heading2', $lang) }}</h3>
-                        <!-- <p class="zk-contact-city">Dubai</p> -->
-                        <div class="zk-contact-locations">
-                            {!! $page->getTranslation('content', $lang) !!}
-                            <br>{{ $page->getTranslation('heading3', $lang) }}
-                            <br>{{ $page->getTranslation('heading4', $lang) }}
-                        </div>
-                    </div>
+            <div id="contact-grid">
+                <div id="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3 class="text-white">{{$page->getTranslation('title2', $lang)}}</h3>
+                    <p>{!! $page->getTranslation('content', $lang) !!}</p>
+                </div>
+
+                <div id="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3 class="text-white">{{$page->getTranslation('heading3', $lang)}}</h3>
+                    <p>{{ $page->getTranslation('heading1', $lang) }}</p>
+                </div>
+
+                @php
+                    $phones = explode('/', $page->getTranslation('content1', $lang));
+                    $phone = '';
+                    foreach($phones as $ph){
+                        $phone .= '<a href="tel:'.$ph.'">'.$ph .'</a><br>';
+                    }
+                @endphp
+
+                <div id="contact-card">
+                    <i class="fas fa-phone-alt"></i>
+                    <h3 class="text-white">{{ $page->getTranslation('title3', $lang) }}</h3>
+                    <p style="color: white">
+                        {!! $phone !!}
+                    </p>
+                </div>
+
+                @php
+                    $working_hours = explode('/', $page->getTranslation('content2', $lang));
+                    $hours = '';
+                    foreach($working_hours as $wh){
+                        $hours .= $wh .'<br>';
+                    }
+                @endphp
+
+                <div id="contact-card">
+                    <i class="fas fa-clock"></i>
+                    <h3 class="text-white">{{ $page->getTranslation('heading2', $lang) }}</h3>
+                    <p>{!! $hours !!}</p>
                 </div>
             </div>
 
-            <!-- Contact Form Section -->
-            <div class="zk-contact-form">
-                <div>
-                    <img src="{{ asset($page->image) }}" class="img-fluid h-100 cover" alt="">
+
+        </div>
+    </section>
+
+    <section id="connect-with-us">
+        <div id="social-links-container" class="container">
+            <h2>{{ $page->getTranslation('heading4', $lang) }}</h2>
+            <p>{{ $page->getTranslation('heading5', $lang) }}</p>
+
+            <div id="social-icons-grid">
+                <a href="{{ $page->getTranslation('heading7', $lang) }}"  target="_blank" class="social-icon-card" id="facebook-card">
+                    <div class="icon-wrapper">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
+                    <h3>Facebook</h3>
+                    <p>{{ $page->getTranslation('heading6', $lang) }}</p>
+                    <span class="follow-text">Follow Us</span>
+                </a>
+                <a href="{{ $page->getTranslation('heading9', $lang) }}" target="_blank" class="social-icon-card" id="twitter-x-card">
+                    <div class="icon-wrapper">
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                    <h3>Twitter</h3>
+                    <p>{{ $page->getTranslation('heading8', $lang) }}</p>
+                    <span class="follow-text">Follow Us</span>
+                </a>
+                <a href="{{ $page->getTranslation('heading11', $lang) }}" target="_blank" class="social-icon-card" id="linkedin-card">
+                    <div class="icon-wrapper">
+                        <i class="fab fa-linkedin-in"></i>
+                    </div>
+                    <h3>LinkedIn</h3>
+                    <p>{{ $page->getTranslation('heading10', $lang) }}</p>
+                    <span class="follow-text">Connect</span>
+                </a>
+                <a href="{{ $page->getTranslation('heading13', $lang) }}" target="_blank" class="social-icon-card" id="instagram-card">
+                    <div class="icon-wrapper">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <h3>Instagram</h3>
+                    <p>{{ $page->getTranslation('heading12', $lang) }}</p>
+                    <span class="follow-text">Follow Us</span>
+                </a>
+                <a href="{{ $page->getTranslation('heading15', $lang) }}" target="_blank" class="social-icon-card" id="youtube-card">
+                    <div class="icon-wrapper">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <h3>YouTube</h3>
+                    <p>{{ $page->getTranslation('heading14', $lang) }}</p>
+                    <span class="follow-text">Subscribe</span>
+                </a>
+            </div>
+
+            <div id="newsletter-signup">
+                <h3>{{ $page->getTranslation('heading16', $lang) }}</h3>
+                <p>{{ $page->getTranslation('heading17', $lang) }}</p>
+                <form id="newsletter-form">
+                    @csrf
+                    <input type="email" placeholder="Enter your email" id="email" name="email" style="background:white;">
+                    <button type="submit">Subscribe</button>
+                   
+                </form>
+                <p id="message" class="mt-2"></p>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="contact-form-section" style="background-image:url('{{ uploaded_asset($page->image2) }}')">
+        <div class="container">
+            
+            <div class="contact-form-wrapper">
+                <h2 class="section-title text-white text-center">{{ $page->getTranslation('heading18', $lang) }}</h2>
+                <p class="section-subtitle text-white text-center pb-40">{{ $page->getTranslation('heading19', $lang) }}</p>
+
+
+                <form id="contact-form">
+                    <div class="form-row">
+                        <div class="form-column">
+                            <input type="text" name="name" id="name" placeholder="Your Name" required>
+                            <input type="email" name="emailc" id="emailc" placeholder="Your Email" required>
+                            <input type="tel" maxlength="15" name="phone" id="phone" placeholder="Your Phone Number">
+                           
+                        </div>
+                        <div class="form-column">
+                            <input type="text" name="subject" id="subject" placeholder="Subject" required>
+                            <textarea name="message" id="messagec" placeholder="Your Message" required></textarea>
+                            
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-form">Send Message</button>
+                </form>
+                <p id="responseMessage" class="mt-3"></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="map-section">
+        <div class="container">
+            <h2 class="section-title">{{ $page->getTranslation('content3', $lang) }}</h2>
+            <p class="section-subtitle">{{ $page->getTranslation('content4', $lang) }}</p>
+
+            <div class="map-container">
+                <div class="map-wrapper">
+                    <!-- Replace the src with your actual Google Maps embed URL -->
+                    <iframe src="{{$page->getTranslation('content5', $lang)}}" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"> </iframe>
                 </div>
-
-                <div class="zk-contact-form-area">
-                    <h2 class="zk-contact-form__title">{{ $page->getTranslation('heading1', $lang) }}</h2>
-
-                    <form action="{{ route('contact.submit') }}" method="post" class="zk-contact-form__form">
-                        @csrf
-                        <div class="zk-form-group">
-                            <label for="firstName" class="zk-form-group__label">{{ trans('messages.first_name') }}</label>
-                            <input type="text" id="firstName" name="firstName"  class="zk-form-group__input">
-                            @error('firstName')
-                                <span class="red">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="zk-form-group">
-                            <label for="lastName" class="zk-form-group__label">{{ trans('messages.last_name') }}</label>
-                            <input type="text" id="lastName" name="lastName"  class="zk-form-group__input">
-                            @error('lastName')
-                                <span class="red">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="zk-form-group">
-                            <label for="email" class="zk-form-group__label">{{ trans('messages.email') }}</label>
-                            <input type="email" id="email" name="email"  class="zk-form-group__input">
-                            @error('email')
-                                <span class="red">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="zk-form-group">
-                            <label for="phone" class="zk-form-group__label">{{ trans('messages.phone') }}</label>
-                            <input type="tel" id="phone" name="phone" class="zk-form-group__input">
-                            @error('phone')
-                                <span class="red">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="zk-form-group zk-form-group--full-width">
-                            <label for="subject" class="zk-form-group__label">{{ trans('messages.subject') }}</label>
-                            <select id="subject" name="subject"  class="zk-form-group__select">
-                                <option value="">{{ trans('messages.select_subject') }}</option>
-                                <option value="general_enquiry">{{ trans('messages.general_enquiry') }}</option>
-                                <option value="support">{{ trans('messages.support') }}</option>
-                                <option value="feedback">{{ trans('messages.feedback') }}</option>
-                                <option value="custom_request">{{ trans('messages.custom_request') }}</option>
-                            </select>
-                            @error('subject')
-                                <span class="red">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="zk-form-group zk-form-group--full-width">
-                            <label for="message" class="zk-form-group__label">{{ trans('messages.message') }}</label>
-                            <textarea id="message" name="message"  class="zk-form-group__textarea"></textarea>
-                            @error('message')
-                                <span class="red">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="zk-submit-btn">
-                            <!-- <button class="btn btn-return">Return Items</button> -->
-                            <button type="submit" class="zk-submit-btn__button zk-btn">{{ trans('messages.submit') }}</button>
-                        </div>
-                    </form>
+                <div class="location-info">
+                    <h3>{{ $page->getTranslation('content6', $lang) }}</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> {!! $page->getTranslation('content', $lang) !!}</p>
+                    <p><i class="fas fa-phone"></i>  {!! $phone !!}</p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:{{ $page->getTranslation('heading1', $lang) }}">{{ $page->getTranslation('heading1', $lang) }}</a></p>
+                    
                 </div>
-
             </div>
         </div>
     </section>
 @endsection
 
 @section('script')
+<script>
+    $('#newsletter-form').on('submit', function(e){
+        e.preventDefault();
+
+        let email = $('#email').val();
+        let _token = $('input[name="_token"]').val();
+
+        $.ajax({
+            url: "{{ route('newsletter.subscribe') }}",
+            type: "POST",
+            data: { email: email, _token: _token },
+            success: function(response) {
+                $('#message').text(response.message).css('color', 'green');
+                $('#email').val('');
+            },
+            error: function(xhr) {
+                let error = xhr.responseJSON.errors.email[0];
+                $('#message').text(error).css('color', 'red');
+            }
+        });
+    });
+
+    $('#contact-form').on('submit', function(e){
+        e.preventDefault();
+
+        let formData = {
+            name: $('#name').val(),
+            email: $('#emailc').val(),
+            phone: $('#phone').val(),
+            subject: $('#subject').val(),
+            message: $('#messagec').val(),
+            _token: $('input[name="_token"]').val()
+        };
+
+        $.ajax({
+            url: "{{ route('contact.send') }}",
+            type: "POST",
+            data: formData,
+            success: function(response) {
+                $('#responseMessage').html(response.message).css('color', 'green');
+                $('#contact-form')[0].reset();
+            },
+            error: function(xhr) {
+                let errors = xhr.responseJSON.errors;
+                let errorMsg = errors ? Object.values(errors).join(', ') : 'Something went wrong';
+                $('#responseMessage').text(errorMsg).css('color', 'red');
+            }
+        });
+    });
+</script>
 @endsection

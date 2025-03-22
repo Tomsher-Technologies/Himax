@@ -1,580 +1,534 @@
 @extends('frontend.layouts.app')
 @section('content')
-    <div class="container-fluid">
-        <!-- Dark slider -->
-        <div class="dark-slider">
-            <!-- Slider js -->
-            <div class="js-home-dark-slider">
-               
+    <section class="hero hero-section hero-1 fix">
 
-                @if(!empty($data['slider']))
-                    @foreach($data['slider'] as $slider)
-                        <!-- Slider item -->
-                        <div class="dark-slider__item">
-                            <!-- Image -->
-                            <div class="dark-slider__image js-slider-heading">
-                                <img data-id="1" alt="Image" data-sizes="auto"
-                                    data-srcset="{{ uploaded_asset($slider->image) }}"
-                                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                    class="lazyload" />
+        <div class="video-wrap">
+            <video autoplay muted loop class="bg-video">
+                <source src="{{ asset($page->video) }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <!-- <div class="video-overlay"></div> -->
+
+        <div class="hero-content m-auto">
+
+            <h1 class="hero-title wow fadeInUp" data-wow-delay=".3s">
+                <span class="hero-title-span">{{ $page->getTranslation('heading15') }}</span><br>
+                <span class="hero-title-main">{{ $page->getTranslation('heading16') }}</span>
+            </h1>
+            <p class="hero-description wow fadeInUp" data-wow-delay=".3s">
+                {!! $page->getTranslation('content6') !!}
+            </p>
+            {{-- {{ route('contact') }} --}}
+            <a href="#" class="btn">
+                {{ $page->getTranslation('heading17') }}
+            </a>
+        </div>
+
+        <div id="hero-service-slider-sec" class="slider-area">
+            <div class="swiper hero-service-slider">
+                <div class="swiper-wrapper">
+
+                    @if (!empty($data['home_categories']))
+                        @foreach ($data['home_categories'] as $home_categories)
+                            <div class="swiper-slide">
+                                {{-- <a href="{{ route('products.index',['category' =>$home_categories->getTranslation('slug', $lang)]) }}"> --}}
+                                    <img src="{{ uploaded_asset($home_categories->getTranslation('icon', $lang)) }}" alt="{{ $home_categories->getTranslation('name', $lang) }}">
+                                {{-- </a> --}}
                             </div>
-                            <!-- End image -->
-                        </div>
-                        <!-- End slider item -->
-                    @endforeach
-                @endif
+                        @endforeach
+                    @endif
                 
-               
+                </div>
             </div>
-            <!-- End slider js -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
-        <!-- End dark slider -->
-    </div>
-    <!-- New in -->
-    <div class="shoppable-new-in">
-        <!-- Container -->
-        <div class="container-fluid">
-            <!-- Title and action -->
-            <div class="shoppable-new-in__title-and-action">
-                <!-- Title -->
-                <h4 class="shoppable-new-in__title font-family-jost">{{ $page->getTranslation('heading1', $lang) }}</h4>
-                <!-- End title -->
-            </div>
-            <!-- End title and action -->
-            <!-- Row -->
-            <div class="row">
+    </section>
 
-                @if(!empty($data['discover_categories']))
-                    @foreach($data['discover_categories'] as $discover_categories)
-                        <div class="col-12 col-md-6 col-lg-3">
-                            <!-- Category -->
-                            <a href="{{ route('products.index',['category' => $discover_categories->getTranslation('slug', $lang)]) }}" class="shoppable-new-in__category">
-                                <img alt="Image" data-sizes="auto"
-                                    data-srcset="{{ uploaded_asset($discover_categories->getTranslation('icon', $lang)) }}"
-                                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                    class="lazyload" />
-                                <p>{{ $discover_categories->getTranslation('name', $lang) }}</p>
-                            </a>
-                            <!-- End category -->
-                        </div>
-                    @endforeach
-                @endif
-                
-            </div>
-            <!-- End row -->
-        </div>
-        <!-- End container -->
-    </div>
-    <!-- End new in -->
-    <!-- Shop categories -->
-    <div class="shop-categories">
-        <!-- Container -->
-        <div class="container-fluid">
-            <!-- Row -->
-            <div class="row">
 
-                @if(!empty($data['banners']['home_mid_banner']))
-                    @foreach ($data['banners']['home_mid_banner'] as $midKey => $home_mid_banner)
-                        <!-- Category -->
-                        <div class="col-12   @if($midKey == 0) col-xl-7 @else col-xl-5  @endif">
-                            <div class="shop-category shop-category--medium">
-                                <!-- Image -->
-                                <div class="shop-category__image">
-                                    @php
-                                        $linktype = $home_mid_banner['type'];
-                                        $link = '#';
-                                        if($linktype == 'external'){
-                                            $link = $home_mid_banner['link'];
-                                        }
-                                        if($linktype == 'product'){
-                                            $prod_sku = getProductSkuFromSlug($home_mid_banner['link']);
-                                            if($prod_sku != null){
-                                                $link = route('product-detail',['slug' => $home_mid_banner['link'], 'sku' => $prod_sku]);
-                                            }else {
-                                                $link = '#';
-                                            }
-                                        }
-                                        if($linktype == 'category'){
-                                            $link = route('products.index',['category' => $home_mid_banner['link']]);
-                                        }
-                                    @endphp
-                                    <a href="{{$link}}">
-                                        <img alt="Image" data-sizes="auto"
-                                            data-srcset="{{ $home_mid_banner['image'] }}"
-                                            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                            class="lazyload" />
-                                    </a>
-                                </div>
-                                <!-- End image -->
-                                <!-- Small heading -->
-                                {{-- <h4 class="shop-category__small-heading"><a href="shop.html">SALE UP TO 40%</a></h4> --}}
-                                <!-- End small heading -->
-                                <!-- Heading and description -->
-                                <div class="shop-category__heading-and-description">
-                                    <!-- Heading -->
-                                    <h4 class="shop-category__heading"><a href="#" style="color: #000"> {{ $home_mid_banner['title'] }}</a>
-                                    </h4>
-                                    <!-- End heading -->
-                                    <!-- Description -->
-                                    <div class="shop-category__description">
-                                        <a href="#">{{ $home_mid_banner['sub_title'] }} </a>
-                                    </div>
-                                    <!-- End description -->
-                                </div>
-                                <!-- End heading and description -->
+
+
+
+    <!-- Why Choose Us Section S T A R T -->
+    <div id="about-as" class="wcu-section section-padding fix pb-0">
+        <div class="container">
+            <div class="wcu-wrapper style3">
+                <div class="row gy-5 gy-64 d-flex align-items-center">
+
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="wcu-content">
+                            <div class="section-title">
+                                <span class="subtitle wow fadeInUp">{{ $page->getTranslation('title', $lang) }}</span>
+                                <h2 class="wow fadeInUp" data-wow-delay=".3s">{{ $page->getTranslation('sub_title', $lang) }}
+                                </h2>
                             </div>
-                        </div>
-                        <!-- End category -->
-                    @endforeach
-                @endif
-                
-               
-            </div>
-            <!-- End row -->
-        </div>
-        <!-- End container -->
-    </div>
-    <!-- End shop categories -->
-    <!-- Our products -->
-    <div class="our-products minimal-our-products">
-        <!-- Container -->
-        <div class="container-fluid">
-            <!-- Title -->
-            <div class="our-products__title-and-action d-flex justify-content-center">
-                <h4 class="our-products__title">{{ $page->getTranslation('heading2', $lang) }}</h4>
-            </div>
-            <!-- End title -->
-            <!-- Products -->
-            <div class="row">
 
-                @if (!empty($data['new_arrival_products']))
-                    @foreach ($data['new_arrival_products'] as $new_arrival_products)
-                        @php
-                            $priceData = getProductOfferPrice($new_arrival_products);
-                        @endphp
-                        <!-- Product -->
-                        <div class="col-6 col-md-4 col-xl-3">
-                            <div class="product-grid-item product-grid-item--type-2 product-grid-item--type-5">
-                                <!-- Product tag -->
-                                @if ($priceData['offer_tag'] != '')
-                                    <div class="product-grid-item__tag">{{ $priceData['offer_tag'] }}</div>
-                                @endif
-                                @php
-                                    $wishlistedNew = productWishlisted($new_arrival_products->sku, $new_arrival_products->slug);
-                                @endphp
-                                <div class="product-grid-item__wishlist-right-0  wishlist-btn" data-product-slug="{{ $new_arrival_products->slug }}" data-product-sku="{{ $new_arrival_products->sku }}" ><i class="lnr lnr-heart {{($wishlistedNew != 0) ? 'active' : '' }}"></i></div>
-                                <!-- End product tag -->
-                                <!-- Product images -->
-                                <div class="product-grid-item__images product-grid-item__images--ratio-100-122 js-product-grid-images"
-                                    data-current-image="0">
-                                    <!-- Product images arrows -->
-                                    <div class="product-grid-item__images-arrows">
-                                        <!-- Previous -->
-                                        <div class="product-grid-item__previous-image js-product-grid-previous-image"><i
-                                                class="lnr lnr-chevron-left"></i></div>
-                                        <!-- End previous -->
-                                        <!-- Previous -->
-                                        <div class="product-grid-item__next-image js-product-grid-next-image"><i
-                                                class="lnr lnr-chevron-right"></i></div>
-                                        <!-- End previous -->
-                                    </div>
-                                    <!-- End product images arrows -->
+                            <p class="text  wow fadeInUp" data-wow-delay=".5s">
+                                {!! $page->getTranslation('content', $lang) !!}
+                            </p>
 
-                                    @php
-                                        $images = explode(',',$new_arrival_products->photos);
-                                        if($new_arrival_products->thumbnail_img != null){
-                                            array_unshift($images, $new_arrival_products->thumbnail_img);
-                                        }
-                                    @endphp
+                            <div class="d-flex gap-4">
+                                <div class="counter-box">
+                                    <h2><span class="counter-number1"></span>{{ $page->getTranslation('title1', $lang) }}</h2>
+                                    <p>{{ $page->getTranslation('title2', $lang) }}</p>
+                                </div>
 
-                                    @if (!empty($images))
-                                        @foreach ($images as $imgkey => $img)
-                                             <!-- Product image -->
-                                            <div class="product-grid-item__image js-product-grid-image @if($imgkey == 0) active @endif">
-                                                <a href="{{ route('product-detail',['slug' => $new_arrival_products->slug, 'sku' => $new_arrival_products->sku]) }}">
-                                                    <img alt="Image" data-sizes="auto"
-                                                        data-srcset="{{get_product_image($img,'300')}}"
-                                                        src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                                        class="lazyload" />
-                                                </a>
-                                            </div>
-                                            <!-- End product image -->
-                                        @endforeach
-                                    @endif
-                                    
-                                    <!-- Quick shop -->
-                                    <div class="product-grid-item__quick-shop">
-                                        <a href="#" class="add-to-cart-btn" data-product-slug="{{$new_arrival_products->slug}}" data-product-sku="{{ $new_arrival_products->sku}}">{{ trans('messages.add_to_cart') }}</a>
-                                    </div>
-                                    <!-- End quick shop -->
+                                <div class="counter-box">
+                                    <h2><span class="counter-number1"></span>{{ $page->getTranslation('title3', $lang) }}</h2>
+                                    <p>{{ $page->getTranslation('heading1', $lang) }}</p>
                                 </div>
-                                <!-- End product images -->
-                                <!-- Product feature -->
-                                <div class="product-grid-item__feature">{{ $new_arrival_products->brand->getTranslation('name', $lang) }}</div>
-                                <!-- End product feature -->
-                                <!-- Product name -->
-                                <div class="product-grid-item__name">
-                                    <a href="{{ route('product-detail',['slug' => $new_arrival_products->slug, 'sku' => $new_arrival_products->sku]) }}">{{ $new_arrival_products->getTranslation('name', $lang) }}</a>
-                                </div>
-                                <!-- End product name -->
-                                <div class="product__reviews" bis_skin_checked="1">
-                                    <i class="lnr lnr-star lnir active"></i>
-                                    <i class="lnr lnr-star lnir active"></i>
-                                    <i class="lnr lnr-star lnir active"></i>
-                                    <i class="lnr lnr-star lnir active"></i>
-                                    <i class="lnr lnr-star lnir"></i>
-                                    <span>3 reviews</span>
-                                </div>
-                                <!-- Product price -->
-                                <div class="product-grid-item__price">
-                                    <!-- Price new -->
-                                    <span class="product-grid-item__price-new">{{ env('DEFAULT_CURRENCY').' '.$priceData['discounted_price'] }}</span>
-                                    <!-- End price new -->
-                                    <!-- Price old -->
-                                    @if ($priceData['discounted_price'] != $priceData['original_price'])
-                                        <span class="product-grid-item__price-old">{{ env('DEFAULT_CURRENCY').' '.$priceData['original_price'] }}</span>
-                                    @endif
-                                    <!-- End price old -->
-                                </div>
-                                <!-- End product price -->
+
                             </div>
+
                         </div>
-                        <!-- End Product -->
-                    @endforeach
-                @endif
-            
-            </div>
-            <!-- End products -->
-        </div>
-        <!-- End container -->
-    </div>
-    <!-- End our products -->
-    <!-- New in -->
-    <div class="shoppable-new-coll">
-        <!-- Container -->
-        <div class="container-fluid">
-            <!-- Title and action -->
-            <div class="shoppable-new-coll__title-and-action">
-                <!-- Title -->
-                <h4 class="shoppable-new-coll__title font-family-jost">{{ $page->getTranslation('heading3', $lang) }}</h4>
-                <!-- End title -->
-            </div>
-            <!-- End title and action -->
-            <!-- Row -->
-            <div class="row">
-               
-               
-                
-            </div>
-            <!-- End row -->
-        </div>
-        <!-- End container -->
-    </div>
-    <!-- End new in -->
-    <!-- Deal week -->
-   
-    @if(!empty($data['banners']['home_center_banner']) && isset($data['banners']['home_center_banner'][0]))
-        <div class="explore-banner mt-3">
-            @php
-                $linktype = $data['banners']['home_center_banner'][0]['type'];
-                $link = '#';
-                if($linktype == 'external'){
-                    $link = $data['banners']['home_center_banner'][0]['link'];
-                }
-                if($linktype == 'product'){
-                    $prod_sku = getProductSkuFromSlug($data['banners']['home_center_banner'][0]['link']);
-                    if($prod_sku != null){
-                        $link = route('product-detail',['slug' => $data['banners']['home_center_banner'][0]['link'], 'sku' => $prod_sku]);
-                    }else {
-                        $link = '#';
-                    }
-                }
-                if($linktype == 'category'){
-                    $link = route('products.index',['category' => $data['banners']['home_center_banner'][0]['link']]);
-                }
-            @endphp
+                        
+                        <a href="#" class="btn">Schedule Free Consultation </a>
+                    </div>
 
-            <!-- Container -->
-            <div class="container-fluid p-0">
-                <a href="{{$link}}"><img src="{{$data['banners']['home_center_banner'][0]['image']}}" alt=""></a>
-            </div>
-            <!-- End container -->
-        </div>
-    @endif
-     {{-- @php 
-        echo '<pre>';
-        print_r($data['banners']);
-        die;
 
-    @endphp --}}
-    <!-- End deal week -->
-    <!-- Our products -->
-    <div class="our-products minimal-our-products">
-        <!-- Container -->
-        <div class="container-fluid">
-            <!-- Title -->
-            <div class="our-products__title-and-action d-flex justify-content-center">
-                <h4 class="our-products__title">{{ $page->getTranslation('heading4', $lang) }}</h4>
-            </div>
-            <!-- End title -->
-            <!-- Products -->
-            <div class="row">
-                @if (!empty($data['special_products']))
-                    @foreach ($data['special_products'] as $special_products)
-                        @php
-                            $priceData = getProductOfferPrice($special_products);
-                        @endphp
-                        <!-- Product -->
-                        <div class="col-6 col-md-4 col-xl-3">
-                            <div class="product-grid-item product-grid-item--type-2 product-grid-item--type-5">
-                                <!-- Product tag -->
-                                @if ($priceData['offer_tag'] != '')
-                                    <div class="product-grid-item__tag">{{ $priceData['offer_tag'] }}</div>
-                                @endif
-                                @php
-                                    $wishlistedSpecial = productWishlisted($special_products->sku, $special_products->slug);
-                                @endphp
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="wcu-thumb">
+                            <div class="thumb1 bg-cover"><img src="{{ asset($page->image) }}" alt="thumb"
+                                    class="wow img-custom-anim-left w-100"></div>
 
-                                <div class="product-grid-item__wishlist-right-0  wishlist-btn" data-product-slug="{{ $special_products->slug }}" data-product-sku="{{ $special_products->sku }}"><i class="lnr lnr-heart {{($wishlistedSpecial != 0) ? 'active' : '' }}"></i></div>
-                                <!-- End product tag -->
-                                <!-- Product images -->
-                                <div class="product-grid-item__images product-grid-item__images--ratio-100-122 js-product-grid-images"
-                                    data-current-image="0">
-                                    <!-- Product images arrows -->
-                                    <div class="product-grid-item__images-arrows">
-                                        <!-- Previous -->
-                                        <div class="product-grid-item__previous-image js-product-grid-previous-image"><i
-                                                class="lnr lnr-chevron-left"></i></div>
-                                        <!-- End previous -->
-                                        <!-- Previous -->
-                                        <div class="product-grid-item__next-image js-product-grid-next-image"><i
-                                                class="lnr lnr-chevron-right"></i></div>
-                                        <!-- End previous -->
-                                    </div>
-                                    <!-- End product images arrows -->
 
-                                    @php
-                                        $images = explode(',',$special_products->photos);
-                                        if($special_products->thumbnail_img != null){
-                                            array_unshift($images, $special_products->thumbnail_img);
-                                        }
-                                    @endphp
-
-                                    @if (!empty($images))
-                                        @foreach ($images as $imgkey => $img)
-                                            <!-- Product image -->
-                                            <div class="product-grid-item__image js-product-grid-image @if($imgkey == 0) active @endif">
-                                                <a href="{{ route('product-detail',['slug' => $special_products->slug, 'sku' => $special_products->sku]) }}">
-                                                    <img alt="Image" data-sizes="auto"
-                                                        data-srcset="{{get_product_image($img,'300')}}"
-                                                        src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                                        class="lazyload" />
-                                                </a>
-                                            </div>
-                                            <!-- End product image -->
-                                        @endforeach
-                                    @endif
-                                    
-
-                                    <!-- Quick shop -->
-                                    <div class="product-grid-item__quick-shop">
-                                        <a href="#" class="add-to-cart-btn" data-product-slug="{{$special_products->slug}}" data-product-sku="{{ $special_products->sku}}">{{ trans('messages.add_to_cart') }}</a>
-                                    </div>
-                                    <!-- End quick shop -->
-                                </div>
-                                <!-- End product images -->
-                                <!-- Product feature -->
-                                <div class="product-grid-item__feature">{{ $special_products->brand->getTranslation('name', $lang) }}</div>
-                                <!-- End product feature -->
-                                <!-- Product name -->
-                                <div class="product-grid-item__name">
-                                    <a href="{{ route('product-detail',['slug' => $special_products->slug, 'sku' => $special_products->sku]) }}">{{ $special_products->getTranslation('name', $lang) }}</a>
-                                </div>
-                                <!-- End product name -->
-                                <div class="product__reviews" bis_skin_checked="1">
-                                    <i class="lnr lnr-star lnir active"></i>
-                                    <i class="lnr lnr-star lnir active"></i>
-                                    <i class="lnr lnr-star lnir active"></i>
-                                    <i class="lnr lnr-star lnir active"></i>
-                                    <i class="lnr lnr-star lnir"></i>
-                                    <span>3 reviews</span>
-                                </div>
-                                <!-- Product price -->
-                                <div class="product-grid-item__price">
-                                    <!-- Price new -->
-                                    <span class="product-grid-item__price-new">{{ env('DEFAULT_CURRENCY').' '.$priceData['discounted_price'] }}</span>
-                                    <!-- End price new -->
-                                    <!-- Price old -->
-                                    @if ($priceData['discounted_price'] != $priceData['original_price'])
-                                        <span class="product-grid-item__price-old">{{ env('DEFAULT_CURRENCY').' '.$priceData['original_price'] }}</span>
-                                    @endif
-                                    <!-- End price new -->
-                                    
-                                </div>
-                                <!-- End product price -->
-                            </div>
                         </div>
-                        <!-- End Product -->
-                    @endforeach
-                @endif
-               
-               
-            </div>
-            <!-- End products -->
-        </div>
-        <!-- End container -->
-    </div>
-    <!-- End our products -->
-    <!-- Our journal -->
-    <div class="full-width-our-journal">
-        <!-- Container -->
-        <div class="container-fluid">
-            <!-- Row -->
-            <div class="row">
-                @if(!empty($data['banners']['home_mid_section_banner']))
-                    @foreach ($data['banners']['home_mid_section_banner'] as $midKey => $home_mid_section_banner)
-                        <!-- Post -->
-                        @php
-                            $linktype = $home_mid_section_banner['type'];
-                            $link = '#';
-                            if($linktype == 'external'){
-                                $link = $home_mid_section_banner['link'];
-                            }
-                            if($linktype == 'product'){
-                                $prod_sku = getProductSkuFromSlug($home_mid_section_banner['link']);
-                                if($prod_sku != null){
-                                    $link = route('product-detail',['slug' => $home_mid_section_banner['link'], 'sku' => $prod_sku]);
-                                }else {
-                                    $link = '#';
-                                }
-                            }
-                            if($linktype == 'category'){
-                                $link = route('products.index',['category' => $home_mid_section_banner['link']]);
-                            }
-                        @endphp
+                    </div>
 
-                        <div class="col-lg-6 col-xl-4">
-                            <div class="full-width-post">
-                                <div class="full-width-post__image">
-                                    <a href="{{$link}}">
-                                        <img alt="Image" data-sizes="auto"
-                                        data-srcset="{{$home_mid_section_banner['image']}}"
-                                        src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                        class="lazyload" />
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End post -->
-                    @endforeach
-                @endif
+
+                </div>
             </div>
-            <!-- End row -->
         </div>
-        <!-- End container -->
     </div>
-    <!-- End our journal -->
-    <!-- Dark brands -->
-    <div class="dark-brands">
-        <h4 class="dark-intro-text__title d-flex justify-content-center">{{ $page->getTranslation('heading5', $lang) }}</h4>
-        <!-- Container -->
-        <div class="container-fluid">
-            <!-- Home brands items -->
-            <div class="home-brands__items">
-                @if (!empty($data['shop_by_brands']))
-                    @foreach ($data['shop_by_brands'] as $shop_by_brands)
-                        <!-- Item -->
-                        <div class="home-brand-item">
-                            <a href="{{ route('products.index',['brand' => [$shop_by_brands->getTranslation('slug', $lang)]]) }}">
-                                <img alt="Image" src="{{ uploaded_asset($shop_by_brands->getTranslation('logo',$lang)) }}" class="lazyload" />
-                            </a>
-                        </div>
-                        <!-- End item -->
-                    @endforeach
-                @endif
-               
-            </div>
-            <!-- End home brands items -->
-        </div>
-        <!-- End container -->
-    </div>
-    <!-- End dark brands -->
-    <!-- video -->
-    <div class="shoppable-video">
-        <!-- Image -->
-        <div class="shoppable-video__background-image"
-            style="background-image: url(assets/images/grey-background.jpg); background-size: cover;"></div>
-        <!-- End image -->
-        <!-- Content -->
-        <div class="shoppable-video__content">
-            <!-- Container -->
-            <div class="container container--type-4">
-                <!-- Title -->
-                <h5 class="shoppable-video__title font-family-jost">{{ $page->getTranslation('heading6', $lang) }}</h5>
-                <!-- End title -->
-                <!-- Action -->
-                <div class="shoppable-video__action">
-                    <div class="row justify-content-center align-items-center">
-                        @if ($page->image != null)
-                            @php
-                                $pageImgaes = explode(',', $page->image);
-                            @endphp
-                            @foreach ($pageImgaes as $pImg)
-                                <div class="col-md-2 col-6">
-                                    <img width="100" src="{{ asset($pImg) }}" alt="">
-                                </div>
-                            @endforeach
+
+    <section id="features">
+        <div class="container">
+            <div class="features-content">
+                @php
+                    $img = $points = '';
+                @endphp
+                @foreach ($data['points'] as $key => $pnt)
+                    @php
+                        if($key == 0){
+                            $active = 'active';
+                            $img = uploaded_asset($pnt->image);
+                        }else {
+                            $active = '';
+                        }
+
+                        $points .= '<button class="tab '.$active.'" data-type="image" data-src="'.uploaded_asset($pnt->image).'">'.$pnt->title.'</button>';
+                        
+                    @endphp
+                @endforeach
+                <!-- Background Media -->
+                <div class="tab-media">
+                    {{-- <video id="features-video" autoplay loop muted>
+                        <source src="assets/videos/cybersecurity.mp4" type="video/mp4">
+                    </video> --}}
+                    <img id="features-image" src="{{$img}}" alt="Feature Image" class="">
+                    {{-- hidden --}}
+                </div>
+
+                <!-- Text Content with Overlay -->
+                <div class="features-text-wrapper">
+                    <div class="text-overlay"></div>
+                    <div class="features-text">
+                        <h3>{{ $page->getTranslation('heading18', $lang) }}</h3>
+                        <h2>{{ $page->getTranslation('heading19', $lang) }}</h2>
+
+                        <!-- Feature Tabs -->
+                        <div class="features-tabs">
+                           {!! $points !!}
                             
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section S T A R T -->
+    <section class="testimonial-section-1 fix">
+        <div class="container-fluid">
+            <div class="testimonial-wrapper style1 margin-minus-bottom">
+                <div class="">
+                    <div class="">
+                        
+                    <div class="container">
+    <div class="section-header text-start row">
+        <div class="col-lg-5 col-md-6 col-sm-12">
+            <span class="section-subtitle">{{ $page->getTranslation('heading3', $lang) }}</span>
+            <h2 class="section-title">{{ $page->getTranslation('heading4', $lang) }}</h2>
+        </div>
+        <div class="col-lg-2 d-none d-lg-block"></div> <!-- Empty column only on large screens -->
+        <div class="col-lg-5 col-md-6 col-sm-12">
+            <p>{{ $page->getTranslation('content1', $lang) }}</p>
+        </div>
+    </div>
+</div>
+
+                        
+                        <div class="slider-area testimonialSliderOne">
+
+                            <div class="swiper gt-slider" id="testimonialSliderOne" data-slider-options='{"loop": true,"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":2}, "768":{"slidesPerView":2}, "992":{"slidesPerView":2}, "1200":{"slidesPerView":4}}}'>
+                                <div class="swiper-wrapper">
+
+                                    @if (!empty($data['featured_services']))
+                                        @foreach ($data['featured_services'] as $fea_service)
+                                            <div class="swiper-slide">
+                                                <div id="services-card">
+                                                    {{-- <a href="{{ route('service-detail',['slug' => $fea_service->slug]) }}" > --}}
+                                                        <img src="{{ uploaded_asset($fea_service->image) }}" alt="Managed IT Services" id="services-card-image">
+                                                        <div id="services-card-content">
+                                                            <div class="services-card-content-top">
+                                                                <!-- Title -->
+                                                                <h2 id="services-card-title">
+                                                                    {{ $fea_service->getTranslation('name', $lang) }}
+                                                                </h2>
+                                                                <!-- Service List (Now below title and always visible) -->
+                                                                <ul id="services-card-list">
+                                                                    @foreach ($fea_service->points as $service_points)
+                                                                        <li class="services-card-item">
+                                                                            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                                height="16" viewBox="0 0 16 16" fill="none">
+                                                                                <g clip-path="url(#clip0_97_177)">
+                                                                                    <path d="M2.5 9L6 12.5L14 4.5" stroke="white"
+                                                                                        stroke-width="2" stroke-linecap="round"
+                                                                                        stroke-linejoin="round" />
+                                                                                </g>
+                                                                                <defs>
+                                                                                    <clipPath id="clip0_97_177">
+                                                                                        <rect width="16" height="16"
+                                                                                            fill="white" />
+                                                                                    </clipPath>
+                                                                                </defs>
+                                                                            </svg> -->
+
+
+
+
+
+                                                                            <svg width="16"
+                                                                            height="16" fill="white" version="1.1" id="fi_447147" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<g>
+	<g>
+		<path d="M504.502,75.496c-9.997-9.998-26.205-9.998-36.204,0L161.594,382.203L43.702,264.311c-9.997-9.998-26.205-9.997-36.204,0
+			c-9.998,9.997-9.998,26.205,0,36.203l135.994,135.992c9.994,9.997,26.214,9.99,36.204,0L504.502,111.7
+			C514.5,101.703,514.499,85.494,504.502,75.496z"></path>
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+
+                                                                            {{ $service_points->title }}
+                                                                        </li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            </div>
+            
+                                                            <!-- Footer (Always Visible) -->
+                                                            <div id="services-card-footer">
+                                                                <span id="services-card-footer-text">{{ ucfirst($fea_service->type) }}</span>
+                                                                <a href="#" id="services-card-arrow">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="48"
+                                                                        height="48" viewBox="0 0 48 48" fill="none">
+                                                                        <path
+                                                                            d="M37.0008 11.5V31C37.0008 31.3978 36.8428 31.7794 36.5615 32.0607C36.2802 32.342 35.8987 32.5 35.5008 32.5C35.103 32.5 34.7215 32.342 34.4402 32.0607C34.1589 31.7794 34.0008 31.3978 34.0008 31V15.1206L12.5621 36.5613C12.2806 36.8427 11.8989 37.0008 11.5008 37.0008C11.1028 37.0008 10.721 36.8427 10.4396 36.5613C10.1581 36.2798 10 35.898 10 35.5C10 35.102 10.1581 34.7202 10.4396 34.4387L31.8802 13H16.0008C15.603 13 15.2215 12.842 14.9402 12.5607C14.6589 12.2794 14.5008 11.8978 14.5008 11.5C14.5008 11.1022 14.6589 10.7206 14.9402 10.4393C15.2215 10.158 15.603 10 16.0008 10H35.5008C35.8987 10 36.2802 10.158 36.5615 10.4393C36.8428 10.7206 37.0008 11.1022 37.0008 11.5Z"
+                                                                            fill="white" />
+                                                                    </svg>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    {{-- </a> --}}
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                
+                                </div>
+                                <div class="testimonial-content">
+                                    <div class="arrow-btn text-end wow fadeInUp" data-wow-delay=".4s">
+                                        <button data-slider-prev="#testimonialSliderOne"
+                                            class="slider-arrow slider-prev"><i
+                                                class="fa-sharp fa-regular fa-arrow-left-long"></i></button>
+                                        <button data-slider-next="#testimonialSliderOne"
+                                            class="slider-arrow slider-next"><i
+                                                class="fa-regular fa-arrow-right-long"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="product-section">
+        <div class="container">
+            <div class="section-header text-start">
+                <div class="">
+                    <span class="section-subtitle">{{ $page->getTranslation('heading5', $lang) }}</span>
+                    <h2 class="section-title">{{ $page->getTranslation('heading6', $lang) }}</h2>
+                </div>
+                <div class="swiper-navigation">
+
+                    
+                    <div class="swiper-button-prev product-custom-prev">
+                        <!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 19L8 12L15 5" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg> -->
+                    </div>
+
+                    <div class="swiper-button-next product-custom-next">
+                        <!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 5L16 12L9 19" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg> -->
+                    </div>
+
+                </div>
+            </div>
+             
+            
+        </div>
+
+        <div class="container-fluid">
+            <div class="swiper product-slider">
+                <div class="swiper-wrapper">
+                    @if (!empty($data['featured_products']))
+                        @foreach ($data['featured_products'] as $fea_products)
+                            
+                                <div class="swiper-slide product-card">
+                                    <div class="product-header">
+                                        <span class="category">{{ $fea_products->category->name }}</span>
+                                        <span class="new-badge">NEW</span>
+                                    </div>
+                                    <div class="image-wrapper">
+                                        {{-- <a href="{{ route('product-detail',['slug' => $fea_products->slug, 'sku' => $fea_products->sku]) }}"> --}}
+                                            <img src="{{ asset($fea_products->thumbnail_img) }}" alt="2M Explosion-proof IR Camera">
+                                        {{-- </a> --}}
+                                    </div>
+                                    <div class="product-info">
+                                        <span class="model">{{ $fea_products->brand->name }}</span>
+                                        {{-- <a href="{{ route('product-detail',['slug' => $fea_products->slug, 'sku' => $fea_products->sku]) }}"> --}}
+                                            <h3 class="product-title">{{ $fea_products->getTranslation('name', $lang) }}</h3>
+                                        {{-- </a> --}}
+                                    </div>
+                                </div>
+                           
+                        @endforeach
+                    @endif
+                    <!-- Product Card 1 -->
+                    
+                    {{-- {{ $page->getTranslation('heading7', $lang) }} // Want to see more? --}}
+                    {{-- {{ $page->getTranslation('heading8', $lang) }} // View all products --}}
+                </div>
+            </div>
+        </div>
+          <div class="container">
+              
+                       <div class="row product_link pt-5 align-items-center ">
+                  <div class="col-md-3"><h3>{{ $page->getTranslation('heading7', $lang) }}</h3> </div>
+                  <div class="col-md-7"> <hr> </div>
+                  <div class="col-md-2"><a href="#" class="btn">{{ $page->getTranslation('heading8', $lang) }}</a></div>
+              </div>
+          </div>
+
+    </section>
+
+    <section id="industries">
+        <div class="container">
+            <div class="industries-header">
+                
+                      <div class="">
+                                         <h5>{{ $page->getTranslation('content2', $lang) }}</h5>
+                <h2>{{ $page->getTranslation('content3', $lang) }}</h2>
+                      </div>
+                
+ 
+                <p>{{ $page->getTranslation('content4', $lang) }}</p>
+            </div>
+
+            <div class="industries-content">
+                <!-- Left Side - Tabs -->
+                <div class="industries-tabs">
+                    @php
+                        $imageInd = $titleInd = $contentInd = '';
+                    @endphp
+                    @if (!empty($data['industries']))
+                        @foreach ($data['industries'] as $ikey => $ind)
+                            @php
+                                if($ikey == 0){
+                                    $imageInd = uploaded_asset($ind->image);
+                                    $titleInd = $ind->title;
+                                    $contentInd = $ind->content;
+                                }
+                            @endphp
+                            <button class="industry-tab @if ($ikey == 0) active @endif" data-image="{{ uploaded_asset($ind->image) }}" data-title="{{ $ind->title }}" data-description="{{ $ind->content }}">
+                                {{ $ind->name }}
+                            </button>
+                        @endforeach
+                    @endif
+                </div>
+
+
+                <!-- Right Side - Content Display -->
+                <div class="industries-display">
+                    <div class="industries-bg">
+                        <img id="industry-bg-image" src="{{$imageInd}}" alt="Industry Image">
+                    </div>
+                    <div class="industries-info">
+                        <h3 id="industry-title">{{$titleInd}}</h3>
+                        <p id="industry-description">{{$contentInd}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="partners">
+        <div class="container">
+            <div class="partners-content">
+                <!-- Left Content -->
+                <div class="partners-text animate__animated animate__fadeInLeft">
+                    <span class="partners-subtitle">{{ $page->getTranslation('heading9', $lang) }}</span>
+                    <h2 class="partners-title">
+                        {{ $page->getTranslation('heading10', $lang) }}
+                    </h2>
+                    <p class="partners-description">
+                        {{ $page->getTranslation('content5', $lang) }}
+                    </p>
+                </div>
+
+                <!-- Right Video Section -->
+                <div class="video-thumbnail animate__animated animate__fadeInRight">
+                    <img src="{{ $page->image1 }}" alt="Video Thumbnail">
+                    {{-- <button class="play-button" onclick="openVideoPopup()">
+                        <svg width="50" height="50" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="11" stroke="white" stroke-width="2" />
+                            <polygon points="9,7 9,17 17,12" fill="white" />
+                        </svg>
+                    </button> --}}
+                </div>
+            </div>
+
+            <!-- Video Modal Popup -->
+            <div id="video-popup" class="video-modal animate__animated animate__fadeIn">
+                <div class="video-container">
+                    <span class="close-video" onclick="closeVideoPopup()">&times;</span>
+                    <iframe id="video-frame" src="" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- Clients Logo Slider -->
+            <div class="client-logos">
+                <div class="swiper client-slider animate__animated animate__fadeInUp">
+                    <div class="swiper-wrapper">
+                        @if (!empty($data['brands']))
+                            @foreach ($data['brands'] as $brand)
+                                <div class="swiper-slide"><img src="{{ uploaded_asset($brand->getTranslation('logo', $lang)) }}" alt="{{ $brand->getTranslation('name', $lang) }}"></div>
+                            @endforeach
                         @endif
                     </div>
                 </div>
-                <!-- End action -->
             </div>
-            <!-- End container -->
         </div>
-        <!-- End content -->
-    </div>
-    <!-- End video -->
-    <!-- Shop by the look -->
-    <div class="minimal-shop-by-the-look">
-        <!-- Container -->
-        <div class="container-fluid">
-            <!-- Container -->
-            <div class="minimal-shop-by-the-look__container">
-                <!-- Title and action -->
-                <div class="minimal-shop-by-the-look__title-and-action d-flex justify-content-center">
-                    <!-- Title -->
-                    <h4 class="minimal-shop-by-the-look__title">{{ $page->getTranslation('heading7', $lang) }}</h4>
-                    <!-- End title -->
-                </div>
-                <!-- End title and action -->
-                <!-- Items -->
-                <div class="minimal-shop-by-the-look__items js-home-minimal-instagram">
+    </section>
 
-                    @if (!empty($data['partners']))
-                        @foreach ($data['partners'] as $partners)
-                            <!-- Item -->
-                            <div class="minimal-instagram-item">
-                                <a href="{{ $partners->link }}" target="_blank">
-                                    <img alt="Image" data-sizes="auto"
-                                        data-srcset="{{ uploaded_asset($partners->image) }}"
-                                        src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                        class="lazyload" />
-                                </a>
-                            </div>
-                            <!-- End item -->
-                        @endforeach
-                    @endif
-
-                </div>
-                <!-- End items -->
+    <section id="blog">
+        <div class="container">
+            <div class="blog-header">
+                <h2 class="blog--sec-title">{{ $page->getTranslation('heading11', $lang) }}</h2>
+                {{-- <a href="{{ route('blogs.index') }}" class="blog-link"> --}}
+                    {{ $page->getTranslation('heading12', $lang) }} ↗
+                {{-- </a> --}}
             </div>
-            <!-- End container -->
-            <!-- Line 1px -->
-            <hr />
-            <!-- End line 1px -->
+
+            <div class="blog-grid">
+                @if (!empty($data['blogs']))
+                    @foreach ($data['blogs'] as $blog)
+                        <div class="blog-card">
+                            {{-- <a href="{{ route('blog-detail',['slug' => $blog->slug]) }}"> --}}
+                                <div class="blog-image">
+                                    <img src="{{ uploaded_asset($blog->image) }}" alt="AI Prosthetics">
+                                    <div class="blog-tags">
+                                        @php
+                                            $tags = explode(',', $blog->tags);
+                                        @endphp
+                                        @if (!empty($tags))
+                                            @foreach ( $tags as $tag)
+                                                <span class="tag">{{$tag}}</span>
+                                            @endforeach
+                                        @endif
+                                        
+                                    </div>
+                                </div>
+                                <span class="blog-date">| {{ date('M d, Y', strtotime($blog->blog_date)) }}</span>
+                                <h3 class="blog-title">{{ $blog->name }}</h3>
+                            {{-- </a> --}}
+                        </div>
+                    @endforeach
+                @endif
+                <!-- Blog Post 1 -->
+                
+
+            </div>
         </div>
-        <!-- End container -->
-    </div>
-    <!-- End shop by the look -->
+    </section>
+
+    <section id="cta-section">
+        <div class="cta-container">
+            <!-- Background Image -->
+            <div class="cta-bg">
+                <img src="{{ asset('assets/images/cta-background.jpg') }}" alt="CTA Background">
+            </div>
+
+            <!-- Text Content -->
+            <div class="cta-content">
+                <h2 class="animate__animated animate__fadeInDown">
+                    {{ $page->getTranslation('heading13', $lang) }}
+                </h2>
+                {{-- {{ route('services.index') }} --}}
+                <a href="#" class="cta-button animate__animated animate__fadeInUp animate__delay-1s">
+                    {{ $page->getTranslation('heading14', $lang) }}
+                </a>
+            </div>
+        </div>
+    </section>
 @endsection
