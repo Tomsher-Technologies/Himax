@@ -17,16 +17,11 @@
                                 {!! get_setting('about_us_description', null, $lang) !!}
                             </p>
                             <div class="social-icon d-flex align-items-center">
-                                {{-- {{ get_setting('facebook_link') }}
-                                {{ get_setting('instagram_link') }}
-                                {{ get_setting('twitter_link') }}
-                                {{ get_setting('linkedin_link') }}
-                                {{ get_setting('youtube_link') }} --}}
-                                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                                <a href="#" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
-                                <a href="#" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                                <a href="{{ get_setting('facebook_link') }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                <a href="{{ get_setting('instagram_link') }}" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a href="{{ get_setting('twitter_link') }}" target="_blank"><i class="fab fa-twitter"></i></a>
+                                <a href="{{ get_setting('linkedin_link') }}" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                                <a href="{{ get_setting('youtube_link') }}" target="_blank"><i class="fa-brands fa-youtube"></i></a>
                             </div>
                         </div>
                     </div>
@@ -38,28 +33,28 @@
                         </div>
                         <ul class="list-area">
                             <li>
-                                {{-- {{ route('about_us') }} --}}
-                                <a href="#">
+                                
+                                <a href="{{ route('about_us') }}">
                                     <i class="fa-solid fa-chevron-right"></i>
                                     About Us
                                 </a>
                             </li>
                             <li>
-                                {{-- {{ route('services.index') }} --}}
-                                <a href="#">
+                                
+                                <a href="{{ route('services.index') }}">
                                     <i class="fa-solid fa-chevron-right"></i>
                                     Our Services
                                 </a>
                             </li>
                             <li>
-                                {{-- {{ route('products.index') }} --}}
-                                <a href="#">
+                                
+                                <a href="{{ route('products.index') }}">
                                     <i class="fa-solid fa-chevron-right"></i>
                                     Our Products
                                 </a>
                             </li>
                             <li>
-                                {{-- {{ route('blogs.index') }} --}}
+                                {{ route('blogs.index') }}
                                 <a href="#">
                                     <i class="fa-solid fa-chevron-right"></i>
                                      Blogs
@@ -72,8 +67,8 @@
                                 </a>
                             </li> --}}
                             <li>
-                                {{-- {{ route('contact') }} --}}
-                                <a href="#">
+                               
+                                <a href="{{ route('contact') }}">
                                     <i class="fa-solid fa-chevron-right"></i>
                                     Contact Us
                                 </a>
@@ -94,8 +89,8 @@
                             @if (!empty($footer_services))
                                 @foreach ($footer_services as $fserv)
                                     <li>
-                                        {{-- {{ route('service-detail',['slug' => $fserv->slug]) }} --}}
-                                        <a href="#">
+                                        
+                                        <a href="{{ route('service-detail',['slug' => $fserv->slug]) }}">
                                             <i class="fa-solid fa-chevron-right"></i>
                                             {{ $fserv->getTranslation('name', $lang) }}
                                         </a>
@@ -119,8 +114,8 @@
                             @if (!empty($footer_categories))
                                 @foreach ($footer_categories as $fcat)
                                     <li>
-                                        {{-- {{ route('products.index',['category' => $fcat->getTranslation('slug', $lang)]) }} --}}
-                                        <a href="#">
+                                        
+                                        <a href="{{ route('products.index',['category' => $fcat->getTranslation('slug', $lang)]) }}">
                                             <i class="fa-solid fa-chevron-right"></i>
                                             {{ $fcat->getTranslation('name', $lang) }}
                                         </a>
