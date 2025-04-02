@@ -115,8 +115,9 @@
 
 
 <header class="header-section-3">
+<div class="container">
     <div id="header-sticky" class="header-3 mb-5">
-        <div class="container-fluid">
+     
             <div class="mega-menu-wrapper">
                 <div class="header-main">
                     <div class="logo">
@@ -396,7 +397,7 @@
                             <a href="{{ route('contact') }}" class="theme-btn"><i
                                     class="fa-light fa-phone me-2"></i> {{ get_setting('main_contact_number') }}</a>
                         </div>
-                        <div class="header__hamburger d-xl-block my-auto">
+                        <!-- <div class="header__hamburger d-xl-block my-auto">
                             <div class="sidebar__toggle">
                                 <div class="header-bar">
                                     <span></span>
@@ -404,7 +405,7 @@
                                     <span></span>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
