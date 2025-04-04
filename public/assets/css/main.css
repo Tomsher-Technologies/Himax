@@ -3534,7 +3534,7 @@ input.main-search-input::placeholder {
 }
 
 .header-main .main-menu ul li {
-    position: relative;
+    /* position: relative; */
     list-style: none;
     display: inline-block;
     margin-inline-end: 10px
@@ -3571,7 +3571,8 @@ input.main-search-input::placeholder {
 
 .header-main .main-menu ul li .submenu {
     position: absolute;
-    top: 115%;
+    /* top: 115%; */
+    top: 103%;
     inset-inline-start: 0;
     min-width: 240px;
     background: var(--white);
@@ -3668,10 +3669,12 @@ input.main-search-input::placeholder {
 
 
 .header-main .main-menu ul li .has-homemenu {
-    width: 1400px;
+    /* width: 1400px; */
+    width: 100%;
     padding: 30px 30px 10px 30px;
     opacity: 0;
-    left: -370px;
+    /* left: -370px; */
+    left:0;
     visibility: hidden;
     padding: 30px 30px 10px 30px
 }
@@ -13736,7 +13739,7 @@ textarea.is-invalid {
         background: rgba(255, 255, 255, 0.30);
         border-radius: 15px;
         padding: 0 20px;
-        
+        position: relative;
     }
     
     a.theme-btn {
