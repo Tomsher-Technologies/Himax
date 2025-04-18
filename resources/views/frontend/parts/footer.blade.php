@@ -54,8 +54,8 @@
                                 </a>
                             </li>
                             <li>
-                                {{ route('blogs.index') }}
-                                <a href="#">
+                                
+                                <a href="{{ route('blogs.index') }}">
                                     <i class="fa-solid fa-chevron-right"></i>
                                      Blogs
                                 </a>
