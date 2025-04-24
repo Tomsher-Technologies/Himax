@@ -300,7 +300,7 @@ class FrontendController extends Controller
     public function serviceDetails($slug){
         $lang = getActiveLanguage();
         $page = Page::where('type','service_details')->first();
-        $service = '';
+        $service = $publishedProducts = '';
         if($slug !=  ''){
             $service = Service::where('status',1)->where('slug', $slug)->first();
             if($service){
@@ -315,9 +315,11 @@ class FrontendController extends Controller
                     'twitter_description'   => $service->getTranslation('twitter_description', $lang),
                 ];
                 $this->loadSEO($seo);
+
+                $publishedProducts = $service->products()->where('published', 1)->get();
             }
         }
-        return view('frontend.service_details', compact('lang','service','page'));
+        return view('frontend.service_details', compact('lang','service','page','publishedProducts'));
     }
 
     public function blogsList(){

@@ -45,140 +45,166 @@
     <br>
 
     <div class="card">
-        <form class="" id="sort_products" action="" method="GET">
-            <div class="card-header row gutters-5">
-                <div class="col">
-                    <h5 class="mb-md-0 h6">All Product</h5>
-                </div>
+        
+        <div class="card-header row gutters-5">
+            <div class="col">
+                <h5 class="mb-md-0 h6">All Product</h5>
+            </div>
+        </div>
 
-               
-                <div class="col-md-3 bootstrap-select">
-                    
-                    <select class="form-control form-control-sm aiz-selectpicker mb-md-0" data-live-search="true"
-                            name="category" id="" data-selected={{ $category }}>
-                        <option value="0">All</option>
-                        @foreach (getAllCategories()->where('parent_id', 0) as $item)
-                            <option value="{{ $item->id }}" @if( $category == $item->id)  {{ 'selected' }} @endif )>{{ $item->name }}</option>
-                            @if ($item->child)
-                                @foreach ($item->child as $cat)
-                                    @include('backend.categories.menu_child_category', [
-                                        'category' => $cat,
-                                        'old_data' => $category,
-                                    ])
-                                @endforeach
-                            @endif
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-md-2 bootstrap-select">
-                    <select class="form-control form-control-sm aiz-selectpicker mb-md-0" name="type" id="type"
-                        onchange="sort_products()">
-                        <option value="">Sort By</option>
-                        <option
-                            value="status,1"@isset($col_name, $query) @if ($col_name == 'status' && $query == '1') selected @endif @endisset>
-                            Published</option>
-                        <option
-                            value="status,0"@isset($col_name, $query) @if ($col_name == 'status' && $query == '0') selected @endif @endisset>
-                            Unpublished</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group mb-0">
-                        <input type="text" class="form-control form-control-sm" id="search"
-                            name="search"@isset($sort_search) value="{{ $sort_search }}" @endisset
-                            placeholder="Type & Enter">
+        <div class="card-body">
+            <div>
+                <form class="row" id="sort_products" action="" method="GET">
+                    <div class="col-md-3 bootstrap-select">
+                        <select class="form-control form-control-sm aiz-selectpicker mb-md-0" data-live-search="true"
+                                name="category" id="" data-selected={{ $category }}>
+                            <option value="0">All Categories</option>
+                            @foreach (getAllCategories()->where('parent_id', 0) as $item)
+                                <option value="{{ $item->id }}" @if( $category == $item->id)  {{ 'selected' }} @endif >{{ $item->name }}</option>
+                                @if ($item->child)
+                                    @foreach ($item->child as $cat)
+                                        @include('backend.categories.menu_child_category', [
+                                            'category' => $cat,
+                                            'old_data' => $category,
+                                        ])
+                                    @endforeach
+                                @endif
+                            @endforeach
+                        </select>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <button class="btn btn-info " type="submit">Filter</button>
-                    <a href="{{ route('products.all') }}" class="btn btn-cancel">Reset</a>
-                </div>
+    
+                    <div class="col-md-2 bootstrap-select">
+                        <select class="form-control form-control-sm aiz-selectpicker mb-md-0" name="type" id="type"
+                            onchange="sort_products()">
+                            <option value="">Filter By Status</option>
+                            <option
+                                value="status,1"@isset($col_name, $query) @if ($col_name == 'status' && $query == '1') selected @endif @endisset>
+                                Published</option>
+                            <option
+                                value="status,0"@isset($col_name, $query) @if ($col_name == 'status' && $query == '0') selected @endif @endisset>
+                                Unpublished</option>
+                        </select>
+                    </div>
+    
+                    <div class="col-md-3 bootstrap-select">
+                        <select name="service_id" id="service" class="select2 form-control form-control-sm aiz-selectpicker mb-md-0" data-live-search="true" data-selected={{ request('service_id') }} data-placeholder="All Services">
+                            <option value="0">All Services</option>
+                            @foreach($services as $service)
+                                <option value="{{ $service->id }}" @if( request('service_id') == $service->id)  {{ 'selected' }} @endif>{{ $service->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+    
+                    <div class="col-md-2">
+                        <div class="form-group mb-0">
+                            <input type="text" class="form-control form-control-sm" id="search"
+                                name="search"@isset($sort_search) value="{{ $sort_search }}" @endisset
+                                placeholder="Type Name..">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-info " type="submit">Filter</button>
+                        <a href="{{ route('products.all') }}" class="btn btn-cancel">Reset</a>
+                    </div>
+                </form>
             </div>
+           
 
-            <div class="card-body">
-                <table class="table aiz-table mb-0">
-                    <thead>
-                        <tr>
-                            {{-- <th>
-                                <div class="form-group">
-                                    <div class="aiz-checkbox-inline">
-                                        <label class="aiz-checkbox">
-                                            <input type="checkbox" class="check-all">
-                                            <span class="aiz-square-check"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </th> --}}
-                            <th>#</th>
-                            <th>{{ trans('messages.image') }}</th>
-                            <th>{{ trans('messages.name') }}</th>
-                            <th >{{ trans('messages.category') }}</th>
-                            <th >{{ trans('messages.brand') }}</th>
-                            <th class="text-center">{{ trans('messages.published') }}</th>
-                            <th class="text-center">{{ trans('messages.options') }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($products as $key => $product)
-                            <tr>
-                                <td>{{ $key + 1 + ($products->currentPage() - 1) * $products->perPage() }}</td>
-                                
-                                <td>
-                                    {{-- w-200px w-md-250px mw-100 --}}
-                                    <div class="row gutters-5 ">
-
-                                        @if ($product->thumbnail_img)
-                                            <div class="col-auto">
-                                                <img src="{{ get_product_image($product->thumbnail_img, '300') }}"
-                                                    alt="Image" class="size-50px img-fit">
-                                                   
-                                            </div>
-                                        @endif
-
-                                    </div>
-                                </td>
-                                <td>
-                                    {{ $product->name }}
-                                </td>
-                                <td class="bread">
-                                    {{ Breadcrumbs::render('product_admin', $product) }}
-                                </td>
-                                <td>
-                                    {{ $product->brand->name }}
-                                </td>
-                                
-                                <td class="text-center">
-                                    <label class="aiz-switch aiz-switch-success mb-0">
-                                        <input onchange="update_published(this)" value="{{ $product->id }}"
-                                            type="checkbox" <?php if ($product->published == 1) {
-                                                echo 'checked';
-                                            } ?>>
-                                        <span class="slider round"></span>
+            <table class="table aiz-table mb-0">
+                <thead>
+                    <tr>
+                        {{-- <th>
+                            <div class="form-group">
+                                <div class="aiz-checkbox-inline">
+                                    <label class="aiz-checkbox">
+                                        <input type="checkbox" class="check-all">
+                                        <span class="aiz-square-check"></span>
                                     </label>
-                                </td>
-                             
-                                <td class="text-center">
-                                    
-                                    <a class="btn btn-soft-primary btn-icon btn-circle"
-                                        href="{{ route('products.edit', ['id' => $product->id, 'lang' => env('DEFAULT_LANGUAGE')]) }}"
-                                        title="Edit">
-                                        <i class="las la-edit"></i>
-                                    </a>
-                                   
-                                    {{-- <a href="#" class="btn btn-soft-danger btn-icon btn-circle confirm-delete"
-                                        data-href="{{ route('products.destroy', $product->id) }}" title="Delete">
-                                        <i class="las la-trash"></i>
-                                    </a> --}}
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <div class="aiz-pagination">
-                    {{ $products->appends(request()->input())->links('pagination::bootstrap-5') }}
-                </div>
+                                </div>
+                            </div>
+                        </th> --}}
+                        <th>#</th>
+                        <th>{{ trans('messages.image') }}</th>
+                        <th>{{ trans('messages.name') }}</th>
+                        <th >{{ trans('messages.category') }}</th>
+                        <th >{{ trans('messages.brand') }}</th>
+                        <th>{{ trans('messages.services') }}</th>
+                        <th class="text-center">{{ trans('messages.published') }}</th>
+                        <th class="text-center">{{ trans('messages.options') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($products as $key => $product)
+                        <tr>
+                            <td>{{ $key + 1 + ($products->currentPage() - 1) * $products->perPage() }}</td>
+                            
+                            <td>
+                                {{-- w-200px w-md-250px mw-100 --}}
+                                <div class="row gutters-5 ">
+
+                                    @if ($product->thumbnail_img)
+                                        <div class="col-auto">
+                                            <img src="{{ get_product_image($product->thumbnail_img, '300') }}"
+                                                alt="Image" class="size-50px img-fit">
+                                                
+                                        </div>
+                                    @endif
+
+                                </div>
+                            </td>
+                            <td>
+                                {{ $product->name }}
+                            </td>
+                            <td class="bread">
+                                {{ Breadcrumbs::render('product_admin', $product) }}
+                            </td>
+                            <td>
+                                {{ $product->brand->name }}
+                            </td>
+
+                            <td>
+                                @if ($product->services->isNotEmpty())
+                                    <ul class="ps-0 mb-0" style="padding-left: 10%;margin-bottom: 0;">
+                                        @foreach ($product->services as $service)
+                                            <li class="">{{ $service->name }}</li>
+                                        @endforeach
+                                    </ul>
+                                @else
+                                    {{-- <span class=" text-muted">---</span> --}}
+                                @endif
+                            </td>
+                            
+                            <td class="text-center">
+                                <label class="aiz-switch aiz-switch-success mb-0">
+                                    <input onchange="update_published(this)" value="{{ $product->id }}"
+                                        type="checkbox" <?php if ($product->published == 1) {
+                                            echo 'checked';
+                                        } ?>>
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                            
+                            <td class="text-center">
+                                
+                                <a class="btn btn-soft-primary btn-icon btn-circle"
+                                    href="{{ route('products.edit', ['id' => $product->id, 'lang' => env('DEFAULT_LANGUAGE')]) }}"
+                                    title="Edit">
+                                    <i class="las la-edit"></i>
+                                </a>
+                                
+                                {{-- <a href="#" class="btn btn-soft-danger btn-icon btn-circle confirm-delete"
+                                    data-href="{{ route('products.destroy', $product->id) }}" title="Delete">
+                                    <i class="las la-trash"></i>
+                                </a> --}}
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <div class="aiz-pagination">
+                {{ $products->appends(request()->input())->links('pagination::bootstrap-5') }}
             </div>
-        </form>
+        </div>
     </div>
 @endsection
 

@@ -66,7 +66,32 @@
                 </div> <!-- Column End -->
             </div> <!-- Row End -->
         </div> <!-- Container End -->
+       
     </section>
+
+    @if (!empty($publishedProducts [0]))
+        <section class="mb-5">
+            <div class="row"  id="products-grid">
+                @foreach ($publishedProducts  as $pkey => $prod)
+                    <div class="product-card">
+                        <a href="{{ route('product-detail',['slug' => $prod->slug, 'sku' => $prod->sku]) }}">
+                            <div class="product-header">
+                                <span class="category">{{ $prod->category->getTranslation('name', $lang) }}</span>
+                                <span class="new-badge">NEW</span>
+                            </div>
+                            <div class="image-wrapper">
+                                <img src="{{ get_product_image($prod->thumbnail_img, '300') }}" alt="{{ $prod->getTranslation('name', $lang) }}">
+                            </div>
+                            <div class="product-info">
+                                <span class="model">{{ $prod->brand->getTranslation('name', $lang) }}</span>
+                                <h3 class="product-title">{{ $prod->getTranslation('name', $lang) }}</h3>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        </section>
+    @endif
 
     <section id="service-dt-cta"  style="background: linear-gradient(rgba(34, 41, 87, 0.8), rgba(147, 28, 30, 0.8)), url('{{ uploaded_asset($page->image2) }}') no-repeat center center;">
         <div class="container text-center">
