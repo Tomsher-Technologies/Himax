@@ -27,6 +27,7 @@ use App\Http\Controllers\Admin\FaqCategoryController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\IndustriesController;
+use App\Http\Controllers\Admin\MenuController;
 
 
 Route::group(['middleware' => ['guest']], function () {
@@ -162,4 +163,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/blog/update/{id}', [BlogController::class, 'update'])->name('blog.update');
     Route::post('/blog/status', [BlogController::class, 'updateStatus'])->name('blog.status');
     Route::get('/blog/delete/{id}', [BlogController::class, 'destroy'])->name('blog.delete');
+
+    Route::get('/menus/manage', [MenuController::class, 'manage'])->name('menus.index');
+    Route::post('/menus/manage', [MenuController::class, 'store'])->name('menus.store');
 });
