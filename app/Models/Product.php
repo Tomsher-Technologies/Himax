@@ -59,4 +59,9 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function services()
+    {
+        return $this->belongsToMany(Service::class, 'product_service');
+    }
+
 }

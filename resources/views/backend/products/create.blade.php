@@ -58,7 +58,19 @@
                                 </div>
                             </div>
                         
-                           
+                            <div class="form-group row" id="service">
+                                <label class="col-md-3 col-from-label">{{ trans('messages.service') }}</label>
+                                <div class="col-md-8">
+                                    <select name="services[]" id="services" multiple class="form-control aiz-selectpicker" data-live-search="true">
+                                        @foreach ($services as $service)
+                                            <option value="{{ $service->id }}" {{ in_array($service->id, old('services',[])) ? 'selected' : '' }}>
+                                                {{ $service->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label class="col-md-3 col-from-label">{{ trans('messages.tags') }}</label>
                                 <div class="col-md-8">
