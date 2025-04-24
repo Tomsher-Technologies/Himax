@@ -244,7 +244,7 @@
                                 </a>
                             </li>
                             <li class="aiz-side-nav-item">
-                                <a href="{{ route('website.menu') }}" class="aiz-side-nav-link">
+                                <a href="{{ route('menus.index') }}" class="aiz-side-nav-link">
                                     <span class="aiz-side-nav-text">Menus</span>
                                 </a>
                             </li>
