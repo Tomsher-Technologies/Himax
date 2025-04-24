@@ -26,4 +26,8 @@ class Service extends Model
         return $this->hasMany(ServicePoints::class);
     }
 
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_service');
+    }
 }

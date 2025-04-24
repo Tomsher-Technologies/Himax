@@ -9,6 +9,7 @@ use App\Models\ProductTranslation;
 use App\Models\Category;
 use App\Models\ProductSeo;
 use App\Models\User;
+use App\Models\Service;
 use Image;
 use Auth;
 use Carbon\Carbon;
@@ -75,10 +76,18 @@ class ProductController extends Controller
                         });
         }
 
+        if ($request->filled('service_id')) {
+            $products->whereHas('services', function ($query) use ($request) {
+                $query->where('service_id', $request->service_id);
+            });
+        }
+    
         $products = $products->paginate(15);
         $type = 'All';
 
-        return view('backend.products.index', compact('category','products', 'type', 'col_name', 'query', 'sort_search'));
+        $services = Service::orderBy('name', 'asc')->get();
+
+        return view('backend.products.index', compact('category','products', 'type', 'col_name', 'query', 'sort_search','services'));
     }
 
 
@@ -93,7 +102,9 @@ class ProductController extends Controller
             ->with('childrenCategories')
             ->get();
 
-        return view('backend.products.create', compact('categories'));
+        $services = Service::where('status', 1)->get();
+
+        return view('backend.products.create', compact('categories','services'));
     }
 
     public function store(Request $request)
@@ -163,6 +174,10 @@ class ProductController extends Controller
 
         $product->save();
 
+        if ($request->has('services')) {
+            $product->services()->attach($request->services);
+        }
+
         // SEO
         $seo = ProductSeo::firstOrNew(['lang' => env('DEFAULT_LANGUAGE', 'en'), 'product_id' => $product->id]);
 
@@ -210,7 +225,8 @@ class ProductController extends Controller
         $categories = Category::where('parent_id', 0)
             ->with('childrenCategories')
             ->get();
-        return view('backend.products.edit', compact('product', 'categories', 'lang')); 
+        $services = Service::where('status', 1)->get();
+        return view('backend.products.edit', compact('product', 'categories', 'lang','services')); 
     }
 
     public function downloadAndResizeImage($product_type, $imageUrl, $sku, $mainImage = false, $count = 1, $update = false)
@@ -330,6 +346,8 @@ class ProductController extends Controller
         }
 
         $product->save();
+
+        $product->services()->sync($request->services ?? []);
 
         $product_translation                = ProductTranslation::firstOrNew(['lang' => $request->lang, 'product_id' => $product->id]);
         $product_translation->name          = $request->name;
