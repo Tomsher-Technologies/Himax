@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Page;
+use App\Models\Menu;
 use App\Models\Service;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cookie;
@@ -13,34 +14,11 @@ use Illuminate\Support\Facades\Request;
 
 // use DB;
 
-function getMenu($id)
+function getMenu()
 {
-    // Cache::forget('menu_6');
-    return Cache::rememberForever('menu_' . $id,  function () use ($id) {
-        $menu = Menu::get($id);
-        $menu_real = array();
-        foreach ($menu as $key => $m) {
-            $menu_real[$key] = $m;
-            if ($m['img_1']) {
-                $menu_real[$key]['img_1_src'] = uploaded_asset($m['img_1']);
-            }
-            if ($m['img_2']) {
-                $menu_real[$key]['img_2_src'] = uploaded_asset($m['img_2']);
-            }
-            if ($m['img_3']) {
-                $menu_real[$key]['img_3_src'] = uploaded_asset($m['img_3']);
-            }
-
-            if ($m['brands'] !== null) {
-                $brand_ids = explode(',', $m['brands']);
-                $brands = Brand::whereIn('id', $brand_ids)->select(['id', 'name', 'logo', 'slug'])->with('logoImage', function ($query) {
-                    return $query->select(['id', 'file_name']);
-                })->get();
-
-                $menu_real[$key]['brands'] = $brands;
-            }
-        }
-        return $menu_real;
+    return Cache::rememberForever('header_menu',  function () {
+        $menus = Menu::with('subMenus')->orderBy('sort_order')->get();
+        return $menus;
     });
 }
 

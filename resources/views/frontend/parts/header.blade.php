@@ -177,196 +177,31 @@
                                             {{-- {{ route('products.index') }} --}}
                                             <ul class="submenu has-homemenu">
                                                 <li class="menu-container">
-
+                                                    @php
+                                                        $menus = getMenu();
+                                                    @endphp
                                                     <!-- Left Tabs -->
                                                     <div class="menu-tabs">
-                                                        <button class="menu-tab active" data-target="ict">ICT</button>
-                                                        <button class="menu-tab"
-                                                            data-target="networking">NETWORKING</button>
-                                                        <button class="menu-tab" data-target="security">SECURITY &
-                                                            SURVEILLANCE</button>
-                                                        <button class="menu-tab" data-target="fire">FIRE
-                                                            SAFETY</button>
-                                                        <button class="menu-tab"
-                                                            data-target="electronics">ELECTRONICS</button>
+                                                        @foreach($menus as $index => $menu)
+                                                            <button class="menu-tab {{ $index == 0 ? 'active' : '' }}"  data-target="menutab_{{$index}}">{{ $menu->title }}</button>
+                                                        @endforeach
                                                     </div>
 
                                                     <!-- Right Content -->
                                                     <div class="menu-content">
+                                                        @foreach($menus as $index => $menu)
 
-                                                        <!-- ICT Section (Grid Layout) -->
-                                                        <div id="ict" class="menu-category-content active">
-                                                            <a href="{{ route('products.index',['category' =>'ict']) }}">
-                                                                <h4 class="menu-title"> ICT </h4>
-                                                            </a>
+                                                            <!-- SECURITY & SURVEILLANCE -->
+                                                            <div id="menutab_{{$index}}" class="menu-category-content {{ $index == 0 ? 'active' : '' }}">
+                                                                <h4 class="menu-title">{{ strtoupper($menu->title) }}</h4>
 
-                                                            <div class="ict-grid">
-                                                                <div class="menu-category">
-                                                                    <a href="{{ route('products.index',['category' =>'telecommunication']) }}">
-                                                                        <h5>Telecommunication</h5>
-                                                                    </a>
-                                                                    <ul>
-                                                                        
-                                                                        <li><a href="{{ route('products.index',['brand' =>'grandstream']) }}">Grandstream</a></li>
-                                                                        {{--  --}}
-                                                                        <li><a href="{{ route('products.index',['brand' =>'avaya']) }}">Avaya</a></li>
-                                                                        {{-- {{ route('products.index',['brand' =>'logitech']) }} --}}
-                                                                        <li><a href="{{ route('products.index',['brand' =>'logitech']) }}">Logitech</a></li>
-                                                                        {{-- {{ route('products.index',['brand' =>'yealink']) }} --}}
-                                                                        <li><a href="{{ route('products.index',['brand' =>'yealink']) }}">Yealink</a></li>
-                                                                    </ul>
-                                                                </div>
-
-                                                                <div class="menu-category">
-                                                                    {{-- {{ route('products.index',['category' =>'computer-hardware']) }} --}}
-                                                                    <a href="{{ route('products.index',['category' =>'computer-hardware']) }}">
-                                                                        <h5>Computer & Hardware</h5>
-                                                                    </a>
-                                                                    <ul>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'dell']) }}">Dell</a></li>
-                                                                        <li><a href="{{ route('products.index',['brand' =>'hp']) }}">HP</a></li>
-                                                                        
-                                                                        <li><a href="{{ route('products.index',['brand' =>'lenovo']) }}">Lenovo</a></li>
-                                                                        
-                                                                        <li><a href="{{ route('products.index',['brand' =>'epson']) }}">Epson</a></li>
-                                                                        
-                                                                        <li><a href="{{ route('products.index',['brand' =>'canon']) }}">Canon</a></li>
-                                                                        
-                                                                        <li><a href="{{ route('products.index',['brand' =>'toshiba']) }}">Toshiba</a></li>
-                                                                        
-                                                                        <li><a href="{{ route('products.index',['brand' =>'logitech']) }}">Logitech</a></li>
-                                                                        
-                                                                        <li><a href="{{ route('products.index',['brand' =>'hpe']) }}">HPE</a></li>
-                                                                       
-                                                                        <li><a href=" {{ route('products.index',['brand' =>'dell-emc']) }}">Dell EMC</a></li>
-                                                                        
-                                                                        <li><a href="{{ route('products.index',['brand' =>'wd']) }}">WD</a></li>
-                                                                        
-                                                                        <li><a href="{{ route('products.index',['brand' =>'dseagate']) }}">Dseagate</a></li>
-                                                                        
-                                                                        <li><a href="{{ route('products.index',['brand' =>'qnap']) }}">Qnap</a></li>
-                                                                    </ul>
-                                                                </div>
-
-                                                                <div class="menu-category">
-                                                                    
-                                                                    <a href="{{ route('products.index',['category' =>'software']) }}">
-                                                                        <h5>Software</h5>
-                                                                    </a>
-                                                                   
-                                                                    <ul>
-                                                                        
-                                                                        <li><a href="{{ route('products.index',['brand' =>'microsoft']) }}">Microsoft</a></li>
-                                                                        
-                                                                        <li><a href="{{ route('products.index',['brand' =>'kaspersky']) }}">Kaspersky</a></li>
-                                                                        
-                                                                        <li><a href="{{ route('products.index',['brand' =>'sophos']) }}">Sophos</a></li>
-                                                                        
-                                                                        <li><a href="{{ route('products.index',['brand' =>'adobe']) }}">Adobe</a></li>
-                                                                        
-                                                                        <li><a href="{{ route('products.index',['brand' =>'vmware']) }}">VMware</a></li>
-                                                                        
-                                                                        <li><a href="{{ route('products.index',['brand' =>'esset']) }}">Esset</a></li>
-                                                                    </ul>
-                                                                </div>
+                                                                <ul class="brand-list">
+                                                                    @foreach ($menu->subMenus as $subM)
+                                                                        <li><a href="{{ $subM->link ?? '#'}}">{{ $subM->title }}</a></li>
+                                                                    @endforeach
+                                                                </ul>
                                                             </div>
-                                                        </div>
-
-                                                        <!-- NETWORKING Section -->
-                                                        <div id="networking" class="menu-category-content">
-                                                            
-                                                            <a href="{{ route('products.index',['category' =>'networking']) }}">
-                                                                <h4 class="menu-title">NETWORKING</h4>
-                                                            </a>
-                                                            <ul class="brand-list">
-                                                               
-                                                                <li><a href=" {{ route('products.index',['brand' =>'cisco']) }}">Cisco</a></li>
-                                                                <li><a href="{{ route('products.index',['brand' =>'sophos']) }} ">Sophos</a></li>
-                                                                
-                                                                <li><a href="{{ route('products.index',['brand' =>'fortigate']) }}">Fortigate</a></li>
-                                                                
-                                                                <li><a href="{{ route('products.index',['brand' =>'tp-link']) }}">TP-Link</a></li>
-                                                                
-                                                                <li><a href="{{ route('products.index',['brand' =>'juniper']) }}">Juniper</a></li>
-                                                                
-                                                                <li><a href="{{ route('products.index',['brand' =>'aruba']) }}">Aruba</a></li>
-                                                                
-                                                                <li><a href="{{ route('products.index',['brand' =>'huawei']) }}">Huawei</a></li>
-                                                                
-                                                                <li><a href="{{ route('products.index',['brand' =>'ubiquiti']) }}">Ubiquiti</a></li>
-                                                               
-                                                                <li><a href=" {{ route('products.index',['brand' =>'mikrotik']) }}">Mikrotik</a></li>
-                                                                
-                                                                <li><a href="{{ route('products.index',['brand' =>'ruckus']) }}">Ruckus</a></li>
-                                                                
-                                                                <li><a href="{{ route('products.index',['brand' =>'sonicwall']) }}">Sonicwall</a></li>
-                                                                
-                                                                <li><a href="{{ route('products.index',['brand' =>'Watchguard']) }}">watchguard</a></li>
-                                                                
-                                                                <li><a href="{{ route('products.index',['brand' =>'Grandstream']) }}">grandstream</a></li>
-                                                                
-                                                                <li><a href="{{ route('products.index',['brand' =>'hikvision']) }}">Hikvision</a></li>
-                                                                
-                                                                <li><a href="{{ route('products.index',['brand' =>'d-link']) }}">D Link</a></li>
-                                                            </ul>
-                                                        </div>
-
-                                                        <!-- SECURITY & SURVEILLANCE -->
-                                                        <div id="security" class="menu-category-content">
-                                                            
-                                                            <a href="{{ route('products.index',['category' =>'security-surveillance']) }}">
-                                                                <h4 class="menu-title">SECURITY & SURVEILLANCE</h4>
-                                                            </a>
-                                                            <ul class="brand-list">
-                                                                
-                                                                <li><a href="{{ route('products.index',['brand' =>'hikvision']) }}">Hikvision</a></li>
-                                                                
-                                                                <li><a href="{{ route('products.index',['brand' =>'ajax']) }}">Ajax</a></li>
-                                                                
-                                                                <li><a href="{{ route('products.index',['brand' =>'ezviz']) }}">EZVIZ</a></li>
-                                                            </ul>
-                                                        </div>
-
-                                                        <!-- FIRE SAFETY -->
-                                                        <div id="fire" class="menu-category-content">
-                                                            
-                                                            <a href="{{ route('products.index',['category' =>'fire-safety']) }}">
-                                                                <h4 class="menu-title">FIRE SAFETY</h4>
-                                                            </a>
-                                                            <ul class="brand-list">
-                                                                
-                                                                <li><a href="{{ route('products.index',['brand' =>'asenware']) }}">Asenware</a></li>
-                                                                
-                                                                <li><a href="{{ route('products.index',['brand' =>'fireX']) }}">FireX</a></li>
-                                                            </ul>
-                                                        </div>
-
-                                                        <!-- ELECTRONICS -->
-                                                        <div id="electronics" class="menu-category-content">
-                                                            
-                                                            <a href="{{ route('products.index',['category' =>'electronics']) }}">
-                                                                <h4 class="menu-title">ELECTRONICS</h4>
-                                                            </a>
-                                                            <ul class="brand-list">
-                                                                
-                                                                <li><a href="{{ route('products.index',['category' =>'mobile-phones']) }}">Mobile Phones</a></li>
-                                                                
-                                                                <li><a href="{{ route('products.index',['category' =>'tablets']) }}">Tablets</a></li>
-                                                                
-                                                                <li><a href="{{ route('products.index',['category' =>'tv']) }}">TV</a></li>
-                                                                
-                                                                <li><a href="{{ route('products.index',['category' =>'projectors']) }}">Projectors</a></li>
-                                                                
-                                                                <li><a href="{{ route('products.index',['category' =>'headsets-speakers']) }}">Headsets & Speakers</a></li>
-                                                                
-                                                                <li><a href="{{ route('products.index',['category' =>'soundbars']) }}">Soundbars</a></li>
-                                                                
-                                                                <li><a href="{{ route('products.index',['category' =>'streaming-devices']) }}">Streaming Devices</a></li>
-                                                                
-                                                                <li><a href="{{ route('products.index',['category' =>'gaming-consoles']) }}">Gaming Consoles</a></li>
-                                                            </ul>
-                                                        </div>
-
+                                                        @endforeach
                                                     </div>
 
                                                 </li>

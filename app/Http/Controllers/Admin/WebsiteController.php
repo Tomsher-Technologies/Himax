@@ -8,7 +8,6 @@ use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Occasion;
 use Cache;
-use Harimayco\Menu\Models\MenuItems;
 use Illuminate\Http\Request;
 
 class WebsiteController extends Controller
@@ -38,30 +37,5 @@ class WebsiteController extends Controller
 		return view('backend.website_settings.menu');
 	}
 
-	public function menuUpdate(Request $request)
-	{
-		// return response()->json(  , 200);
-
-		$brands = NULL;
-		if ($request->brands) {
-			$brands = implode(',', $request->brands);
-		}
-
-		MenuItems::where('id', $request->id)->update([
-			'img_1' => $request->img_1,
-			'img_2' => $request->img_2,
-			'img_3' => $request->img_3,
-
-			'img_1_link' => $request->img_1_link,
-			'img_2_link' => $request->img_2_link,
-			'img_3_link' => $request->img_3_link,
-
-			'brands' => $brands
-		]);
-
-
-		Cache::forget('menu_' . $request->menu_id);
-
-		return response()->json('completed', 200);
-	}
+	
 }
