@@ -200,13 +200,16 @@ var clientSwiper = new Swiper('.client-slider', {
 document.addEventListener("DOMContentLoaded", function () {
     let serviceCard = document.getElementById("services-card");
 
-    serviceCard.addEventListener("mouseenter", function () {
-        serviceCard.classList.add("hover-effect");
-    });
+    if(serviceCard){
+        serviceCard.addEventListener("mouseenter", function () {
+            serviceCard.classList.add("hover-effect");
+        });
 
-    serviceCard.addEventListener("mouseleave", function () {
-        serviceCard.classList.remove("hover-effect");
-    });
+        serviceCard.addEventListener("mouseleave", function () {
+            serviceCard.classList.remove("hover-effect");
+        });
+    }
+   
 });
 
 
