@@ -586,7 +586,7 @@
 
         }
         section.hero.hero-section .swiper-button-next, .swiper-button-prev {
-            top: 25%;
+            top: 30%;
         }
         .hero-content {
             width: 70%;
