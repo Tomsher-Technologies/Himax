@@ -52,7 +52,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row d-none">
                             <label class="col-md-2 col-form-label" for="signinSrEmail">Video</label>
                             <div class="col-md-10">
                                 <input type="file" name="video" accept="video/mp4,video/x-m4v,video/*" class="form-control" value="{{ old('video') }}">

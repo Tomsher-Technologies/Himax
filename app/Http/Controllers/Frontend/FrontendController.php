@@ -140,10 +140,8 @@ class FrontendController extends Controller
         $data['industries'] = Industries::where('status',1)->orderBy('sort_order','ASC')->get();
         $data['brands'] = Brand::where('is_active',1)->whereIn('id', json_decode(get_setting('home_brands')))->orderBy('name','ASC')->get();
         $data['blogs'] = Blog::where('status',1)->orderBy('blog_date','desc')->limit(4)->get();
-        // echo '<pre>';
-        // print_r($page);
-        // die;
-
+       
+        $data['sliders'] =  HomeSlider::where('status',1)->orderBy('sort_order','asc')->get();
 
         return view('frontend.home',compact('page','data','lang'));
     }

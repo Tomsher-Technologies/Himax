@@ -138,7 +138,7 @@
                                         <li class="has-dropdown active menu-thumb">
                                             {{-- {{ route('services.index') }} --}}
                                             <a href="{{ route('services.index') }}">
-                                                SERVICES & SOLUTIONS
+                                                Services & Solutions
 
                                                 <i class="fa-regular fa-plus"></i>
                                             </a>
@@ -173,7 +173,11 @@
 
                                         <!-- Mega Menu -->
                                         <li id="product-menu" class="has-dropdown active menu-thumb">
-                                            <a href="{{ route('products.index') }}">PRODUCT CATEGORIES</a>
+                                            <a href="{{ route('products.index') }}">
+                                                Product Categories
+                                                <i class="fa-regular fa-plus"></i>
+                                            
+                                            </a>
                                             {{-- {{ route('products.index') }} --}}
                                             <ul class="submenu has-homemenu">
                                                 <li class="menu-container">
@@ -229,8 +233,10 @@
                     <div class="header-right d-flex justify-content-end align-items-center">
                         <div class="header-button">
                             
-                            <a href="{{ route('contact') }}" class="theme-btn"><i
+                            <a href="tel:{{ get_setting('main_contact_number') }}" class="theme-btn"><i
                                     class="fa-light fa-phone me-2"></i> {{ get_setting('main_contact_number') }}</a>
+                                    <!--    <a href="{{ route('contact') }}" class="theme-btn"><i-->
+                                    <!--class="fa-light fa-phone me-2"></i> {{ get_setting('main_contact_number') }}</a>-->
                         </div>
                         <!-- <div class="header__hamburger d-xl-block my-auto">
                             <div class="sidebar__toggle">
