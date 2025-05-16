@@ -2,11 +2,20 @@
 @section('content')
     <section class="hero hero-section hero-1 fix">
 
-        <div class="video-wrap">
-            <video autoplay muted loop class="bg-video">
-                <source src="{{ asset($page->video) }}" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+        <div class="slider-area">
+            <div class="swiper home-hero-slider">
+                <div class="swiper-wrapper">
+                    @if (!empty($data['sliders']))
+                        @foreach ($data['sliders'] as $slider)
+                            <div class="swiper-slide"> <img src="{{ uploaded_asset($slider->image) }}" alt="{{$slider->name}}"></div>
+                        @endforeach
+                    @endif
+                   
+                </div>
+                <!-- Add Navigation -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
         </div>
         <!-- <div class="video-overlay"></div> -->
 
@@ -32,13 +41,15 @@
                     @if (!empty($data['home_categories']))
                         @foreach ($data['home_categories'] as $home_categories)
                             <div class="swiper-slide">
-                                <a href="{{ route('products.index',['category' =>$home_categories->getTranslation('slug', $lang)]) }}">
-                                    <img src="{{ uploaded_asset($home_categories->getTranslation('icon', $lang)) }}" alt="{{ $home_categories->getTranslation('name', $lang) }}">
+                                <a
+                                    href="{{ route('products.index', ['category' => $home_categories->getTranslation('slug', $lang)]) }}">
+                                    <img src="{{ uploaded_asset($home_categories->getTranslation('icon', $lang)) }}"
+                                        alt="{{ $home_categories->getTranslation('name', $lang) }}">
                                 </a>
                             </div>
                         @endforeach
                     @endif
-                
+
                 </div>
             </div>
             <div class="swiper-button-prev"></div>
@@ -60,7 +71,8 @@
                         <div class="wcu-content">
                             <div class="section-title">
                                 <span class="subtitle wow fadeInUp">{{ $page->getTranslation('title', $lang) }}</span>
-                                <h2 class="wow fadeInUp" data-wow-delay=".3s">{{ $page->getTranslation('sub_title', $lang) }}
+                                <h2 class="wow fadeInUp" data-wow-delay=".3s">
+                                    {{ $page->getTranslation('sub_title', $lang) }}
                                 </h2>
                             </div>
 
@@ -70,20 +82,23 @@
 
                             <div class="d-flex gap-4">
                                 <div class="counter-box">
-                                    <h2><span class="counter-number1"></span>{{ $page->getTranslation('title1', $lang) }}</h2>
+                                    <h2><span class="counter-number1"></span>{{ $page->getTranslation('title1', $lang) }}
+                                    </h2>
                                     <p>{{ $page->getTranslation('title2', $lang) }}</p>
                                 </div>
 
                                 <div class="counter-box">
-                                    <h2><span class="counter-number1"></span>{{ $page->getTranslation('title3', $lang) }}</h2>
+                                    <h2><span class="counter-number1"></span>{{ $page->getTranslation('title3', $lang) }}
+                                    </h2>
                                     <p>{{ $page->getTranslation('heading1', $lang) }}</p>
                                 </div>
 
                             </div>
 
                         </div>
-                        
-                        <a href="{{ route('contact') }}" class="btn">{{ $page->getTranslation('heading2', $lang) }} </a>
+
+                        <a href="{{ route('contact') }}" class="btn">{{ $page->getTranslation('heading2', $lang) }}
+                        </a>
                     </div>
 
 
@@ -110,15 +125,22 @@
                 @endphp
                 @foreach ($data['points'] as $key => $pnt)
                     @php
-                        if($key == 0){
+                        if ($key == 0) {
                             $active = 'active';
                             $img = uploaded_asset($pnt->image);
-                        }else {
+                        } else {
                             $active = '';
                         }
 
-                        $points .= '<button class="tab '.$active.'" data-type="image" data-src="'.uploaded_asset($pnt->image).'">'.$pnt->title.'</button>';
-                        
+                        $points .=
+                            '<button class="tab ' .
+                            $active .
+                            '" data-type="image" data-src="' .
+                            uploaded_asset($pnt->image) .
+                            '">' .
+                            $pnt->title .
+                            '</button>';
+
                     @endphp
                 @endforeach
                 <!-- Background Media -->
@@ -126,7 +148,7 @@
                     {{-- <video id="features-video" autoplay loop muted>
                         <source src="assets/videos/cybersecurity.mp4" type="video/mp4">
                     </video> --}}
-                    <img id="features-image" src="{{$img}}" alt="Feature Image" class="">
+                    <img id="features-image" src="{{ $img }}" alt="Feature Image" class="">
                     {{-- hidden --}}
                 </div>
 
@@ -139,8 +161,8 @@
 
                         <!-- Feature Tabs -->
                         <div class="features-tabs">
-                           {!! $points !!}
-                            
+                            {!! $points !!}
+
                         </div>
                     </div>
                 </div>
@@ -154,32 +176,35 @@
             <div class="testimonial-wrapper style1 margin-minus-bottom">
                 <div class="">
                     <div class="">
-                        
-                    <div class="container">
-    <div class="section-header text-start row">
-        <div class="col-lg-5 col-md-6 col-sm-12">
-            <span class="section-subtitle">{{ $page->getTranslation('heading3', $lang) }}</span>
-            <h2 class="section-title">{{ $page->getTranslation('heading4', $lang) }}</h2>
-        </div>
-        <div class="col-lg-2 d-none d-lg-block"></div> <!-- Empty column only on large screens -->
-        <div class="col-lg-5 col-md-6 col-sm-12">
-            <p>{{ $page->getTranslation('content1', $lang) }}</p>
-        </div>
-    </div>
-</div>
 
-                        
+                        <div class="container">
+                            <div class="section-header text-start row">
+                                <div class="col-lg-5 col-md-6 col-sm-12">
+                                    <span class="section-subtitle">{{ $page->getTranslation('heading3', $lang) }}</span>
+                                    <h2 class="section-title">{{ $page->getTranslation('heading4', $lang) }}</h2>
+                                </div>
+                                <div class="col-lg-2 d-none d-lg-block"></div> <!-- Empty column only on large screens -->
+                                <div class="col-lg-5 col-md-6 col-sm-12">
+                                    <p>{{ $page->getTranslation('content1', $lang) }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+
                         <div class="slider-area testimonialSliderOne">
 
-                            <div class="swiper gt-slider" id="testimonialSliderOne" data-slider-options='{"loop": true,"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":2}, "768":{"slidesPerView":2}, "992":{"slidesPerView":2}, "1200":{"slidesPerView":4}}}'>
+                            <div class="swiper gt-slider" id="testimonialSliderOne"
+                                data-slider-options='{"loop": true,"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":2}, "768":{"slidesPerView":2}, "992":{"slidesPerView":2}, "1200":{"slidesPerView":4}}}'>
                                 <div class="swiper-wrapper">
 
                                     @if (!empty($data['featured_services']))
                                         @foreach ($data['featured_services'] as $fea_service)
                                             <div class="swiper-slide">
                                                 <div id="services-card">
-                                                    <a href="{{ route('service-detail',['slug' => $fea_service->slug]) }}" >
-                                                        <img src="{{ uploaded_asset($fea_service->image) }}" alt="Managed IT Services" id="services-card-image">
+                                                    <a
+                                                        href="{{ route('service-detail', ['slug' => $fea_service->slug]) }}">
+                                                        <img src="{{ uploaded_asset($fea_service->image) }}"
+                                                            alt="Managed IT Services" id="services-card-image">
                                                         <div id="services-card-content">
                                                             <div class="services-card-content-top">
                                                                 <!-- Title -->
@@ -191,64 +216,70 @@
                                                                     @foreach ($fea_service->points as $service_points)
                                                                         <li class="services-card-item">
                                                                             <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                                height="16" viewBox="0 0 16 16" fill="none">
-                                                                                <g clip-path="url(#clip0_97_177)">
-                                                                                    <path d="M2.5 9L6 12.5L14 4.5" stroke="white"
-                                                                                        stroke-width="2" stroke-linecap="round"
-                                                                                        stroke-linejoin="round" />
+                                                                                            height="16" viewBox="0 0 16 16" fill="none">
+                                                                                            <g clip-path="url(#clip0_97_177)">
+                                                                                                <path d="M2.5 9L6 12.5L14 4.5" stroke="white"
+                                                                                                    stroke-width="2" stroke-linecap="round"
+                                                                                                    stroke-linejoin="round" />
+                                                                                            </g>
+                                                                                            <defs>
+                                                                                                <clipPath id="clip0_97_177">
+                                                                                                    <rect width="16" height="16"
+                                                                                                        fill="white" />
+                                                                                                </clipPath>
+                                                                                            </defs>
+                                                                                        </svg> -->
+
+
+
+
+
+                                                                            <svg width="16" height="16"
+                                                                                fill="white" version="1.1"
+                                                                                id="fi_447147"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                x="0px" y="0px" viewBox="0 0 512 512"
+                                                                                style="enable-background:new 0 0 512 512;"
+                                                                                xml:space="preserve">
+                                                                                <g>
+                                                                                    <g>
+                                                                                        <path d="M504.502,75.496c-9.997-9.998-26.205-9.998-36.204,0L161.594,382.203L43.702,264.311c-9.997-9.998-26.205-9.997-36.204,0
+               c-9.998,9.997-9.998,26.205,0,36.203l135.994,135.992c9.994,9.997,26.214,9.99,36.204,0L504.502,111.7
+               C514.5,101.703,514.499,85.494,504.502,75.496z"></path>
+                                                                                    </g>
                                                                                 </g>
-                                                                                <defs>
-                                                                                    <clipPath id="clip0_97_177">
-                                                                                        <rect width="16" height="16"
-                                                                                            fill="white" />
-                                                                                    </clipPath>
-                                                                                </defs>
-                                                                            </svg> -->
-
-
-
-
-
-                                                                            <svg width="16"
-                                                                            height="16" fill="white" version="1.1" id="fi_447147" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-<g>
-	<g>
-		<path d="M504.502,75.496c-9.997-9.998-26.205-9.998-36.204,0L161.594,382.203L43.702,264.311c-9.997-9.998-26.205-9.997-36.204,0
-			c-9.998,9.997-9.998,26.205,0,36.203l135.994,135.992c9.994,9.997,26.214,9.99,36.204,0L504.502,111.7
-			C514.5,101.703,514.499,85.494,504.502,75.496z"></path>
-	</g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-</svg>
+                                                                                <g>
+                                                                                </g>
+                                                                                <g>
+                                                                                </g>
+                                                                                <g>
+                                                                                </g>
+                                                                                <g>
+                                                                                </g>
+                                                                                <g>
+                                                                                </g>
+                                                                                <g>
+                                                                                </g>
+                                                                                <g>
+                                                                                </g>
+                                                                                <g>
+                                                                                </g>
+                                                                                <g>
+                                                                                </g>
+                                                                                <g>
+                                                                                </g>
+                                                                                <g>
+                                                                                </g>
+                                                                                <g>
+                                                                                </g>
+                                                                                <g>
+                                                                                </g>
+                                                                                <g>
+                                                                                </g>
+                                                                                <g>
+                                                                                </g>
+                                                                            </svg>
 
 
                                                                             {{ $service_points->title }}
@@ -256,13 +287,15 @@
                                                                     @endforeach
                                                                 </ul>
                                                             </div>
-            
+
                                                             <!-- Footer (Always Visible) -->
                                                             <div id="services-card-footer">
-                                                                <span id="services-card-footer-text">{{ ucfirst($fea_service->type) }}</span>
+                                                                <span
+                                                                    id="services-card-footer-text">{{ ucfirst($fea_service->type) }}</span>
                                                                 <a href="#" id="services-card-arrow">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="48"
-                                                                        height="48" viewBox="0 0 48 48" fill="none">
+                                                                        height="48" viewBox="0 0 48 48"
+                                                                        fill="none">
                                                                         <path
                                                                             d="M37.0008 11.5V31C37.0008 31.3978 36.8428 31.7794 36.5615 32.0607C36.2802 32.342 35.8987 32.5 35.5008 32.5C35.103 32.5 34.7215 32.342 34.4402 32.0607C34.1589 31.7794 34.0008 31.3978 34.0008 31V15.1206L12.5621 36.5613C12.2806 36.8427 11.8989 37.0008 11.5008 37.0008C11.1028 37.0008 10.721 36.8427 10.4396 36.5613C10.1581 36.2798 10 35.898 10 35.5C10 35.102 10.1581 34.7202 10.4396 34.4387L31.8802 13H16.0008C15.603 13 15.2215 12.842 14.9402 12.5607C14.6589 12.2794 14.5008 11.8978 14.5008 11.5C14.5008 11.1022 14.6589 10.7206 14.9402 10.4393C15.2215 10.158 15.603 10 16.0008 10H35.5008C35.8987 10 36.2802 10.158 36.5615 10.4393C36.8428 10.7206 37.0008 11.1022 37.0008 11.5Z"
                                                                             fill="white" />
@@ -275,7 +308,7 @@
                                             </div>
                                         @endforeach
                                     @endif
-                                
+
                                 </div>
                                 <div class="testimonial-content">
                                     <div class="arrow-btn text-end wow fadeInUp" data-wow-delay=".4s">
@@ -304,27 +337,27 @@
                 </div>
                 <div class="swiper-navigation">
 
-                    
+
                     <div class="swiper-button-prev product-custom-prev">
                         <!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15 19L8 12L15 5" stroke="white" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg> -->
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M15 19L8 12L15 5" stroke="white" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg> -->
                     </div>
 
                     <div class="swiper-button-next product-custom-next">
                         <!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 5L16 12L9 19" stroke="white" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg> -->
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9 5L16 12L9 19" stroke="white" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg> -->
                     </div>
 
                 </div>
             </div>
-             
-            
+
+
         </div>
 
         <div class="container-fluid">
@@ -332,55 +365,61 @@
                 <div class="swiper-wrapper">
                     @if (!empty($data['featured_products']))
                         @foreach ($data['featured_products'] as $fea_products)
-                            
-                                <div class="swiper-slide product-card">
-                                    <div class="product-header">
-                                        <span class="category">{{ $fea_products->category->name }}</span>
-                                        <span class="new-badge">NEW</span>
-                                    </div>
-                                    <div class="image-wrapper">
-                                        <a href="{{ route('product-detail',['slug' => $fea_products->slug, 'sku' => $fea_products->sku]) }}">
-                                            <img src="{{ asset($fea_products->thumbnail_img) }}" alt="2M Explosion-proof IR Camera">
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <span class="model">{{ $fea_products->brand->name }}</span>
-                                        <a href="{{ route('product-detail',['slug' => $fea_products->slug, 'sku' => $fea_products->sku]) }}">
-                                            <h3 class="product-title">{{ $fea_products->getTranslation('name', $lang) }}</h3>
-                                        </a>
-                                    </div>
+                            <div class="swiper-slide product-card">
+                                <div class="product-header">
+                                    <span class="category">{{ $fea_products->category->name }}</span>
+                                    <span class="new-badge">NEW</span>
                                 </div>
-                           
+                                <div class="image-wrapper">
+                                    <a
+                                        href="{{ route('product-detail', ['slug' => $fea_products->slug, 'sku' => $fea_products->sku]) }}">
+                                        <img src="{{ asset($fea_products->thumbnail_img) }}"
+                                            alt="2M Explosion-proof IR Camera">
+                                    </a>
+                                </div>
+                                <div class="product-info">
+                                    <span class="model">{{ $fea_products->brand->name }}</span>
+                                    <a
+                                        href="{{ route('product-detail', ['slug' => $fea_products->slug, 'sku' => $fea_products->sku]) }}">
+                                        <h3 class="product-title">{{ $fea_products->getTranslation('name', $lang) }}</h3>
+                                    </a>
+                                </div>
+                            </div>
                         @endforeach
                     @endif
                     <!-- Product Card 1 -->
-                    
+
                     {{-- {{ $page->getTranslation('heading7', $lang) }} // Want to see more? --}}
                     {{-- {{ $page->getTranslation('heading8', $lang) }} // View all products --}}
                 </div>
             </div>
         </div>
-          <div class="container">
-              
+        <div class="container">
+
             <div class="row product_link pt-5 align-items-center ">
-                  <div class="col-md-3"><h3>{{ $page->getTranslation('heading7', $lang) }}</h3> </div>
-                  <div class="col-md-7"> <hr> </div>
-                  <div class="col-md-2"><a href="{{ route('products.index') }}" class="btn">{{ $page->getTranslation('heading8', $lang) }}</a></div>
-              </div>
-          </div>
+                <div class="col-md-3">
+                    <h3>{{ $page->getTranslation('heading7', $lang) }}</h3>
+                </div>
+                <div class="col-md-7">
+                    <hr>
+                </div>
+                <div class="col-md-2"><a href="{{ route('products.index') }}"
+                        class="btn">{{ $page->getTranslation('heading8', $lang) }}</a></div>
+            </div>
+        </div>
 
     </section>
 
     <section id="industries">
         <div class="container">
             <div class="industries-header">
-                
-                      <div class="">
-                                         <h5>{{ $page->getTranslation('content2', $lang) }}</h5>
-                <h2>{{ $page->getTranslation('content3', $lang) }}</h2>
-                      </div>
-                
- 
+
+                <div class="">
+                    <h5>{{ $page->getTranslation('content2', $lang) }}</h5>
+                    <h2>{{ $page->getTranslation('content3', $lang) }}</h2>
+                </div>
+
+
                 <p>{{ $page->getTranslation('content4', $lang) }}</p>
             </div>
 
@@ -393,13 +432,15 @@
                     @if (!empty($data['industries']))
                         @foreach ($data['industries'] as $ikey => $ind)
                             @php
-                                if($ikey == 0){
+                                if ($ikey == 0) {
                                     $imageInd = uploaded_asset($ind->image);
                                     $titleInd = $ind->title;
                                     $contentInd = $ind->content;
                                 }
                             @endphp
-                            <button class="industry-tab @if ($ikey == 0) active @endif" data-image="{{ uploaded_asset($ind->image) }}" data-title="{{ $ind->title }}" data-description="{{ $ind->content }}">
+                            <button class="industry-tab @if ($ikey == 0) active @endif"
+                                data-image="{{ uploaded_asset($ind->image) }}" data-title="{{ $ind->title }}"
+                                data-description="{{ $ind->content }}">
                                 {{ $ind->name }}
                             </button>
                         @endforeach
@@ -410,11 +451,11 @@
                 <!-- Right Side - Content Display -->
                 <div class="industries-display">
                     <div class="industries-bg">
-                        <img id="industry-bg-image" src="{{$imageInd}}" alt="Industry Image">
+                        <img id="industry-bg-image" src="{{ $imageInd }}" alt="Industry Image">
                     </div>
                     <div class="industries-info">
-                        <h3 id="industry-title">{{$titleInd}}</h3>
-                        <p id="industry-description">{{$contentInd}}</p>
+                        <h3 id="industry-title">{{ $titleInd }}</h3>
+                        <p id="industry-description">{{ $contentInd }}</p>
                     </div>
                 </div>
             </div>
@@ -462,7 +503,9 @@
                     <div class="swiper-wrapper">
                         @if (!empty($data['brands']))
                             @foreach ($data['brands'] as $brand)
-                                <div class="swiper-slide"><img src="{{ uploaded_asset($brand->getTranslation('logo', $lang)) }}" alt="{{ $brand->getTranslation('name', $lang) }}"></div>
+                                <div class="swiper-slide"><img
+                                        src="{{ uploaded_asset($brand->getTranslation('logo', $lang)) }}"
+                                        alt="{{ $brand->getTranslation('name', $lang) }}"></div>
                             @endforeach
                         @endif
                     </div>
@@ -484,7 +527,7 @@
                 @if (!empty($data['blogs']))
                     @foreach ($data['blogs'] as $blog)
                         <div class="blog-card">
-                            <a href="{{ route('blog-detail',['slug' => $blog->slug]) }}">
+                            <a href="{{ route('blog-detail', ['slug' => $blog->slug]) }}">
                                 <div class="blog-image">
                                     <img src="{{ uploaded_asset($blog->image) }}" alt="AI Prosthetics">
                                     <div class="blog-tags">
@@ -492,11 +535,11 @@
                                             $tags = explode(',', $blog->tags);
                                         @endphp
                                         @if (!empty($tags))
-                                            @foreach ( $tags as $tag)
-                                                <span class="tag">{{$tag}}</span>
+                                            @foreach ($tags as $tag)
+                                                <span class="tag">{{ $tag }}</span>
                                             @endforeach
                                         @endif
-                                        
+
                                     </div>
                                 </div>
                                 <span class="blog-date">| {{ date('M d, Y', strtotime($blog->blog_date)) }}</span>
@@ -506,7 +549,7 @@
                     @endforeach
                 @endif
                 <!-- Blog Post 1 -->
-                
+
 
             </div>
         </div>
@@ -525,10 +568,48 @@
                     {{ $page->getTranslation('heading13', $lang) }}
                 </h2>
                 {{-- {{ route('services.index') }} --}}
-                <a href="{{ route('services.index') }}" class="cta-button animate__animated animate__fadeInUp animate__delay-1s">
+                <a href="{{ route('services.index') }}"
+                    class="cta-button animate__animated animate__fadeInUp animate__delay-1s">
                     {{ $page->getTranslation('heading14', $lang) }}
                 </a>
             </div>
         </div>
     </section>
+@endsection
+
+@section('header')
+    <style>
+        .slider-area {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+
+        }
+        section.hero.hero-section .swiper-button-next, .swiper-button-prev {
+            top: 25%;
+        }
+        .hero-content {
+            width: 70%;
+        }
+    </style>
+@endsection
+
+@section('script')
+    <script>
+        const swiper = new Swiper('.home-hero-slider', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+        });
+    </script>
 @endsection
