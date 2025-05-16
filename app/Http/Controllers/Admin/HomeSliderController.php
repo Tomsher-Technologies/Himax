@@ -42,24 +42,24 @@ class HomeSliderController extends Controller
         $request->validate([
             'name' => 'required',
             'banner' => 'required',
-            'mobile_banner' => 'required',
-            'link_type' => 'required',
+            // 'mobile_banner' => 'required',
+            // 'link_type' => 'required',
             'status' => 'required',
-            'link' => 'nullable|required_if:link_type,external',
-            'link_ref_id' => 'nullable|required_if:link_type,product,category',
+            // 'link' => 'nullable|required_if:link_type,external',
+            // 'link_ref_id' => 'nullable|required_if:link_type,product,category',
         ],[
-            'link.required_if' => "Please enter a valid link",
-            'link_ref_id.required_if' => "Please enter an option",
+            // 'link.required_if' => "Please enter a valid link",
+            // 'link_ref_id.required_if' => "Please enter an option",
         ]);
 
         $slider = HomeSlider::create([
             'name' => $request->name,
             'image' => $request->banner,
-            'mobile_image' => $request->mobile_banner,
-            'link_type' => $request->link_type,
-            'link_ref' => $request->link_type,
-            'link_ref_id' => $request->link_ref_id,
-            'link' => $request->link,
+            // 'mobile_image' => $request->mobile_banner,
+            // 'link_type' => $request->link_type,
+            // 'link_ref' => $request->link_type,
+            // 'link_ref_id' => $request->link_ref_id,
+            // 'link' => $request->link,
             'sort_order' => $request->sort_order,
             'status' => $request->status,
         ]);
@@ -104,25 +104,25 @@ class HomeSliderController extends Controller
         $request->validate([
             'name' => 'required',
             'banner' => 'required',
-            'mobile_banner' => 'required',
-            'link_type' => 'required',
+            // 'mobile_banner' => 'required',
+            // 'link_type' => 'required',
             'status' => 'required',
-            'link' => 'nullable|required_if:link_type,external',
-            'link_ref_id' => 'nullable|required_if:link_type,product,category',
+            // 'link' => 'nullable|required_if:link_type,external',
+            // 'link_ref_id' => 'nullable|required_if:link_type,product,category',
         ],[
-            'link.required_if' => "Please enter a valid link",
-            'link_ref_id.required_if' => "Please enter an option",
+            // 'link.required_if' => "Please enter a valid link",
+            // 'link_ref_id.required_if' => "Please enter an option",
         ]);
 
 
         $homeSlider->update([
             'name' => $request->name,
             'image' => $request->banner,
-            'mobile_image' => $request->mobile_banner,
-            'link_type' => $request->link_type,
-            'link_ref' => $request->link_type,
-            'link_ref_id' => $request->link_ref_id,
-            'link' => $request->link,
+            // 'mobile_image' => $request->mobile_banner,
+            // 'link_type' => $request->link_type,
+            // 'link_ref' => $request->link_type,
+            // 'link_ref_id' => $request->link_ref_id,
+            // 'link' => $request->link,
             'sort_order' => $request->sort_order,
             'status' => $request->status,
         ]);
