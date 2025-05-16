@@ -45,11 +45,10 @@
                                 @enderror
                             </div>
                         </div>
-
+{{-- 
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label" for="signinSrEmail">
                                 Mobile Banner
-                                {{-- <small>(1300x650)</small> --}}
                             </label>
                             <div class="col-md-9">
                                 <div class="input-group" data-toggle="aizuploader" data-type="image">
@@ -86,7 +85,7 @@
                                         value="category">
                                         Category</option>
                                     <option {{ old('link_type', $homeSlider->link_type) == 'brand' ? 'selected' : '' }} value="brand">Brand</option>
-                                    <option {{ old('link_type', $homeSlider->link_type) == 'occasion' ? 'selected' : '' }} value="occasion">Occasion</option>
+                                    <option {{ old('link_type', $homeSlider->link_type) == 'services_solutions' ? 'selected' : '' }} value="services_solutions">Services & Solutions</option>
                                 </select>
                                 @error('link_type')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -101,7 +100,7 @@
                         @enderror
                         @error('link_ref_id')
                             <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
 
 
                         <div class="form-group row">

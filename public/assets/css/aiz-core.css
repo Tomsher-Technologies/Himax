@@ -5617,7 +5617,7 @@ div.footable-loader > span.fooicon:after {
 }
 .aiz-table td,
 .aiz-table th {
-    padding: 1rem 0.75rem;
+    padding: 0.2rem 0.75rem;
 }
 .aiz-table.table-bordered td,
 .aiz-table.table-bordered th {

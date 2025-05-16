@@ -48,17 +48,14 @@ class MenuController extends Controller
 
             DB::commit();
             Cache::forget('header_menu');
+            flash('Menus updated successfully!')->success();
             return redirect()->back()->with('success', 'Menus updated successfully!');
         } catch (\Exception $e) {
             DB::rollback();
+            flash('Something went wrong!')->error();
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
 
-    public function destroy(Menu $menu)
-    {
-        $menu->delete();
-        return redirect()->back()->with('success', 'Menu deleted.');
-    }
 }
 

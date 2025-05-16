@@ -1,36 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 
-@font-face {
-    font-family: 'Kabyta';
-    src: url('/assets/fonts/Kabyta-Regular.woff2') format('woff2'),
-        url('/assets/fonts/Kabyta-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+/*@font-face {*/
+/*    font-family: 'Kabyta';*/
+/*    src: url('/assets/fonts/Kabyta-Regular.woff2') format('woff2'),*/
+/*        url('/assets/fonts/Kabyta-Regular.woff') format('woff');*/
+/*    font-weight: normal;*/
+/*    font-style: normal;*/
+/*}*/
 
-@font-face {
-    font-family: 'Kabyta';
-    src: url('/assets/fonts/Kabyta-Bold.woff2') format('woff2'),
-        url('/assets/fonts/Kabyta-Bold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-}
+/*@font-face {*/
+/*    font-family: 'Kabyta';*/
+/*    src: url('/assets/fonts/Kabyta-Bold.woff2') format('woff2'),*/
+/*        url('/assets/fonts/Kabyta-Bold.woff') format('woff');*/
+/*    font-weight: bold;*/
+/*    font-style: normal;*/
+/*}*/
 
-@font-face {
-    font-family: 'Kabyta';
-    src: url('/assets/fonts/Kabyta-Light.woff2') format('woff2'),
-        url('/assets/fonts/Kabyta-Light.woff') format('woff');
-    font-weight: lighter;
-    font-style: normal;
-}
+/*@font-face {*/
+/*    font-family: 'Kabyta';*/
+/*    src: url('/assets/fonts/Kabyta-Light.woff2') format('woff2'),*/
+/*        url('/assets/fonts/Kabyta-Light.woff') format('woff');*/
+/*    font-weight: lighter;*/
+/*    font-style: normal;*/
+/*}*/
 
-@font-face {
-    font-family: 'Kabyta';
-    src: url('/assets/fonts/Kabyta-SemiBold.woff2') format('woff2'),
-        url('/assets/fonts/Kabyta-SemiBold.woff') format('woff');
-    font-weight: 600;
-    font-style: normal;
-}
+/*@font-face {*/
+/*    font-family: 'Kabyta';*/
+/*    src: url('/assets/fonts/Kabyta-SemiBold.woff2') format('woff2'),*/
+/*        url('/assets/fonts/Kabyta-SemiBold.woff') format('woff');*/
+/*    font-weight: 600;*/
+/*    font-style: normal;*/
+/*}*/
 
 
 
@@ -81,7 +81,7 @@
 
 /* General Button Styling */
 .btn {
-    font-family: 'Kabyta', sans-serif !important;
+    font-family: 'Urbanist', sans-serif  !important;
     font-size: 15px;
     letter-spacing: 0.2px;
     font-weight: 600;
@@ -263,14 +263,14 @@
     font-size: 30px;
     font-weight: 600;
     color: #FFF;
-    font-family: 'Kabyta', sans-serif;
+    font-family: 'Urbanist', sans-serif ;
 }
 
 /* Hero Title (smaller part inside span) */
 .hero-title-span {
     font-size: 25px;
     font-weight: 500;
-    font-family: 'Kabyta', sans-serif !important;
+    font-family: 'Urbanist', sans-serif  !important;
     /*background: linear-gradient(90deg, #FAD201 0%, #00A1DE 100%);*/
     /*background-clip: text;*/
     /*-webkit-background-clip: text;*/
@@ -290,7 +290,7 @@
 }
 
 .hero-title-main {
-    font-family: 'Kabyta', sans-serif !important;
+    font-family: 'Urbanist', sans-serif  !important;
 }
 
 /* Hero Description */
@@ -934,7 +934,7 @@ backdrop-filter: blur(12.149999618530273px);
 
 .industry-tab {
     background:transparent;
-    font-family: 'Kabyta', sans-serif !important;
+    font-family: 'Urbanist', sans-serif  !important;
     border: 1px solid #c8b9b9;
     padding: 12px 20px;
     font-size: 16px;
@@ -1072,7 +1072,7 @@ backdrop-filter: blur(12.149999618530273px);
 }
 
 .partners-subtitle {
-    font-family: 'Kabyta', sans-serif !important;
+    font-family: 'Urbanist', sans-serif  !important;
     font-size: 16px;
     color: #000;
     font-weight:600;
@@ -2419,7 +2419,7 @@ backdrop-filter: blur(12.149999618530273px);
 /* Image Wrapper */
 .image-wrapper {
     width: 100%;
-    height: 160px;
+    /*height: 160px;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -3183,4 +3183,55 @@ backdrop-filter: blur(12.149999618530273px);
 
 #about-as p{
     font-size: 20px;
+}
+
+/*SH-10-05-25*/
+
+
+.service-content .service-title {
+    min-height: 64px;
+}
+
+.solution-item {
+    background-image: none !important;
+}
+
+.solution-item::before {
+    background: rgb(147 28 30);
+    transition: background 0.3s ease-in-out;
+}
+
+.solution-item:hover::before {
+    background: rgb(34 41 87);
+}
+.header-main .main-menu ul li .submenu li a {
+    font-weight: 500;
+
+}
+
+.brand-list li {
+    list-style: none;
+    padding: 0px 0 !important;
+}
+
+.header-main .main-menu ul li .submenu li a {
+    line-height: 16px;
+}
+
+#product-dt-info ul{
+    list-style: disc;
+    padding-left: 18px;
+}
+
+#product-dt-images {
+    position: relative;
+}
+
+#product-dt #main-image-slider {
+    position:sticky!important;
+    top: 10%;
+}
+
+#products-grid {
+    justify-content: start;
 }

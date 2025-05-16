@@ -48,15 +48,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const servicesWrapper = document.querySelector('.services-wrapper');
 
-    // Scroll left on clicking the previous button
-    prevButton.addEventListener('click', () => {
-        servicesWrapper.scrollBy({ left: -200, behavior: 'smooth' });
-    });
-
-    // Scroll right on clicking the next button
-    nextButton.addEventListener('click', () => {
-        servicesWrapper.scrollBy({ left: 200, behavior: 'smooth' });
-    });
+     if (prevButton && servicesWrapper) {
+        // Scroll left on clicking the previous button
+        prevButton.addEventListener('click', () => {
+            servicesWrapper.scrollBy({ left: -200, behavior: 'smooth' });
+        });
+     }
+     if (nextButton && servicesWrapper) {
+        // Scroll right on clicking the next button
+        nextButton.addEventListener('click', () => {
+            servicesWrapper.scrollBy({ left: 200, behavior: 'smooth' });
+        });
+     }
 });
 
 
@@ -197,13 +200,16 @@ var clientSwiper = new Swiper('.client-slider', {
 document.addEventListener("DOMContentLoaded", function () {
     let serviceCard = document.getElementById("services-card");
 
-    serviceCard.addEventListener("mouseenter", function () {
-        serviceCard.classList.add("hover-effect");
-    });
+    if(serviceCard){
+        serviceCard.addEventListener("mouseenter", function () {
+            serviceCard.classList.add("hover-effect");
+        });
 
-    serviceCard.addEventListener("mouseleave", function () {
-        serviceCard.classList.remove("hover-effect");
-    });
+        serviceCard.addEventListener("mouseleave", function () {
+            serviceCard.classList.remove("hover-effect");
+        });
+    }
+   
 });
 
 

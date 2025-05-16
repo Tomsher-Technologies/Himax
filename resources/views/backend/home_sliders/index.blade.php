@@ -25,11 +25,11 @@
                             <thead>
                                 <tr>
                                     <th data-breakpoints="lg">Name</th>
-                                    <th data-breakpoints="lg">Link Type</th>
+                                    {{-- <th data-breakpoints="lg">Link Type</th> --}}
                                     <th data-breakpoints="lg">Image</th>
-                                    <th data-breakpoints="lg">Sort Order</th>
-                                    <th data-breakpoints="lg">Status</th>
-                                    <th>Options</th>
+                                    <th class="text-center" data-breakpoints="lg">Sort Order</th>
+                                    <th class="text-center" data-breakpoints="lg">Status</th>
+                                    <th class="text-center">Options</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -38,11 +38,11 @@
                                         <td>
                                             {{ $slider->name }}
                                         </td>
+                                        {{-- <td>
+                                            {{ ucfirst(str_replace('_',' & ',$slider->link_type)) }}
+                                        </td> --}}
                                         <td>
-                                            {{ ucfirst($slider->link_type) }}
-                                        </td>
-                                        <td>
-                                            <div class="row gutters-5 w-200px w-md-300px mw-100">
+                                            <div class="row gutters-5 w-200px w-md-150px mw-100">
                                                 @if ($slider->image)
                                                     <div class="col-auto">
                                                         <img src="{{ uploaded_asset($slider->image) }}" alt="Image"
@@ -51,18 +51,18 @@
                                                 @endif
                                             </div>
                                         </td>
-                                        <td>
+                                        <td class="text-center">
                                             {{ $slider->sort_order }}
                                         </td>
 
-                                        <td>
+                                        <td class="text-center">
                                             <label class="aiz-switch aiz-switch-success mb-0">
                                                 <input onchange="update_published(this)" value="{{ $slider->id }}"
                                                     type="checkbox" {{ $slider->status == 1 ? 'checked' : '' }}>
                                                 <span class="slider round"></span>
                                             </label>
                                         </td>
-                                        <td class="text-right">
+                                        <td class="text-center">
                                             <a class="btn btn-soft-primary btn-icon btn-circle"
                                                 href="{{ route('home-slider.edit', $slider) }}" title="Edit">
                                                 <i class="las la-edit"></i>
