@@ -3537,7 +3537,7 @@ input.main-search-input::placeholder {
     /* position: relative; */
     list-style: none;
     display: inline-block;
-    margin-inline-end: 40px
+    margin-inline-end: 30px
 }
 
 .header-main .main-menu ul li:last-child {
@@ -3547,9 +3547,8 @@ input.main-search-input::placeholder {
 .header-main .main-menu ul li a {
     
     display: inline-block;
-    font-size: 16px;
+    font-size: 18px;
     letter-spacing: 1.2px;
-    font-weight: 500;
     color: var(--white);
     padding: 10px 0;
     text-align: left;
@@ -3557,7 +3556,7 @@ input.main-search-input::placeholder {
     text-transform: capitalize;
     transition: all 0.4s ease-in-out;
     font-family: 'Kabyta', sans-serif !important;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .header-main .main-menu ul li a i {
@@ -8748,7 +8747,7 @@ textarea.is-invalid {
 
 
 .hero-1 {
-    /* min-height: 100vh; */
+    min-height: 100vh;
     /* Ensures it fills the viewport */
 
     align-items: center;
@@ -14091,3 +14090,19 @@ color: #fff;
 #product-dt-info p {
  color: #000;
 }
+
+
+@media (max-width:768px) {
+
+    .hero-1 .hero-content {
+    max-width: 100%!important;
+}
+
+    .hero-1 .hero-content {
+        padding-top: 50px!important;
+    }
+
+}
+
+
+
