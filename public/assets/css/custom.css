@@ -3143,6 +3143,10 @@ backdrop-filter: blur(12.149999618530273px);
     #blog-details-social-links a {
         font-size: 1.6rem;
     }
+
+        #product-section .product-info {
+    min-height: 130px;
+}
 }
 
 @media (max-width: 576px) {
@@ -3165,6 +3169,10 @@ backdrop-filter: blur(12.149999618530273px);
     #blog-details-sidebar-title {
         font-size: 1.4rem;
     }
+
+    #product-section .product-info {
+    min-height:auto;
+}
 }
 
 
@@ -3275,4 +3283,8 @@ backdrop-filter: blur(12.149999618530273px);
     color: #000;
 }
 
+
+#product-section .product-info {
+    min-height: 106px;
+}
 
