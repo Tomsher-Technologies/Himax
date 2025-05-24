@@ -33,7 +33,7 @@
             <!-- Filters Section -->
             <form action="" id="productfilters" method="GET">
                 <div id="products-filters">
-                    <div class="filter-group">
+                    <div class="filter-group" style=" align-items: center;">
                         <select id="products-category-filter" name="category">
                             <option value="">All Categories</option>
                             @if (!empty($categories))
@@ -55,6 +55,7 @@
                                 @endforeach
                             @endif
                         </select>
+                        <a href="{{ route('products.index') }}" class=""><i class="fa-regular fa-close"></i> Clear Filter</a>
                     </div>
 
                     <input type="text" id="products-search-box" name="search" value="{{ $sort_search }}"
