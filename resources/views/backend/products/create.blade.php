@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="aiz-titlebar text-left mt-2 mb-3">
-        <h5 class="mb-0 h6">{{ trans('messages.add').' '.trans('messages.new').' '.trans('messages.product') }}</h5>
+        <h5 class="mb-0 h6">{{ trans('messages.add') . ' ' . trans('messages.new') . ' ' . trans('messages.product') }}</h5>
     </div>
     <div class="">
         <form class="form form-horizontal mar-top" id="addNewProduct" action="{{ route('products.store') }}" method="POST"
@@ -12,20 +12,23 @@
                     @csrf
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="mb-0 h6">{{ trans('messages.product').' '.trans('messages.information') }}</h5>
+                            <h5 class="mb-0 h6">{{ trans('messages.product') . ' ' . trans('messages.information') }}</h5>
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
-                                
-                                <label class="col-md-3 col-from-label">{{ trans('messages.product').' '.trans('messages.name') }} <span
-                                        class="text-danger">*</span></label>
+
+                                <label
+                                    class="col-md-3 col-from-label">{{ trans('messages.product') . ' ' . trans('messages.name') }}
+                                    <span class="text-danger">*</span></label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" name="name" placeholder="{{ trans('messages.product').' '.trans('messages.name') }}"
-                                    onkeyup="title_update(this)" required>
+                                    <input type="text" class="form-control" name="name"
+                                        placeholder="{{ trans('messages.product') . ' ' . trans('messages.name') }}"
+                                        onkeyup="title_update(this)" required>
                                 </div>
                             </div>
                             <div class="form-group row" id="category">
-                                <label class="col-md-3 col-from-label">{{ trans('messages.category') }} <span class="text-danger">*</span></label>
+                                <label class="col-md-3 col-from-label">{{ trans('messages.category') }} <span
+                                        class="text-danger">*</span></label>
                                 <div class="col-md-8">
                                     <select class="form-control aiz-selectpicker" name="category_id" id="category_id"
                                         data-live-search="true" required>
@@ -44,12 +47,15 @@
                             <div class="form-group row" id="brand">
                                 <label class="col-md-3 col-from-label">{{ trans('messages.brand') }}</label>
                                 <div class="col-md-8">
-                                    @php   
-                                        $brands = \App\Models\Brand::where('is_active',1)->orderBy('name','asc')->get();
+                                    @php
+                                        $brands = \App\Models\Brand::where('is_active', 1)
+                                            ->orderBy('name', 'asc')
+                                            ->get();
                                     @endphp
                                     <select class="form-control aiz-selectpicker" name="brand_id" id="brand_id"
                                         data-live-search="true" required>
-                                        <option value="">{{ trans('messages.select').' '.trans('messages.brand') }}</option>
+                                        <option value="">{{ trans('messages.select') . ' ' . trans('messages.brand') }}
+                                        </option>
                                         @foreach ($brands as $brand)
                                             <option value="{{ $brand->id }}">{{ $brand->name }}
                                             </option>
@@ -57,13 +63,15 @@
                                     </select>
                                 </div>
                             </div>
-                        
+
                             <div class="form-group row" id="service">
                                 <label class="col-md-3 col-from-label">{{ trans('messages.service') }}</label>
                                 <div class="col-md-8">
-                                    <select name="services[]" id="services" multiple class="form-control aiz-selectpicker" data-live-search="true">
+                                    <select name="services[]" id="services" multiple class="form-control aiz-selectpicker"
+                                        data-live-search="true">
                                         @foreach ($services as $service)
-                                            <option value="{{ $service->id }}" {{ in_array($service->id, old('services',[])) ? 'selected' : '' }}>
+                                            <option value="{{ $service->id }}"
+                                                {{ in_array($service->id, old('services', [])) ? 'selected' : '' }}>
                                                 {{ $service->name }}
                                             </option>
                                         @endforeach
@@ -81,10 +89,11 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label">{{ trans('messages.slug') }}<span class="text-danger">*</span></label>
+                                <label class="col-md-3 col-form-label">{{ trans('messages.slug') }}<span
+                                        class="text-danger">*</span></label>
                                 <div class="col-md-8">
-                                    <input type="text" placeholder="{{ trans('messages.slug') }}" id="slug" name="slug" required
-                                        class="form-control">
+                                    <input type="text" placeholder="{{ trans('messages.slug') }}" id="slug"
+                                        name="slug" required class="form-control">
                                     @error('slug')
                                         <div class="alert alert-danger mt-1">{{ $message }}</div>
                                     @enderror
@@ -94,7 +103,8 @@
                             <div class="form-group row">
                                 <label class="col-md-3 col-from-label">{{ trans('messages.sku') }} </label>
                                 <div class="col-md-6">
-                                    <input type="text" placeholder="{{ trans('messages.sku') }}" name="sku" class="form-control">
+                                    <input type="text" placeholder="{{ trans('messages.sku') }}" name="sku"
+                                        class="form-control">
                                 </div>
                             </div>
 
@@ -102,22 +112,25 @@
                     </div>
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="mb-0 h6">{{ trans('messages.product').' '.trans('messages.files') }}</h5>
+                            <h5 class="mb-0 h6">{{ trans('messages.product') . ' ' . trans('messages.files') }}</h5>
                         </div>
                         <div class="card-body">
-                            
+
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="signinSrEmail">{{ trans('messages.thumbnail_image') }}
-                                    <small>({{ trans('messages.1000*1000') }})</small></label>
+                                <label class="col-md-3 col-form-label"
+                                    for="signinSrEmail">{{ trans('messages.thumbnail_image') }}
+                                    <br><small>(Image size - 500 x 500)</small></label>
                                 <div class="col-md-8">
-                                    <input type="file" name="thumbnail_image" class="form-control" accept="image/*" required>
+                                    <input type="file" name="thumbnail_image" class="form-control" accept="image/*"
+                                        required>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="signinSrEmail">Datasheet (PDF)</label>
                                 <div class="col-md-8">
-                                    <input type="file" name="datasheet_pdf" class="form-control" accept="application/pdf">
+                                    <input type="file" name="datasheet_pdf" class="form-control"
+                                        accept="application/pdf">
                                 </div>
                             </div>
 
@@ -126,11 +139,11 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="mb-0 h6">{{ trans('messages.product').' '.trans('messages.description') }}</h5>
+                            <h5 class="mb-0 h6">{{ trans('messages.product') . ' ' . trans('messages.description') }}</h5>
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
-                                <label class="col-md-12 col-from-label">{{trans('messages.description') }}</label>
+                                <label class="col-md-12 col-from-label">{{ trans('messages.description') }}</label>
                                 <div class="col-md-12">
                                     <textarea class="aiz-text-editor" data-min-height="300" name="description"></textarea>
                                 </div>
@@ -140,7 +153,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="mb-0 h6">{{ trans('messages.product').' Specifications' }}</h5>
+                            <h5 class="mb-0 h6">{{ trans('messages.product') . ' Specifications' }}</h5>
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
@@ -151,8 +164,8 @@
                             </div>
                         </div>
                     </div>
-                
-                  
+
+
                     <div class="card">
                         <div class="card-header">
                             <h5 class="mb-0 h6">{{ trans('messages.seo_section') }}</h5>
@@ -184,7 +197,8 @@
                             <div class="form-group row">
                                 <label class="col-lg-3 col-from-label">{{ trans('messages.og_title') }}</label>
                                 <div class="col-lg-8">
-                                    <input type="text" class="form-control" name="og_title" placeholder="{{ trans('messages.og_title') }}">
+                                    <input type="text" class="form-control" name="og_title"
+                                        placeholder="{{ trans('messages.og_title') }}">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -212,13 +226,14 @@
                     </div>
                 </div>
 
-                
+
                 <div class="col-lg-10  m-auto">
                     <div class="btn-toolbar float-right mb-3" role="toolbar" aria-label="Toolbar with button groups">
                         <div class="btn-group mr-2" role="group" aria-label="First group">
-                            <button type="submit" name="button" value="draft" class="btn btn-cancel action-btn">{{ trans('messages.save_draft') }}</button>
+                            <button type="submit" name="button" value="draft"
+                                class="btn btn-cancel action-btn">{{ trans('messages.save_draft') }}</button>
                         </div>
-                       
+
                         <div class="btn-group" role="group" aria-label="Second group">
                             <button type="submit" name="button" value="publish"
                                 class="btn btn-info action-btn">{{ trans('messages.save_publish') }}</button>
@@ -231,23 +246,21 @@
 @endsection
 
 @section('styles')
-<style>
-   
-</style>
+    <style>
+
+    </style>
 @endsection
 @section('script')
-    
     <script>
-      
         let buttons = [
-                    ["font", ["bold", "underline", "italic", "clear"]],
-                    ["para", ["ul", "ol", "paragraph"]],
-                    ["style", ["style"]],
-                    ["color", ["color"]],
-                    ["table", ["table"]],
-                    ["insert", ["link", "picture", "video"]],
-                    ["view", ["fullscreen", "undo", "redo"]],
-                ];
+            ["font", ["bold", "underline", "italic", "clear"]],
+            ["para", ["ul", "ol", "paragraph"]],
+            ["style", ["style"]],
+            ["color", ["color"]],
+            ["table", ["table"]],
+            ["insert", ["link", "picture", "video"]],
+            ["view", ["fullscreen", "undo", "redo"]],
+        ];
         $('.description-text-area').summernote({
             toolbar: buttons,
             height: 300,
@@ -265,7 +278,6 @@
                 }
             }
         });
-
     </script>
 
     <script type="text/javascript">
@@ -282,7 +294,5 @@
             title = title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')
             $('#slug').val(title)
         }
-
-      
     </script>
 @endsection

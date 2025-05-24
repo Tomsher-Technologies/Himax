@@ -170,10 +170,10 @@ class ProductController extends Controller
     {
         // Validate form input
         $request->validate([
-            'name' => 'required|string|max:100',
+            'name' => 'required|string|min:3|max:100',
             'email' => 'required|email',
             'phone' => 'required|string|max:15',
-            'message' => 'required|string|max:500',
+            'message' => 'required|string|min:10|max:500',
             'product_id' => 'required|exists:products,id',
         ]);
 

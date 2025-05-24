@@ -20,6 +20,7 @@ use App\Models\HomePoints;
 use App\Models\Industries;
 use App\Models\Blog;
 use App\Mail\ContactEnquiry;
+use App\Rules\Recaptcha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
@@ -31,9 +32,9 @@ use Artesaos\SEOTools\Facades\JsonLd;
 use Artesaos\SEOTools\Facades\JsonLdMulti;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\WebHomeProductsCollection;
 use Storage;
-use Validator;
 use Mail;
 use DB;
 use Hash;
@@ -227,14 +228,22 @@ class FrontendController extends Controller
 
     public function submitContactForm(Request $request)
     {
-        // Validate input
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'nullable|string|max:20',
             'subject' => 'required|string',
             'message' => 'required|string|max:1000',
+            'g-recaptcha-response' => ['required', new Recaptcha()],
+        ],[
+            'g-recaptcha-response.required' => 'reCAPTCHA verification failed. Please try again.'
         ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 422);
+        }
 
         $con                = new Contacts;
         $con->name          = $request->name;

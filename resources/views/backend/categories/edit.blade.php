@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="aiz-titlebar text-left mt-2 mb-3">
-        <h5 class="mb-0 h6">{{ trans('messages.category') .' '. trans('messages.information')}}</h5>
+        <h5 class="mb-0 h6">{{ trans('messages.category') . ' ' . trans('messages.information') }}</h5>
     </div>
 
     <div class="row">
@@ -28,19 +28,21 @@
                         @csrf
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">{{ trans('messages.name') }} <i
-                                    class="las la-language text-danger" title="{{ trans('messages.translatable') }}"></i></label>
+                                    class="las la-language text-danger"
+                                    title="{{ trans('messages.translatable') }}"></i></label>
                             <div class="col-md-9">
-                                <input  type="text" name="name"
-                                    value="{{ $category->getTranslation('name', $lang) }}" class="form-control"
-                                    id="name" placeholder="{{ trans('messages.name') }}" onkeyup="makeSlug(this)">
+                                <input type="text" name="name" value="{{ $category->getTranslation('name', $lang) }}"
+                                    class="form-control" id="name" placeholder="{{ trans('messages.name') }}"
+                                    onkeyup="makeSlug(this)">
                             </div>
                         </div>
 
                         <div class="form-group row ">
                             <label class="col-sm-3 col-from-label" for="name">{{ trans('messages.slug') }}</label>
                             <div class="col-sm-9">
-                                <input  type="text" placeholder="{{ trans('messages.slug') }}" id="slug"
-                                    name="slug" value="{{ old('slug', $category->getTranslation('slug', $lang)) }}" class="form-control">
+                                <input type="text" placeholder="{{ trans('messages.slug') }}" id="slug"
+                                    name="slug" value="{{ old('slug', $category->getTranslation('slug', $lang)) }}"
+                                    class="form-control">
                                 @error('slug')
                                     <div class="alert alert-danger mt-1">{{ $message }}</div>
                                 @enderror
@@ -48,12 +50,14 @@
                         </div>
 
                         <div class="form-group row  @if ($lang != 'en') d-none @endif">
-                            <label class="col-md-3 col-form-label">{{ trans('messages.parent') .' '. trans('messages.category') }}</label>
+                            <label
+                                class="col-md-3 col-form-label">{{ trans('messages.parent') . ' ' . trans('messages.category') }}</label>
                             <div class="col-md-9">
-                                <select  class="select2 form-control aiz-selectpicker" name="parent_id"
-                                    data-toggle="select2" data-placeholder="Choose ..."data-live-search="true"
+                                <select class="select2 form-control aiz-selectpicker" name="parent_id" data-toggle="select2"
+                                    data-placeholder="Choose ..."data-live-search="true"
                                     data-selected="{{ $category->parent_id }}">
-                                    <option value="0">{{ trans('messages.no') .' '. trans('messages.parent') }}</option>
+                                    <option value="0">{{ trans('messages.no') . ' ' . trans('messages.parent') }}
+                                    </option>
                                     @foreach ($categories as $acategory)
                                         <option value="{{ $acategory->id }}">{{ $acategory->getTranslation('name') }}
                                         </option>
@@ -66,10 +70,12 @@
                                 </select>
                             </div>
                         </div>
-                      
-                     
+
+
                         <div class="form-group row ">
-                            <label class="col-md-3 col-form-label" for="signinSrEmail">{{ trans('messages.icon') }}</label>
+                            <label class="col-md-3 col-form-label"
+                                for="signinSrEmail">{{ trans('messages.icon') }}<br><small>(Image size - 242 x
+                                    261)</small></label>
                             <div class="col-md-9">
                                 <div class="input-group" data-toggle="aizuploader" data-type="image">
                                     <div class="input-group-prepend">
@@ -87,12 +93,14 @@
 
                         @if ($lang == 'en')
                             <div class="form-group  row">
-                                <label class="col-md-3 col-form-label">{{trans('messages.status')}}</label>
+                                <label class="col-md-3 col-form-label">{{ trans('messages.status') }}</label>
                                 <div class="col-md-9">
                                     <select class="select2 form-control" name="status">
-                                        <option {{ old('status', $category->is_active) == 1 ? 'selected' : '' }} value="1">{{trans('messages.enabled')}}
+                                        <option {{ old('status', $category->is_active) == 1 ? 'selected' : '' }}
+                                            value="1">{{ trans('messages.enabled') }}
                                         </option>
-                                        <option {{ old('status', $category->is_active) == 2 ? 'selected' : '' }} value="2">{{trans('messages.disabled')}}
+                                        <option {{ old('status', $category->is_active) == 2 ? 'selected' : '' }}
+                                            value="2">{{ trans('messages.disabled') }}
                                         </option>
                                     </select>
                                 </div>
@@ -100,9 +108,9 @@
                         @endif
 
 
-                        <h5 class="mb-0 h6">{{trans('messages.seo_section')}}</h5>
+                        <h5 class="mb-0 h6">{{ trans('messages.seo_section') }}</h5>
                         <hr>
-    
+
                         <div class="form-group row">
                             <label class="col-sm-3 col-from-label">{{ trans('messages.meta_title') }}</label>
                             <div class="col-sm-9">
@@ -121,16 +129,16 @@
                             <label class="col-sm-3 col-from-label">{{ trans('messages.meta_keywords') }}</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" name="meta_keywords"
-                                    value="{{ old('meta_keywords',$category->getTranslation('meta_keyword', $lang)) }}"
+                                    value="{{ old('meta_keywords', $category->getTranslation('meta_keyword', $lang)) }}"
                                     placeholder="{{ trans('messages.meta_keywords') }}">
                             </div>
                         </div>
-    
+
                         <div class="form-group row">
                             <label class="col-sm-3 col-from-label">{{ trans('messages.og_title') }}</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" name="og_title"
-                                    value="{{ old('og_title',$category->getTranslation('og_title', $lang)) }}"
+                                    value="{{ old('og_title', $category->getTranslation('og_title', $lang)) }}"
                                     placeholder="{{ trans('messages.og_title') }}">
                             </div>
                         </div>
@@ -140,7 +148,7 @@
                                 <textarea name="og_description" rows="5" class="form-control">{{ old('og_description', $category->getTranslation('og_description', $lang)) }}</textarea>
                             </div>
                         </div>
-    
+
                         <div class="form-group row">
                             <label class="col-sm-3 col-from-label">{{ trans('messages.twitter_title') }}</label>
                             <div class="col-sm-9">
@@ -155,10 +163,11 @@
                                 <textarea name="twitter_description" rows="5" class="form-control">{{ old('twitter_description', $category->getTranslation('twitter_description', $lang)) }}</textarea>
                             </div>
                         </div>
-                       
+
                         <div class="form-group mb-0 text-right">
                             <button type="submit" class="btn btn-primary">{{ trans('messages.Save') }}</button>
-                            <a href="{{ route('categories.index') }}" class="btn btn-cancel">{{trans('messages.cancel')}}</a>
+                            <a href="{{ route('categories.index') }}"
+                                class="btn btn-cancel">{{ trans('messages.cancel') }}</a>
                         </div>
                     </form>
                 </div>
@@ -167,22 +176,22 @@
     </div>
 @endsection
 @section('script')
-<script>
-    function makeSlug(e) {
-        var title = e.value;
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url: "{{ route('generate-slug') }}",
-            type: 'GET',
-            data: {
-                title: title
-            },
-            success: function(response) {
-                $('#slug').val(response);
-            }
-        });
-    }
-</script>
+    <script>
+        function makeSlug(e) {
+            var title = e.value;
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ route('generate-slug') }}",
+                type: 'GET',
+                data: {
+                    title: title
+                },
+                success: function(response) {
+                    $('#slug').val(response);
+                }
+            });
+        }
+    </script>
 @endsection
