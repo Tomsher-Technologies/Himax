@@ -36,7 +36,8 @@
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <label class="form-label" for="signinSrEmail">Footer Logo</label>
+                                    <label class="form-label" for="signinSrEmail">Footer Logo <small>(Image size - 207 x
+                                            79)</small></label>
                                     <div class="input-group " data-toggle="aizuploader" data-type="image">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text bg-soft-secondary font-weight-medium">Browse</div>
@@ -57,7 +58,7 @@
                                         {!! get_setting('about_us_description', null, $lang) !!}
                                     </textarea>
                                 </div>
-                                
+
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
@@ -78,35 +79,42 @@
                                 <div class="form-group">
                                     <label>Services Title</label>
                                     <input type="hidden" name="types[][{{ $lang }}]" value="footer_services_title">
-                                    <input type="text" class="form-control" placeholder="Enter..." name="footer_services_title"
-                                        value="{{ get_setting('footer_services_title') }}">
+                                    <input type="text" class="form-control" placeholder="Enter..."
+                                        name="footer_services_title" value="{{ get_setting('footer_services_title') }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Services</label>
                                     <input type="hidden" name="types[][{{ $lang }}]" value="footer_services">
-                                    <select name="footer_services[]" class="form-control aiz-selectpicker" multiple data-actions-box="true" data-live-search="true" title="Select" data-selected="{{ get_setting('footer_services') }}">
+                                    <select name="footer_services[]" class="form-control aiz-selectpicker" multiple
+                                        data-actions-box="true" data-live-search="true" title="Select"
+                                        data-selected="{{ get_setting('footer_services') }}">
                                         {{-- <option disabled value=""></option> --}}
-                                        @foreach (App\Models\Service::where('status',1)->get() as $key => $serv)
-                                            <option value="{{ $serv->id }}">{{ $serv->getTranslation('name', 'en') }}</option>
+                                        @foreach (App\Models\Service::where('status', 1)->get() as $key => $serv)
+                                            <option value="{{ $serv->id }}">{{ $serv->getTranslation('name', 'en') }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Products Title</label>
-                                    <input type="hidden" name="types[][{{ $lang }}]" value="footer_products_title">
-                                    <input type="text" class="form-control" placeholder="Enter..." name="footer_products_title"
-                                        value="{{ get_setting('footer_products_title') }}">
+                                    <input type="hidden" name="types[][{{ $lang }}]"
+                                        value="footer_products_title">
+                                    <input type="text" class="form-control" placeholder="Enter..."
+                                        name="footer_products_title" value="{{ get_setting('footer_products_title') }}">
                                 </div>
-                               
+
                                 <div class="form-group">
                                     <label>Product Categories</label>
                                     <input type="hidden" name="types[][{{ $lang }}]" value="footer_categories">
-                                    <select name="footer_categories[]" class="form-control aiz-selectpicker" multiple data-actions-box="true" data-live-search="true" title="Select" data-selected="{{ get_setting('footer_categories') }}">
+                                    <select name="footer_categories[]" class="form-control aiz-selectpicker" multiple
+                                        data-actions-box="true" data-live-search="true" title="Select"
+                                        data-selected="{{ get_setting('footer_categories') }}">
                                         {{-- <option disabled value=""></option> --}}
-                                        @foreach (App\Models\Category::where('parent_id',0)->where('is_active',1)->get() as $categ)
-                                            <option value="{{ $categ->id }}">{{ $categ->getTranslation('name', 'en') }}</option>
+                                        @foreach (App\Models\Category::where('parent_id', 0)->where('is_active', 1)->get() as $categ)
+                                            <option value="{{ $categ->id }}">{{ $categ->getTranslation('name', 'en') }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -139,10 +147,10 @@
                                 <div class="form-group">
                                     <label>Newsletter Button Text</label>
                                     <input type="hidden" name="types[]" value="newsletter_btn_text">
-                                    <input type="text" class="form-control" placeholder="Enter..." name="newsletter_btn_text"
-                                        value="{{ get_setting('newsletter_btn_text') }}">
+                                    <input type="text" class="form-control" placeholder="Enter..."
+                                        name="newsletter_btn_text" value="{{ get_setting('newsletter_btn_text') }}">
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label>Contact Title</label>
                                     <input type="hidden" name="types[][{{ $lang }}]" value="contact_title">
@@ -152,8 +160,8 @@
                                 <div class="form-group">
                                     <label>Contact Button Text</label>
                                     <input type="hidden" name="types[]" value="contact_btn_text">
-                                    <input type="text" class="form-control" placeholder="Enter..." name="contact_btn_text"
-                                        value="{{ get_setting('contact_btn_text') }}">
+                                    <input type="text" class="form-control" placeholder="Enter..."
+                                        name="contact_btn_text" value="{{ get_setting('contact_btn_text') }}">
                                 </div>
 
                                 <div class="text-right">
@@ -229,8 +237,8 @@
                                                     <div class="col-4">
                                                         <div class="form-group">
                                                             <input type="text" class="form-control"
-                                                                placeholder="Label"
-                                                                name="widget_one_labels[]" value="{{ $value }}">
+                                                                placeholder="Label" name="widget_one_labels[]"
+                                                                value="{{ $value }}">
                                                         </div>
                                                     </div>
                                                     <div class="col">
@@ -366,7 +374,7 @@
                         </div>
                     </div>
                 </div>
-                
+
 
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary">Update</button>
@@ -378,17 +386,14 @@
 
 @section('script')
     <script type="text/javascript">
-        
-        $(document).ready(function () {
-           
-            $('.aiz-selectpicker').on('shown.bs.select', function () {
+        $(document).ready(function() {
+
+            $('.aiz-selectpicker').on('shown.bs.select', function() {
                 var select = $(this);
                 var selectedOptions = select.find('option:selected').detach();
                 select.prepend(selectedOptions);
                 select.selectpicker('refresh');
             });
         });
-
     </script>
 @endsection
-

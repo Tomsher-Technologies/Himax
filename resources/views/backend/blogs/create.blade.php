@@ -44,16 +44,19 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-3 col-from-label">{{ trans('messages.tags') }} <small class="text-muted">(Maximum - 2)</small></label>
+                            <label class="col-md-3 col-from-label">{{ trans('messages.tags') }} <small
+                                    class="text-muted">(Maximum - 2)</small></label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control aiz-tag-input" data-max-tags="2" name="tags[]" placeholder="{{ trans('messages.type_hit_enter_add_tag') }}">
+                                <input type="text" class="form-control aiz-tag-input" data-max-tags="2" name="tags[]"
+                                    placeholder="{{ trans('messages.type_hit_enter_add_tag') }}">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Blog Date</label>
                             <div class="col-md-9">
-                                <input type="text" placeholder="YYYY-MM-DD" id="blog_date" name="blog_date" class="form-control " value="{{ old('blog_date') }}" autocomplete="off">
+                                <input type="text" placeholder="YYYY-MM-DD" id="blog_date" name="blog_date"
+                                    class="form-control " value="{{ old('blog_date') }}" autocomplete="off">
                                 @error('blog_date')
                                     <div class="alert alert-danger mt-1">{{ $message }}</div>
                                 @enderror
@@ -61,9 +64,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label"
-                                for="signinSrEmail">{{ trans('messages.image') }}<span
-                                class="text-danger">*</span></label>
+                            <label class="col-md-3 col-form-label" for="signinSrEmail">{{ trans('messages.image') }}<span
+                                    class="text-danger">*</span>
+
+                                <br><small>(Image size - 1024 x 683)</small>
+                            </label>
                             <div class="col-md-9">
                                 <div class="input-group" data-toggle="aizuploader" data-type="image">
                                     <div class="input-group-prepend">
@@ -79,8 +84,8 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-3 col-from-label">{{trans('messages.description') }}<span
-                                class="text-danger">*</span></label>
+                            <label class="col-md-3 col-from-label">{{ trans('messages.description') }}<span
+                                    class="text-danger">*</span></label>
                             <div class="col-md-9">
                                 <textarea class="aiz-text-editor" data-min-height="300" name="description">{{ old('description') }}</textarea>
                             </div>
@@ -88,7 +93,7 @@
 
                         <div class="form-group  row">
                             <label class="col-md-3 col-form-label">{{ trans('messages.active_status') }}<span
-                                class="text-danger">*</span></label>
+                                    class="text-danger">*</span></label>
                             <div class="col-md-9">
                                 <select class="select2 form-control" name="status">
                                     <option {{ old('status') == 1 ? 'selected' : '' }} value="1">
@@ -132,7 +137,8 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label" for="name">{{ trans('messages.og_title') }}</label>
+                            <label class="col-md-3 col-form-label"
+                                for="name">{{ trans('messages.og_title') }}</label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="og_title"
                                     placeholder="{{ trans('messages.og_title') }}" value="{{ old('og_title') }}">
@@ -174,28 +180,27 @@
             </div>
         </div>
     </div>
-    @endsection
+@endsection
 
-    @section('script')
-        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+@section('script')
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
-        <script>
-
-            $(document).ready(function() {
-                $("#blog_date").datepicker({
-                    dateFormat: "yy-mm-dd",
-                    changeMonth: true,
-                    changeYear: true
-                });
+    <script>
+        $(document).ready(function() {
+            $("#blog_date").datepicker({
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true
             });
+        });
 
-            function title_update(e) {
-                title = e.value;
-                title = title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')
-                $('#slug').val(title)
-            }
-        </script>
-    @endsection
+        function title_update(e) {
+            title = e.value;
+            title = title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')
+            $('#slug').val(title)
+        }
+    </script>
+@endsection
