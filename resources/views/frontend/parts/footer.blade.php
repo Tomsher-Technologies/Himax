@@ -17,14 +17,21 @@
                                 {!! get_setting('about_us_description', null, $lang) !!}
                             </p>
                             <div class="social-icon d-flex align-items-center">
-                                <a href="{{ get_setting('facebook_link') }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                                <a href="{{ get_setting('instagram_link') }}" target="_blank"><i class="fab fa-instagram"></i></a>
-                                <a href="{{ get_setting('twitter_link') }}" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" fill="#fff">
-  <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/>
-</svg>
-</a>
-                                <a href="{{ get_setting('linkedin_link') }}" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
-                                <a href="{{ get_setting('youtube_link') }}" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                                <a href="{{ get_setting('facebook_link') }}" target="_blank"><i
+                                        class="fab fa-facebook-f"></i></a>
+                                <a href="{{ get_setting('instagram_link') }}" target="_blank"><i
+                                        class="fab fa-instagram"></i></a>
+                                <a href="{{ get_setting('twitter_link') }}" target="_blank"><svg
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16"
+                                        fill="#fff">
+                                        <path
+                                            d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
+                                    </svg>
+                                </a>
+                                <a href="{{ get_setting('linkedin_link') }}" target="_blank"><i
+                                        class="fa-brands fa-linkedin-in"></i></a>
+                                <a href="{{ get_setting('youtube_link') }}" target="_blank"><i
+                                        class="fa-brands fa-youtube"></i></a>
                             </div>
                         </div>
                     </div>
@@ -36,31 +43,31 @@
                         </div>
                         <ul class="list-area">
                             <li>
-                                
+
                                 <a href="{{ route('about_us') }}">
                                     <i class="fa-solid fa-chevron-right"></i>
                                     About Us
                                 </a>
                             </li>
                             <li>
-                                
+
                                 <a href="{{ route('services.index') }}">
                                     <i class="fa-solid fa-chevron-right"></i>
                                     Our Services
                                 </a>
                             </li>
                             <li>
-                                
+
                                 <a href="{{ route('products.index') }}">
                                     <i class="fa-solid fa-chevron-right"></i>
                                     Our Products
                                 </a>
                             </li>
                             <li>
-                                
+
                                 <a href="{{ route('blogs.index') }}">
                                     <i class="fa-solid fa-chevron-right"></i>
-                                     Blogs
+                                    Blogs
                                 </a>
                             </li>
                             {{-- <li>
@@ -70,7 +77,7 @@
                                 </a>
                             </li> --}}
                             <li>
-                               
+
                                 <a href="{{ route('contact') }}">
                                     <i class="fa-solid fa-chevron-right"></i>
                                     Contact Us
@@ -92,8 +99,8 @@
                             @if (!empty($footer_services))
                                 @foreach ($footer_services as $fserv)
                                     <li>
-                                        
-                                        <a href="{{ route('service-detail',['slug' => $fserv->slug]) }}">
+
+                                        <a href="{{ route('service-detail', ['slug' => $fserv->slug]) }}">
                                             <i class="fa-solid fa-chevron-right"></i>
                                             {{ $fserv->getTranslation('name', $lang) }}
                                         </a>
@@ -117,8 +124,9 @@
                             @if (!empty($footer_categories))
                                 @foreach ($footer_categories as $fcat)
                                     <li>
-                                        
-                                        <a href="{{ route('products.index',['category' => $fcat->getTranslation('slug', $lang)]) }}">
+
+                                        <a
+                                            href="{{ route('products.index', ['category' => $fcat->getTranslation('slug', $lang)]) }}">
                                             <i class="fa-solid fa-chevron-right"></i>
                                             {{ $fcat->getTranslation('name', $lang) }}
                                         </a>
@@ -136,11 +144,11 @@
         <div class="container">
             <div class="footer-wrapper d-flex align-items-center justify-content-between">
                 <p class="wow fadeInLeft color-2" data-wow-delay=".3s">
-                    © {{date('Y')}} {!! get_setting('frontend_copyright_text', null, $lang) !!}
+                    © {{ date('Y') }} {!! get_setting('frontend_copyright_text', null, $lang) !!}
                 </p>
 
                 <p class="wow fadeInLeft color-2 fadeInRight" data-wow-delay=".3s">
-                    Designed by <a href="tomsher.com">Tomsher</a>
+                    Designed by <a href="https://www.tomsher.com/" target="_blank">Tomsher</a>
                 </p>
 
             </div>

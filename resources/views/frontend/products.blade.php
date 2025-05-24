@@ -38,7 +38,9 @@
                             <option value="">All Categories</option>
                             @if (!empty($categories))
                                 @foreach ($categories as $cat)
-                                    <option value="{{ $cat->getTranslation('slug', $lang) }}" @if($category == $cat->getTranslation('slug', $lang)) selected @endif>{{ $cat->getTranslation('name', $lang)}}</option>
+                                    <option value="{{ $cat->getTranslation('slug', $lang) }}"
+                                        @if ($category == $cat->getTranslation('slug', $lang)) selected @endif>
+                                        {{ $cat->getTranslation('name', $lang) }}</option>
                                 @endforeach
                             @endif
                         </select>
@@ -47,14 +49,17 @@
                             <option value="">All Brands</option>
                             @if (!empty($brands))
                                 @foreach ($brands as $brnd)
-                                    <option value="{{ $brnd->getTranslation('slug', $lang) }}"  @if($brand == $brnd->getTranslation('slug', $lang)) selected @endif>{{ $brnd->getTranslation('name', $lang)}}</option>
+                                    <option value="{{ $brnd->getTranslation('slug', $lang) }}"
+                                        @if ($brand == $brnd->getTranslation('slug', $lang)) selected @endif>
+                                        {{ $brnd->getTranslation('name', $lang) }}</option>
                                 @endforeach
                             @endif
                         </select>
                     </div>
 
-                    <input type="text" id="products-search-box" name="search" value="{{ $sort_search }}" placeholder="Search for a product...">
-                
+                    <input type="text" id="products-search-box" name="search" value="{{ $sort_search }}"
+                        placeholder="Search for a product...">
+
                 </div>
             </form>
             <!-- Product Grid -->
@@ -63,13 +68,14 @@
                 @if (!empty($products[0]))
                     @foreach ($products as $pkey => $prod)
                         <div class="product-card">
-                            <a href="{{ route('product-detail',['slug' => $prod->slug, 'sku' => $prod->sku]) }}">
+                            <a href="{{ route('product-detail', ['slug' => $prod->slug, 'sku' => $prod->sku]) }}">
                                 <div class="product-header">
                                     <span class="category">{{ $prod->category->getTranslation('name', $lang) }}</span>
                                     <span class="new-badge">NEW</span>
                                 </div>
                                 <div class="image-wrapper">
-                                    <img src="{{ get_product_image($prod->thumbnail_img, '300') }}" alt="{{ $prod->getTranslation('name', $lang) }}">
+                                    <img src="{{ get_product_image($prod->thumbnail_img, '300') }}"
+                                        alt="{{ $prod->getTranslation('name', $lang) }}">
                                 </div>
                                 <div class="product-info">
                                     <span class="model">{{ $prod->brand->getTranslation('name', $lang) }}</span>
@@ -81,10 +87,10 @@
                 @else
                     <img src="{{ asset('assets/images/no-product.png') }}" class="w-25" alt="No Products Found">
                 @endif
-                
+
             </div>
-            <div class="standard-pagination">
-                {{ $products->appends(request()->input())->links('pagination::bootstrap-4') }}
+            <div class="aiz-pagination mt-4" style="margin-right: 2%;">
+                {{ $products->appends(request()->input())->links('pagination::bootstrap-5') }}
             </div>
         </div>
     </section>
@@ -92,7 +98,7 @@
 
 @section('script')
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('select').niceSelect();
 
             if (window.location.search.match(/(brand|category|search|page)/)) {
@@ -104,11 +110,11 @@
 
 
             function filterProducts() {
-               $('#productfilters').submit();
+                $('#productfilters').submit();
             }
 
             $("#products-category-filter, #products-brand-filter").on("change", filterProducts);
-            
+
         });
     </script>
 @endsection
