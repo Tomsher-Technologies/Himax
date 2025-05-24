@@ -45,4 +45,18 @@ Route::get('/category/{category_slug}', [SearchController::class, 'listingByCate
 
 
 
+Route::prefix('admin')->group(function () {
+    // Admin routes...
 
+    Route::fallback(function () {
+        return response()->view('errors.404', [], 404);
+    });
+});
+
+Route::prefix('/')->group(function () {
+    // Frontend routes...
+
+    Route::fallback(function () {
+        return response()->view('errors.404-frontend', [], 404);
+    });
+});
