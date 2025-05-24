@@ -11,7 +11,8 @@
                 <div class="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
                     <div class="offcanvas__logo">
                         <a href="{{ route('home') }}">
-                            <img src="{{ uploaded_asset(get_setting('header_logo')) ?? asset('assets/images/logo.svg') }}" alt="logo-img">
+                            <img src="{{ uploaded_asset(get_setting('header_logo')) ?? asset('assets/images/logo.svg') }}"
+                                alt="logo-img">
                         </a>
                     </div>
                     <div class="offcanvas__close">
@@ -26,14 +27,14 @@
 
                     $phones = explode('/', $pagedata->getTranslation('content1', env('DEFAULT_LANGUAGE')));
                     $phone = '';
-                    foreach($phones as $ph){
-                        $phone .= '<a href="tel:'.$ph.'">'.$ph .'</a><br>';
+                    foreach ($phones as $ph) {
+                        $phone .= '<a href="tel:' . $ph . '">' . $ph . '</a><br>';
                     }
 
                     $working_hours = explode('/', $pagedata->getTranslation('content2', env('DEFAULT_LANGUAGE')));
                     $hours = '';
-                    foreach($working_hours as $wh){
-                        $hours .= $wh .'<br>';
+                    foreach ($working_hours as $wh) {
+                        $hours .= $wh . '<br>';
                     }
                 @endphp
 
@@ -115,17 +116,19 @@
 
 
 <header class="header-section-3">
-<div class="container">
-    <div id="header-sticky" class="header-3 mb-5">
-     
+    <div class="container">
+        <div id="header-sticky" class="header-3 mb-5">
+
             <div class="mega-menu-wrapper">
                 <div class="header-main">
                     <div class="logo">
                         <a href="{{ route('home') }}" class="header-logo">
-                            <img src="{{ uploaded_asset(get_setting('header_logo')) ?? asset('assets/images/logo.svg') }}" alt="logo-img">
+                            <img src="{{ uploaded_asset(get_setting('header_logo')) ?? asset('assets/images/logo.svg') }}"
+                                alt="logo-img">
                         </a>
                         <a href="{{ route('home') }}" class="header-logo-2">
-                            <img src="{{ uploaded_asset(get_setting('header_logo')) ?? asset('assets/images/logo.svg') }}" alt="logo-img">
+                            <img src="{{ uploaded_asset(get_setting('header_logo')) ?? asset('assets/images/logo.svg') }}"
+                                alt="logo-img">
                         </a>
                     </div>
 
@@ -135,7 +138,8 @@
                                 <nav id="mobile-menu">
                                     <ul>
 
-                                        <li class="has-dropdown active menu-thumb">
+                                        <li
+                                            class="has-dropdown {{ areActiveRoutes(['services.index', 'service-detail']) }} menu-thumb">
                                             {{-- {{ route('services.index') }} --}}
                                             <a href="{{ route('services.index') }}">
                                                 Services & Solutions
@@ -154,14 +158,14 @@
 
                                                                 @if (!empty($header_services))
                                                                     @foreach ($header_services as $hserv)
-                                                    
-                                                                        <div class="solution-item" style="background-image: url({{ uploaded_asset($hserv->image) }});">
+                                                                        <div class="solution-item"
+                                                                            style="background-image: url({{ uploaded_asset($hserv->image) }});">
                                                                             {{-- {{ route('service-detail',['slug' => $hserv->slug]) }} --}}
-                                                                            <a href="{{ route('service-detail',['slug' => $hserv->slug]) }}">
+                                                                            <a
+                                                                                href="{{ route('service-detail', ['slug' => $hserv->slug]) }}">
                                                                                 {{ $hserv->getTranslation('name', env('DEFAULT_LANGUAGE')) }}
                                                                             </a>
                                                                         </div>
-
                                                                     @endforeach
                                                                 @endif
                                                             </div>
@@ -172,11 +176,12 @@
                                         </li>
 
                                         <!-- Mega Menu -->
-                                        <li id="product-menu" class="has-dropdown active menu-thumb">
+                                        <li id="product-menu"
+                                            class="has-dropdown {{ areActiveRoutes(['products.index', 'product-detail']) }} menu-thumb">
                                             <a href="{{ route('products.index') }}">
                                                 Product Categories
                                                 <i class="fa-regular fa-plus"></i>
-                                            
+
                                             </a>
                                             {{-- {{ route('products.index') }} --}}
                                             <ul class="submenu has-homemenu">
@@ -186,22 +191,26 @@
                                                     @endphp
                                                     <!-- Left Tabs -->
                                                     <div class="menu-tabs">
-                                                        @foreach($menus as $index => $menu)
-                                                            <button class="menu-tab {{ $index == 0 ? 'active' : '' }}"  data-target="menutab_{{$index}}">{{ $menu->title }}</button>
+                                                        @foreach ($menus as $index => $menu)
+                                                            <button class="menu-tab {{ $index == 0 ? 'active' : '' }}"
+                                                                data-target="menutab_{{ $index }}">{{ $menu->title }}</button>
                                                         @endforeach
                                                     </div>
 
                                                     <!-- Right Content -->
                                                     <div class="menu-content">
-                                                        @foreach($menus as $index => $menu)
-
+                                                        @foreach ($menus as $index => $menu)
                                                             <!-- SECURITY & SURVEILLANCE -->
-                                                            <div id="menutab_{{$index}}" class="menu-category-content {{ $index == 0 ? 'active' : '' }}">
-                                                                <h4 class="menu-title">{{ strtoupper($menu->title) }}</h4>
+                                                            <div id="menutab_{{ $index }}"
+                                                                class="menu-category-content {{ $index == 0 ? 'active' : '' }}">
+                                                                <h4 class="menu-title">{{ strtoupper($menu->title) }}
+                                                                </h4>
 
                                                                 <ul class="brand-list">
                                                                     @foreach ($menu->subMenus as $subM)
-                                                                        <li><a href="{{ $subM->link ?? '#'}}">{{ $subM->title }}</a></li>
+                                                                        <li><a
+                                                                                href="{{ $subM->link ?? '#' }}">{{ $subM->title }}</a>
+                                                                        </li>
                                                                     @endforeach
                                                                 </ul>
                                                             </div>
@@ -216,12 +225,12 @@
                                             <a href="{{ route('products.index') }}">Products</a>
                                         </li> --}}
 
-                                        <li>
-                                            
+                                        <li class="{{ areActiveRoutes(['about_us']) }}">
+
                                             <a href="{{ route('about_us') }}">About Us</a>
                                         </li>
-                                        <li>
-                                           
+                                        <li class="{{ areActiveRoutes(['contact']) }}">
+
                                             <a href="{{ route('contact') }}">Contact Us</a>
                                         </li>
                                     </ul>
@@ -232,11 +241,11 @@
 
                     <div class="header-right d-flex justify-content-end align-items-center">
                         <div class="header-button">
-                            
+
                             <a href="tel:{{ get_setting('main_contact_number') }}" class="theme-btn"><i
                                     class="fa-light fa-phone me-2"></i> {{ get_setting('main_contact_number') }}</a>
-                                    <!--    <a href="{{ route('contact') }}" class="theme-btn"><i-->
-                                    <!--class="fa-light fa-phone me-2"></i> {{ get_setting('main_contact_number') }}</a>-->
+                            <!--    <a href="{{ route('contact') }}" class="theme-btn"><i-->
+                            <!--class="fa-light fa-phone me-2"></i> {{ get_setting('main_contact_number') }}</a>-->
                         </div>
                         <!-- <div class="header__hamburger d-xl-block my-auto">
                             <div class="sidebar__toggle">

@@ -7,10 +7,11 @@
                 <div class="swiper-wrapper">
                     @if (!empty($data['sliders']))
                         @foreach ($data['sliders'] as $slider)
-                            <div class="swiper-slide"> <img src="{{ uploaded_asset($slider->image) }}" alt="{{$slider->name}}"></div>
+                            <div class="swiper-slide"> <img src="{{ uploaded_asset($slider->image) }}"
+                                    alt="{{ $slider->name }}"></div>
                         @endforeach
                     @endif
-                   
+
                 </div>
                 <!-- Add Navigation -->
                 <div class="swiper-button-prev"></div>
@@ -204,7 +205,8 @@
                                                     <a
                                                         href="{{ route('service-detail', ['slug' => $fea_service->slug]) }}">
                                                         <img src="{{ uploaded_asset($fea_service->image) }}"
-                                                            alt="Managed IT Services" id="services-card-image">
+                                                            alt="{{ $fea_service->getTranslation('name', $lang) }}"
+                                                            id="services-card-image">
                                                         <div id="services-card-content">
                                                             <div class="services-card-content-top">
                                                                 <!-- Title -->
@@ -216,19 +218,19 @@
                                                                     @foreach ($fea_service->points as $service_points)
                                                                         <li class="services-card-item">
                                                                             <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                                            height="16" viewBox="0 0 16 16" fill="none">
-                                                                                            <g clip-path="url(#clip0_97_177)">
-                                                                                                <path d="M2.5 9L6 12.5L14 4.5" stroke="white"
-                                                                                                    stroke-width="2" stroke-linecap="round"
-                                                                                                    stroke-linejoin="round" />
-                                                                                            </g>
-                                                                                            <defs>
-                                                                                                <clipPath id="clip0_97_177">
-                                                                                                    <rect width="16" height="16"
-                                                                                                        fill="white" />
-                                                                                                </clipPath>
-                                                                                            </defs>
-                                                                                        </svg> -->
+                                                                                                                height="16" viewBox="0 0 16 16" fill="none">
+                                                                                                                <g clip-path="url(#clip0_97_177)">
+                                                                                                                    <path d="M2.5 9L6 12.5L14 4.5" stroke="white"
+                                                                                                                        stroke-width="2" stroke-linecap="round"
+                                                                                                                        stroke-linejoin="round" />
+                                                                                                                </g>
+                                                                                                                <defs>
+                                                                                                                    <clipPath id="clip0_97_177">
+                                                                                                                        <rect width="16" height="16"
+                                                                                                                            fill="white" />
+                                                                                                                    </clipPath>
+                                                                                                                </defs>
+                                                                                                            </svg> -->
 
 
 
@@ -245,8 +247,8 @@
                                                                                 <g>
                                                                                     <g>
                                                                                         <path d="M504.502,75.496c-9.997-9.998-26.205-9.998-36.204,0L161.594,382.203L43.702,264.311c-9.997-9.998-26.205-9.997-36.204,0
-               c-9.998,9.997-9.998,26.205,0,36.203l135.994,135.992c9.994,9.997,26.214,9.99,36.204,0L504.502,111.7
-               C514.5,101.703,514.499,85.494,504.502,75.496z"></path>
+                                   c-9.998,9.997-9.998,26.205,0,36.203l135.994,135.992c9.994,9.997,26.214,9.99,36.204,0L504.502,111.7
+                                   C514.5,101.703,514.499,85.494,504.502,75.496z"></path>
                                                                                     </g>
                                                                                 </g>
                                                                                 <g>
@@ -340,18 +342,18 @@
 
                     <div class="swiper-button-prev product-custom-prev">
                         <!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M15 19L8 12L15 5" stroke="white" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                    </svg> -->
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M15 19L8 12L15 5" stroke="white" stroke-width="2" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </svg> -->
                     </div>
 
                     <div class="swiper-button-next product-custom-next">
                         <!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M9 5L16 12L9 19" stroke="white" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                    </svg> -->
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M9 5L16 12L9 19" stroke="white" stroke-width="2" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </svg> -->
                     </div>
 
                 </div>
@@ -374,7 +376,7 @@
                                     <a
                                         href="{{ route('product-detail', ['slug' => $fea_products->slug, 'sku' => $fea_products->sku]) }}">
                                         <img src="{{ asset($fea_products->thumbnail_img) }}"
-                                            alt="2M Explosion-proof IR Camera">
+                                            alt="{{ $fea_products->getTranslation('name', $lang) }}">
                                     </a>
                                 </div>
                                 <div class="product-info">
@@ -451,7 +453,7 @@
                 <!-- Right Side - Content Display -->
                 <div class="industries-display">
                     <div class="industries-bg">
-                        <img id="industry-bg-image" src="{{ $imageInd }}" alt="Industry Image">
+                        <img id="industry-bg-image" src="{{ $imageInd }}" alt="{{ $titleInd }}">
                     </div>
                     <div class="industries-info">
                         <h3 id="industry-title">{{ $titleInd }}</h3>
@@ -478,7 +480,7 @@
 
                 <!-- Right Video Section -->
                 <div class="video-thumbnail animate__animated animate__fadeInRight">
-                    <img src="{{ $page->image1 }}" alt="">
+                    <img src="{{ $page->image1 }}" alt="Video">
                     {{-- <button class="play-button" onclick="openVideoPopup()">
                         <svg width="50" height="50" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -529,7 +531,7 @@
                         <div class="blog-card">
                             <a href="{{ route('blog-detail', ['slug' => $blog->slug]) }}">
                                 <div class="blog-image">
-                                    <img src="{{ uploaded_asset($blog->image) }}" alt="AI Prosthetics">
+                                    <img src="{{ uploaded_asset($blog->image) }}" alt="{{ $blog->name }}">
                                     <div class="blog-tags">
                                         @php
                                             $tags = explode(',', $blog->tags);
@@ -588,6 +590,7 @@
         section.hero.hero-section .swiper-button-next, .swiper-button-prev {
             top: 30%;
         }
+
         .hero-content {
             width: 70%;
         }
