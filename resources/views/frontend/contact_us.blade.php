@@ -171,7 +171,6 @@
                                 title="Please enter digits only">
                             <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
 
-                            <span class="recaptcha-error d-none text-danger">Please complete the reCAPTCHA.</span>
                         </div>
                         <div class="form-column">
                             <input type="text" name="subject" id="subject" placeholder="Subject *" required
@@ -243,20 +242,14 @@
 
         $('#contact-form').on('submit', function(e) {
             e.preventDefault();
-            // $('.recaptcha-error').addClass('d-none');
-            // var responseCaptcha = grecaptcha.getResponse();
-            // if (responseCaptcha.length === 0) {
-            //     $('.recaptcha-error').removeClass('d-none');
-            //     return false; // Prevent form submission
-            // } else {
-
-            // }
+            var recaptchaResponse = grecaptcha.getResponse();
             let formData = {
                 name: $('#name').val(),
                 email: $('#emailc').val(),
                 phone: $('#phone').val(),
                 subject: $('#subject').val(),
                 message: $('#messagec').val(),
+                'g-recaptcha-response': recaptchaResponse,
                 _token: $('input[name="_token"]').val()
             };
 
@@ -267,12 +260,14 @@
                 success: function(response) {
                     $('#responseMessage').html(response.message).css('color', 'green');
                     $('#contact-form')[0].reset();
+                    grecaptcha.reset();
                 },
                 error: function(xhr) {
                     let errors = xhr.responseJSON.errors;
                     let errorMsg = errors ? Object.values(errors).join(', ') :
                         'Something went wrong';
                     $('#responseMessage').text(errorMsg).css('color', 'red');
+                    grecaptcha.reset();
                 }
             });
         });
