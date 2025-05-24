@@ -3012,24 +3012,23 @@ input.main-search-input::placeholder {
     /* position: relative; */
     list-style: none;
     display: inline-block;
-    margin-inline-end: 40px;
+    margin-inline-end: 30px
 }
 .header-main .main-menu ul li:last-child {
     margin-inline-end: 0;
 }
 .header-main .main-menu ul li a {
     display: inline-block;
-    font-size: 16px;
+    font-size: 18px;
     letter-spacing: 1.2px;
-    font-weight: 500;
     color: var(--white);
     padding: 10px 0;
     text-align: left;
     position: relative;
     text-transform: capitalize;
     transition: all 0.4s ease-in-out;
-    font-family: "Kabyta", sans-serif !important;
-    font-weight: 500;
+    font-family: 'Kabyta', sans-serif !important;
+    font-weight: 600;
 }
 .header-main .main-menu ul li a i {
     margin-left: 0px;
@@ -7973,7 +7972,7 @@ textarea.is-invalid {
     color: inherit;
 }
 .hero-1 {
-    /* min-height: 100vh; */
+    min-height: 100vh;
     /* Ensures it fills the viewport */
     align-items: center;
     /* Centers content vertically */
@@ -12636,5 +12635,21 @@ div#swiper-wrapper-6109ad5ea45ba5ad7 {
     color: #000;
 }
 #product-dt-info p {
-    color: #000;
+ color: #000;
 }
+
+
+@media (max-width:768px) {
+
+    .hero-1 .hero-content {
+    max-width: 100%!important;
+}
+
+    .hero-1 .hero-content {
+        padding-top: 50px!important;
+    }
+
+}
+
+
+

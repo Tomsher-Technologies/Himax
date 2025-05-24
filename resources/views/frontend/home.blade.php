@@ -587,10 +587,8 @@
             width: 100%;
 
         }
-
-        section.hero.hero-section .swiper-button-next,
-        .swiper-button-prev {
-            top: 25%;
+        section.hero.hero-section .swiper-button-next, .swiper-button-prev {
+            top: 30%;
         }
 
         .hero-content {
