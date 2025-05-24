@@ -29,15 +29,19 @@
                             </ul> --}}
                             <div class=" p-4">
                                 <div class="form-group row ">
-                                    <label class="col-lg-3 col-from-label">{{ trans('messages.product').' '.trans('messages.name') }} <span class="text-danger">*</span>
+                                    <label
+                                        class="col-lg-3 col-from-label">{{ trans('messages.product') . ' ' . trans('messages.name') }}
+                                        <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" name="name" placeholder="{{ trans('messages.product').' '.trans('messages.name') }}"
-                                            value="{{ $product->getTranslation('name',$lang) }}" required>
+                                        <input type="text" class="form-control" name="name"
+                                            placeholder="{{ trans('messages.product') . ' ' . trans('messages.name') }}"
+                                            value="{{ $product->getTranslation('name', $lang) }}" required>
                                     </div>
                                 </div>
                                 <div class="form-group row @if ($lang != 'en') d-none @endif" id="category">
-                                    <label class="col-lg-3 col-from-label">{{ trans('messages.category') }}<span class="text-danger">*</span></label>
+                                    <label class="col-lg-3 col-from-label">{{ trans('messages.category') }}<span
+                                            class="text-danger">*</span></label>
                                     <div class="col-lg-8">
                                         <select class="form-control aiz-selectpicker" name="category_id" id="category_id"
                                             data-selected="{{ $product->category_id }}" data-live-search="true" required>
@@ -57,26 +61,32 @@
                                 <div class="form-group row @if ($lang != 'en') d-none @endif" id="brand">
                                     <label class="col-md-3 col-from-label">{{ trans('messages.brand') }}</label>
                                     <div class="col-md-8">
-                                        @php   
-                                            $brands = \App\Models\Brand::where('is_active',1)->orderBy('name','asc')->get();
+                                        @php
+                                            $brands = \App\Models\Brand::where('is_active', 1)
+                                                ->orderBy('name', 'asc')
+                                                ->get();
                                         @endphp
                                         <select class="form-control aiz-selectpicker" name="brand_id" id="brand_id"
                                             data-live-search="true" required>
-                                            <option value="">{{ trans('messages.select').' '.trans('messages.brand') }}</option>
+                                            <option value="">
+                                                {{ trans('messages.select') . ' ' . trans('messages.brand') }}</option>
                                             @foreach ($brands as $brand)
-                                                <option @if ($product->brand_id == $brand->id) selected @endif value="{{ $brand->id }}">{{ $brand->name }}
+                                                <option @if ($product->brand_id == $brand->id) selected @endif
+                                                    value="{{ $brand->id }}">{{ $brand->name }}
                                                 </option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-                    
+
                                 <div class="form-group row" id="service">
                                     <label class="col-md-3 col-from-label">{{ trans('messages.service') }}</label>
                                     <div class="col-md-8">
-                                        <select name="services[]" id="services" multiple class="form-control aiz-selectpicker" data-live-search="true">
+                                        <select name="services[]" id="services" multiple
+                                            class="form-control aiz-selectpicker" data-live-search="true">
                                             @foreach ($services as $service)
-                                                <option value="{{ $service->id }}" {{ in_array($service->id, old('services', $product->services->pluck('id')->toArray() ?? [])) ? 'selected' : '' }}>
+                                                <option value="{{ $service->id }}"
+                                                    {{ in_array($service->id, old('services', $product->services->pluck('id')->toArray() ?? [])) ? 'selected' : '' }}>
                                                     {{ $service->name }}
                                                 </option>
                                             @endforeach
@@ -88,16 +98,18 @@
                                     <label class="col-md-3 col-from-label">{{ trans('messages.tags') }}</label>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control aiz-tag-input" name="tags[]"
-                                            placeholder="{{ trans('messages.type_hit_enter_add_tag') }}" value="{{ $product->getTranslation('tags',$lang) }}" >
+                                            placeholder="{{ trans('messages.type_hit_enter_add_tag') }}"
+                                            value="{{ $product->getTranslation('tags', $lang) }}">
                                         <small class="text-muted">{{ trans('messages.tag_details') }}</small>
                                     </div>
                                 </div>
 
                                 <div class="form-group row @if ($lang != 'en') d-none @endif">
-                                    <label class="col-md-3 col-form-label">{{ trans('messages.slug') }}<span class="text-danger">*</span></label>
+                                    <label class="col-md-3 col-form-label">{{ trans('messages.slug') }}<span
+                                            class="text-danger">*</span></label>
                                     <div class="col-md-8">
-                                        <input type="text" placeholder="{{ trans('messages.slug') }}" id="slug" name="slug" required
-                                            class="form-control" value="{{ $product->slug }}">
+                                        <input type="text" placeholder="{{ trans('messages.slug') }}" id="slug"
+                                            name="slug" required class="form-control" value="{{ $product->slug }}">
                                         @error('slug')
                                             <div class="alert alert-danger mt-1">{{ $message }}</div>
                                         @enderror
@@ -107,7 +119,8 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 col-from-label">{{ trans('messages.sku') }} </label>
                                     <div class="col-md-6">
-                                        <input type="text" placeholder="{{ trans('messages.sku') }}" name="sku" class="form-control"  value="{{ $product->stocks[0]->sku ?? $product->sku }}">
+                                        <input type="text" placeholder="{{ trans('messages.sku') }}" name="sku"
+                                            class="form-control" value="{{ $product->stocks[0]->sku ?? $product->sku }}">
                                     </div>
                                 </div>
 
@@ -116,13 +129,14 @@
                     </div>
                     <div class="card  @if ($lang != 'en') d-none @endif">
                         <div class="card-header">
-                            <h5 class="mb-0 h6">{{ trans('messages.product').' '.trans('messages.images') }}</h5>
+                            <h5 class="mb-0 h6">{{ trans('messages.product') . ' ' . trans('messages.images') }}</h5>
                         </div>
                         <div class="card-body">
 
                             <div class="form-group row @if ($lang != 'en') d-none @endif">
-                                <label class="col-md-3 col-form-label" for="signinSrEmail">{{ trans('messages.thumbnail_image') }}
-                                    <small>({{ trans('messages.1000*1000') }})</small></label>
+                                <label class="col-md-3 col-form-label"
+                                    for="signinSrEmail">{{ trans('messages.thumbnail_image') }}
+                                    <br><small>(Image size - 500 x 500)</small></label>
                                 <div class="col-md-8">
                                     <input type="file" name="thumbnail_image" class="form-control" accept="image/*">
 
@@ -150,12 +164,15 @@
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="signinSrEmail">Datasheet (PDF)</label>
                                 <div class="col-md-8">
-                                    <input type="file" name="datasheet_pdf" class="form-control" accept="application/pdf">
-    
+                                    <input type="file" name="datasheet_pdf" class="form-control"
+                                        accept="application/pdf">
+
                                     @if ($product->datasheet_pdf)
                                         <div class="file-preview box sm">
-                                            <div class="d-flex justify-content-between align-items-center mt-2 file-preview-item">
-                                                <div class="align-items-center align-self-stretch d-flex justify-content-center thumb">
+                                            <div
+                                                class="d-flex justify-content-between align-items-center mt-2 file-preview-item">
+                                                <div
+                                                    class="align-items-center align-self-stretch d-flex justify-content-center thumb">
                                                     <a href="{{ asset($product->datasheet_pdf) }}" target="_blank">
                                                         <img src="{{ asset('assets/images/pdf.png') }}" class="img-fit">
                                                     </a>
@@ -168,23 +185,23 @@
                                             </div>
                                         </div>
                                     @endif
-    
+
                                 </div>
                             </div>
                         </div>
-                       
+
                     </div>
 
 
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="mb-0 h6">{{ trans('messages.product').' '.trans('messages.description') }}</h5>
+                            <h5 class="mb-0 h6">{{ trans('messages.product') . ' ' . trans('messages.description') }}</h5>
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
-                                <label class="col-md-12 col-from-label">{{trans('messages.description') }}</label>
+                                <label class="col-md-12 col-from-label">{{ trans('messages.description') }}</label>
                                 <div class="col-md-12">
-                                    <textarea class="aiz-text-editor"  data-min-height="300" name="description">{{ $product->getTranslation('description',$lang) }}</textarea>
+                                    <textarea class="aiz-text-editor" data-min-height="300" name="description">{{ $product->getTranslation('description', $lang) }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -192,14 +209,14 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="mb-0 h6">{{ trans('messages.product').' Specifications' }}</h5>
+                            <h5 class="mb-0 h6">{{ trans('messages.product') . ' Specifications' }}</h5>
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
                                 <label class="col-md-12 col-from-label">Specifications</label>
                                 <div class="col-md-12">
                                     <textarea class="aiz-text-editor" data-min-height="300" name="specification">
-                                        {{ $product->getTranslation('specification',$lang) }}
+                                        {{ $product->getTranslation('specification', $lang) }}
                                     </textarea>
                                 </div>
                             </div>
@@ -215,14 +232,14 @@
                                 <label class="col-lg-3 col-from-label">{{ trans('messages.meta_title') }}</label>
                                 <div class="col-lg-8">
                                     <input type="text" class="form-control"
-                                        value="{{ $product->getSeoTranslation('meta_title',$lang) }}" name="meta_title"
+                                        value="{{ $product->getSeoTranslation('meta_title', $lang) }}" name="meta_title"
                                         placeholder="Meta Title">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-lg-3 col-from-label">{{ trans('messages.meta_description') }}</label>
                                 <div class="col-lg-8">
-                                    <textarea name="meta_description" rows="8" class="form-control">{{ $product->getSeoTranslation('meta_description',$lang) }}</textarea>
+                                    <textarea name="meta_description" rows="8" class="form-control">{{ $product->getSeoTranslation('meta_description', $lang) }}</textarea>
                                 </div>
                             </div>
 
@@ -232,21 +249,22 @@
                                     {{-- data-max-tags="1" --}}
                                     <input type="text" class="form-control aiz-tag-input" name="meta_keywords[]"
                                         placeholder="Type and hit enter to add a keyword"
-                                        value="{{ $product->getSeoTranslation('meta_keywords',$lang) }}">
+                                        value="{{ $product->getSeoTranslation('meta_keywords', $lang) }}">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-lg-3 col-from-label">{{ trans('messages.og_title') }}</label>
                                 <div class="col-lg-8">
-                                    <input type="text" class="form-control" name="og_title" placeholder="{{ trans('messages.og_title') }}"
-                                        value="{{ $product->getSeoTranslation('og_title',$lang) }}">
+                                    <input type="text" class="form-control" name="og_title"
+                                        placeholder="{{ trans('messages.og_title') }}"
+                                        value="{{ $product->getSeoTranslation('og_title', $lang) }}">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-lg-3 col-from-label">{{ trans('messages.og_description') }}</label>
                                 <div class="col-lg-8">
-                                    <textarea name="og_description" rows="8" class="form-control">{{ $product->getSeoTranslation('og_description',$lang)  }}</textarea>
+                                    <textarea name="og_description" rows="8" class="form-control">{{ $product->getSeoTranslation('og_description', $lang) }}</textarea>
                                 </div>
                             </div>
 
@@ -255,13 +273,13 @@
                                 <div class="col-lg-8">
                                     <input type="text" class="form-control" name="twitter_title"
                                         placeholder="{{ trans('messages.twitter_title') }}"
-                                        value="{{ $product->getSeoTranslation('twitter_title',$lang) }}">
+                                        value="{{ $product->getSeoTranslation('twitter_title', $lang) }}">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-lg-3 col-from-label">{{ trans('messages.twitter_description') }}</label>
                                 <div class="col-lg-8">
-                                    <textarea name="twitter_description" rows="8" class="form-control">{{ $product->getSeoTranslation('twitter_description',$lang) }}</textarea>
+                                    <textarea name="twitter_description" rows="8" class="form-control">{{ $product->getSeoTranslation('twitter_description', $lang) }}</textarea>
                                 </div>
                             </div>
 
@@ -271,7 +289,8 @@
 
                 <div class="col-12">
                     <div class="mb-3 text-right">
-                        <button type="submit" name="button" class="btn btn-info">{{ trans('messages.update').' '.trans('messages.product') }}</button>
+                        <button type="submit" name="button"
+                            class="btn btn-info">{{ trans('messages.update') . ' ' . trans('messages.product') }}</button>
                     </div>
                 </div>
             </div>
@@ -279,15 +298,13 @@
     </div>
 @endsection
 @section('styles')
-<style>
-  
-</style>
+    <style>
+
+    </style>
 @endsection
 
 @section('script')
-
     <script>
-
         $('.remove-thumbnail').on('click', function() {
             thumbnail = $(this)
             $.ajax({
@@ -305,20 +322,18 @@
             });
 
         });
-       
     </script>
 
     <script>
-       
         let buttons = [
-                    ["font", ["bold", "underline", "italic", "clear"]],
-                    ["para", ["ul", "ol", "paragraph"]],
-                    ["style", ["style"]],
-                    ["color", ["color"]],
-                    ["table", ["table"]],
-                    ["insert", ["link", "picture", "video"]],
-                    ["view", ["fullscreen", "undo", "redo"]],
-                ];
+            ["font", ["bold", "underline", "italic", "clear"]],
+            ["para", ["ul", "ol", "paragraph"]],
+            ["style", ["style"]],
+            ["color", ["color"]],
+            ["table", ["table"]],
+            ["insert", ["link", "picture", "video"]],
+            ["view", ["fullscreen", "undo", "redo"]],
+        ];
         $('.description-text-area').summernote({
             toolbar: buttons,
             height: 200,
@@ -336,12 +351,9 @@
                 }
             }
         });
-
-     
     </script>
 
     <script type="text/javascript">
-     
         AIZ.plugins.tagify();
 
         $(document).ready(function() {
@@ -349,7 +361,5 @@
                 $(this).parents(".col-md-4").remove();
             });
         });
-
-      
     </script>
 @endsection

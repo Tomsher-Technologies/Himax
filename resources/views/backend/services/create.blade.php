@@ -23,8 +23,10 @@
                             <div class="col-md-10">
                                 <select class="form-control aiz-selectpicker" name="type" id="type" required>
                                     <option value="">Select</option>
-                                    <option {{ old('type') == 'service' ? 'selected' : '' }} value="service">Service</option>
-                                    <option {{ old('type') == 'solution' ? 'selected' : '' }} value="solution">Solution</option>
+                                    <option {{ old('type') == 'service' ? 'selected' : '' }} value="service">Service
+                                    </option>
+                                    <option {{ old('type') == 'solution' ? 'selected' : '' }} value="solution">Solution
+                                    </option>
                                 </select>
                                 @error('type')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -58,8 +60,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-2 col-form-label"
-                                for="signinSrEmail">{{ trans('messages.image') }}</label>
+                            <label class="col-md-2 col-form-label" for="signinSrEmail">{{ trans('messages.image') }}
+                                <br><small>(Image size - 1080 x 1080)</small>
+                            </label>
                             <div class="col-md-10">
                                 <div class="input-group" data-toggle="aizuploader" data-type="image">
                                     <div class="input-group-prepend">
@@ -82,7 +85,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-2 col-from-label">{{trans('messages.description') }}</label>
+                            <label class="col-md-2 col-from-label">{{ trans('messages.description') }}</label>
                             <div class="col-md-10">
                                 <textarea class="aiz-text-editor" data-min-height="300" name="description">{{ old('description') }}</textarea>
                             </div>
@@ -106,18 +109,19 @@
 
                         <div class="repeater">
                             <div data-repeater-list="points">
-                              
-                                <div data-repeater-item >
-                                   
+
+                                <div data-repeater-item>
+
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-from-label">Point</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="title" class="form-control" >
+                                            <input type="text" name="title" class="form-control">
                                         </div>
                                     </div>
-        
+
                                     <div class="form-group text-right">
-                                        <button type="button" class="btn btn-soft-danger" data-repeater-delete>Delete</button>
+                                        <button type="button" class="btn btn-soft-danger"
+                                            data-repeater-delete>Delete</button>
                                     </div>
                                 </div>
                             </div>
@@ -155,7 +159,8 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-2 col-form-label" for="name">{{ trans('messages.og_title') }}</label>
+                            <label class="col-md-2 col-form-label"
+                                for="name">{{ trans('messages.og_title') }}</label>
                             <div class="col-md-10">
                                 <input type="text" class="form-control" name="og_title"
                                     placeholder="{{ trans('messages.og_title') }}" value="{{ old('og_title') }}">
@@ -207,7 +212,7 @@
                 $('#slug').val(title)
             }
 
-            $(document).ready(function () {
+            $(document).ready(function() {
                 $('.repeater').repeater({
                     initEmpty: false,
                     show: function() {

@@ -24,7 +24,7 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label" for="signinSrEmail">
                                 Banner
-                                {{-- <small>(1300x650)</small> --}}
+                                <br> <small>(Image size - 1920 x 1080)</small>
                             </label>
                             <div class="col-md-9">
                                 <div class="input-group" data-toggle="aizuploader" data-type="image">
@@ -101,8 +101,8 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Sort Order</label>
                             <div class="col-md-9">
-                                <input type="number" placeholder="Sort Order" value="{{ old('sort_order') }}" id="sort_order"
-                                    name="sort_order" class="form-control" required>
+                                <input type="number" placeholder="Sort Order" value="{{ old('sort_order') }}"
+                                    id="sort_order" name="sort_order" class="form-control" required>
                                 @error('sort_order')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror

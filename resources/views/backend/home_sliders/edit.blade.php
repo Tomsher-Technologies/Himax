@@ -25,7 +25,7 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label" for="signinSrEmail">
                                 Banner
-                                {{-- <small>(1300x650)</small> --}}
+                                <br> <small>(Image size - 1920 x 1080)</small>
                             </label>
                             <div class="col-md-9">
                                 <div class="input-group" data-toggle="aizuploader" data-type="image">
@@ -45,7 +45,7 @@
                                 @enderror
                             </div>
                         </div>
-{{-- 
+                        {{-- 
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label" for="signinSrEmail">
                                 Mobile Banner
